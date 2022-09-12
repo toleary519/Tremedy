@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
@@ -16,7 +16,7 @@ const FirstMenu = ({}) => (
       Urge
     </Text>
   </TouchableOpacity>
-  <TouchableOpacity delayPressIn={150}>
+  <TouchableOpacity onPress={() => setPep(true)} delayPressIn={150}>
     {/* <Text onPress={onPress} style={styles.add}> */}
     <Text style={styles.add}>
       Pep-Talk
