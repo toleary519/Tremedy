@@ -8,12 +8,13 @@ import { PlanningMenu } from "./screens/PlanningMenu";
 import { NotesMenu } from "./screens/NotesMenu";
 import SuperPhoneContacts from "./screens/Contacts"
 import { BadTimes } from "./screens/BadTimes";
+import { GoodTimes } from "./screens/GoodTimes";
 
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <BadTimes/>
+      <GoodTimes/>
       {/* <StatusBar style="auto" /> */}
     </View>
   );
