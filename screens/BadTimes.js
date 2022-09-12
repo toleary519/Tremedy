@@ -7,22 +7,23 @@ const BadTimes = () => {
   let fakeDB = [{id: 1, message: "crashed my car"},{id: 2, message: "lost my house"},
   {id:3, message: "I yelled at someone"},{id: 4, message: "I stole from my Mum"}]
   
-  const [note, setNote] = useState("")
   const [showDB, setShowDB] = useState(fakeDB)
+  const [note, setNote] = useState("")
   
-    const handleAdd = () => {
+  const handleAdd = () => {
+        
         let newNote = {
           id: showDB.length + 1,
           message: note
         };
         
         const newList = [...showDB, newNote]
-
+        const empty = ""
+        
         setShowDB(newList);
-        setNote("");
+        setNote(empty); 
     }
-        // console.log("++++++++++++++++++++", )
-    
+
 
   return (
     <ScrollView>
@@ -30,8 +31,8 @@ const BadTimes = () => {
       “You are free to choose, but you are not free to alter
        the consequences of your decisions.” - Ezra Taft Benson
       </Text>
-      <Text style={styles.header}>
-        These are some lows. You are NOT these lows now.
+      <Text style={styles.headerTwo}>
+        These are some lows. You are NOT these lows, and you don't have to be.
       </Text>
       <TextInput 
         style={styles.input} 
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
+    left: "20%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#2f8587",
@@ -68,11 +70,13 @@ const styles = StyleSheet.create({
   input: {
     borderRadius: 10,
     borderWidth: 4,
+    width: "80%",
     marginTop: 21,
     textAlign: "center",
     justifyContent: "center",
-    alignItems: "center",
+    
     padding: 10,
+    left: "10%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#2f8587",
@@ -80,7 +84,19 @@ const styles = StyleSheet.create({
   header: {
     // borderRadius: 10,
     // borderWidth: 4,
-    marginTop: 100,
+    marginTop: 110,
+    textAlign: "center",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    padding: 10,
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#2f8587",
+  },
+  headerTwo: {
+    // borderRadius: 10,
+    // borderWidth: 4,
+    marginTop: 30,
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "flex-start",
