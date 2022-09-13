@@ -24,7 +24,7 @@ const GoodTimes = () => {
       }
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Text style={styles.header}>
       “I'm defined by the vision of my future rather than my past.
        While doing so I am living ahead of my time.” - Unknown
@@ -51,6 +51,9 @@ const GoodTimes = () => {
   
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   add: {
     borderRadius: 10,
     borderWidth: 4,
