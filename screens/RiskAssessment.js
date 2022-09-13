@@ -2,12 +2,9 @@ import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const UserSettings = () => (
+const RiskAssessment = () => (
   <View style={styles.container}>
-    <Text style={styles.add}>Build out a form.</Text>
-    <Text style={styles.add}>
-    Need to make a list of the info you want.
-    </Text>
+  <Text style={styles.add}>Find an way to do cost benefit analysis</Text>
   </View>
 );
 
@@ -40,4 +37,4 @@ const styles = StyleSheet.create({
   // }
 });
 
-export { UserSettings };
+export { RiskAssessment };

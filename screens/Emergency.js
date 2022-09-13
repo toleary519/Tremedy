@@ -1,9 +1,9 @@
 import React from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const Emergency = ({}) => (
-  <>
+const Emergency = ({ navigation }) => (
+  <View style={styles.container}>
   <TouchableOpacity delayPressIn={150}>
     {/* <Text onPress={onPress} style={styles.add}> */}
     <Text style={styles.add}>
@@ -21,17 +21,21 @@ const Emergency = ({}) => (
     <Text style={styles.emergency}>
       CALL 911
     </Text>
-    <FontAwesome5 name="phone-volume" style={styles.emergency} />
   </TouchableOpacity>
-  
-  </>
+  </View>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 140,
+  },
   add: {
     borderRadius: 10,
     borderWidth: 4,
     marginTop: 21,
+    width: "80%",
+    left: "10%",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
@@ -44,6 +48,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 4,
     marginTop: 21,
+    width: "80%",
+    left: "10%",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,

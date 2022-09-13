@@ -8,13 +8,13 @@ const pepHandler = () => {
 
 const FirstMenu = ({ navigation }) => (
   <View style={styles.container}>
-    <TouchableOpacity delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("Emergency")} delayPressIn={150}>
       {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.emergency}>
         Emergency
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("UrgeMenu")} delayPressIn={150}>
       {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
         Urge
@@ -26,7 +26,7 @@ const FirstMenu = ({ navigation }) => (
         Pep-Talk
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("UserSettings")} delayPressIn={150}>
       <FontAwesome5 name="user-cog" style={styles.icon}/>
     </TouchableOpacity>
   </View>
