@@ -1,11 +1,9 @@
 import React from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const NotesMenu = ({}) => (
-  <>
-  
-    {/* <Text onPress={onPress} style={styles.add}> */}
+const NotesMenu = ({ navigation }) => (
+  <View style={styles.container}>
     <Text style={styles.summary}>
     Read or record some moments of life that shone because you were sober and some of the worst things that happened when you were not.  
     </Text>
@@ -13,23 +11,24 @@ const NotesMenu = ({}) => (
     Reflect on them. 
     </Text>
   
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
+  <TouchableOpacity onPress={() => navigation.navigate("GoodTimes")} delayPressIn={150}>
     <Text style={styles.good}>
       The good times
     </Text>
   </TouchableOpacity>
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
+  <TouchableOpacity onPress={() => navigation.navigate("BadTimes")} delayPressIn={150}>
     <Text style={styles.bad}>
       The bad times
     </Text>
   </TouchableOpacity>
-  
-  </>
+  </View>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 140,
+  },
   good: {
     borderRadius: 10,
     borderWidth: 4,
