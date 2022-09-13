@@ -1,37 +1,41 @@
 import React from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const PepTalkMenu = ({}) => (
-  <>
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-    Your Experiences
-    </Text>
-  </TouchableOpacity>
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-      Your "Go-Tos"
-    </Text>
-  </TouchableOpacity>
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-      Quotes
-    </Text>
-  </TouchableOpacity>
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-      Other People
-    </Text>
-  </TouchableOpacity>
-  </>
+const PepTalkMenu = ({ navigation }) => (
+  <View style={styles.container}>
+    <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>
+      Your Experiences
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>
+        Your "Go-Tos"
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>
+        Quotes
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>
+        Other People
+      </Text>
+    </TouchableOpacity>
+  </View>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 140,
+  },
   add: {
     borderRadius: 10,
     borderWidth: 4,
