@@ -18,7 +18,6 @@ const BadTimes = () => {
         };
         
         const newList = [...showDB, newNote]
-        const empty = ""
         
         setShowDB(newList);
         setNote(empty); 
@@ -26,7 +25,7 @@ const BadTimes = () => {
 
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Text style={styles.header}>
       “You are free to choose, but you are not free to alter
        the consequences of your decisions.” - Ezra Taft Benson
@@ -53,6 +52,9 @@ const BadTimes = () => {
   
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   add: {
     borderRadius: 10,
     borderWidth: 4,
