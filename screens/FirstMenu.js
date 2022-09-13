@@ -1,34 +1,43 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const FirstMenu = ({}) => (
-  <>
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.emergency}>
-      Emergency
-    </Text>
-  </TouchableOpacity>
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-      Urge
-    </Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={() => setPep(true)} delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-      Pep-Talk
-    </Text>
-  </TouchableOpacity>
-  <TouchableOpacity delayPressIn={150}>
-    <FontAwesome5 name="user-cog" style={styles.icon}/>
-  </TouchableOpacity>
-  </>
+const pepHandler = () => {
+
+};
+
+const FirstMenu = ({ navigation }) => (
+  <View style={styles.container}>
+    <TouchableOpacity delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.emergency}>
+        Emergency
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>
+        Urge
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("PepTalk")} delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>
+        Pep-Talk
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity delayPressIn={150}>
+      <FontAwesome5 name="user-cog" style={styles.icon}/>
+    </TouchableOpacity>
+  </View>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   add: {
     marginTop: 21,
     textAlign: "center",
