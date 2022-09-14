@@ -53,10 +53,12 @@ const GoodTimes = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:"#1B2A41"
   },
   add: {
     borderRadius: 10,
     borderWidth: 4,
+    borderColor: "#D7D9D7",
     width: "60%",
     marginTop: 21,
     textAlign: "center",
@@ -66,11 +68,12 @@ const styles = StyleSheet.create({
     left: "20%",
     fontSize: 20,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
   input: {
     borderRadius: 10,
     borderWidth: 4,
+    borderColor: "#D7D9D7",
     width: "80%",
     marginTop: 21,
     textAlign: "center",
@@ -85,26 +88,26 @@ const styles = StyleSheet.create({
   header: {
     // borderRadius: 10,
     // borderWidth: 4,
-    marginTop: 110,
+    paddingTop: 110,
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "flex-start",
     padding: 10,
     fontSize: 20,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
   headerTwo: {
     // borderRadius: 10,
     // borderWidth: 4,
-    marginTop: 30,
+    paddingTop: 30,
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "flex-start",
     padding: 10,
     fontSize: 25,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
   icon: {
     borderRadius: "3px",
