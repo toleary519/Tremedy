@@ -34,11 +34,13 @@ const PepTalkMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 140,
+    paddingTop: 140,
+    backgroundColor:"#1B2A41"
   },
   add: {
     borderRadius: 10,
     borderWidth: 4,
+    borderColor: "#D7D9D7",
     marginTop: 21,
     width: "80%",
     left: "10%",
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 30,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
 
   // icon: {
