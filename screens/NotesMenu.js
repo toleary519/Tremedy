@@ -27,11 +27,13 @@ const NotesMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 140,
+    paddingTop: 140,
+    backgroundColor:"#1B2A41"
   },
   good: {
     borderRadius: 10,
     borderWidth: 4,
+    borderColor: "#D7D9D7",
     marginTop: 21,
     width: "80%",
     left: "10%",
@@ -40,21 +42,22 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 30,
     fontWeight: "bold",
-    color: "#09A129",
+    color: "#59DA59",
   },
 
   bad: {
     borderRadius: 10,
     borderWidth: 4,
+    borderColor: "#D7D9D7",
     marginTop: 21,
-     width: "80%",
+    width: "80%",
     left: "10%",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
     fontSize: 30,
     fontWeight: "bold",
-    color: "#A4031F",
+    color: "#D84C36",
   },
 
   summary: {
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 15,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
 
   // icon: {
