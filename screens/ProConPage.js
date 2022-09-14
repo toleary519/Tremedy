@@ -5,7 +5,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 const ProCon = () => {
 
   let prosList = [{id: 1, message: "no hangover"}]
-  let consList = [{id: 1, message: "fun"}]
+  let consList = [{id: 1, message: "hangover"}]
   
   const [showPros, setShowPros] = useState(prosList)
   const [pro, setPro] = useState("")
@@ -42,57 +42,52 @@ const ProCon = () => {
 
   return (
     <View style={styles.container}>
-    
-      <ScrollView style={styles.left}>
-        <TextInput 
+        <ScrollView style={styles.left}>
+          <Text style={styles.title}>PROs</Text>
+          <TextInput 
           style={styles.input} 
           onChangeText={(text) => setPro(text)} 
-          placeholder={"New Pro"} 
+          placeholder={"add new Pro"} 
           multiline
           keyboardType="default"  
           />
-        <Button onPress={() => handleAddPro()} title="add"> Add Pro </Button>
-          {showPros.map((item) => (
-            <Text key={item.id} style={styles.add}>{item.message}</Text>
-            ))}
-      </ScrollView>
-      <ScrollView style={styles.right}>
-        <TextInput 
+          <Button onPress={() => handleAddPro()} title="add"> Add Pro </Button>
+            {showPros.map((item) => (
+              <Text key={item.id} style={styles.add}>{item.message}</Text>
+              ))}
+        </ScrollView>
+        <ScrollView style={styles.right}>
+        <Text style={styles.title}>CONs</Text>
+          <TextInput 
           style={styles.input} 
           onChangeText={(text) => setCon(text)} 
-          placeholder={"New Con"} 
+          placeholder={"add new Con"} 
           multiline
           keyboardType="default"  
           />
-        <Button onPress={() => handleAddCon()} title="add"> Add Con </Button>
-          {showCons.map((item) => (
-            <Text key={item.id} style={styles.add}>{item.message}</Text>
-            ))}
-      </ScrollView>
-        
-      
-      
-
-
-      </View>
-   
-   
-    )
-    };
+          <Button style={styles.button} onPress={() => handleAddCon()} title="add"> Add Con </Button>
+            {showCons.map((item) => (
+              <Text key={item.id} style={styles.add}>{item.message}</Text>
+              ))}
+        </ScrollView>
+    </View>
+   )};
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
+    backgroundColor:"#1B2A41"
   },
   right: {
     width: "50%",
-    borderWidth: 2,
-    borderColor: "green",
+    // borderWidth: 2,
+    // borderColor: "green",
   },
   left: {
     width: "50%",
-    borderWidth: 2,
-    borderColor: "red",
+    // borderWidth: 2,
+    // borderColor: "red",
   },
   add: {
     // borderRadius: 10,
@@ -103,8 +98,23 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+    textAlign: "center",
+    paddingTop: 25,
+    color: "#D7D9D7",
+  },
+  input: {
+    fontSize: 25,
+    textAlign: "center",
+    paddingTop: 25,
+  },
+  button: {
+    color: "#D7D9D7",
+  }
 
   // icon: {
   //   borderRadius: "3px",
