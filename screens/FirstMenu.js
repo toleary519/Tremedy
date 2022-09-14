@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#1B2A41"
   },
   add: {
     marginTop: 21,
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 40,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
 
   emergency: {
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: "60", 
     padding: 60,
-    color: "#1B2A41"
+    color: "#D7D9D7"
   }
 });
 
