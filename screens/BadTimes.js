@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, TextInput, Text, StyleSheet, Button, ScrollView, TouchableOpacity } from "react-native";
-
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 const BadTimes = () => {
   
@@ -40,7 +40,9 @@ const BadTimes = () => {
         multiline
         keyboardType="default"  
       />
-      <Button onPress={() => handleAdd()} title="add"> Add Note </Button>
+      <TouchableOpacity onPress={() => handleAdd()}>
+        <MaterialIcons style={styles.icon} name="add-circle" />
+      </TouchableOpacity>
       <View>
         {showDB.map((item) => (
           <Text key={item.id} style={styles.add}>{item.message}</Text>
@@ -54,10 +56,12 @@ const BadTimes = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:"#1B2A41"
   },
   add: {
     borderRadius: 10,
     borderWidth: 4,
+    borderColor: "#D7D9D7",
     width: "60%",
     marginTop: 21,
     textAlign: "center",
@@ -67,11 +71,12 @@ const styles = StyleSheet.create({
     left: "20%",
     fontSize: 20,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
   input: {
     borderRadius: 10,
     borderWidth: 4,
+    borderColor: "#D7D9D7",
     width: "80%",
     marginTop: 21,
     textAlign: "center",
@@ -86,36 +91,34 @@ const styles = StyleSheet.create({
   header: {
     // borderRadius: 10,
     // borderWidth: 4,
-    marginTop: 110,
+    paddingTop: 110,
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "flex-start",
     padding: 10,
     fontSize: 20,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
   headerTwo: {
     // borderRadius: 10,
     // borderWidth: 4,
-    marginTop: 30,
+    paddingTop: 30,
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "flex-start",
     padding: 10,
     fontSize: 25,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
   icon: {
-    borderRadius: "3px",
-    borderColor: "red",    
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "60", 
-    padding: 40,
-    color: "#1B2A41"
+    paddingTop: 20,
+    fontSize: 40,
+    color: "#D7D9D7",
+    textAlign: "center",
   }
+  
 });
 
 export { BadTimes }
