@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, TextInput, Text, StyleSheet, Button, ScrollView, TouchableOpacity } from "react-native";
-
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 const GoodTimes = () => {
   
@@ -39,7 +39,9 @@ const GoodTimes = () => {
         multiline
         keyboardType="default"  
       />
-      <Button onPress={() => handleAdd()} title="add"> Add Note </Button>
+      <TouchableOpacity onPress={() => handleAdd()}>
+        <MaterialIcons style={styles.icon} name="add-circle" />
+      </TouchableOpacity>
       <View>
         {showDB.map((item) => (
           <Text key={item.id} style={styles.add}>{item.message}</Text>
@@ -110,13 +112,10 @@ const styles = StyleSheet.create({
     color: "#D7D9D7",
   },
   icon: {
-    borderRadius: "3px",
-    borderColor: "red",    
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "60", 
-    padding: 40,
-    color: "#1B2A41"
+    paddingTop: 20,
+    fontSize: 40,
+    color: "#D7D9D7",
+    textAlign: "center",
   }
 });
 
