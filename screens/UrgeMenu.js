@@ -34,6 +34,8 @@ const UrgeMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor:"#1B2A41"
   },
   add: {
@@ -42,11 +44,10 @@ const styles = StyleSheet.create({
     borderColor: "#D7D9D7",
     marginTop: 21,
     width: "80%",
-    left: "10%",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
