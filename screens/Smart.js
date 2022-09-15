@@ -4,9 +4,6 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { A } from '@expo/html-elements';
 import * as Location from 'expo-location';
 
-
-myUrl = `https://meetings.smartrecovery.org/meetings/?coordinates=100&location`
-
 const Smart = () => {
   const [location, setLocation] = useState();
   const [errorMsg, setErrorMsg] = useState();
