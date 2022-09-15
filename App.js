@@ -19,6 +19,12 @@ import { UserSettings } from "./screens/UserSettings";
 import { Smart } from "./screens/Smart";
 import { Anon } from "./screens/Anon";
 import { Dharma } from "./screens/Dharma";
+import { Breathe } from "./screens/Breathe";
+import { Five } from "./screens/Five";
+import { Four } from "./screens/Four";
+import { Three } from "./screens/Three";
+import { Two } from "./screens/Two";
+import { One } from "./screens/One";
 import MyStack from "./routes/homeStack"
 
 const Stack = createNativeStackNavigator();
@@ -42,9 +48,15 @@ function App() {
             <Stack.Screen name="Meetings" component={Meetings} options={[]}/>
             <Stack.Screen name="UserSettings" component={UserSettings} options={[]}/>
             <Stack.Screen name="OutsideMenu" component={OutsideMenu} options={[]}/>
+            <Stack.Screen name="Breathe" component={Breathe} options={[]}/>
             <Stack.Screen name="Smart" component={Smart} options={[]}/>
             <Stack.Screen name="Anon" component={Anon} options={[]}/>
             <Stack.Screen name="Dharma" component={Dharma} options={[]}/>
+            <Stack.Screen name="One" component={One} options={[]}/>
+            <Stack.Screen name="Two" component={Two} options={[]}/>
+            <Stack.Screen name="Three" component={Three} options={[]}/>
+            <Stack.Screen name="Four" component={Four} options={[]}/>
+            <Stack.Screen name="Five" component={Five} options={[]}/>
             <Stack.Screen name="ProCon" component={ProConPage} options={[]}/>
           </Stack.Navigator>
         </NavigationContainer>
