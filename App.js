@@ -16,6 +16,9 @@ import { OutsideMenu } from "./screens/OutsideMenu";
 import { RiskAssessment } from "./screens/RiskAssessment";
 import { Meetings } from "./screens/Meetings";
 import { UserSettings } from "./screens/UserSettings";
+import { Smart } from "./screens/Smart";
+import { Anon } from "./screens/Anon";
+import { Dharma } from "./screens/Dharma";
 import MyStack from "./routes/homeStack"
 
 const Stack = createNativeStackNavigator();
@@ -39,6 +42,9 @@ function App() {
             <Stack.Screen name="Meetings" component={Meetings} options={[]}/>
             <Stack.Screen name="UserSettings" component={UserSettings} options={[]}/>
             <Stack.Screen name="OutsideMenu" component={OutsideMenu} options={[]}/>
+            <Stack.Screen name="Smart" component={Smart} options={[]}/>
+            <Stack.Screen name="Anon" component={Anon} options={[]}/>
+            <Stack.Screen name="Dharma" component={Dharma} options={[]}/>
             <Stack.Screen name="ProCon" component={ProConPage} options={[]}/>
           </Stack.Navigator>
         </NavigationContainer>
