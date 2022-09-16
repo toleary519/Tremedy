@@ -37,7 +37,9 @@ const GoodTimes = () => {
         onChangeText={(text) => setNote(text)} 
         placeholder={"New Note"} 
         multiline
-        keyboardType="default"  
+        keyboardType="default"
+        color="#D7D9D7"
+        placeholderTextColor={"#F1F7EE"}  
       />
       <TouchableOpacity onPress={() => handleAdd()}>
         <MaterialIcons style={styles.icon} name="add-circle" />
