@@ -18,11 +18,11 @@ const Meetings = ({ navigation }) => {
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
-      console.log("location object: ****", location)
+      // console.log("location object: ****", location)
 
       let address = await Location.reverseGeocodeAsync(location.coords);
       setAddress(address[0].city);
-      console.log("address object: ****", address[0]);
+      // console.log("address object: ****", address[0]);
 
     })();
   }, []);
