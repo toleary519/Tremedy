@@ -1,40 +1,70 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, StyleSheet, View , TouchableOpacity } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { A } from '@expo/html-elements';
+import * as Location from 'expo-location';
 
-const Meetings = ({ navigation }) => (
+const Meetings = ({ navigation }) => {
+  const [location, setLocation] = useState();
+  const [errorMsg, setErrorMsg] = useState();
+  const [address, setAddress] = useState();
+  
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+      console.log("location object: ****", location)
+
+      let address = await Location.reverseGeocodeAsync(location.coords);
+      setAddress(address[0].city);
+      console.log("address object: ****", address[0]);
+
+    })();
+  }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+
+  return(
   <View style={styles.container}>
-  <TouchableOpacity onPress={() => navigation.navigate("Smart")} delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
+   <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
-    SMART
+      <A style={styles.add} href={`https://meetings.smartrecovery.org/meetings/?coordinates=100&location=${address}`}>Smart</A>
     </Text>
   </TouchableOpacity>
-  <TouchableOpacity onPress={() => navigation.navigate("Dharma")} delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
+  <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
-      DHARMA
+      <A style={styles.add} href={`https://recoverydharma.org/find-a-meeting/`}>Dharma</A>
     </Text>
   </TouchableOpacity>
-  <TouchableOpacity onPress={() => navigation.navigate("Anon")} delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
+  <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
-      AA
+      <A style={styles.add} href={`https://www.google.com/search?q=aa+meetings+${address}`}> AA </A>
     </Text>
   </TouchableOpacity>
-  <TouchableOpacity onPress={() => navigation.navigate()} delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
+  <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
-      The Luckiest Club
+      <A href={`https://www.theluckiestclub.com/`}> Luckiest Club </A>
     </Text>
   </TouchableOpacity>
   </View>
-);
+
+)};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1B2A41"
+    paddingTop: 140,
+    backgroundColor:"#1B2A41"
   },
   add: {
     borderRadius: 10,
