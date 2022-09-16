@@ -25,7 +25,7 @@ const Anon = () => {
       console.log("location object: ****", location)
 
       let address = await Location.reverseGeocodeAsync(location.coords);
-      setAddress(address[0]);
+      setAddress(address[0].city);
       console.log("address object: ****", address[0]);
 
     })();
@@ -40,7 +40,8 @@ const Anon = () => {
 
   return (
     <View style={styles.container}>
-      <A style={styles.add} href={`https://www.aa.org/find-aa/north-america?lat=51.04473309999999&lng=-114.0718831&geolocation_geocoder_address=${address.city}%2C+${address.region}%2C+${address.country}`}>See Meetings</A>
+      <A style={styles.add} href={`https://www.google.com/search?q=aa+meetings+${address}`}>See Meetings</A>
+          
     </View>
   )
 };
