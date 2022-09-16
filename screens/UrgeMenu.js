@@ -4,16 +4,16 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const UrgeMenu = ({ navigation }) => (
   <View style={styles.container}>
-    <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
-      <Text style={styles.add}>
-      Experiences
-      </Text>
-    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("PlanningMenu")} delayPressIn={150}>
       {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
       I'm planning
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>
+      Experiences
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("OutsideMenu")} delayPressIn={150}>
@@ -34,8 +34,7 @@ const UrgeMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    paddingTop: 140,
     backgroundColor:"#1B2A41"
   },
   add: {
@@ -44,6 +43,7 @@ const styles = StyleSheet.create({
     borderColor: "#D7D9D7",
     marginTop: 21,
     width: "80%",
+    left: "10%",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
