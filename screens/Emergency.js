@@ -61,8 +61,7 @@ const Emergency = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    paddingTop: 140,
     backgroundColor:"#1B2A41"
   },
   add: {
@@ -70,6 +69,8 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#D7D9D7",
     marginTop: 21,
+    width: "80%",
+    left: "10%",
     textAlign: "center",
     padding: 10,
     fontSize: 40,
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
     borderColor: "#D7D9D7",
     marginTop: 21,
     width: "80%",
+    left: "10%",
     textAlign: "center",
     padding: 10,
     fontSize: 40,
