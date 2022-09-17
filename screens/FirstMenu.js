@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const pepHandler = () => {
-
-};
-
 const FirstMenu = ({ navigation }) => (
   <View style={styles.container}>
     <TouchableOpacity onPress={() => navigation.navigate("Emergency")} delayPressIn={150}>
