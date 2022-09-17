@@ -25,6 +25,10 @@ import { Four } from "./screens/Four";
 import { Three } from "./screens/Three";
 import { Two } from "./screens/Two";
 import { One } from "./screens/One";
+import { PercievedThreatMenu } from "./screens/PercievedThreatMenu";
+import { EyeInstruct } from "./screens/EyeInstruct";
+import { KneadInstruct } from "./screens/KneadInstruct";
+import { AnkleInstruct } from "./screens/AnkleInstruct";
 import MyStack from "./routes/homeStack"
 
 const Stack = createNativeStackNavigator();
@@ -52,11 +56,15 @@ function App() {
             <Stack.Screen name="Smart" component={Smart} options={[]}/>
             <Stack.Screen name="Anon" component={Anon} options={[]}/>
             <Stack.Screen name="Dharma" component={Dharma} options={[]}/>
+            <Stack.Screen name="PercievedThreatMenu" component={PercievedThreatMenu} options={[]}/>
+            <Stack.Screen name="EyeInstruct" component={EyeInstruct} options={[]}/>
+            <Stack.Screen name="KneadInstruct" component={KneadInstruct} options={[]}/>
+            <Stack.Screen name="AnkleInstruct" component={AnkleInstruct} options={[]}/>
             <Stack.Screen name="One" component={One} options={[]}/>
             <Stack.Screen name="Two" component={Two} options={[]}/>
             <Stack.Screen name="Three" component={Three} options={[]}/>
-            <Stack.Screen name="Four" component={Four} options={[]}/>
             <Stack.Screen name="Five" component={Five} options={[]}/>
+            <Stack.Screen name="Four" component={Four} options={[]}/>
             <Stack.Screen name="ProCon" component={ProConPage} options={[]}/>
           </Stack.Navigator>
         </NavigationContainer>
