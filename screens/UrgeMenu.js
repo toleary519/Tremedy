@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 4,
     borderColor: "#D7D9D7",
-    marginTop: 21,
+    marginTop: 20,
     width: "80%",
     left: "10%",
     textAlign: "center",
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#D7D9D7",
   },
+ 
 
   // icon: {
   //   borderRadius: "3px",
