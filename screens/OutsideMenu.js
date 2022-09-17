@@ -4,16 +4,16 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const OutsideMenu = ({ navigation }) => (
   <View style={styles.container}>
+    <TouchableOpacity delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>
+        Sober Contacts
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
       {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
       Your Experiences
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
-      <Text style={styles.add}>
-        Your "Go-Tos"
       </Text>
     </TouchableOpacity>
   </View>
@@ -22,20 +22,22 @@ const OutsideMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 140,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#1B2A41"
   },
   add: {
     borderRadius: 10,
     borderWidth: 4,
-    marginTop: 21,
+    borderColor: "#D7D9D7",
+    marginTop: 20,
     width: "80%",
-    left: "10%",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
 
   // icon: {
