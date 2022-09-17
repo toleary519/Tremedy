@@ -1,52 +1,51 @@
 import React from "react";
-import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const PepTalkMenu = ({ navigation }) => (
-  <View style={styles.container}>
+  <ScrollView style={styles.container}>
+    <TouchableOpacity onPress={() => navigation.navigate("PercievedThreatMenu")} delayPressIn={150}>
+      <Text style={styles.add}>
+      I'm In a State of Percieved Threat
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
       Your Experiences
       </Text>
     </TouchableOpacity>
     <TouchableOpacity delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
-        Your "Go-Tos"
+        Sober Contacts
       </Text>
     </TouchableOpacity>
     <TouchableOpacity delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
         Quotes
       </Text>
     </TouchableOpacity>
     <TouchableOpacity delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
         + Self-Talk
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Breathe")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
         Breathe
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Five")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
         5-4-3-2-1
       </Text>
     </TouchableOpacity>
-  </View>
+  </ScrollView>
 );
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 140,
+    paddingTop: 50,
     backgroundColor:"#1B2A41"
   },
   add: {
