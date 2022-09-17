@@ -44,17 +44,15 @@ const Emergency = ({ navigation }) => {
     </Text>
   </TouchableOpacity>
   <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
     <Text style={styles.add}>
       <A style={styles.add} href={`https://www.google.com/search?q=${address}+hospitals`}>Hospitals</A>
     </Text>
   </TouchableOpacity>
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
+  {/* <TouchableOpacity delayPressIn={150}>
     <Text style={styles.emergency}>
       CALL 911
     </Text>
-  </TouchableOpacity>
+  </TouchableOpacity> */}
   </View>
 )};
 
@@ -68,29 +66,30 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 4,
     borderColor: "#D7D9D7",
-    marginTop: 21,
+    marginTop: 20,
     width: "80%",
     left: "10%",
     textAlign: "center",
+    justifyContent: "flex-end",
     padding: 10,
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
 
-  emergency: {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    marginTop: 21,
-    width: "80%",
-    left: "10%",
-    textAlign: "center",
-    padding: 10,
-    fontSize: 40,
-    fontWeight: "bold",
-    color: "#FB3640",
-  },
+  // emergency: {
+  //   borderRadius: 10,
+  //   borderWidth: 4,
+  //   borderColor: "#D7D9D7",
+  //   marginTop: 21,
+  //   width: "80%",
+  //   left: "10%",
+  //   textAlign: "center",
+  //   padding: 10,
+  //   fontSize: 40,
+  //   fontWeight: "bold",
+  //   color: "#FB3640",
+  // },
 
   icon: {
     borderRadius: "3px",
