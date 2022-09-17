@@ -4,22 +4,16 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const PlanningMenu = ({ navigation }) => (
   <View style={styles.container}>
-  <TouchableOpacity onPress={() => navigation.navigate("RiskAssessment")} delayPressIn={150}>
+  <TouchableOpacity delayPressIn={150}>
     {/* <Text onPress={onPress} style={styles.add}> */}
     <Text style={styles.add}>
-    Risk Assessment
+      Your Sober Contacts
     </Text>
   </TouchableOpacity>
   <TouchableOpacity onPress={() => navigation.navigate("ProCon")} delayPressIn={150}>
     {/* <Text onPress={onPress} style={styles.add}> */}
     <Text style={styles.add}>
       Pros / Cons
-    </Text>
-  </TouchableOpacity>
-  <TouchableOpacity delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-      Your Sober Contacts
     </Text>
   </TouchableOpacity>
   <TouchableOpacity onPress={() => navigation.navigate("Meetings")} delayPressIn={150}>
