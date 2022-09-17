@@ -1,6 +1,7 @@
 import React,{ useState } from "react";
 import { Text, StyleSheet, View, ScrollView, TextInput, Button } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'; 
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ProCon = () => {
 
@@ -49,9 +50,13 @@ const ProCon = () => {
           onChangeText={(text) => setPro(text)} 
           placeholder={"add new Pro"} 
           multiline
-          keyboardType="default"  
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}    
           />
-          <Button onPress={() => handleAddPro()} title="add"> Add Pro </Button>
+          <TouchableOpacity onPress={() => handleAddPro()}>
+            <Ionicons style={styles.icon} name="add-circle"/>
+          </TouchableOpacity>
             {showPros.map((item) => (
               <Text key={item.id} style={styles.add}>{item.message}</Text>
               ))}
@@ -63,9 +68,13 @@ const ProCon = () => {
           onChangeText={(text) => setCon(text)} 
           placeholder={"add new Con"} 
           multiline
-          keyboardType="default"  
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}      
           />
-          <Button style={styles.button} onPress={() => handleAddCon()} title="add"> Add Con </Button>
+          <TouchableOpacity onPress={() => handleAddPro()}>
+            <Ionicons style={styles.icon} name="add-circle" />
+          </TouchableOpacity>
             {showCons.map((item) => (
               <Text key={item.id} style={styles.add}>{item.message}</Text>
               ))}
@@ -92,7 +101,6 @@ const styles = StyleSheet.create({
   add: {
     // borderRadius: 10,
     // borderWidth: 4,
-    marginTop: 21,
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
@@ -114,17 +122,15 @@ const styles = StyleSheet.create({
   },
   button: {
     color: "#D7D9D7",
+  },
+  icon: { 
+    justifyContent: "center",
+    alignItems: "center",
+    left: "30%",
+    fontSize: "45", 
+    padding: 20,
+    color: "#D7D9D7"
   }
-
-  // icon: {
-  //   borderRadius: "3px",
-  //   borderColor: "red",    
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   fontSize: "60", 
-  //   padding: 60,
-  //   color: "#1B2A41"
-  // }
 });
 
 export default ProCon;
