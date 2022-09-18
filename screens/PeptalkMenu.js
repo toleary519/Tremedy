@@ -14,7 +14,7 @@ const PepTalkMenu = ({ navigation }) => (
       Your Experiences
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
       <Text style={styles.add}>
         Sober Contacts
       </Text>
