@@ -3,12 +3,25 @@ import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Alert } from "rea
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import * as Contacts from "expo-contacts";
+import call from 'react-native-phone-call'
 
 const SoberContacts = () => {
 
   let filteredContacts = []
 
   const [contacts, setContacts] = useState([]);
+
+  const makeCall = (item) => {
+
+    const args = {
+      number: `1${item.phoneNumbers[0].digits}}`,
+      prompt: false, 
+      skipCanOpen: true
+    }
+
+    call(args).catch(console.error);
+
+  }
 
   useEffect(() => {
     (async () => {
@@ -43,7 +56,11 @@ return (
     <Text style={styles.summaryThree}> To add a sober contact put "2174" anywhere in the 
     company field of their contact card.</Text>
     {filteredContacts.map((item) => (
-    <TouchableOpacity style={styles.contactContainer} key={item.phoneNumbers[0].number} delayPressIn={150}>
+    <TouchableOpacity 
+      style={styles.contactContainer} 
+      key={item.phoneNumbers[0].number}
+      onPress={() => makeCall(item)} 
+      delayPressIn={150}>
       <Text style={styles.add}>{item.firstName}</Text>
       <Text style={styles.add}>{item.lastName ? item.lastName : null}</Text>
       <Text style={styles.add}>{item.phoneNumbers[0].number}</Text>
