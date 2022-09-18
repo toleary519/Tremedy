@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View, SafeAreaView, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { FirstMenu } from "./screens/FirstMenu";
 import { Emergency } from "./screens/Emergency";
 import { PepTalkMenu } from "./screens/PepTalkMenu";
@@ -30,7 +30,7 @@ import { EyeInstruct } from "./screens/EyeInstruct";
 import { KneadInstruct } from "./screens/KneadInstruct";
 import { AnkleInstruct } from "./screens/AnkleInstruct";
 import MyStack from "./routes/homeStack"
-import { setStatusBarBackgroundColor } from "expo-status-bar";
+import { StatusBar } from "expo-status-bar";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,7 +39,7 @@ function App() {
   return (
     <View style={styles.container}>
          <SafeAreaView style={{flex: 1}}>
-          <StatusBar backgroundColor='#1B2A41' barStyle={"light-content"} />
+          {/* <StatusBar backgroundColor='#1B2A41' barStyle={"light-content"} /> */}
             <NavigationContainer>
               <Stack.Navigator initialRouteName="Home" screenOptions={{
                 headerStyle: {
