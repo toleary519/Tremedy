@@ -4,12 +4,6 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const FirstMenu = ({ navigation }) => (
   <View style={styles.container}>
-    <TouchableOpacity onPress={() => navigation.navigate("Emergency")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
-      <Text style={styles.emergency}>
-        Emergency
-      </Text>
-    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("UrgeMenu")} delayPressIn={150}>
       {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
@@ -22,8 +16,16 @@ const FirstMenu = ({ navigation }) => (
         Pep-Talk
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("UserSettings")} delayPressIn={150}>
-      <FontAwesome5 name="user-cog" style={styles.icon}/>
+    <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
+      <Text style={styles.add}>
+        Sober Contacts
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("Emergency")} delayPressIn={150}>
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.emergency}>
+        Emergency
+      </Text>
     </TouchableOpacity>
   </View>
 );
@@ -36,7 +38,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#1B2A41"
   },
   add: {
-    marginTop: 21,
+    marginTop: 30,
+    borderRadius: 10,
+    borderWidth: 4,
+    borderColor: "#D7D9D7",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
@@ -46,7 +51,10 @@ const styles = StyleSheet.create({
   },
 
   emergency: {
-    marginTop: 21,
+    marginTop: 30,
+    borderRadius: 10,
+    borderWidth: 4,
+    borderColor: "red",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
