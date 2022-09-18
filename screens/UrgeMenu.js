@@ -22,6 +22,11 @@ const UrgeMenu = ({ navigation }) => (
         I'm outside the store
       </Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
+      <Text style={styles.add}>
+        Sober Contacts
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity delayPressIn={150}>
       {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
