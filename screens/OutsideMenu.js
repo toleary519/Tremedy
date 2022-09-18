@@ -4,7 +4,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const OutsideMenu = ({ navigation }) => (
   <View style={styles.container}>
-    <TouchableOpacity delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
       {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
         Sober Contacts
