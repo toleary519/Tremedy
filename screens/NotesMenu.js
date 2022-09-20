@@ -27,7 +27,7 @@ const NotesMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 140,
+    paddingTop: 70,
     backgroundColor:"#1B2A41"
   },
   good: {
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     marginTop: 21,
     textAlign: "center",
     justifyContent: "flex-end",
-    padding: 10,
+    padding: 20,
     fontSize: 15,
     fontWeight: "bold",
     color: "#D7D9D7",
