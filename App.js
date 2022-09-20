@@ -51,33 +51,33 @@ function App() {
                   fontSize: 20,
                 },
               }}>
-                <Stack.Screen name="Home" component={FirstMenu} options={[]}/>
-                <Stack.Screen name="PepTalk" component={PepTalkMenu} options={[]}/>
-                <Stack.Screen name="NotesMenu" component={NotesMenu} options={[]}/>
-                <Stack.Screen name="GoodTimes" component={GoodTimes} options={[]}/>
-                <Stack.Screen name="BadTimes" component={BadTimes} options={[]}/>
-                <Stack.Screen name="Emergency" component={Emergency} options={[]}/>
-                <Stack.Screen name="UrgeMenu" component={UrgeMenu} options={[]}/>
-                <Stack.Screen name="PlanningMenu" component={PlanningMenu} options={[]}/>
-                <Stack.Screen name="RiskAssessment" component={RiskAssessment} options={[]}/>
-                <Stack.Screen name="Meetings" component={Meetings} options={[]}/>
-                <Stack.Screen name="UserSettings" component={UserSettings} options={[]}/>
-                <Stack.Screen name="SoberContacts" component={SoberContacts} options={[]}/>
-                <Stack.Screen name="OutsideMenu" component={OutsideMenu} options={[]}/>
-                <Stack.Screen name="Breathe" component={Breathe} options={[]}/>
-                <Stack.Screen name="Smart" component={Smart} options={[]}/>
-                <Stack.Screen name="Anon" component={Anon} options={[]}/>
-                <Stack.Screen name="Dharma" component={Dharma} options={[]}/>
-                <Stack.Screen name="PercievedThreatMenu" component={PercievedThreatMenu} options={[]}/>
-                <Stack.Screen name="EyeInstruct" component={EyeInstruct} options={[]}/>
-                <Stack.Screen name="KneadInstruct" component={KneadInstruct} options={[]}/>
-                <Stack.Screen name="AnkleInstruct" component={AnkleInstruct} options={[]}/>
-                <Stack.Screen name="One" component={One} options={[]}/>
-                <Stack.Screen name="Two" component={Two} options={[]}/>
-                <Stack.Screen name="Three" component={Three} options={[]}/>
-                <Stack.Screen name="Five" component={Five} options={[]}/>
-                <Stack.Screen name="Four" component={Four} options={[]}/>
-                <Stack.Screen name="ProCon" component={ProConPage} options={[]}/>
+                <Stack.Screen name="Home" component={FirstMenu} options={{ title: 'Home' }}/>
+                <Stack.Screen name="PepTalk" component={PepTalkMenu} options={{ title: 'Pep-Talk' }}/>
+                <Stack.Screen name="NotesMenu" component={NotesMenu} options={{ title: 'Experiences' }}/>
+                <Stack.Screen name="GoodTimes" component={GoodTimes} options={{ title: 'The Good' }}/>
+                <Stack.Screen name="BadTimes" component={BadTimes} options={{ title: 'The Bad' }}/>
+                <Stack.Screen name="Emergency" component={Emergency} options={{ title: 'Emergency' }}/>
+                <Stack.Screen name="UrgeMenu" component={UrgeMenu} options={{ title: 'Urges' }}/>
+                <Stack.Screen name="PlanningMenu" component={PlanningMenu} options={{ title: "I'm Planning" }}/>
+                {/* <Stack.Screen name="RiskAssessment" component={RiskAssessment} options={{ title: 'My home' }}/> */}
+                <Stack.Screen name="Meetings" component={Meetings} options={{ title: 'Find A Meeting' }}/>
+                {/* <Stack.Screen name="UserSettings" component={UserSettings} options={{ title: 'My home' }}/> */}
+                <Stack.Screen name="SoberContacts" component={SoberContacts} options={{ title: 'Sober Contacts' }}/>
+                <Stack.Screen name="OutsideMenu" component={OutsideMenu} options={{ title: "Don't Do It" }}/>
+                <Stack.Screen name="Breathe" component={Breathe} options={{ title: 'Breathe' }}/>
+                {/* <Stack.Screen name="Smart" component={Smart} options={{ title: 'My home' }}/> */}
+                {/* <Stack.Screen name="Anon" component={Anon} options={{ title: 'My home' }}/> */}
+                {/* <Stack.Screen name="Dharma" component={Dharma} options={{ title: 'My home' }}/> */}
+                <Stack.Screen name="PercievedThreatMenu" component={PercievedThreatMenu} options={{ title: 'Percieved Threat' }}/>
+                <Stack.Screen name="EyeInstruct" component={EyeInstruct} options={{ title: 'Eye Exercise' }}/>
+                <Stack.Screen name="KneadInstruct" component={KneadInstruct} options={{ title: 'Knead Exercise' }}/>
+                <Stack.Screen name="AnkleInstruct" component={AnkleInstruct} options={{ title: 'Ankle Exercise' }}/>
+                <Stack.Screen name="One" component={One} options={{ title: 'One' }}/>
+                <Stack.Screen name="Two" component={Two} options={{ title: 'Two' }}/>
+                <Stack.Screen name="Three" component={Three} options={{ title: 'Three' }}/>
+                <Stack.Screen name="Five" component={Five} options={{ title: 'Five' }}/>
+                <Stack.Screen name="Four" component={Four} options={{ title: 'Four' }}/>
+                <Stack.Screen name="ProCon" component={ProConPage} options={{ title: 'PROs & CONs' }}/>
               </Stack.Navigator>
             </NavigationContainer>
       </SafeAreaView>
