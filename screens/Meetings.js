@@ -20,9 +20,9 @@ const Meetings = ({ navigation }) => {
       setLocation(location);
       // console.log("location object: ****", location)
 
-      let address = await Location.reverseGeocodeAsync(location.coords);
-      setAddress(address[0].city);
-      // console.log("address object: ****", address[0]);
+      let address = await Location.reverseGeocodeAsync({latitude : location.coords.latitude, longitude : location.coords.longitude});
+      setAddress(address[0].city)
+      // console.log("address object: ****", address[0].city);
 
     })();
   }, []);
@@ -38,7 +38,7 @@ const Meetings = ({ navigation }) => {
   <View style={styles.container}>
    <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
-      <A style={styles.add} href={`https://meetings.smartrecovery.org/meetings/?coordinates=100&location=${address}`}>Smart</A>
+     <A style={styles.add} href={`https://meetings.smartrecovery.org/meetings/?location=${address}&coordinates=100`}>Smart</A>
     </Text>
   </TouchableOpacity>
   <TouchableOpacity delayPressIn={150}>
@@ -48,7 +48,8 @@ const Meetings = ({ navigation }) => {
   </TouchableOpacity>
   <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
-      <A style={styles.add} href={`https://www.google.com/search?q=aa+meetings+${address}`}> AA </A>
+    <A style={styles.add} 
+      href={`https://www.google.com/search?q=aa+meetings+${address}`}> AA </A> 
     </Text>
   </TouchableOpacity>
   <TouchableOpacity delayPressIn={150}>
