@@ -1,9 +1,10 @@
 import React from "react";
-import { Text, StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity, ScrollView, SafeAreaView, FlatList } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const PepTalkMenu = ({ navigation }) => (
-  <ScrollView style={styles.container}>
+  <View style={styles.container}>
+  <ScrollView contentContainerStyle={{ paddingBottom: 30}} >
     <TouchableOpacity onPress={() => navigation.navigate("PercievedThreatMenu")} delayPressIn={150}>
       <Text style={styles.add}>
       I'm In a State of Percieved Threat
@@ -40,6 +41,7 @@ const PepTalkMenu = ({ navigation }) => (
       </Text>
     </TouchableOpacity>
   </ScrollView>
+  </View>
 );
 
 const styles = StyleSheet.create({
@@ -58,20 +60,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
-
-  // icon: {
-  //   borderRadius: "3px",
-  //   borderColor: "red",    
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   fontSize: "60", 
-  //   padding: 60,
-  //   color: "#1B2A41"
-  // }
 });
 
 export { PepTalkMenu }
