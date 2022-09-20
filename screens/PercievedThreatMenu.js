@@ -78,14 +78,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#1B2A41"
   },
   exercise: {
-    flexDirection: "row"
+    flexDirection: "row",
+    width: "90%",
+    justifyContent: "center",
   },
   add: {
     marginTop: 21,
     textAlign: "center",
-    justifyContent: "flex-end",
     padding: 1,
-    fontSize: 35,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
@@ -95,6 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     marginBottom: 50,
     fontSize: 20,
+    width: "90%",
     fontWeight: "bold",
     color: "#D7D9D7",
   },
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     padding: 10,
     marginRight: 25,
-    fontSize: 35,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
