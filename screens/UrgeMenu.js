@@ -5,19 +5,16 @@ import { FontAwesome5 } from '@expo/vector-icons';
 const UrgeMenu = ({ navigation }) => (
   <View style={styles.container}>
     <TouchableOpacity onPress={() => navigation.navigate("PlanningMenu")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
       I'm planning
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
       Experiences
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("OutsideMenu")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
         I'm outside the store
       </Text>
@@ -28,7 +25,6 @@ const UrgeMenu = ({ navigation }) => (
       </Text>
     </TouchableOpacity>
     <TouchableOpacity delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
         I'm already using
       </Text>
@@ -39,7 +35,7 @@ const UrgeMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 140,
+    paddingTop: 40,
     backgroundColor:"#1B2A41"
   },
   add: {
