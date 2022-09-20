@@ -22,8 +22,8 @@ const Emergency = ({ navigation }) => {
       setLocation(location);
       // console.log("location object: ****", location)
 
-      let address = await Location.reverseGeocodeAsync(location.coords);
-      setAddress(address[0].city);
+      let address = await Location.reverseGeocodeAsync({latitude : location.coords.latitude, longitude : location.coords.longitude});
+      setAddress(address[0].city)
       // console.log("address object: ****", address[0].city);
 
     })();
@@ -40,12 +40,14 @@ const Emergency = ({ navigation }) => {
   <View style={styles.container}>
   <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
-      <A style={styles.add} href={`https://www.google.com/search?q=${address}+crisis+line`}>Crisis Lines</A>
+    <A style={styles.add} href={`https://www.google.com/search?q=${address}+crisis+line`}>Crisis Lines</A>
+     {/* <A href={`https://www.google.com/search?q=crisis+lines+near+${location.longitude}%2C+${location.latitude}`}>Crisis Lines</A>  */}
     </Text>
   </TouchableOpacity>
   <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
-      <A style={styles.add} href={`https://www.google.com/search?q=${address}+hospitals`}>Hospitals</A>
+    <A style={styles.add} href={`https://www.google.com/search?q=${address}+hospitals`}>Hospitals</A>
+     {/* <A href={`https://www.google.com/search?q=hospitals+near+${location.coords.longitude}%2C+${location.coords.latitude}`}>Hospitals</A> */}
     </Text>
   </TouchableOpacity>
   {/* <TouchableOpacity delayPressIn={150}>
@@ -76,21 +78,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#D7D9D7",
   },
-
-  // emergency: {
-  //   borderRadius: 10,
-  //   borderWidth: 4,
-  //   borderColor: "#D7D9D7",
-  //   marginTop: 21,
-  //   width: "80%",
-  //   left: "10%",
-  //   textAlign: "center",
-  //   padding: 10,
-  //   fontSize: 40,
-  //   fontWeight: "bold",
-  //   color: "#FB3640",
-  // },
-
   icon: {
     borderRadius: "3px",
     borderColor: "red",    
