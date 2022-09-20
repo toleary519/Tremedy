@@ -17,11 +17,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#1B2A41"
   },
   add: {
-    marginTop: 21,
     textAlign: "center",
     justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 40,
+    padding: 15,
+    fontSize: 35,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
