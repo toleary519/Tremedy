@@ -19,7 +19,7 @@ const SoberContacts = () => {
       skipCanOpen: true
     }
 
-    call(args).catch(console.error);
+    call(args);
 
   }
 
@@ -33,7 +33,7 @@ const SoberContacts = () => {
           const contacts = data;
           setContacts(contacts)
           // console.log("test 8****", contacts);
-          // console.log("data length:", contacts.length);
+          console.log("data length:", contacts.length);
         }
         else {
           setError('Add some "2174" company contacts');
@@ -76,8 +76,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#1B2A41"
   },
   add: {
-    paddingTop: 10,
-    paddingBottom: 10,
     padding: 5,
     fontSize: 14,
     fontWeight: "bold",
@@ -125,11 +123,11 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#D7D9D7",
     marginTop: 15,
-    width: "80%",
-    left: "10%",
+    width: "90%",
+    left: "2.5%",
     textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
     color: "#D7D9D7",
   }
 });
