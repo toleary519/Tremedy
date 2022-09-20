@@ -4,8 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const GoodTimes = () => {
   
-  let fakeDB = [{id: 1, message: "made partner"},{id: 2, message: "kids birthday"},
-  {id:3, message: "dinner with family"},{id: 4, message: "saved 1000s"}]
+  let fakeDB = [{id:1, message: "dinner with family"},{id: 2, message: "saved 1000s"}]
   
   const [showDB, setShowDB] = useState(fakeDB)
   const [note, setNote] = useState("")
@@ -63,13 +62,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 4,
     borderColor: "#D7D9D7",
-    width: "60%",
+    width: "80%",
     marginTop: 21,
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    left: "20%",
+    left: "10%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#D7D9D7",
@@ -82,7 +81,6 @@ const styles = StyleSheet.create({
     marginTop: 21,
     textAlign: "center",
     justifyContent: "center",
-    
     padding: 10,
     left: "10%",
     fontSize: 20,
@@ -90,25 +88,21 @@ const styles = StyleSheet.create({
     color: "#2f8587",
   },
   header: {
-    // borderRadius: 10,
-    // borderWidth: 4,
-    paddingTop: 110,
+    paddingTop: 40,
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    padding: 10,
+    padding: 20,
     fontSize: 20,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
   headerTwo: {
-    // borderRadius: 10,
-    // borderWidth: 4,
     paddingTop: 30,
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    padding: 10,
+    padding: 20,
     fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
