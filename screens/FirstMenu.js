@@ -33,7 +33,7 @@ const FirstMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    paddingTop: 40,
     alignItems: "center",
     backgroundColor: "#1B2A41"
   },
