@@ -27,6 +27,16 @@ const PepTalkMenu = ({ navigation }) => (
     </TouchableOpacity>
     <TouchableOpacity delayPressIn={150}>
       <Text style={styles.add}>
+        Copernican Turn
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity delayPressIn={150}>
+      <Text style={styles.add}>
+        Activities
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity delayPressIn={150}>
+      <Text style={styles.add}>
         + Self-Talk
       </Text>
     </TouchableOpacity>
