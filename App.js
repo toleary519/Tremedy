@@ -59,18 +59,16 @@ function App() {
                 <Stack.Screen name="Emergency" component={Emergency} options={{ title: 'Emergency' }}/>
                 <Stack.Screen name="UrgeMenu" component={UrgeMenu} options={{ title: 'Urges' }}/>
                 <Stack.Screen name="PlanningMenu" component={PlanningMenu} options={{ title: "I'm Planning" }}/>
-                {/* <Stack.Screen name="RiskAssessment" component={RiskAssessment} options={{ title: 'My home' }}/> */}
                 <Stack.Screen name="Meetings" component={Meetings} options={{ title: 'Find A Meeting' }}/>
-                {/* <Stack.Screen name="UserSettings" component={UserSettings} options={{ title: 'My home' }}/> */}
                 <Stack.Screen name="SoberContacts" component={SoberContacts} options={{ title: 'Sober Contacts' }}/>
                 <Stack.Screen name="OutsideMenu" component={OutsideMenu} options={{ title: "Don't Do It" }}/>
                 <Stack.Screen name="Breathe" component={Breathe} options={{ title: 'Breathe' }}/>
-                {/* <Stack.Screen name="Smart" component={Smart} options={{ title: 'My home' }}/> */}
-                {/* <Stack.Screen name="Anon" component={Anon} options={{ title: 'My home' }}/> */}
-                {/* <Stack.Screen name="Dharma" component={Dharma} options={{ title: 'My home' }}/> */}
                 <Stack.Screen name="PercievedThreatMenu" component={PercievedThreatMenu} options={{ title: 'Percieved Threat' }}/>
                 <Stack.Screen name="EyeInstruct" component={EyeInstruct} options={{ title: 'Eye Exercise' }}/>
                 <Stack.Screen name="KneadInstruct" component={KneadInstruct} options={{ title: 'Knead Exercise' }}/>
+                <Stack.Screen name="Activities" component={Activities} options={{ title: 'Activities' }}/>
+                <Stack.Screen name="Pies" component={Pies} options={{ title: 'PIES Check-In' }}/>
+                <Stack.Screen name="ProgressiveMuscle" component={ProgressiveMuscle} options={{ title: 'PMR' }}/>
                 <Stack.Screen name="AnkleInstruct" component={AnkleInstruct} options={{ title: 'Ankle Exercise' }}/>
                 <Stack.Screen name="One" component={One} options={{ title: 'One' }}/>
                 <Stack.Screen name="Two" component={Two} options={{ title: 'Two' }}/>
