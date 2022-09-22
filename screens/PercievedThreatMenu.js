@@ -9,6 +9,7 @@ const PercievedThreatMenu = ({ navigation }) => {
   const [breatheDone, setBreatheDone] = useState(false);
   const [kneadDone, setKneadDone] = useState(false);
   const [anklesDone, setAnklesDone] = useState(false);
+  const [PMR, setPMR] = useState(false);
 
   const handleREDO = () => {
     setEyeDone(false);
@@ -29,6 +30,16 @@ const PercievedThreatMenu = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity onPress={() => setBreatheDone(true)}>
         <MaterialCommunityIcons style={ breatheDone ? styles.breatheIconDone : styles.breatheIcon} name="gesture-tap-button"/>
+      </TouchableOpacity>
+    </View>    
+    <View style={styles.exercise}>
+      <TouchableOpacity onPress={() => navigation.navigate("ProgressiveMuscle")} delayPressIn={150}>
+        <Text style={styles.breathe}>
+          Progressive Muscle Relaxation
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => setPMR(true)}>
+        <MaterialCommunityIcons style={ breatheDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
       </TouchableOpacity>
     </View>    
     <View style={styles.exercise}>
