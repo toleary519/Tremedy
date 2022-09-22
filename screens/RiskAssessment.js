@@ -2,7 +2,7 @@ import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const RiskAssessment = () => (
+const xyz = () => (
   <View style={styles.container}>
   <Text style={styles.add}>Find an way to do cost benefit analysis</Text>
   </View>
@@ -11,30 +11,23 @@ const RiskAssessment = () => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    paddingTop: 50,
+    backgroundColor:"#1B2A41"
   },
   add: {
-    // borderRadius: 10,
-    // borderWidth: 4,
+    borderRadius: 10,
+    borderWidth: 4,
+    borderColor: "#D7D9D7",
     marginTop: 21,
+    width: "80%",
+    left: "10%",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: "#D7D9D7",
   },
-
-  // icon: {
-  //   borderRadius: "3px",
-  //   borderColor: "red",    
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   fontSize: "60", 
-  //   padding: 60,
-  //   color: "#1B2A41"
-  // }
 });
 
-export { RiskAssessment };
+export { xyz };
