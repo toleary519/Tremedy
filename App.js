@@ -52,7 +52,7 @@ function App() {
                 },
               }}>
                 <Stack.Screen name="Home" component={FirstMenu} options={{ title: 'Home' }}/>
-                <Stack.Screen name="PepTalk" component={PepTalkMenu} options={{ title: 'Pep-Talk' }}/>
+                <Stack.Screen name="PepTalk" component={PepTalkMenu} options={{ title: 'Tool Box' }}/>
                 <Stack.Screen name="NotesMenu" component={NotesMenu} options={{ title: 'Experiences' }}/>
                 <Stack.Screen name="GoodTimes" component={GoodTimes} options={{ title: 'The Good' }}/>
                 <Stack.Screen name="BadTimes" component={BadTimes} options={{ title: 'The Bad' }}/>
