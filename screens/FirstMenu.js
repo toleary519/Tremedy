@@ -13,7 +13,7 @@ const FirstMenu = ({ navigation }) => (
     <TouchableOpacity onPress={() => navigation.navigate("PepTalk")} delayPressIn={150}>
       {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
-        Pep-Talk
+        Tool Box
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 40,
-    alignItems: "center",
     backgroundColor: "#1B2A41"
   },
   add: {
@@ -44,6 +43,8 @@ const styles = StyleSheet.create({
     borderColor: "#D7D9D7",
     textAlign: "center",
     justifyContent: "flex-end",
+    width: "80%",
+    left: "10%",
     padding: 10,
     fontSize: 40,
     fontWeight: "bold",
@@ -57,6 +58,8 @@ const styles = StyleSheet.create({
     borderColor: "red",
     textAlign: "center",
     justifyContent: "flex-end",
+    width: "80%",
+    left: "10%",
     padding: 10,
     fontSize: 40,
     fontWeight: "bold",
