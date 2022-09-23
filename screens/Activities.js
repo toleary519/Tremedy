@@ -1,3 +1,7 @@
+import React from "react";
+import { Text, StyleSheet, View } from "react-native";
+
+
 const Activities = () => (
   <View style={styles.container}>
   <Text style={styles.add}>Activities List</Text>
