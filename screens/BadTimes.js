@@ -4,8 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const BadTimes = () => {
   
-  let fakeDB = [{id: 1, message: "crashed my car"},{id: 2, message: "lost my house"},
-  {id:3, message: "I yelled at someone"},{id: 4, message: "I stole from my Mum"}]
+  let fakeDB = [{id: 1, message: "crashed my car"}]
   
   const [showDB, setShowDB] = useState(fakeDB)
   const [note, setNote] = useState("")
