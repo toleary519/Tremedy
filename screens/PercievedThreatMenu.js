@@ -9,13 +9,14 @@ const PercievedThreatMenu = ({ navigation }) => {
   const [breatheDone, setBreatheDone] = useState(false);
   const [kneadDone, setKneadDone] = useState(false);
   const [anklesDone, setAnklesDone] = useState(false);
-  const [PMR, setPMR] = useState(false);
+  const [PMRDone, setPMRDone] = useState(false);
 
   const handleREDO = () => {
     setEyeDone(false);
     setBreatheDone(false);
     setKneadDone(false);
     setAnklesDone(false);
+    setPMRDone(false);
   }
 
   return (
@@ -34,12 +35,15 @@ const PercievedThreatMenu = ({ navigation }) => {
     </View>    
     <View style={styles.exercise}>
       <TouchableOpacity onPress={() => navigation.navigate("ProgressiveMuscle")} delayPressIn={150}>
-        <Text style={styles.breathe}>
+        <Text style={styles.add}>
           Progressive Muscle Relaxation
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setPMR(true)}>
-        <MaterialCommunityIcons style={ breatheDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
+      <TouchableOpacity onPress={() => navigation.navigate("")} delayPressIn={150}>
+        <FontAwesome style={styles.icon} name="question-circle" />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => setPMRDone(true)}>
+        <MaterialCommunityIcons style={ PMRDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
       </TouchableOpacity>
     </View>    
     <View style={styles.exercise}>
@@ -47,7 +51,7 @@ const PercievedThreatMenu = ({ navigation }) => {
         Eye Exercise
       </Text>
       <TouchableOpacity onPress={() => navigation.navigate("EyeInstruct")} delayPressIn={150}>
-      <FontAwesome style={styles.icon} name="question-circle" />
+        <FontAwesome style={styles.icon} name="question-circle" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => setEyeDone(true)}>
         <MaterialCommunityIcons style={ eyeDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
@@ -58,7 +62,7 @@ const PercievedThreatMenu = ({ navigation }) => {
         Knead Feet
       </Text>
       <TouchableOpacity onPress={() => navigation.navigate("KneadInstruct")} delayPressIn={150}>
-      <FontAwesome style={styles.icon} name="question-circle" />
+        <FontAwesome style={styles.icon} name="question-circle" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => setKneadDone(true)}>
         <MaterialCommunityIcons style={ kneadDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
@@ -69,7 +73,7 @@ const PercievedThreatMenu = ({ navigation }) => {
         Ankle Rock
       </Text>
       <TouchableOpacity onPress={() => navigation.navigate("AnkleInstruct")} delayPressIn={150}>
-      <FontAwesome style={styles.icon} name="question-circle" />
+        <FontAwesome style={styles.icon} name="question-circle" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => setAnklesDone(true)}>
         <MaterialCommunityIcons style={ anklesDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
