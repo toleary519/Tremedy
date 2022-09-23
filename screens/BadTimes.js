@@ -19,7 +19,7 @@ const BadTimes = () => {
         const newList = [...showDB, newNote]
         
         setShowDB(newList);
-        setNote(empty); 
+        setNote(""); 
     }
 
 
@@ -35,6 +35,7 @@ const BadTimes = () => {
       <TextInput 
         style={styles.input} 
         onChangeText={(text) => setNote(text)} 
+        value={note}
         placeholder={"New Note"} 
         multiline
         keyboardType="default"
