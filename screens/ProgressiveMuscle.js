@@ -1,3 +1,6 @@
+import React from "react";
+import { Text, StyleSheet, View } from "react-native";
+
 const ProgressiveMuscle = () => (
   <View style={styles.container}>
   <Text style={styles.add}>Progressive Muscle Relaxation</Text>
