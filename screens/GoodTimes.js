@@ -34,6 +34,7 @@ const GoodTimes = () => {
       <TextInput 
         style={styles.input} 
         onChangeText={(text) => setNote(text)} 
+        value={note}
         placeholder={"New Note"} 
         multiline
         keyboardType="default"
