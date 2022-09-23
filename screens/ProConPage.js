@@ -48,6 +48,7 @@ const ProCon = () => {
           <TextInput 
           style={styles.input} 
           onChangeText={(text) => setPro(text)} 
+          value={pro}
           placeholder={"add new Pro"} 
           multiline
           keyboardType="default"
@@ -66,13 +67,14 @@ const ProCon = () => {
           <TextInput 
           style={styles.input} 
           onChangeText={(text) => setCon(text)} 
+          value={con}
           placeholder={"add new Con"} 
           multiline
           keyboardType="default"
           color="#D7D9D7"
           placeholderTextColor={"#F1F7EE"}      
           />
-          <TouchableOpacity onPress={() => handleAddPro()}>
+          <TouchableOpacity onPress={() => handleAddCon()}>
             <Ionicons style={styles.icon} name="add-circle" />
           </TouchableOpacity>
             {showCons.map((item) => (
