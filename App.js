@@ -13,12 +13,7 @@ import { BadTimes } from "./screens/BadTimes";
 import ProConPage from "./screens/ProConPage";
 import { GoodTimes } from "./screens/GoodTimes";
 import { OutsideMenu } from "./screens/OutsideMenu";
-import { RiskAssessment } from "./screens/RiskAssessment";
 import { Meetings } from "./screens/Meetings";
-import { UserSettings } from "./screens/UserSettings";
-import { Smart } from "./screens/Smart";
-import { Anon } from "./screens/Anon";
-import { Dharma } from "./screens/Dharma";
 import { Breathe } from "./screens/Breathe";
 import { Five } from "./screens/Five";
 import { Four } from "./screens/Four";
@@ -29,6 +24,9 @@ import { PercievedThreatMenu } from "./screens/PercievedThreatMenu";
 import { EyeInstruct } from "./screens/EyeInstruct";
 import { KneadInstruct } from "./screens/KneadInstruct";
 import { AnkleInstruct } from "./screens/AnkleInstruct";
+import { Activities } from "./screens/Activities";
+import { Pies } from "./screens/Pies";
+import { ProgressiveMuscle } from "./screens/ProgressiveMuscle";
 import MyStack from "./routes/homeStack"
 import { StatusBar } from "expo-status-bar";
 
