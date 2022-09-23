@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 
 const Pies = () => {
@@ -7,12 +7,13 @@ const Pies = () => {
   let fakeDB = []
   
   const [showDB, setShowDB] = useState(fakeDB)
-  const [physical, setPhysical] = useState("")
-  const [insights, setInsights] = useState("")
-  const [emotions, setEmotions] = useState("")
-  const [spiritual, setSpiritual] = useState("")
-  const [placeholder, setPlaceholder] = useState("new entry")
-  
+  const [physical, setPhysical] = useState()
+  const [insights, setInsights] = useState()
+  const [emotions, setEmotions] = useState()
+  const [spiritual, setSpiritual] = useState()
+
+ 
+ 
   const handleAdd = () => {
         
         let newPie = {
@@ -22,6 +23,7 @@ const Pies = () => {
           emotions: emotions,
           spiritual: spiritual
         };
+
         
         const newList = [...showDB, newPie]
         
@@ -30,12 +32,11 @@ const Pies = () => {
         setInsights("");
         setEmotions("");
         setSpiritual("");
-        setPlaceholder("new entry");
     }
 
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth();
+    let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
 
   return (
@@ -48,8 +49,9 @@ const Pies = () => {
       </Text>
       <TextInput 
         style={styles.input} 
-        onChangeText={(text) => setPhysical(text)} 
-        placeholder={placeholder} 
+        onChangeText={(text) => setPhysical(text)}
+        value={physical}
+        placeholder={"new entry"} 
         multiline
         keyboardType="default"
         color="#D7D9D7"
@@ -61,7 +63,8 @@ const Pies = () => {
       <TextInput 
         style={styles.input} 
         onChangeText={(text) => setInsights(text)} 
-        placeholder={placeholder} 
+        value={insights}
+        placeholder={"new entry"} 
         multiline
         keyboardType="default"
         color="#D7D9D7"
@@ -73,7 +76,8 @@ const Pies = () => {
       <TextInput 
         style={styles.input} 
         onChangeText={(text) => setEmotions(text)} 
-        placeholder={placeholder} 
+        placeholder={"new entry"} 
+        value={emotions}
         multiline
         keyboardType="default"
         color="#D7D9D7"
@@ -85,13 +89,17 @@ const Pies = () => {
       <TextInput 
         style={styles.input} 
         onChangeText={(text) => setSpiritual(text)} 
-        placeholder={placeholder} 
+        placeholder={"new entry"} 
+        value={spiritual}
         multiline
         keyboardType="default"
         color="#D7D9D7"
         placeholderTextColor={"#F1F7EE"}    
       />
-      <TouchableOpacity onPress={() => handleAdd()}>
+      <TouchableOpacity onPress={() => { 
+        handleAdd();
+        
+        }}>
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
@@ -117,6 +125,8 @@ const styles = StyleSheet.create({
   pieContainer: {
     borderRadius: 10,
     borderWidth: 4,
+    width: "95%",
+    left: "2.5%",
     borderColor: "#D7D9D7",
   },
   elementContainer: {
@@ -129,8 +139,8 @@ const styles = StyleSheet.create({
     width: "90%",
     left: "5%",
     textAlign: "flex-start",
-    justifyContent: "flex-end",
-    padding: 10,
+    alignItems: "center",
+    marginBottom: 5,
     fontSize: 18,
     fontWeight: "bold",
     color: "#D7D9D7",
