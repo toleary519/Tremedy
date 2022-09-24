@@ -29,6 +29,7 @@ import { Pies } from "./screens/Pies";
 import { ProgressiveMuscle } from "./screens/ProgressiveMuscle";
 import { SelfTalk } from "./screens/SelfTalk";
 import { MyValues } from "./screens/MyValues";
+import { Using } from "./screens/Using";
 import MyStack from "./routes/homeStack"
 import { StatusBar } from "expo-status-bar";
 
@@ -39,7 +40,6 @@ function App() {
   return (
     <View style={styles.container}>
          <SafeAreaView style={{flex: 1}}>
-          {/* <StatusBar backgroundColor='#1B2A41' barStyle={"light-content"} /> */}
             <NavigationContainer>
               <Stack.Navigator initialRouteName="Home" screenOptions={{
                 headerStyle: {
@@ -72,6 +72,7 @@ function App() {
                 <Stack.Screen name="AnkleInstruct" component={AnkleInstruct} options={{ title: 'Ankle Exercise' }}/>
                 <Stack.Screen name="SelfTalk" component={SelfTalk} options={{ title: 'Thought Challenging' }}/>
                 <Stack.Screen name="MyValues" component={MyValues} options={{ title: 'My Values' }}/>
+                <Stack.Screen name="Using" component={Using} options={{ title: 'We Can Do This' }}/>
                 <Stack.Screen name="One" component={One} options={{ title: 'One' }}/>
                 <Stack.Screen name="Two" component={Two} options={{ title: 'Two' }}/>
                 <Stack.Screen name="Three" component={Three} options={{ title: 'Three' }}/>
