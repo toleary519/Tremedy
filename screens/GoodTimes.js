@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const GoodTimes = () => {
   
-  let fakeDB = [{id:1, message: "dinner with family"},{id: 2, message: "saved 1000s"}]
+  let fakeDB = [{id:1, message: "dinner with family"}]
   
   const [showDB, setShowDB] = useState(fakeDB)
   const [note, setNote] = useState("")
@@ -63,13 +63,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 4,
     borderColor: "#D7D9D7",
-    width: "80%",
+    width: "90%",
+    left: "5%",
     marginTop: 21,
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    left: "10%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#D7D9D7",
@@ -78,12 +78,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 4,
     borderColor: "#D7D9D7",
-    width: "80%",
+    width: "90%",
+    left: "5%",
     marginTop: 21,
     textAlign: "center",
     justifyContent: "center",
     padding: 10,
-    left: "10%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#2f8587",
