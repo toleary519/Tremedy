@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 
-const Pies = () => {
+const SelfTalk = () => {
   
   let fakeDB = []
   
   const [showDB, setShowDB] = useState(fakeDB)
-  const [physical, setPhysical] = useState()
-  const [insights, setInsights] = useState()
-  const [emotions, setEmotions] = useState()
-  const [spiritual, setSpiritual] = useState()
+  const [initial, setInitial] = useState()
+  const [rational, setRational] = useState()
+  // const [emotions, setEmotions] = useState()
+  // const [spiritual, setSpiritual] = useState()
 
  
  
@@ -18,20 +18,16 @@ const Pies = () => {
         
         let newPie = {
           id: showDB.length + 1,
-          physical: physical,
-          insights: insights,
-          emotions: emotions,
-          spiritual: spiritual
+          initial: initial,
+          rational: rational,
         };
 
         
         const newList = [...showDB, newPie]
         
         setShowDB(newList);
-        setPhysical("");
-        setInsights("");
-        setEmotions("");
-        setSpiritual("");
+        setInitial("");
+        setRational("");
     }
 
     let currentDate = new Date();
@@ -43,15 +39,12 @@ const Pies = () => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.header}>
-        How do you feel today? 
-      </Text>
-      <Text style={styles.headerTwo}>
-        Physical Body 
+        What is the thought that you are having? 
       </Text>
       <TextInput 
         style={styles.input} 
-        onChangeText={(text) => setPhysical(text)}
-        value={physical}
+        onChangeText={(text) => setInitial(text)}
+        value={initial}
         placeholder={"new entry"} 
         multiline
         keyboardType="default"
@@ -59,12 +52,13 @@ const Pies = () => {
         placeholderTextColor={"#F1F7EE"}    
       />
       <Text style={styles.headerTwo}>
-        Insights or Thoughts
+        Take a moment to evaluate this thought. Modfy the language, have you added
+        negative distortions? Try to write a more resonably framed thought in the field below.
       </Text>
       <TextInput 
         style={styles.input} 
-        onChangeText={(text) => setInsights(text)} 
-        value={insights}
+        onChangeText={(text) => setRational(text)} 
+        value={rational}
         placeholder={"new entry"} 
         multiline
         keyboardType="default"
@@ -72,31 +66,9 @@ const Pies = () => {
         placeholderTextColor={"#F1F7EE"}    
       />
       <Text style={styles.headerTwo}>
-        Emotions or Feelings  
+        Look at the two side by side below and consider the differences. Run the 
+        excersize again if something new comes to mind.   
       </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setEmotions(text)} 
-        placeholder={"new entry"} 
-        value={emotions}
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
-      />
-      <Text style={styles.headerTwo}>
-        Spiritual Connection to Self, Others or a Higher Power
-      </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setSpiritual(text)} 
-        placeholder={"new entry"} 
-        value={spiritual}
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
-      />
       <TouchableOpacity onPress={() => { 
         handleAdd();
         
@@ -107,10 +79,8 @@ const Pies = () => {
         {showDB.map((item) => (
           <View key={item.id} style={styles.pieContainer}>
           <Text  style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
-          <Text  style={styles.add}> P: {item.physical}</Text>
-          <Text  style={styles.add}> I: {item.insights}</Text>
-          <Text  style={styles.add}> E: {item.emotions}</Text>
-          <Text  style={styles.add}> S: {item.spiritual}</Text>
+          <Text  style={styles.add}> Initial Thought: {item.initial}</Text>
+          <Text  style={styles.add}> Rational Thought: {item.rational}</Text>
           </View>
         ))}
       </View>
@@ -121,7 +91,8 @@ const Pies = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#1B2A41"
+    backgroundColor:"#1B2A41",
+    paddingBottom: 15
   },
   pieContainer: {
     borderRadius: 10,
@@ -139,8 +110,8 @@ const styles = StyleSheet.create({
   },
   add: {
     marginTop: 5,
-    width: "90%",
-    left: "5%",
+    width: "95%",
+    left: "2.5%",
     textAlign: "flex-start",
     alignItems: "center",
     marginBottom: 5,
@@ -196,7 +167,6 @@ const styles = StyleSheet.create({
     marginTop: 21,
     textAlign: "center",
     justifyContent: "center",
-    
     padding: 10,
     left: "10%",
     fontSize: 20,
@@ -205,4 +175,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { Pies };
+export { SelfTalk };

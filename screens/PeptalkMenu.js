@@ -35,7 +35,12 @@ const PepTalkMenu = ({ navigation }) => (
         Activities
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("MyValues")} delayPressIn={150}>
+      <Text style={styles.add}>
+        My Values
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("SelfTalk")} delayPressIn={150}>
       <Text style={styles.add}>
         + Self-Talk
       </Text>
