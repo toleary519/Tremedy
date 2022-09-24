@@ -38,6 +38,7 @@ const Emergency = ({ navigation }) => {
 
   return(
   <View style={styles.container}>
+    <Text style={styles.header}>{`If having a medical emergency \n call 911.`}</Text>
   <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
     <A style={styles.add} href={`https://www.google.com/search?q=${address}+crisis+line`}>Crisis Lines</A>
@@ -75,6 +76,16 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     padding: 10,
     fontSize: 30,
+    fontWeight: "bold",
+    color: "#D7D9D7",
+  },
+  header: {
+    paddingTop: 40,
+    textAlign: "center",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    padding: 10,
+    fontSize: 35,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
