@@ -24,7 +24,7 @@ const UrgeMenu = ({ navigation }) => (
         Sober Contacts
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("Using")} delayPressIn={150}>
       <Text style={styles.add}>
         I'm already using
       </Text>
