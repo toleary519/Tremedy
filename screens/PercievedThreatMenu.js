@@ -36,7 +36,7 @@ const PercievedThreatMenu = ({ navigation }) => {
     <View style={styles.exercise}>
       <TouchableOpacity onPress={() => navigation.navigate("ProgressiveMuscle")} delayPressIn={150}>
         <Text style={styles.add}>
-          Progressive Muscle Relaxation
+          {`Progressive Muscle \n Relaxation`}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("")} delayPressIn={150}>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "flex-end",
     marginBottom: 50,
-    fontSize: 20,
+    fontSize: 25,
     width: "90%",
     fontWeight: "bold",
     color: "#D7D9D7",
