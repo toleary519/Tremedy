@@ -39,7 +39,7 @@ const PercievedThreatMenu = ({ navigation }) => {
           {`Progressive Muscle \n Relaxation`}
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("")} delayPressIn={150}>
+      <TouchableOpacity onPress={() => navigation.navigate("PMRInstruct")} delayPressIn={150}>
         <FontAwesome style={styles.icon} name="question-circle" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => setPMRDone(true)}>
