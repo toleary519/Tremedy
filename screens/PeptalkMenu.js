@@ -15,6 +15,26 @@ const PepTalkMenu = ({ navigation }) => (
       PIES Check-In
       </Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("SelfTalk")} delayPressIn={150}>
+      <Text style={styles.add}>
+        + Self-Talk
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity delayPressIn={150}>
+      <Text style={styles.add}>
+        Stoic Principles
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("MyValues")} delayPressIn={150}>
+      <Text style={styles.add}>
+        My Values
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("Breathe")} delayPressIn={150}>
+      <Text style={styles.add}>
+        Breathe
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
       <Text style={styles.add}>
       Your Experiences
@@ -27,27 +47,7 @@ const PepTalkMenu = ({ navigation }) => (
     </TouchableOpacity>
     <TouchableOpacity delayPressIn={150}>
       <Text style={styles.add}>
-        Quotes
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity delayPressIn={150}>
-      <Text style={styles.add}>
         Activities
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("MyValues")} delayPressIn={150}>
-      <Text style={styles.add}>
-        My Values
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("SelfTalk")} delayPressIn={150}>
-      <Text style={styles.add}>
-        + Self-Talk
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("Breathe")} delayPressIn={150}>
-      <Text style={styles.add}>
-        Breathe
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Five")} delayPressIn={150}>
@@ -62,7 +62,7 @@ const PepTalkMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 40,
     backgroundColor:"#1B2A41"
   },
   add: {
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#D7D9D7",
     marginTop: 21,
-    width: "80%",
-    left: "10%",
+    width: "90%",
+    left: "5%",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
