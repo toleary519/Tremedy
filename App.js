@@ -30,6 +30,8 @@ import { ProgressiveMuscle } from "./screens/ProgressiveMuscle";
 import { SelfTalk } from "./screens/SelfTalk";
 import { MyValues } from "./screens/MyValues";
 import { Using } from "./screens/Using";
+import { PMRInstruct } from "./screens/PMRInstruct";
+import { Stoic } from "./screens/Stoic";
 import MyStack from "./routes/homeStack"
 import { StatusBar } from "expo-status-bar";
 
@@ -72,7 +74,9 @@ function App() {
                 <Stack.Screen name="AnkleInstruct" component={AnkleInstruct} options={{ title: 'Ankle Exercise' }}/>
                 <Stack.Screen name="SelfTalk" component={SelfTalk} options={{ title: 'Thought Challenging' }}/>
                 <Stack.Screen name="MyValues" component={MyValues} options={{ title: 'My Values' }}/>
+                <Stack.Screen name="PMRInstruct" component={PMRInstruct} options={{ title: 'PMR' }}/>
                 <Stack.Screen name="Using" component={Using} options={{ title: 'We Can Do This' }}/>
+                <Stack.Screen name="Stoic" component={Stoic} options={{ title: 'Stoic Principles' }}/>
                 <Stack.Screen name="One" component={One} options={{ title: 'One' }}/>
                 <Stack.Screen name="Two" component={Two} options={{ title: 'Two' }}/>
                 <Stack.Screen name="Three" component={Three} options={{ title: 'Three' }}/>
