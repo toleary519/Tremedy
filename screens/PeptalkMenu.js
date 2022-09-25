@@ -20,7 +20,7 @@ const PepTalkMenu = ({ navigation }) => (
         + Self-Talk
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("Stoic")} delayPressIn={150}>
       <Text style={styles.add}>
         Stoic Principles
       </Text>
@@ -45,7 +45,7 @@ const PepTalkMenu = ({ navigation }) => (
         Sober Contacts
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("Activities")} delayPressIn={150}>
       <Text style={styles.add}>
         Activities
       </Text>
