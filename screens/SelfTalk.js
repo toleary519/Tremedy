@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const SelfTalk = () => {
   
@@ -37,7 +38,7 @@ const SelfTalk = () => {
     let time = `${currentDate.getHours()}:${currentDate.getMinutes()}` 
 
   return (
-    <ScrollView style={styles.container}>
+    <KeyboardAwareScrollView style={styles.container}>
       <Text style={styles.header}>
         What is the thought that you are having? 
       </Text>
@@ -69,10 +70,7 @@ const SelfTalk = () => {
         Look at the two side by side below and consider the differences. Run the 
         excersize again if something new comes to mind.   
       </Text>
-      <TouchableOpacity onPress={() => { 
-        handleAdd();
-        
-        }}>
+      <TouchableOpacity onPress={() =>  handleAdd()}>
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
@@ -84,7 +82,7 @@ const SelfTalk = () => {
           </View>
         ))}
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   )
 };
 
