@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Pies = () => {
   
@@ -41,7 +42,9 @@ const Pies = () => {
     let time = `${currentDate.getHours()}:${currentDate.getMinutes()}` 
 
   return (
-    <ScrollView style={styles.container}>
+    
+    <View style={styles.container}>
+    <KeyboardAwareScrollView>
       <Text style={styles.header}>
         How do you feel today? 
       </Text>
@@ -57,7 +60,7 @@ const Pies = () => {
         keyboardType="default"
         color="#D7D9D7"
         placeholderTextColor={"#F1F7EE"}    
-      />
+        />
       <Text style={styles.headerTwo}>
         Insights or Thoughts
       </Text>
@@ -70,7 +73,7 @@ const Pies = () => {
         keyboardType="default"
         color="#D7D9D7"
         placeholderTextColor={"#F1F7EE"}    
-      />
+        />
       <Text style={styles.headerTwo}>
         Emotions or Feelings  
       </Text>
@@ -83,7 +86,7 @@ const Pies = () => {
         keyboardType="default"
         color="#D7D9D7"
         placeholderTextColor={"#F1F7EE"}    
-      />
+        />
       <Text style={styles.headerTwo}>
         Spiritual Connection to Self, Others or a Higher Power
       </Text>
@@ -96,13 +99,15 @@ const Pies = () => {
         keyboardType="default"
         color="#D7D9D7"
         placeholderTextColor={"#F1F7EE"}    
-      />
+        />
       <TouchableOpacity onPress={() => { 
         handleAdd();
         
-        }}>
+      }}>
         <MaterialIcons style={styles.icon} name="add-circle" />
+  
       </TouchableOpacity>
+        
       <View>
         {showDB.map((item) => (
           <View key={item.id} style={styles.pieContainer}>
@@ -114,14 +119,16 @@ const Pies = () => {
           </View>
         ))}
       </View>
-    </ScrollView>
+      </KeyboardAwareScrollView>
+    </View>
   )
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#1B2A41"
+    backgroundColor:"#1B2A41",
+    paddingBottom: 30
   },
   pieContainer: {
     borderRadius: 10,
