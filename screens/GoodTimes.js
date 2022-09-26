@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, TextInput, Text, StyleSheet, Button, ScrollView, TouchableOpacity } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const GoodTimes = () => {
   
@@ -23,33 +24,35 @@ const GoodTimes = () => {
       }
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.header}>
-      “I'm defined by the vision of my future rather than my past.
-       While doing so I am living ahead of my time.” - Unknown
-      </Text>
-      <Text style={styles.headerTwo}>
-        Look at these highs! You know who you can be, and how.
-      </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setNote(text)} 
-        value={note}
-        placeholder={"New Note"} 
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}  
-      />
-      <TouchableOpacity onPress={() => handleAdd()}>
-        <MaterialIcons style={styles.icon} name="add-circle" />
-      </TouchableOpacity>
-      <View>
-        {showDB.map((item) => (
-          <Text key={item.id} style={styles.add}>{item.message}</Text>
-        ))}
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <KeyboardAwareScrollView contentContainerStyle={{ paddingBottom: 30}} >
+        <Text style={styles.header}>
+        “I'm defined by the vision of my future rather than my past.
+        While doing so I am living ahead of my time.” - Unknown
+        </Text>
+        <Text style={styles.headerTwo}>
+          Look at these highs! You know who you can be, and how.
+        </Text>
+        <TextInput 
+          style={styles.input} 
+          onChangeText={(text) => setNote(text)} 
+          value={note}
+          placeholder={"New Note"} 
+          multiline
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}  
+        />
+        <TouchableOpacity onPress={() => handleAdd()}>
+          <MaterialIcons style={styles.icon} name="add-circle" />
+        </TouchableOpacity>
+        <View>
+          {showDB.map((item) => (
+            <Text key={item.id} style={styles.add}>{item.message}</Text>
+          ))}
+        </View>
+      </KeyboardAwareScrollView>
+    </View>
   )
 }
   
