@@ -1,27 +1,29 @@
 import React from "react";
-import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const NotesMenu = ({ navigation }) => (
   <View style={styles.container}>
-    <Text style={styles.summary}>
-    Read or record some moments of life that shone because you were sober and some of the worst things that happened when you were not.  
-    </Text>
-    <Text style={styles.summary}>
-    Reflect on them. 
-    </Text>
-  
-  <TouchableOpacity onPress={() => navigation.navigate("GoodTimes")} delayPressIn={150}>
-    <Text style={styles.good}>
-      The good times
-    </Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={() => navigation.navigate("BadTimes")} delayPressIn={150}>
-    <Text style={styles.bad}>
-      The bad times
-    </Text>
-  </TouchableOpacity>
-  </View>
+      <ScrollView contentContainerStyle={{ paddingBottom: 30}} >
+      <Text style={styles.summary}>
+      Read or record some moments of life that shone because you were sober and some of the worst things that happened when you were not.  
+      </Text>
+      <Text style={styles.summary}>
+      Reflect on them. 
+      </Text>
+    
+    <TouchableOpacity onPress={() => navigation.navigate("GoodTimes")} delayPressIn={150}>
+      <Text style={styles.good}>
+        The good times
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("BadTimes")} delayPressIn={150}>
+      <Text style={styles.bad}>
+        The bad times
+      </Text>
+    </TouchableOpacity>
+  </ScrollView>
+    </View>
 );
 
 const styles = StyleSheet.create({
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
