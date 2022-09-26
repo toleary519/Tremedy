@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, Keyboa
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { A } from '@expo/html-elements';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const MyValues = () => {
    
@@ -33,7 +34,7 @@ const MyValues = () => {
 
 
   return (
-    <ScrollView style={styles.container}>
+    <KeyboardAwareScrollView style={styles.container}>
       <Text style={styles.header}>
         Look through your core values and assess how using would align with them.
       </Text>
@@ -65,7 +66,7 @@ const MyValues = () => {
           </View>
         ))}
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   )
 };
 const styles = StyleSheet.create({
