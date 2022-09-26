@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, TextInput, Text, StyleSheet, Button, ScrollView, TouchableOpacity } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const BadTimes = () => {
   
@@ -24,7 +25,8 @@ const BadTimes = () => {
 
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
+      <KeyboardAwareScrollView contentContainerStyle={{ paddingBottom: 30}} >
       <Text style={styles.header}>
       “You are free to choose, but you are not free to alter
        the consequences of your decisions.” - Ezra Taft Benson
@@ -50,7 +52,8 @@ const BadTimes = () => {
           <Text key={item.id} style={styles.add}>{item.message}</Text>
         ))}
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
+    </View>
   )
 }
   
