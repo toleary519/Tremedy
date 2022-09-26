@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, Keyboa
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { A } from '@expo/html-elements';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Activities = () => {
    
@@ -33,7 +34,7 @@ const Activities = () => {
 
 
   return (
-    <ScrollView style={styles.container}>
+    <KeyboardAwareScrollView style={styles.container}>
       <Text style={styles.header}>
         Make a list below of activities you enjoy and could do at the drop of the hat.
       </Text>
@@ -63,7 +64,7 @@ const Activities = () => {
           </View>
         ))}
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   )
 };
 
