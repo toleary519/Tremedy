@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
     backgroundColor:"#1B2A41"
   },
   add: {
@@ -25,6 +24,8 @@ const styles = StyleSheet.create({
     marginTop: 21,
     textAlign: "center",
     padding: 10,
+    width: "90%",
+    left: "5%",
     fontSize: 40,
     fontWeight: "bold",
     color: "#D7D9D7",
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
   icon: {
     paddingTop: 40,
     fontSize: 50,
+    left: "43%",
     color: "#D7D9D7"
   }
 
