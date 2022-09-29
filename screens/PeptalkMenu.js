@@ -5,6 +5,11 @@ import { FontAwesome5 } from '@expo/vector-icons';
 const PepTalkMenu = ({ navigation }) => (
   <View style={styles.container}>
   <ScrollView contentContainerStyle={{ paddingBottom: 30}} >
+    <TouchableOpacity onPress={() => navigation.navigate("FocusStatement")} delayPressIn={150}>
+      <Text style={styles.add}>
+      My Focus Statement
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("PercievedThreatMenu")} delayPressIn={150}>
       <Text style={styles.add}>
       I'm In a State of Percieved Threat
@@ -22,7 +27,7 @@ const PepTalkMenu = ({ navigation }) => (
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Stoic")} delayPressIn={150}>
       <Text style={styles.add}>
-        Stoic Principles
+        Stoic Questions
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("MyValues")} delayPressIn={150}>
