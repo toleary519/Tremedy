@@ -21,8 +21,15 @@ const GoodTimes = () => {
         
         setShowDB(newList);
         setNote("");
-      }
+  }
 
+  const handleDelete = ({ item }, index) => {
+    console.log("before: ", showDB)
+    setShowDB(showDB.filter((val) => val.id !== item.id));
+    showDB.splice(index, 1)
+    console.log("after: ", showDB)
+  }
+  
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView contentContainerStyle={{ paddingBottom: 30}} >
@@ -46,11 +53,14 @@ const GoodTimes = () => {
         <TouchableOpacity onPress={() => handleAdd()}>
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
-        <View>
-          {showDB.map((item) => (
-            <Text key={item.id} style={styles.add}>{item.message}</Text>
-          ))}
-        </View>
+        {showDB.map((item) => (
+          <View key={item.id} style={styles.memory}>
+            <Text style={styles.add}>{item.message}</Text>
+            <TouchableOpacity onPress={() => handleDelete({ item })}>
+              <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
+            </TouchableOpacity>
+          </View>
+        ))}
       </KeyboardAwareScrollView>
     </View>
   )
@@ -62,10 +72,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor:"#1B2A41"
   },
-  add: {
+  memory: {
     borderRadius: 10,
     borderWidth: 4,
+    marginTop: 5,
+    marginBottom: 7,
+    width: "95%",
+    left: "2.5%",
     borderColor: "#D7D9D7",
+  },
+  add: {
     width: "90%",
     left: "5%",
     marginTop: 21,
@@ -96,7 +112,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    padding: 20,
+    padding: 10,
     fontSize: 20,
     fontWeight: "bold",
     color: "#D7D9D7",
@@ -106,17 +122,25 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    padding: 20,
+    padding: 10,
     fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
   icon: {
-    paddingTop: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
     fontSize: 40,
     color: "#D7D9D7",
     textAlign: "center",
-  }
+  },
+  deleteIcon: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    left: "45%",
+    fontSize: 30,
+    color: "#D7D9D7",
+  },
 });
 
 export { GoodTimes }
