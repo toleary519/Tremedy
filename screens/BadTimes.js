@@ -23,6 +23,12 @@ const BadTimes = () => {
         setNote(""); 
     }
 
+  const handleDelete = ({ item }, index) => {
+      console.log("before: ", showDB)
+      setShowDB(showDB.filter((val) => val.id !== item.id));
+      showDB.splice(index, 1)
+      console.log("after: ", showDB)
+  }
 
   return (
     <View style={styles.container}>
@@ -47,11 +53,14 @@ const BadTimes = () => {
       <TouchableOpacity onPress={() => handleAdd()}>
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
-      <View>
         {showDB.map((item) => (
-          <Text key={item.id} style={styles.add}>{item.message}</Text>
+          <View key={item.id} style={styles.memory}>
+            <Text style={styles.add}>{item.message}</Text>
+            <TouchableOpacity onPress={() => handleDelete({ item })}>
+              <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
+            </TouchableOpacity>
+          </View>
         ))}
-      </View>
     </KeyboardAwareScrollView>
     </View>
   )
@@ -63,10 +72,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor:"#1B2A41"
   },
-  add: {
+  memory: {
     borderRadius: 10,
     borderWidth: 4,
+    marginTop: 7,
+    marginBottom: 7,
+    width: "95%",
+    left: "2.5%",
     borderColor: "#D7D9D7",
+  },
+  add: {
     width: "90%",
     left: "5%",
     marginTop: 21,
@@ -117,8 +132,14 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: "#D7D9D7",
     textAlign: "center",
-  }
-  
+  },
+  deleteIcon: {
+    paddingTop: 20,
+    paddingBottom: 20,
+    left: "45%",
+    fontSize: 30,
+    color: "#D7D9D7",
+  },
 });
 
 export { BadTimes }
