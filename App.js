@@ -32,6 +32,7 @@ import { MyValues } from "./screens/MyValues";
 import { Using } from "./screens/Using";
 import { PMRInstruct } from "./screens/PMRInstruct";
 import { Stoic } from "./screens/Stoic";
+import { FocusStatement } from "./screens/FocusStatement";
 import MyStack from "./routes/homeStack"
 import { StatusBar } from "expo-status-bar";
 
@@ -77,6 +78,7 @@ function App() {
                 <Stack.Screen name="PMRInstruct" component={PMRInstruct} options={{ title: 'PMR' }}/>
                 <Stack.Screen name="Using" component={Using} options={{ title: 'We Can Do This' }}/>
                 <Stack.Screen name="Stoic" component={Stoic} options={{ title: 'Stoic Principles' }}/>
+                <Stack.Screen name="FocusStatement" component={FocusStatement} options={{ title: 'Focus Statement' }}/>
                 <Stack.Screen name="One" component={One} options={{ title: 'One' }}/>
                 <Stack.Screen name="Two" component={Two} options={{ title: 'Two' }}/>
                 <Stack.Screen name="Three" component={Three} options={{ title: 'Three' }}/>
