@@ -36,13 +36,13 @@ const MyValues = () => {
   return (
     <KeyboardAwareScrollView style={styles.container}>
       <Text style={styles.header}>
-        Look through your core values and assess how using would align with them.
+        Look through your core values and assess how this action would align with them.
       </Text>
       <Text style={styles.headerTwo}>
         If you are unsure, look through this list of values and take some time
         to choose a few that truly resonate with you.
       </Text>
-      <A style={styles.add} href={`https://www.guilford.com/add/miller2/values.pdf`}>Core Values List</A>
+      <A style={styles.link} href={`https://www.guilford.com/add/miller2/values.pdf`}>Core Values List</A>
       <TextInput 
         style={styles.input} 
         onChangeText={(text) => setMyValue(text)}
@@ -102,6 +102,17 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     fontWeight: "bold",
     color: "#D7D9D7",
+  },
+  link: {
+    width: "95%",
+    left: "2.5%",
+    textAlign: "center",
+    alignItems: "center",
+    fontSize: 25,
+    paddingTop: 20,
+    paddingBottom: 20,
+    fontWeight: "bold",
+    color: "#FC9F5B",
   },
   header: {
     paddingTop: 30,
