@@ -35,6 +35,13 @@ const Pies = () => {
         setSpiritual("");
     }
 
+    const handleDelete = ({ item }, index) => {
+      console.log("before: ", showDB)
+      setShowDB(showDB.filter((val) => val.id !== item.id));
+      showDB.splice(index, 1)
+      console.log("after: ", showDB)
+    }
+
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
@@ -116,6 +123,9 @@ const Pies = () => {
           <Text  style={styles.add}> I: {item.insights}</Text>
           <Text  style={styles.add}> E: {item.emotions}</Text>
           <Text  style={styles.add}> S: {item.spiritual}</Text>
+          <TouchableOpacity onPress={() => handleDelete({ item })}>
+              <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
+            </TouchableOpacity>
           </View>
         ))}
       </View>
@@ -202,13 +212,19 @@ const styles = StyleSheet.create({
     width: "80%",
     marginTop: 21,
     textAlign: "center",
-    justifyContent: "center",
-    
+    justifyContent: "center",  
     padding: 10,
     left: "10%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#2f8587",
+  },
+  deleteIcon: {
+    paddingTop: 20,
+    paddingBottom: 20,
+    left: "45%",
+    fontSize: 30,
+    color: "#D7D9D7",
   },
 });
 
