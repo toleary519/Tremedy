@@ -31,6 +31,13 @@ const SelfTalk = () => {
         setRational("");
     }
 
+    const handleDelete = ({ item }, index) => {
+      console.log("before: ", showDB)
+      setShowDB(showDB.filter((val) => val.id !== item.id));
+      showDB.splice(index, 1)
+      console.log("after: ", showDB)
+    }
+
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
@@ -68,7 +75,7 @@ const SelfTalk = () => {
       />
       <Text style={styles.headerTwo}>
         Look at the two side by side below and consider the differences. Run the 
-        excersize again if something new comes to mind.   
+        exercize again if something new comes to mind.   
       </Text>
       <TouchableOpacity onPress={() =>  handleAdd()}>
         <MaterialIcons style={styles.icon} name="add-circle" />
@@ -79,6 +86,9 @@ const SelfTalk = () => {
           <Text  style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
           <Text  style={styles.add}> Initial Thought: {item.initial}</Text>
           <Text  style={styles.add}> Rational Thought: {item.rational}</Text>
+          <TouchableOpacity onPress={() => handleDelete({ item })}>
+              <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
+            </TouchableOpacity>
           </View>
         ))}
       </View>
@@ -156,6 +166,13 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: "#D7D9D7",
     textAlign: "center",
+  },
+  deleteIcon: {
+    paddingTop: 20,
+    paddingBottom: 20,
+    left: "45%",
+    fontSize: 30,
+    color: "#D7D9D7",
   },
   input: {
     borderRadius: 10,
