@@ -4,13 +4,33 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { A } from '@expo/html-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Activities = () => {
    
   let fakeDB = []
   
-  const [showDB, setShowDB] = useState(fakeDB)
+  const [activeStorage, setActiveStorage] = useState(fakeDB)
   const [activity, setActivity] = useState() 
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('storedAct')
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setActiveStorage(savedData);
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const storeData = async (activeStorage) => {
+    try {
+      const jsonValue = JSON.stringify(activeStorage)
+      await AsyncStorage.setItem('storedAct', jsonValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
  
   const handleAdd = () => {
         
@@ -19,19 +39,36 @@ const Activities = () => {
           activity: activity,
         };
 
-        const newList = [...showDB, newActivity]
+        const newList = [...activeStorage, newActivity]
         
-        setShowDB(newList);
+        setActiveStorage(newList);
         setActivity("");
+        storeData(newList);
+        getData();
     }
 
-  const handleDelete = ({ item }, index) => {
-          console.log("before: ", showDB)
-          setShowDB(showDB.filter((val) => val.id !== item.id));
-          showDB.splice(index, 1)
-          console.log("after: ", showDB)
-  }
+    const handleDelete = ({ item }) => {
+      let index = 0
+      // find the index of item to delete
+      for (let obj of activeStorage) {
+        if (obj.id !== item.id) {
+          index++;
+        }
+        else {
+          break;
+        }
+      }
+      // filter array for display 
+      setActiveStorage(activeStorage.filter((val) => val.id !== item.id));
+      // make permanent delete
+      activeStorage.splice(index, 1)
+      // save deletion of item
+      storeData(activeStorage);
+    }
 
+    React.useEffect(() => {
+      getData()
+      }, []);
 
   return (
     <KeyboardAwareScrollView style={styles.container}>
@@ -55,7 +92,7 @@ const Activities = () => {
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
-        {showDB.map((item) => (
+        {activeStorage.map((item) => (
           <View key={item.id} style={styles.pieContainer}>
             <Text  style={styles.add}>{item.activity}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
