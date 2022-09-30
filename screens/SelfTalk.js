@@ -2,40 +2,67 @@ import React, { useState } from "react";
 import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SelfTalk = () => {
   
-  let fakeDB = []
-  
-  const [showDB, setShowDB] = useState(fakeDB)
+  const [selfTalk, setSelfTalk] = useState(selfTalk ? selfTalk : [])
   const [initial, setInitial] = useState()
   const [rational, setRational] = useState()
-  // const [emotions, setEmotions] = useState()
-  // const [spiritual, setSpiritual] = useState()
 
- 
- 
-  const handleAdd = () => {
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('storedSelfTalk')
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setSelfTalk(savedData);
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const storeData = async (selfTalk) => {
+    try {
+      const jsonValue = JSON.stringify(selfTalk)
+      await AsyncStorage.setItem('storedSelfTalk', jsonValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+    const handleAdd = () => {
         
-        let newPie = {
-          id: showDB.length + 1,
+        let newSelfTalk = {
+          id: rational,
           initial: initial,
           rational: rational,
         };
-
+    
+        const newList = [...selfTalk, newSelfTalk]
         
-        const newList = [...showDB, newPie]
-        
-        setShowDB(newList);
+        setSelfTalk(newList);
         setInitial("");
         setRational("");
+        storeData(newList);
+        getData();
     }
 
-    const handleDelete = ({ item }, index) => {
-      console.log("before: ", showDB)
-      setShowDB(showDB.filter((val) => val.id !== item.id));
-      showDB.splice(index, 1)
-      console.log("after: ", showDB)
+    const handleDelete = ({ item }) => {
+      let index = 0
+      // find the index of item to delete
+      for (let obj of selfTalk) {
+        if (obj.id !== item.id) {
+          index++;
+        }
+        else {
+          break;
+        }
+      }
+      // filter array for display 
+      setSelfTalk(selfTalk.filter((val) => val.id !== item.id));
+      // make permanent delete
+      selfTalk.splice(index, 1)
+      // save deletion of item
+      storeData(selfTalk);
     }
 
     let currentDate = new Date();
@@ -44,6 +71,10 @@ const SelfTalk = () => {
     let currentYear = currentDate.getFullYear();
     let time = `${currentDate.getHours()}:${currentDate.getMinutes()}` 
 
+    React.useEffect(() => {
+      getData()
+      }, []);
+      
   return (
     <KeyboardAwareScrollView style={styles.container}>
       <Text style={styles.header}>
@@ -81,7 +112,7 @@ const SelfTalk = () => {
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
-        {showDB.map((item) => (
+        {selfTalk.map((item) => (
           <View key={item.id} style={styles.pieContainer}>
           <Text  style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
           <Text  style={styles.add}> Initial Thought: {item.initial}</Text>
