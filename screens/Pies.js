@@ -2,23 +2,40 @@ import React, { useState } from "react";
 import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Pies = () => {
   
-  let fakeDB = []
   
-  const [showDB, setShowDB] = useState(fakeDB)
+  const [pieStorage, setPieStorage] = useState(pieStorage ? pieStorage : [])
   const [physical, setPhysical] = useState()
   const [insights, setInsights] = useState()
   const [emotions, setEmotions] = useState()
   const [spiritual, setSpiritual] = useState()
 
- 
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('storedPie')
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setPieStorage(savedData);
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const storeData = async (focusStorage) => {
+    try {
+      const jsonValue = JSON.stringify(focusStorage)
+      await AsyncStorage.setItem('storedPie', jsonValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
  
   const handleAdd = () => {
         
         let newPie = {
-          id: showDB.length + 1,
+          id: pieStorage.length + 1,
           physical: physical,
           insights: insights,
           emotions: emotions,
@@ -26,27 +43,45 @@ const Pies = () => {
         };
 
         
-        const newList = [...showDB, newPie]
+        const newList = [...pieStorage, newPie]
         
-        setShowDB(newList);
+        setPieStorage(newList);
         setPhysical("");
         setInsights("");
         setEmotions("");
         setSpiritual("");
+        storeData(newList);
+        getData();
     }
-
-    const handleDelete = ({ item }, index) => {
-      console.log("before: ", showDB)
-      setShowDB(showDB.filter((val) => val.id !== item.id));
-      showDB.splice(index, 1)
-      console.log("after: ", showDB)
-    }
-
+    
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
     let time = `${currentDate.getHours()}:${currentDate.getMinutes()}` 
+    
+    const handleDelete = ({ item }) => {
+      let index = 0
+      // find the index of item to delete
+      for (let obj of pieStorage) {
+        if (obj.id !== item.id) {
+          index++;
+        }
+        else {
+          break;
+        }
+      }
+      // filter array for display 
+      setPieStorage(pieStorage.filter((val) => val.id !== item.id));
+      // make permanent delete
+      pieStorage.splice(index, 1)
+      // save deletion of item
+      storeData(pieStorage);
+    }
+
+    React.useEffect(() => {
+      getData()
+      }, []);
 
   return (
     
@@ -116,7 +151,7 @@ const Pies = () => {
       </TouchableOpacity>
         
       <View>
-        {showDB.map((item) => (
+        {pieStorage.map((item) => (
           <View key={item.id} style={styles.pieContainer}>
           <Text  style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
           <Text  style={styles.add}> P: {item.physical}</Text>
