@@ -10,6 +10,11 @@ const PepTalkMenu = ({ navigation }) => (
       My Focus Statement
       </Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("CopingStatement")} delayPressIn={150}>
+      <Text style={styles.add}>
+      Coping Statement
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("PercievedThreatMenu")} delayPressIn={150}>
       <Text style={styles.add}>
       I'm In a State of Percieved Threat
@@ -48,6 +53,11 @@ const PepTalkMenu = ({ navigation }) => (
     <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
       <Text style={styles.add}>
         Sober Contacts
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("ProCon")} delayPressIn={150}>
+      <Text style={styles.add}>
+        Pros & Cons
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Activities")} delayPressIn={150}>
