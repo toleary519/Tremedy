@@ -2,33 +2,69 @@ import React, { useState, useEffect } from "react";
 import { View, TextInput, Text, StyleSheet, Button, ScrollView, TouchableOpacity } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const GoodTimes = () => {
   
-  let fakeDB = [{id:1, message: "dinner with family"}]
-  
-  const [showDB, setShowDB] = useState(fakeDB)
+  const [goodStorage, setGoodStorage] = useState(goodStorage ? goodStorage : [])
   const [note, setNote] = useState("")
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('storedgood')
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setGoodStorage(savedData);
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const storeData = async (goodStorage) => {
+    try {
+      const jsonValue = JSON.stringify(goodStorage)
+      await AsyncStorage.setItem('storedgood', jsonValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
   
   const handleAdd = () => {
         
         let newNote = {
-          id: showDB.length + 1,
+          id: note,
           message: note
         };
         
-        const newList = [...showDB, newNote]
+        const newList = [...goodStorage, newNote]
         
-        setShowDB(newList);
+        setGoodStorage(newList);
         setNote("");
-  }
+        storeData(newList);
+        getData(); 
+    }
 
-  const handleDelete = ({ item }, index) => {
-    console.log("before: ", showDB)
-    setShowDB(showDB.filter((val) => val.id !== item.id));
-    showDB.splice(index, 1)
-    console.log("after: ", showDB)
-  }
+    const handleDelete = ({ item }) => {
+      let index = 0
+      // find the index of item to delete
+      for (let obj of goodStorage) {
+        if (obj.id !== item.id) {
+          index++;
+        }
+        else {
+          break;
+        }
+      }
+      // filter array for display 
+      setGoodStorage(goodStorage.filter((val) => val.id !== item.id));
+      // make permanent delete
+      goodStorage.splice(index, 1)
+      // save deletion of item
+      storeData(goodStorage);
+    }
+
+    React.useEffect(() => {
+      getData()
+    }, []);
   
   return (
     <View style={styles.container}>
@@ -53,7 +89,7 @@ const GoodTimes = () => {
         <TouchableOpacity onPress={() => handleAdd()}>
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
-        {showDB.map((item) => (
+        {goodStorage.map((item) => (
           <View key={item.id} style={styles.memory}>
             <Text style={styles.add}>{item.message}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
