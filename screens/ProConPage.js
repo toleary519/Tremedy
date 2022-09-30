@@ -12,11 +12,27 @@ const ProCon = () => {
   const [conStorage, setConStorage] = useState(conStorage ? conStorage : [])
   const [con, setCon] = useState();
 
-  const getData = async () => {
+  const getProData = async () => {
     try {
-      const jsonProValue = await AsyncStorage.getItem('storedpro')
+      const jsonProValue = await AsyncStorage.getItem('storedPro')
       let savedProData = jsonProValue ? JSON.parse(jsonProValue) : [];
       setProStorage(savedProData);
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const storeProData = async (proStorage) => {
+    try {
+      const jsonProValue = JSON.stringify(proStorage)
+      await AsyncStorage.setItem('storedPro', jsonProValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const getConData = async () => {
+    try {
       const jsonConValue = await AsyncStorage.getItem('storedCon')
       let savedConData = jsonConValue ? JSON.parse(jsonConValue) : [];
       setConStorage(savedConData);
@@ -25,12 +41,10 @@ const ProCon = () => {
     }
   }
 
-  const storeData = async (proStorage, conStorage) => {
+  const storeConData = async (conStorage) => {
     try {
-      const jsonProValue = JSON.stringify(proStorage)
-      await AsyncStorage.setItem('storedpro', jsonProValue)
       const jsonConValue = JSON.stringify(conStorage)
-      await AsyncStorage.setItem('storedpro', jsonConValue)
+      await AsyncStorage.setItem('storedCon', jsonConValue)
     } catch (e) {
       console.log(e)
     }
@@ -47,8 +61,8 @@ const ProCon = () => {
         
         setProStorage(newProsList);
         setPro("");
-        storeData(newProsList, conStorage);
-        getData();
+        storeProData(newProsList);
+        getProData();
   }
   
   const handleAddCon = () => {
@@ -62,8 +76,8 @@ const ProCon = () => {
         
         setConStorage(newConsList);
         setCon("");
-        storeData(proStorage, newConsList);
-        getData();
+        storeConData(newConsList);
+        getConData();
   }
 
   const handleProDelete = ({ item }) => {
@@ -82,7 +96,7 @@ const ProCon = () => {
     // make permanent delete
     proStorage.splice(index, 1)
     // save deletion of item
-    storeData(proStorage);
+    storeProData(proStorage);
   }
 
   const handleConDelete = ({ item }) => {
@@ -101,11 +115,12 @@ const ProCon = () => {
     // make permanent delete
     conStorage.splice(index, 1)
     // save deletion of item
-    storeData(conStorage);
+    storeConData(conStorage);
   }
 
   React.useEffect(() => {
-    getData()
+    getProData()
+    getConData()
     }, []);
 
   return (
@@ -126,8 +141,8 @@ const ProCon = () => {
             <Ionicons style={styles.icon} name="add-circle"/>
           </TouchableOpacity>
           {proStorage.map((item) => (
-            <View  style={styles.pieContainer}>
-              <Text key={item.id} style={styles.add}>{item.myMessage}</Text>
+            <View key={item.id} style={styles.pieContainer}>
+              <Text style={styles.add}>{item.message}</Text>
                 <TouchableOpacity onPress={() => handleProDelete({ item })}>
                   <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
                 </TouchableOpacity>
@@ -150,8 +165,8 @@ const ProCon = () => {
             <Ionicons style={styles.icon} name="add-circle" />
           </TouchableOpacity>
             {conStorage.map((item) => (
-            <View  style={styles.pieContainer}>
-              <Text key={item.id} style={styles.add}>{item.myMessage}</Text>
+            <View key={item.id} style={styles.pieContainer}>
+              <Text style={styles.add}>{item.message}</Text>
                 <TouchableOpacity onPress={() => handleConDelete({ item })}>
                   <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
                 </TouchableOpacity>
@@ -168,27 +183,24 @@ const styles = StyleSheet.create({
     backgroundColor:"#1B2A41"
   },
   right: {
-    width: "50%",
+    width: "47.5%",
     // borderWidth: 2,
     // borderColor: "green",
   },
   left: {
-    width: "50%",
+    width: "47.5%",
     // borderWidth: 2,
     // borderColor: "red",
   },
   pieContainer: {
     borderRadius: 10,
     borderWidth: 3,
-    marginTop: 3,
-    marginBottom: 3,
+    margin: 3,
     borderColor: "#D7D9D7",
   },
   add: {
-    marginTop: 5,
     textAlign: "center",
-    alignItems: "center",
-    marginBottom: 5,
+    paddingTop: 10,
     fontSize: 18,
     fontWeight: "bold",
     color: "#D7D9D7",
@@ -217,8 +229,8 @@ const styles = StyleSheet.create({
     color: "#D7D9D7"
   }, 
   deleteIcon: {
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 5,
+    paddingBottom: 10,
     left: "45%",
     fontSize: 30,
     color: "#D7D9D7",
