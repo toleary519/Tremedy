@@ -33,6 +33,7 @@ import { Using } from "./screens/Using";
 import { PMRInstruct } from "./screens/PMRInstruct";
 import { Stoic } from "./screens/Stoic";
 import { FocusStatement } from "./screens/FocusStatement";
+import { CopingStatement } from "./screens/CopingStatement";
 import MyStack from "./routes/homeStack"
 import { StatusBar } from "expo-status-bar";
 
@@ -60,7 +61,7 @@ function App() {
                 <Stack.Screen name="GoodTimes" component={GoodTimes} options={{ title: 'The Good' }}/>
                 <Stack.Screen name="BadTimes" component={BadTimes} options={{ title: 'The Bad' }}/>
                 <Stack.Screen name="Emergency" component={Emergency} options={{ title: 'Emergency' }}/>
-                <Stack.Screen name="UrgeMenu" component={UrgeMenu} options={{ title: 'Urges' }}/>
+                <Stack.Screen name="UrgeMenu" component={UrgeMenu} options={{ title: "It's Okay" }}/>
                 <Stack.Screen name="PlanningMenu" component={PlanningMenu} options={{ title: "I'm Planning" }}/>
                 <Stack.Screen name="Meetings" component={Meetings} options={{ title: 'Find A Meeting' }}/>
                 <Stack.Screen name="SoberContacts" component={SoberContacts} options={{ title: 'Sober Contacts' }}/>
@@ -79,6 +80,7 @@ function App() {
                 <Stack.Screen name="Using" component={Using} options={{ title: 'We Can Do This' }}/>
                 <Stack.Screen name="Stoic" component={Stoic} options={{ title: 'Stoic Principles' }}/>
                 <Stack.Screen name="FocusStatement" component={FocusStatement} options={{ title: 'Focus Statement' }}/>
+                <Stack.Screen name="CopingStatement" component={CopingStatement} options={{ title: 'Coping Statement' }}/>
                 <Stack.Screen name="One" component={One} options={{ title: 'One' }}/>
                 <Stack.Screen name="Two" component={Two} options={{ title: 'Two' }}/>
                 <Stack.Screen name="Three" component={Three} options={{ title: 'Three' }}/>
