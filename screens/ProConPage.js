@@ -1,45 +1,112 @@
 import React,{ useState } from "react";
 import { Text, StyleSheet, View, ScrollView, TextInput, Button } from "react-native";
 import { Ionicons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons'; 
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ProCon = () => {
-
-  let prosList = [{id: 1, message: "no hangover"}]
-  let consList = [{id: 1, message: "hangover"}]
   
-  const [showPros, setShowPros] = useState(prosList)
-  const [pro, setPro] = useState("")
+  const [proStorage, setProStorage] = useState(proStorage ? proStorage : [])
+  const [pro, setPro] = useState();
+  const [conStorage, setConStorage] = useState(conStorage ? conStorage : [])
+  const [con, setCon] = useState();
+
+  const getData = async () => {
+    try {
+      const jsonProValue = await AsyncStorage.getItem('storedpro')
+      let savedProData = jsonProValue ? JSON.parse(jsonProValue) : [];
+      setProStorage(savedProData);
+      const jsonConValue = await AsyncStorage.getItem('storedCon')
+      let savedConData = jsonConValue ? JSON.parse(jsonConValue) : [];
+      setConStorage(savedConData);
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const storeData = async (proStorage, conStorage) => {
+    try {
+      const jsonProValue = JSON.stringify(proStorage)
+      await AsyncStorage.setItem('storedpro', jsonProValue)
+      const jsonConValue = JSON.stringify(conStorage)
+      await AsyncStorage.setItem('storedpro', jsonConValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
   
   const handleAddPro = () => {
         
         let newPro = {
-          id: showPros.length + 1,
+          id: pro,
           message: pro
         };
         
-        const newProsList = [...showPros, newPro]
+        const newProsList = [...proStorage, newPro]
         
-        setShowPros(newProsList);
+        setProStorage(newProsList);
         setPro("");
-      }
-
-  const [showCons, setShowCons] = useState(consList)
-  const [con, setCon] = useState("")
+        storeData(newProsList, conStorage);
+        getData();
+  }
   
   const handleAddCon = () => {
         
         let newCon = {
-          id: showCons.length + 1,
+          id: con,
           message: con
         };
         
-        const newConsList = [...showCons, newCon]
+        const newConsList = [...conStorage, newCon]
         
-        setShowCons(newConsList);
+        setConStorage(newConsList);
         setCon("");
-      }
+        storeData(proStorage, newConsList);
+        getData();
+  }
 
+  const handleProDelete = ({ item }) => {
+    let index = 0
+    // find the index of item to delete
+    for (let obj of proStorage) {
+      if (obj.id !== item.id) {
+        index++;
+      }
+      else {
+        break;
+      }
+    }
+    // filter array for display 
+    setProStorage(proStorage.filter((val) => val.id !== item.id));
+    // make permanent delete
+    proStorage.splice(index, 1)
+    // save deletion of item
+    storeData(proStorage);
+  }
+
+  const handleConDelete = ({ item }) => {
+    let index = 0
+    // find the index of item to delete
+    for (let obj of conStorage) {
+      if (obj.id !== item.id) {
+        index++;
+      }
+      else {
+        break;
+      }
+    }
+    // filter array for display 
+    setConStorage(conStorage.filter((val) => val.id !== item.id));
+    // make permanent delete
+    conStorage.splice(index, 1)
+    // save deletion of item
+    storeData(conStorage);
+  }
+
+  React.useEffect(() => {
+    getData()
+    }, []);
 
   return (
     <View style={styles.container}>
@@ -58,9 +125,14 @@ const ProCon = () => {
           <TouchableOpacity onPress={() => handleAddPro()}>
             <Ionicons style={styles.icon} name="add-circle"/>
           </TouchableOpacity>
-            {showPros.map((item) => (
-              <Text key={item.id} style={styles.add}>{item.message}</Text>
-              ))}
+          {proStorage.map((item) => (
+            <View  style={styles.pieContainer}>
+              <Text key={item.id} style={styles.add}>{item.myMessage}</Text>
+                <TouchableOpacity onPress={() => handleProDelete({ item })}>
+                  <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
+                </TouchableOpacity>
+            </View>
+          ))}
         </ScrollView>
         <ScrollView style={styles.right}>
         <Text style={styles.title}>CONs</Text>
@@ -77,9 +149,14 @@ const ProCon = () => {
           <TouchableOpacity onPress={() => handleAddCon()}>
             <Ionicons style={styles.icon} name="add-circle" />
           </TouchableOpacity>
-            {showCons.map((item) => (
-              <Text key={item.id} style={styles.add}>{item.message}</Text>
-              ))}
+            {conStorage.map((item) => (
+            <View  style={styles.pieContainer}>
+              <Text key={item.id} style={styles.add}>{item.myMessage}</Text>
+                <TouchableOpacity onPress={() => handleConDelete({ item })}>
+                  <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
+                </TouchableOpacity>
+            </View>
+          ))}
         </ScrollView>
     </View>
    )};
@@ -100,13 +177,19 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     // borderColor: "red",
   },
+  pieContainer: {
+    borderRadius: 10,
+    borderWidth: 3,
+    marginTop: 3,
+    marginBottom: 3,
+    borderColor: "#D7D9D7",
+  },
   add: {
-    // borderRadius: 10,
-    // borderWidth: 4,
+    marginTop: 5,
     textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 20,
+    alignItems: "center",
+    marginBottom: 5,
+    fontSize: 18,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
@@ -132,7 +215,14 @@ const styles = StyleSheet.create({
     fontSize: "45", 
     padding: 20,
     color: "#D7D9D7"
-  }
+  }, 
+  deleteIcon: {
+    paddingTop: 20,
+    paddingBottom: 20,
+    left: "45%",
+    fontSize: 30,
+    color: "#D7D9D7",
+  },
 });
 
 export default ProCon;
