@@ -1,29 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { A } from '@expo/html-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FocusStatement = () => {
-   
-  let fakeDB = []
-  
-  const [showDB, setShowDB] = useState(fakeDB)
+    
+  const [focusStorage, setFocusStorage] = useState(focusStorage ? focusStorage : [])
   const [myFocus, setMyFocus] = useState() 
- 
-  const handleAdd = () => {
-        
-        let newFocus = {
-          id: myFocus,
-          myFocus: myFocus,
-        };
 
-        const newList = [...showDB, newFocus]
-        
-        setShowDB(newList);
-        setMyFocus("");
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('storedFocus')
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setFocusStorage(savedData);
+    } catch(e) {
+      console.log(e)
     }
+  }
+
+  const storeData = async (focusStorage) => {
+    try {
+      const jsonValue = JSON.stringify(focusStorage)
+      await AsyncStorage.setItem('storedFocus', jsonValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+    const handleAdd = () => {
+        
+      let newFocus = {
+        id: myFocus,
+        myFocus: myFocus,
+      };
+
+      const newList = [...focusStorage, newFocus]
+      
+      setFocusStorage(newList);
+      setMyFocus("");
+      storeData(newList);
+      getData();
+    }  
 
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
@@ -31,12 +51,28 @@ const FocusStatement = () => {
     let currentYear = currentDate.getFullYear();
     let time = `${currentDate.getHours()}:${currentDate.getMinutes()}`
 
-  const handleDelete = ({ item }, index) => {
-          console.log("before: ", showDB)
-          setShowDB(showDB.filter((val) => val.id !== item.id));
-          showDB.splice(index, 1)
-          console.log("after: ", showDB)
-  }
+    const handleDelete = ({ item }) => {
+      let index = 0
+      // find the index of item to delete
+      for (let obj of focusStorage) {
+        if (obj.id !== item.id) {
+          index++;
+        }
+        else {
+          break;
+        }
+      }
+      // filter array for display 
+      setFocusStorage(focusStorage.filter((val) => val.id !== item.id));
+      // make permanent delete
+      focusStorage.splice(index, 1)
+      // save deletion of item
+      storeData(focusStorage);
+    }
+
+    React.useEffect(() => {
+    getData()
+    }, []);
 
 
   return (
@@ -61,7 +97,7 @@ const FocusStatement = () => {
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
-        {showDB.map((item) => (
+        {focusStorage.map((item) => (
           <View key={item.id} style={styles.pieContainer}>
             <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
             <Text style={styles.add}>{item.myFocus}</Text>
