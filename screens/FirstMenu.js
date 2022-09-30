@@ -4,14 +4,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const FirstMenu = ({ navigation }) => (
   <View style={styles.container}>
-    <TouchableOpacity onPress={() => navigation.navigate("UrgeMenu")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
-      <Text style={styles.add}>
-        Urge
-      </Text>
-    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("PepTalk")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.add}>
         Tool Box
       </Text>
@@ -21,8 +14,12 @@ const FirstMenu = ({ navigation }) => (
         Sober Contacts
       </Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("UrgeMenu")} delayPressIn={150}>
+      <Text style={styles.add}>
+        Lapse
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Emergency")} delayPressIn={150}>
-      {/* <Text onPress={onPress} style={styles.add}> */}
       <Text style={styles.emergency}>
         Emergency
       </Text>
