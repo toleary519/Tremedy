@@ -10,11 +10,10 @@ const PlanningMenu = ({ navigation }) => (
       Your Sober Contacts
     </Text>
   </TouchableOpacity>
-  <TouchableOpacity onPress={() => navigation.navigate("ProCon")} delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-      Pros / Cons
-    </Text>
+  <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
+      <Text style={styles.add}>
+      Experiences
+      </Text>
   </TouchableOpacity>
   <TouchableOpacity onPress={() => navigation.navigate("Meetings")} delayPressIn={150}>
     {/* <Text onPress={onPress} style={styles.add}> */}
