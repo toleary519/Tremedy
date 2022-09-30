@@ -9,24 +9,19 @@ const UrgeMenu = ({ navigation }) => (
       I'm planning
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
-      <Text style={styles.add}>
-      Experiences
-      </Text>
-    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("OutsideMenu")} delayPressIn={150}>
       <Text style={styles.add}>
         I'm outside the store
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
-      <Text style={styles.add}>
-        Sober Contacts
-      </Text>
-    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Using")} delayPressIn={150}>
       <Text style={styles.add}>
         I'm already using
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
+      <Text style={styles.add}>
+        Sober Contacts
       </Text>
     </TouchableOpacity>
   </View>
