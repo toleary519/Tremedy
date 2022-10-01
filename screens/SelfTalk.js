@@ -76,7 +76,10 @@ const SelfTalk = () => {
       }, []);
       
   return (
-    <KeyboardAwareScrollView style={styles.container}>
+    <View style={styles.container}>
+
+    
+    <KeyboardAwareScrollView extraHeight={400}>
       <Text style={styles.header}>
         What is the thought that you are having? 
       </Text>
@@ -112,7 +115,7 @@ const SelfTalk = () => {
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
-        {selfTalk.map((item) => (
+        {selfTalk.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
           <Text  style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
           <Text  style={styles.add}> Initial Thought: {item.initial}</Text>
@@ -124,6 +127,7 @@ const SelfTalk = () => {
         ))}
       </View>
     </KeyboardAwareScrollView>
+    </View>
   )
 };
 
