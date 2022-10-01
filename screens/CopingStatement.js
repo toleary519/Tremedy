@@ -76,7 +76,8 @@ const CopingStatement = () => {
 
 
   return (
-    <KeyboardAwareScrollView style={styles.container}>
+    <View style={styles.container}>
+    <KeyboardAwareScrollView extraHeight={175}>
       <Text style={styles.header}>
         Think of a coping statement that in concise and impactful. A rational nudge from yourself to help you stay on course.
       </Text>
@@ -97,7 +98,7 @@ const CopingStatement = () => {
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
-        {copingStorage.map((item) => (
+        {copingStorage.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
             <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
             <Text style={styles.add}>{item.myCoping}</Text>
@@ -108,6 +109,7 @@ const CopingStatement = () => {
         ))}
       </View>
     </KeyboardAwareScrollView>
+    </View>
   )
 };
 const styles = StyleSheet.create({
