@@ -68,7 +68,7 @@ const GoodTimes = () => {
   
   return (
     <View style={styles.container}>
-      <KeyboardAwareScrollView contentContainerStyle={{ paddingBottom: 30}} >
+      <KeyboardAwareScrollView extraHeight={200} >
         <Text style={styles.header}>
         “I'm defined by the vision of my future rather than my past.
         While doing so I am living ahead of my time.” - Unknown
@@ -89,7 +89,7 @@ const GoodTimes = () => {
         <TouchableOpacity onPress={() => handleAdd()}>
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
-        {goodStorage.map((item) => (
+        {goodStorage.reverse().map((item) => (
           <View key={item.id} style={styles.memory}>
             <Text style={styles.add}>{item.message}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
