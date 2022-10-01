@@ -68,7 +68,7 @@ const BadTimes = () => {
 
   return (
     <View style={styles.container}>
-      <KeyboardAwareScrollView contentContainerStyle={{ paddingBottom: 30}} >
+      <KeyboardAwareScrollView extraHeight={200}>
       <Text style={styles.header}>
       “You are free to choose, but you are not free to alter
        the consequences of your decisions.” - Ezra Taft Benson
@@ -89,7 +89,7 @@ const BadTimes = () => {
       <TouchableOpacity onPress={() => handleAdd()}>
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
-        {badStorage.map((item) => (
+        {badStorage.reverse().map((item) => (
           <View key={item.id} style={styles.memory}>
             <Text style={styles.add}>{item.message}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
