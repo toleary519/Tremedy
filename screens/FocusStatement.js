@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { Text, StyleSheet, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { A } from '@expo/html-elements';
@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const FocusStatement = () => {
     
   const [focusStorage, setFocusStorage] = useState(focusStorage ? focusStorage : [])
-  const [myFocus, setMyFocus] = useState() 
+  const [myFocus, setMyFocus] = useState("") 
 
   const getData = async () => {
     try {
@@ -49,7 +49,7 @@ const FocusStatement = () => {
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
-    let time = `${currentDate.getHours()}:${currentDate.getMinutes()}`
+    // let time = `${currentDate.getHours()}:${currentDate.getMinutes()}`
 
     const handleDelete = ({ item }) => {
       let index = 0
@@ -63,12 +63,23 @@ const FocusStatement = () => {
         }
       }
       // filter array for display 
-      setFocusStorage(focusStorage.filter((val) => val.id !== item.id));
+      setFocusStorage(focusStorage.filter((val) => val.id !== item.id).reverse());
       // make permanent delete
       focusStorage.splice(index, 1)
       // save deletion of item
-      storeData(focusStorage);
+      storeData(focusStorage.reverse());
     }
+
+    const errorCheck = () => {
+      if (!myFocus.replace(/\s+/g, "")) {
+        Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+          { text: "Got It" },
+        ]);
+        return;
+      } else {
+        handleAdd();
+      }
+    };
 
     React.useEffect(() => {
     getData()
@@ -94,13 +105,13 @@ const FocusStatement = () => {
         color="#D7D9D7"
         placeholderTextColor={"#F1F7EE"}    
       />
-      <TouchableOpacity onPress={() => handleAdd()}>
+      <TouchableOpacity onPress={() => errorCheck()}>
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
         {focusStorage.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
-            <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
+            <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}</Text>
             <Text style={styles.add}>{item.myFocus}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
               <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
