@@ -6,8 +6,8 @@ const EyeInstruct = () => (
   <View style={styles.container}>
   <Text style={styles.add}>Pick a point in front of you and focus your eyes on it. 
   Without moving anything but your eyes look as far left as you can. 
-  HOLD for 10 seconds and return to the centre. Repeat looking to the the right. 
-  Complete the full cycle 3-4 times.</Text>
+  HOLD for 5 seconds and return to the centre. Repeat looking to the the right. 
+  Complete the full cycle 5 times.</Text>
   </View>
 );
 
