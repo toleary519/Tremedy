@@ -11,7 +11,6 @@ const NotesMenu = ({ navigation }) => (
       <Text style={styles.summary}>
       Reflect on them. 
       </Text>
-    
     <TouchableOpacity onPress={() => navigation.navigate("GoodTimes")} delayPressIn={150}>
       <Text style={styles.good}>
         The good times
