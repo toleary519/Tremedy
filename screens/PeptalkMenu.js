@@ -5,6 +5,11 @@ import { FontAwesome5 } from '@expo/vector-icons';
 const PepTalkMenu = ({ navigation }) => (
   <View style={styles.container}>
   <ScrollView contentContainerStyle={{ paddingBottom: 30}} >
+    <TouchableOpacity onPress={() => navigation.navigate("PercievedThreatMenu")} delayPressIn={150}>
+      <Text style={styles.add}>
+      I'm In a State of Percieved Threat
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("FocusStatement")} delayPressIn={150}>
       <Text style={styles.add}>
       My Focus Statement
@@ -15,19 +20,14 @@ const PepTalkMenu = ({ navigation }) => (
       Coping Statement
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("PercievedThreatMenu")} delayPressIn={150}>
+    <TouchableOpacity onPress={() => navigation.navigate("SelfTalk")} delayPressIn={150}>
       <Text style={styles.add}>
-      I'm In a State of Percieved Threat
+        + Self-Talk
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Pies")} delayPressIn={150}>
       <Text style={styles.add}>
       PIES Check-In
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("SelfTalk")} delayPressIn={150}>
-      <Text style={styles.add}>
-        + Self-Talk
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Stoic")} delayPressIn={150}>
