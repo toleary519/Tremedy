@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { Text, StyleSheet, View, Alert, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { A } from '@expo/html-elements';
@@ -11,7 +11,7 @@ const Activities = () => {
   let fakeDB = []
   
   const [activeStorage, setActiveStorage] = useState(fakeDB)
-  const [activity, setActivity] = useState() 
+  const [activity, setActivity] = useState("") 
 
   const getData = async () => {
     try {
@@ -59,12 +59,23 @@ const Activities = () => {
         }
       }
       // filter array for display 
-      setActiveStorage(activeStorage.filter((val) => val.id !== item.id));
+      setActiveStorage(activeStorage.filter((val) => val.id !== item.id).reverse());
       // make permanent delete
       activeStorage.splice(index, 1)
       // save deletion of item
-      storeData(activeStorage);
+      storeData(activeStorage.reverse());
     }
+
+    const errorCheck = () => {
+      if (!activity.replace(/\s+/g, "")) {
+        Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+          { text: "Got It" },
+        ]);
+        return;
+      } else {
+        handleAdd();
+      }
+    };
 
     React.useEffect(() => {
       getData()
@@ -89,7 +100,7 @@ const Activities = () => {
         color="#D7D9D7"
         placeholderTextColor={"#F1F7EE"}    
       />
-      <TouchableOpacity onPress={() => handleAdd()}>
+      <TouchableOpacity onPress={() => errorCheck()}>
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
