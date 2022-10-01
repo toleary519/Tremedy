@@ -1,13 +1,13 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, Image, StyleSheet, View } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const PMRInstruct = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.add}>PMR Instructions</Text>
-    </View>
+        <Image style={{ height: '80%', width: '100%' }} source={require("../assets/PMR.png")}/>
+      </View>
   )
 };
 
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#1B2A41"
+    backgroundColor: "#FFFEFE"
   },
   add: {
     textAlign: "center",
