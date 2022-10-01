@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { Text, StyleSheet, View, Alert, TextInput, TouchableOpacity} from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { A } from '@expo/html-elements';
@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const CopingStatement = () => {
     
   const [copingStorage, setCopingStorage] = useState(copingStorage ? copingStorage : [])
-  const [myCoping, setMyCoping] = useState() 
+  const [myCoping, setMyCoping] = useState("") 
 
   const getData = async () => {
     try {
@@ -49,7 +49,6 @@ const CopingStatement = () => {
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
-    let time = `${currentDate.getHours()}:${currentDate.getMinutes()}`
 
     const handleDelete = ({ item }) => {
       let index = 0
@@ -63,17 +62,27 @@ const CopingStatement = () => {
         }
       }
       // filter array for display 
-      setCopingStorage(copingStorage.filter((val) => val.id !== item.id));
+      setCopingStorage(copingStorage.filter((val) => val.id !== item.id).reverse());
       // make permanent delete
       copingStorage.splice(index, 1)
       // save deletion of item
-      storeData(copingStorage);
+      storeData(copingStorage.reverse());
     }
 
     React.useEffect(() => {
     getData()
     }, []);
-
+    
+    const errorCheck = () => {
+      if (!myCoping.replace(/\s+/g, "")) {
+        Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+          { text: "Got It" },
+        ]);
+        return;
+      } else {
+        handleAdd();
+      }
+    };
 
   return (
     <View style={styles.container}>
@@ -94,13 +103,13 @@ const CopingStatement = () => {
         color="#D7D9D7"
         placeholderTextColor={"#F1F7EE"}    
       />
-      <TouchableOpacity onPress={() => handleAdd()}>
+      <TouchableOpacity onPress={() => errorCheck()}>
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
         {copingStorage.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
-            <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
+            <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}</Text>
             <Text style={styles.add}>{item.myCoping}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
               <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
