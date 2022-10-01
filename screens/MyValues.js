@@ -1,117 +1,144 @@
-import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, View, BackHandler, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons'; 
-import { A } from '@expo/html-elements';
+import React, { useState } from "react";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Alert,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import { A } from "@expo/html-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MyValues = () => {
-  
-  const [storage, setStorage] = useState(storage ? storage : [])
-  const [myValue, setMyValue] = useState() 
+  const [storage, setStorage] = useState(storage ? storage : []);
+  const [myValue, setMyValue] = useState("");
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem('storedValues')
+      const jsonValue = await AsyncStorage.getItem("storedValues");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       setStorage(savedData);
-    } catch(e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const storeData = async (storage) => {
     try {
-      const jsonValue = JSON.stringify(storage)
-      await AsyncStorage.setItem('storedValues', jsonValue)
+      const jsonValue = JSON.stringify(storage);
+      await AsyncStorage.setItem("storedValues", jsonValue);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   const handleAdd = () => {
-        
-        let newValue = {
-          id: myValue,
-          myValue: myValue,
-        };
+    let newValue = {
+      id: myValue,
+      myValue: myValue,
+    };
 
-        const newList = [...storage, newValue]
-        
-        setStorage(newList);
-        setMyValue("");
-        storeData(newList);
-        getData();
-    }
+    const newList = [...storage, newValue];
+
+    setStorage(newList);
+    setMyValue("");
+    storeData(newList);
+    getData();
+  };
 
   const handleDelete = ({ item }) => {
-          let index = 0
-          // find the index of item to delete
-          for (let obj of storage) {
-            if (obj.id !== item.id) {
-              index++;
-            }
-            else {
-              break;
-            }
-          }
-          // filter array for display 
-          setStorage(storage.filter((val) => val.id !== item.id));
-          // make permanent delete
-          storage.splice(index, 1)
-          // save deletion of item
-          storeData(storage);
-  }
+    let index = 0;
+    // find the index of item to delete
+    for (let obj of storage) {
+      if (obj.id !== item.id) {
+        index++;
+      } else {
+        break;
+      }
+    }
+    // filter array for display
+    setStorage(storage.filter((val) => val.id !== item.id).reverse());
+    // make permanent delete
+    storage.splice(index, 1);
+    // save deletion of item
+    storeData(storage.reverse());
+  };
+
+  const errorCheck = () => {
+    if (!myValue.replace(/\s+/g, "")) {
+      Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+        { text: "Got It" },
+      ]);
+      return;
+    } else {
+      handleAdd();
+    }
+  };
 
   React.useEffect(() => {
-    getData()
+    getData();
   }, []);
 
   return (
     <View style={styles.container}>
-    <KeyboardAwareScrollView extraHeight={200}>
-      <Text style={styles.header}>
-        Look through your core values and assess how this action would align with them.
-      </Text>
-      <Text style={styles.headerTwo}>
-        If you are unsure, look through this list of values and take some time
-        to choose a few that truly resonate with you.
-      </Text>
-      <A style={styles.link} href={`https://www.guilford.com/add/miller2/values.pdf`}>Core Values List</A>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setMyValue(text)}
-        value={myValue}
-        placeholder={"new value"} 
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
-      />
-      <TouchableOpacity onPress={() => handleAdd()}>
-        <MaterialIcons style={styles.icon} name="add-circle" />
-      </TouchableOpacity>
-      <View>
-        {storage.reverse().map((item) => (
-          <View key={item.id} style={styles.pieContainer}>
-            <Text  style={styles.add}>{item.myValue}</Text>
-            <TouchableOpacity onPress={() => handleDelete({ item })}>
-              <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
-            </TouchableOpacity>
-          </View>
-        ))}    
-      </View>
-    </KeyboardAwareScrollView>
+      <KeyboardAwareScrollView extraHeight={200}>
+        <Text style={styles.header}>
+          Look through your core values and assess how this action would align
+          with them.
+        </Text>
+        <Text style={styles.headerTwo}>
+          If you are unsure, look through this list of values and take some time
+          to choose a few that truly resonate with you.
+        </Text>
+        <A
+          style={styles.link}
+          href={`https://www.guilford.com/add/miller2/values.pdf`}
+        >
+          Core Values List
+        </A>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setMyValue(text)}
+          value={myValue}
+          placeholder={"new value"}
+          multiline
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}
+        />
+        <TouchableOpacity
+          onPress={() => {
+            errorCheck();
+          }}
+        >
+          <MaterialIcons style={styles.icon} name="add-circle" />
+        </TouchableOpacity>
+        <View>
+          {storage.reverse().map((item) => (
+            <View key={item.id} style={styles.pieContainer}>
+              <Text style={styles.add}>{item.myValue}</Text>
+              <TouchableOpacity onPress={() => handleDelete({ item })}>
+                <MaterialIcons
+                  style={styles.deleteIcon}
+                  name="delete-forever"
+                />
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
+      </KeyboardAwareScrollView>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#1B2A41",
-    paddingBottom: 15
+    backgroundColor: "#1B2A41",
+    paddingBottom: 15,
   },
   pieContainer: {
     borderRadius: 10,
