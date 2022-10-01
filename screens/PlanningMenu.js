@@ -4,6 +4,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const PlanningMenu = ({ navigation }) => (
   <View style={styles.container}>
+    <Text style={styles.summary}>{`There isn't anything to plan. Talk to someone. Look back.\n Go Meet.`}</Text>
   <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
     {/* <Text onPress={onPress} style={styles.add}> */}
     <Text style={styles.add}>
@@ -27,7 +28,6 @@ const PlanningMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 140,
     backgroundColor:"#1B2A41"
   },
   add: {
@@ -44,16 +44,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#D7D9D7",
   },
-
-  // icon: {
-  //   borderRadius: "3px",
-  //   borderColor: "red",    
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   fontSize: "60", 
-  //   padding: 60,
-  //   color: "#1B2A41"
-  // }
+  summary: {
+    borderColor: "#D7D9D7",
+    marginTop: 21,
+    width: "90%",
+    left: "5%",
+    textAlign: "center",
+    justifyContent: "flex-end",
+    padding: 10,
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#D7D9D7",
+  },
 });
 
 export { PlanningMenu }
