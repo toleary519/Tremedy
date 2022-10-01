@@ -76,7 +76,8 @@ const FocusStatement = () => {
 
 
   return (
-    <KeyboardAwareScrollView style={styles.container}>
+    <View style={styles.container}>
+    <KeyboardAwareScrollView extraHeight={250}>
       <Text style={styles.header}>
         Think of your focus. Who you want to be and who you are.
       </Text>
@@ -97,7 +98,7 @@ const FocusStatement = () => {
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
-        {focusStorage.map((item) => (
+        {focusStorage.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
             <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
             <Text style={styles.add}>{item.myFocus}</Text>
@@ -108,6 +109,7 @@ const FocusStatement = () => {
         ))}
       </View>
     </KeyboardAwareScrollView>
+    </View>
   )
 };
 const styles = StyleSheet.create({
