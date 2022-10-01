@@ -86,7 +86,7 @@ const Pies = () => {
   return (
     
     <View style={styles.container}>
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView extraHeight={180}>
       <Text style={styles.header}>
         How do you feel today? 
       </Text>
@@ -151,7 +151,7 @@ const Pies = () => {
       </TouchableOpacity>
         
       <View>
-        {pieStorage.map((item) => (
+        {pieStorage.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
           <Text  style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
           <Text  style={styles.add}> P: {item.physical}</Text>
