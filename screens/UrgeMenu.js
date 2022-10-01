@@ -4,6 +4,11 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const UrgeMenu = ({ navigation }) => (
   <View style={styles.container}>
+    <TouchableOpacity onPress={() => navigation.navigate("JustOne")} delayPressIn={150}>
+      <Text style={styles.add}>
+      It's Just One
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("PlanningMenu")} delayPressIn={150}>
       <Text style={styles.add}>
       I'm planning
