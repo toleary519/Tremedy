@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const CopingStatement = () => {
     
   const [copingStorage, setCopingStorage] = useState(copingStorage ? copingStorage : [])
-  const [mycoping, setMycoping] = useState() 
+  const [myCoping, setMyCoping] = useState() 
 
   const getData = async () => {
     try {
@@ -32,15 +32,15 @@ const CopingStatement = () => {
 
     const handleAdd = () => {
         
-      let newcoping = {
-        id: mycoping,
-        mycoping: mycoping,
+      let newCoping = {
+        id: myCoping,
+        myCoping: myCoping,
       };
 
-      const newList = [...copingStorage, newcoping]
+      const newList = [...copingStorage, newCoping]
       
       setCopingStorage(newList);
-      setMycoping("");
+      setMyCoping("");
       storeData(newList);
       getData();
     }  
@@ -85,8 +85,8 @@ const CopingStatement = () => {
       </Text>
       <TextInput 
         style={styles.input} 
-        onChangeText={(text) => setMycoping(text)}
-        value={mycoping}
+        onChangeText={(text) => setMyCoping(text)}
+        value={myCoping}
         placeholder={"coping statement"} 
         multiline
         keyboardType="default"
@@ -100,7 +100,7 @@ const CopingStatement = () => {
         {copingStorage.map((item) => (
           <View key={item.id} style={styles.pieContainer}>
             <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
-            <Text style={styles.add}>{item.mycoping}</Text>
+            <Text style={styles.add}>{item.myCoping}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
               <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
             </TouchableOpacity>
