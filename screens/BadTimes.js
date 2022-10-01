@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, Text, StyleSheet, Button, ScrollView, TouchableOpacity } from "react-native";
+import { View, TextInput, Text, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -55,12 +55,23 @@ const BadTimes = () => {
         }
       }
       // filter array for display 
-      setBadStorage(badStorage.filter((val) => val.id !== item.id));
+      setBadStorage(badStorage.filter((val) => val.id !== item.id).reverse());
       // make permanent delete
       badStorage.splice(index, 1)
       // save deletion of item
-      storeData(badStorage);
+      storeData(badStorage.reverse());
     }
+
+    const errorCheck = () => {
+      if (!note.replace(/\s+/g, "")) {
+        Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+          { text: "Got It" },
+        ]);
+        return;
+      } else {
+        handleAdd();
+      }
+    };
 
     React.useEffect(() => {
     getData()
@@ -86,7 +97,7 @@ const BadTimes = () => {
         color="#D7D9D7"
         placeholderTextColor={"#F1F7EE"}    
       />
-      <TouchableOpacity onPress={() => handleAdd()}>
+      <TouchableOpacity onPress={() => errorCheck()}>
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
         {badStorage.reverse().map((item) => (
