@@ -1,179 +1,195 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
-import { MaterialIcons } from '@expo/vector-icons';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Alert,
+  TextInput,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Pies = () => {
-  
-  
-  const [pieStorage, setPieStorage] = useState(pieStorage ? pieStorage : [])
-  const [physical, setPhysical] = useState()
-  const [insights, setInsights] = useState()
-  const [emotions, setEmotions] = useState()
-  const [spiritual, setSpiritual] = useState()
+  const [pieStorage, setPieStorage] = useState(pieStorage ? pieStorage : []);
+  const [physical, setPhysical] = useState("");
+  const [insights, setInsights] = useState("");
+  const [emotions, setEmotions] = useState("");
+  const [spiritual, setSpiritual] = useState("");
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem('storedPie')
+      const jsonValue = await AsyncStorage.getItem("storedPie");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       setPieStorage(savedData);
-    } catch(e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const storeData = async (focusStorage) => {
     try {
-      const jsonValue = JSON.stringify(focusStorage)
-      await AsyncStorage.setItem('storedPie', jsonValue)
+      const jsonValue = JSON.stringify(focusStorage);
+      await AsyncStorage.setItem("storedPie", jsonValue);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
- 
+  };
+
   const handleAdd = () => {
-        
-        let newPie = {
-          id: pieStorage.length + 1,
-          physical: physical,
-          insights: insights,
-          emotions: emotions,
-          spiritual: spiritual
-        };
+    let newPie = {
+      id: `${physical}${emotions}`,
+      physical: physical,
+      insights: insights,
+      emotions: emotions,
+      spiritual: spiritual,
+    };
 
-        
-        const newList = [...pieStorage, newPie]
-        
-        setPieStorage(newList);
-        setPhysical("");
-        setInsights("");
-        setEmotions("");
-        setSpiritual("");
-        storeData(newList);
-        getData();
-    }
-    
-    let currentDate = new Date();
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth() + 1;
-    let currentYear = currentDate.getFullYear();
-    let time = `${currentDate.getHours()}:${currentDate.getMinutes()}` 
-    
-    const handleDelete = ({ item }) => {
-      let index = 0
-      // find the index of item to delete
-      for (let obj of pieStorage) {
-        if (obj.id !== item.id) {
-          index++;
-        }
-        else {
-          break;
-        }
+    const newList = [...pieStorage, newPie];
+
+    setPieStorage(newList);
+    setPhysical("");
+    setInsights("");
+    setEmotions("");
+    setSpiritual("");
+    storeData(newList);
+    getData();
+  };
+
+  let currentDate = new Date();
+  let currentDay = currentDate.getDate();
+  let currentMonth = currentDate.getMonth() + 1;
+  let currentYear = currentDate.getFullYear();
+  // let time = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+
+  const handleDelete = ({ item }) => {
+    let index = 0;
+    // find the index of item to delete
+    for (let obj of pieStorage) {
+      if (obj.id !== item.id) {
+        index++;
+      } else {
+        break;
       }
-      // filter array for display 
-      setPieStorage(pieStorage.filter((val) => val.id !== item.id));
-      // make permanent delete
-      pieStorage.splice(index, 1)
-      // save deletion of item
-      storeData(pieStorage);
     }
+    // filter array for display
+    setPieStorage(pieStorage.filter((val) => val.id !== item.id).reverse());
+    // make permanent delete
+    pieStorage.splice(index, 1);
+    // save deletion of item
+    storeData(pieStorage.reverse());
+  };
 
-    React.useEffect(() => {
-      getData()
-      }, []);
+  const errorCheck = () => {
+    
+    if (
+      !physical.replace(/\s+/g, "") ||
+      !insights.replace(/\s+/g, "") ||
+      !emotions.replace(/\s+/g, "") ||
+      !spiritual.replace(/\s+/g, "")
+    ) {
+      Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+        { text: "Got It" },
+      ]);
+      return;
+    } else {
+      handleAdd();
+    }
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
-    
     <View style={styles.container}>
-    <KeyboardAwareScrollView extraHeight={180}>
-      <Text style={styles.header}>
-        How do you feel today? 
-      </Text>
-      <Text style={styles.headerTwo}>
-        Physical Body 
-      </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setPhysical(text)}
-        value={physical}
-        placeholder={"new entry"} 
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
+      <KeyboardAwareScrollView extraHeight={180}>
+        <Text style={styles.header}>How do you feel today?</Text>
+        <Text style={styles.headerTwo}>Physical Body</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setPhysical(text)}
+          value={physical}
+          placeholder={"new entry"}
+          multiline
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}
         />
-      <Text style={styles.headerTwo}>
-        Insights or Thoughts
-      </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setInsights(text)} 
-        value={insights}
-        placeholder={"new entry"} 
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
+        <Text style={styles.headerTwo}>Insights or Thoughts</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setInsights(text)}
+          value={insights}
+          placeholder={"new entry"}
+          multiline
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}
         />
-      <Text style={styles.headerTwo}>
-        Emotions or Feelings  
-      </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setEmotions(text)} 
-        placeholder={"new entry"} 
-        value={emotions}
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
+        <Text style={styles.headerTwo}>Emotions or Feelings</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setEmotions(text)}
+          placeholder={"new entry"}
+          value={emotions}
+          multiline
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}
         />
-      <Text style={styles.headerTwo}>
-        Spiritual Connection to Self, Others or a Higher Power
-      </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setSpiritual(text)} 
-        placeholder={"new entry"} 
-        value={spiritual}
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
+        <Text style={styles.headerTwo}>
+          Spiritual Connection to Self, Others or a Higher Power
+        </Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setSpiritual(text)}
+          placeholder={"new entry"}
+          value={spiritual}
+          multiline
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}
         />
-      <TouchableOpacity onPress={() => { 
-        handleAdd();
-        
-      }}>
-        <MaterialIcons style={styles.icon} name="add-circle" />
-  
-      </TouchableOpacity>
-        
-      <View>
-        {pieStorage.reverse().map((item) => (
-          <View key={item.id} style={styles.pieContainer}>
-          <Text  style={styles.date}>{currentMonth}/{currentDay}/{currentYear}  {time}</Text>
-          <Text  style={styles.add}> P: {item.physical}</Text>
-          <Text  style={styles.add}> I: {item.insights}</Text>
-          <Text  style={styles.add}> E: {item.emotions}</Text>
-          <Text  style={styles.add}> S: {item.spiritual}</Text>
-          <TouchableOpacity onPress={() => handleDelete({ item })}>
-              <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
+        <TouchableOpacity
+          onPress={() => {
+            errorCheck();
+          }}
+        >
+          <MaterialIcons style={styles.icon} name="add-circle" />
+        </TouchableOpacity>
+
+        <View>
+          {pieStorage.reverse().map((item) => (
+            <View key={item.id} style={styles.pieContainer}>
+              <Text style={styles.date}>
+                {currentMonth}/{currentDay}/{currentYear}
+              </Text>
+              <Text style={styles.add}> P: {item.physical}</Text>
+              <Text style={styles.add}> I: {item.insights}</Text>
+              <Text style={styles.add}> E: {item.emotions}</Text>
+              <Text style={styles.add}> S: {item.spiritual}</Text>
+              <TouchableOpacity onPress={() => handleDelete({ item })}>
+                <MaterialIcons
+                  style={styles.deleteIcon}
+                  name="delete-forever"
+                />
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
       </KeyboardAwareScrollView>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#1B2A41",
-    paddingBottom: 30
+    backgroundColor: "#1B2A41",
+    paddingBottom: 30,
   },
   pieContainer: {
     borderRadius: 10,
@@ -247,7 +263,7 @@ const styles = StyleSheet.create({
     width: "80%",
     marginTop: 21,
     textAlign: "center",
-    justifyContent: "center",  
+    justifyContent: "center",
     padding: 10,
     left: "10%",
     fontSize: 20,
