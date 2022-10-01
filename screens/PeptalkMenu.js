@@ -20,6 +20,11 @@ const PepTalkMenu = ({ navigation }) => (
       Coping Statement
       </Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("MyValues")} delayPressIn={150}>
+      <Text style={styles.add}>
+        My Values
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("SelfTalk")} delayPressIn={150}>
       <Text style={styles.add}>
         + Self-Talk
@@ -35,14 +40,14 @@ const PepTalkMenu = ({ navigation }) => (
         Stoic Questions
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("MyValues")} delayPressIn={150}>
-      <Text style={styles.add}>
-        My Values
-      </Text>
-    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("Breathe")} delayPressIn={150}>
       <Text style={styles.add}>
         Breathe
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("Five")} delayPressIn={150}>
+      <Text style={styles.add}>
+        5-4-3-2-1
       </Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
@@ -63,11 +68,6 @@ const PepTalkMenu = ({ navigation }) => (
     <TouchableOpacity onPress={() => navigation.navigate("Activities")} delayPressIn={150}>
       <Text style={styles.add}>
         Activities
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("Five")} delayPressIn={150}>
-      <Text style={styles.add}>
-        5-4-3-2-1
       </Text>
     </TouchableOpacity>
   </ScrollView>
