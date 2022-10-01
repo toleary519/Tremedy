@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     color: "#D7D9D7",
   },
   input: {
-    fontSize: 25,
+    fontSize: 20,
     textAlign: "center",
     paddingTop: 25,
   },
@@ -224,14 +224,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     left: "30%",
-    fontSize: "45", 
+    fontSize: 35, 
     padding: 20,
     color: "#D7D9D7"
   }, 
   deleteIcon: {
     paddingTop: 5,
     paddingBottom: 10,
-    left: "45%",
+    left: "42.5%",
     fontSize: 30,
     color: "#D7D9D7",
   },
