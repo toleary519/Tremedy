@@ -14,7 +14,7 @@ const MyValues = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('storedValues')
-      let savedData = jsonValue ? JSON.parse(jsonValue) : null;
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       setStorage(savedData);
     } catch(e) {
       console.log(e)
@@ -46,7 +46,6 @@ const MyValues = () => {
     }
 
   const handleDelete = ({ item }) => {
-          // console.log("before: ", storage)
           let index = 0
           // find the index of item to delete
           for (let obj of storage) {
@@ -57,15 +56,12 @@ const MyValues = () => {
               break;
             }
           }
-          // console.log("Storage", storage)
-          // console.log("index", index)
           // filter array for display 
           setStorage(storage.filter((val) => val.id !== item.id));
           // make permanent delete
           storage.splice(index, 1)
           // save deletion of item
           storeData(storage);
-          // console.log("after: ", storage)
   }
 
   React.useEffect(() => {
@@ -116,13 +112,12 @@ const styles = StyleSheet.create({
     paddingBottom: 15
   },
   pieContainer: {
-    // flexDirection: "row",
     borderRadius: 10,
     borderWidth: 4,
     marginTop: 7,
     marginBottom: 7,
+    marginLeft: "2.5%",
     width: "95%",
-    left: "5%",
     borderColor: "#D7D9D7",
     flexDirection: "row",
     justifyContent: "center",
@@ -134,7 +129,6 @@ const styles = StyleSheet.create({
   },
   add: {
     width: "95%",
-    left: "2.5%",
     textAlign: "center",
     alignItems: "center",
     fontSize: 25,
