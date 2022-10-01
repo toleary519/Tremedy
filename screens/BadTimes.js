@@ -165,14 +165,15 @@ const styles = StyleSheet.create({
   },
   icon: {
     paddingTop: 20,
+    paddingBottom: 20,
     fontSize: 40,
     color: "#D7D9D7",
     textAlign: "center",
   },
   deleteIcon: {
-    paddingTop: 20,
+    paddingTop: 10,
     paddingBottom: 20,
-    left: "45%",
+    left: "46%",
     fontSize: 30,
     color: "#D7D9D7",
   },
