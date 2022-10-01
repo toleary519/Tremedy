@@ -38,7 +38,7 @@ const Emergency = ({ navigation }) => {
 
   return(
   <View style={styles.container}>
-    <Text style={styles.header}>{`If having a medical emergency \n call 911.`}</Text>
+    <Text style={styles.header}>{`If you're having\n a medical emergency call\n 911`}</Text>
   <TouchableOpacity delayPressIn={150}>
     <Text style={styles.add}>
     <A style={styles.add} href={`https://www.google.com/search?q=${address}+crisis+line`}>Crisis Lines</A>
@@ -51,18 +51,13 @@ const Emergency = ({ navigation }) => {
      {/* <A href={`https://www.google.com/search?q=hospitals+near+${location.coords.longitude}%2C+${location.coords.latitude}`}>Hospitals</A> */}
     </Text>
   </TouchableOpacity>
-  {/* <TouchableOpacity delayPressIn={150}>
-    <Text style={styles.emergency}>
-      CALL 911
-    </Text>
-  </TouchableOpacity> */}
   </View>
 )};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 140,
+    paddingTop: 40,
     backgroundColor:"#1B2A41"
   },
   add: {
