@@ -69,7 +69,8 @@ const MyValues = () => {
   }, []);
 
   return (
-    <KeyboardAwareScrollView style={styles.container}>
+    <View style={styles.container}>
+    <KeyboardAwareScrollView extraHeight={200}>
       <Text style={styles.header}>
         Look through your core values and assess how this action would align with them.
       </Text>
@@ -92,7 +93,7 @@ const MyValues = () => {
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
-        {storage.map((item) => (
+        {storage.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
             <Text  style={styles.add}>{item.myValue}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
@@ -102,6 +103,7 @@ const MyValues = () => {
         ))}    
       </View>
     </KeyboardAwareScrollView>
+    </View>
   )
 };
 
