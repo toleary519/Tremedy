@@ -22,6 +22,22 @@ const Stoic = () => {
           <Text style={styles.subAdd}>Anxious feelings and thoughts are not only bad, they are actively destructive.</Text>
         </View>
         <View style={styles.ideal}>
+          <Text style={styles.add}>Will this be alive time or dead time?</Text>
+          <Text style={styles.subAdd}>Are you going to do what you can, seize moments. Or are you going to be passive and wait?</Text>
+        </View>
+        <View style={styles.ideal}>
+          <Text style={styles.add}>Are you doing your job?</Text>
+          <Text style={styles.subAdd}>Not just professional, your job in the moment. No? Why not?</Text>
+        </View>
+        <View style={styles.ideal}>
+          <Text style={styles.add}>What is the most important thing?</Text>
+          <Text style={styles.subAdd}>Focusing on what is most important to you sharpens your view and makes it easier to ignore distractions.</Text>
+        </View>
+        <View style={styles.ideal}>
+          <Text style={styles.add}>Who is this for?</Text>
+          <Text style={styles.subAdd}>Are you acting on your own behalf, or the wishes of others?</Text>
+        </View>
+        <View style={styles.ideal}>
           <Text style={styles.add}>Who am I spending time with?</Text>
           <Text style={styles.subAdd}> Are the people surrounding you bringing you closer to yourself or pulling you away?</Text>
         </View>
@@ -31,22 +47,6 @@ const Stoic = () => {
         </View>
         <View style={styles.ideal}>
           <Text style={styles.add}>If I am not for me who is? If I am only for me, who am I?</Text>
-        </View>
-        <View style={styles.ideal}>
-          <Text style={styles.add}>Are you doing your job?</Text>
-          <Text style={styles.subAdd}>Not just professional, you job in the moment. No? Why not?</Text>
-        </View>
-        <View style={styles.ideal}>
-          <Text style={styles.add}>What is the most important thing?</Text>
-          <Text style={styles.subAdd}>Focusing on what is most important to you sharpens your mind and makes it easier to ignore distractions.</Text>
-        </View>
-        <View style={styles.ideal}>
-          <Text style={styles.add}>Who is this for?</Text>
-          <Text style={styles.subAdd}>Are you acting on your own behalf, or the wishes of others?</Text>
-        </View>
-        <View style={styles.ideal}>
-          <Text style={styles.add}>Will this be alive time or dead time?</Text>
-          <Text style={styles.subAdd}>Are you going to do what you can, seize moments. Or are you going to be passive and wait?</Text>
         </View>
     </ScrollView>
   </View>
