@@ -71,7 +71,8 @@ const Activities = () => {
       }, []);
 
   return (
-    <KeyboardAwareScrollView style={styles.container}>
+    <View style={styles.container}>
+    <KeyboardAwareScrollView extraHeight={200}>
       <Text style={styles.header}>
         Make a list below of activities you enjoy and could do at the drop of the hat.
       </Text>
@@ -92,7 +93,7 @@ const Activities = () => {
         <MaterialIcons style={styles.icon} name="add-circle" />
       </TouchableOpacity>
       <View>
-        {activeStorage.map((item) => (
+        {activeStorage.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
             <Text  style={styles.add}>{item.activity}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
@@ -102,6 +103,7 @@ const Activities = () => {
         ))}
       </View>
     </KeyboardAwareScrollView>
+    </View>
   )
 };
 
