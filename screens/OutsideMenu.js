@@ -7,12 +7,13 @@ const OutsideMenu = ({ navigation }) => (
     <Text style={styles.summary}>Explain to the version of yourself when you were at SCHC this decision.</Text>
     <Text style={styles.summaryTwo}>Say it OUT LOUD how this is the right move.</Text>
     <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
-      <Text style={styles.add}>
-        Sober Contacts
-      </Text>
+      <Text style={styles.add}>Sober Contacts</Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
       <Text style={styles.add}>Your Experiences</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("Meetings")} delayPressIn={150}>
+      <Text style={styles.add}>Meetings</Text>
     </TouchableOpacity>
   </View>
 );
@@ -20,7 +21,6 @@ const OutsideMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
     backgroundColor:"#1B2A41"
   },
   add: {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   summary: {
     borderColor: "#D7D9D7",
-    marginTop: 21,
+    marginTop: 5,
     width: "90%",
     left: "5%",
     textAlign: "center",
