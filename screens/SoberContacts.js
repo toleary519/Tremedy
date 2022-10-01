@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Alert } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity, ScrollView,  } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import * as Contacts from "expo-contacts";
@@ -32,8 +32,6 @@ const SoberContacts = () => {
         if (data.length > 0) {
           const contacts = data;
           setContacts(contacts)
-          // console.log("test 8****", contacts);
-          console.log("data length:", contacts.length);
         }
         else {
           setError('Add some "2174" company contacts');
@@ -73,11 +71,13 @@ export { SoberContacts };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1B2A41"
+    flex: 1,
+    backgroundColor:"#1B2A41",
+    paddingBottom: 15
   },
   add: {
     padding: 5,
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#D7D9D7",
     marginTop: 15,
-    width: "90%",
-    left: "2.5%",
+    marginLeft: "2.5%",
+    width: "95%",
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
