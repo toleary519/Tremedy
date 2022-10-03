@@ -2,7 +2,7 @@ import React from "react";
 import { Text, StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const Using = () => (
+const Using = ({ navigation }) => (
   <View style={styles.container}>
     <ScrollView contentContainerStyle={{ paddingBottom: 30}}>
       <Text style={[styles.add, {
