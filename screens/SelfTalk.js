@@ -37,10 +37,17 @@ const SelfTalk = () => {
   };
 
   const handleAdd = () => {
+
+    let currentDate = new Date();
+    let currentDay = currentDate.getDate();
+    let currentMonth = currentDate.getMonth() + 1;
+    let currentYear = currentDate.getFullYear();
+    
     let newSelfTalk = {
       id: `${rational}${initial}`,
       initial: initial,
       rational: rational,
+      date: `${currentMonth}/${currentDay}/${currentYear}`
     };
 
     const newList = [...selfTalk, newSelfTalk];
@@ -81,12 +88,6 @@ const SelfTalk = () => {
     }
   };
 
-  let currentDate = new Date();
-  let currentDay = currentDate.getDate();
-  let currentMonth = currentDate.getMonth() + 1;
-  let currentYear = currentDate.getFullYear();
-  // let time = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
-
   React.useEffect(() => {
     getData();
   }, []);
@@ -108,7 +109,7 @@ const SelfTalk = () => {
           placeholderTextColor={"#F1F7EE"}
         />
         <Text style={styles.headerTwo}>
-          Take a moment to evaluate this thought. Modfy the language, have you
+          Take a moment to evaluate this thought. Modify the language, have you
           added negative distortions? Try to write a more resonably framed
           thought in the field below.
         </Text>
@@ -130,11 +131,9 @@ const SelfTalk = () => {
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
         <View>
-          {selfTalk.map((item) => (
+          {selfTalk.reverse().map((item) => (
             <View key={item.id} style={styles.pieContainer}>
-              <Text style={styles.date}>
-                {currentMonth}/{currentDay}/{currentYear}
-              </Text>
+              <Text style={styles.date}>{item.date}</Text>
               <Text style={styles.add}> Initial Thought: {item.initial}</Text>
               <Text style={styles.add}> Rational Thought: {item.rational}</Text>
               <TouchableOpacity onPress={() => handleDelete({ item })}>
