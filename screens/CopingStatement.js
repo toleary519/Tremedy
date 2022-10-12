@@ -31,10 +31,16 @@ const CopingStatement = () => {
   }
 
     const handleAdd = () => {
+
+      let currentDate = new Date();
+      let currentDay = currentDate.getDate();
+      let currentMonth = currentDate.getMonth() + 1;
+      let currentYear = currentDate.getFullYear();
         
       let newCoping = {
         id: myCoping,
         myCoping: myCoping,
+        date: `${currentMonth}/${currentDay}/${currentYear}`
       };
 
       const newList = [...copingStorage, newCoping]
@@ -44,11 +50,6 @@ const CopingStatement = () => {
       storeData(newList);
       getData();
     }  
-
-    let currentDate = new Date();
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth() + 1;
-    let currentYear = currentDate.getFullYear();
 
     const handleDelete = ({ item }) => {
       let index = 0
@@ -109,7 +110,7 @@ const CopingStatement = () => {
       <View>
         {copingStorage.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
-            <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}</Text>
+            <Text style={styles.date}>{item.date}</Text>
             <Text style={styles.add}>{item.myCoping}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
               <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
