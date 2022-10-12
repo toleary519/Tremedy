@@ -6,7 +6,6 @@ import {
   Alert,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -39,12 +38,19 @@ const Pies = () => {
   };
 
   const handleAdd = () => {
+
+    let currentDate = new Date();
+    let currentDay = currentDate.getDate();
+    let currentMonth = currentDate.getMonth() + 1;
+    let currentYear = currentDate.getFullYear();
+
     let newPie = {
       id: `${physical}${emotions}`,
       physical: physical,
       insights: insights,
       emotions: emotions,
       spiritual: spiritual,
+      date: `${currentMonth}/${currentDay}/${currentYear}`
     };
 
     const newList = [...pieStorage, newPie];
@@ -57,12 +63,6 @@ const Pies = () => {
     storeData(newList);
     getData();
   };
-
-  let currentDate = new Date();
-  let currentDay = currentDate.getDate();
-  let currentMonth = currentDate.getMonth() + 1;
-  let currentYear = currentDate.getFullYear();
-  // let time = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
   const handleDelete = ({ item }) => {
     let index = 0;
@@ -164,9 +164,7 @@ const Pies = () => {
         <View>
           {pieStorage.reverse().map((item) => (
             <View key={item.id} style={styles.pieContainer}>
-              <Text style={styles.date}>
-                {currentMonth}/{currentDay}/{currentYear}
-              </Text>
+              <Text style={styles.date}>{item.date}</Text>
               <Text style={styles.add}> P: {item.physical}</Text>
               <Text style={styles.add}> I: {item.insights}</Text>
               <Text style={styles.add}> E: {item.emotions}</Text>
