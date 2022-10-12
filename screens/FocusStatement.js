@@ -31,10 +31,16 @@ const FocusStatement = () => {
   }
 
     const handleAdd = () => {
+
+      let currentDate = new Date();
+      let currentDay = currentDate.getDate();
+      let currentMonth = currentDate.getMonth() + 1;
+      let currentYear = currentDate.getFullYear();
         
       let newFocus = {
         id: myFocus,
         myFocus: myFocus,
+        date: `${currentMonth}/${currentDay}/${currentYear}`
       };
 
       const newList = [...focusStorage, newFocus]
@@ -44,12 +50,6 @@ const FocusStatement = () => {
       storeData(newList);
       getData();
     }  
-
-    let currentDate = new Date();
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth() + 1;
-    let currentYear = currentDate.getFullYear();
-    // let time = `${currentDate.getHours()}:${currentDate.getMinutes()}`
 
     const handleDelete = ({ item }) => {
       let index = 0
@@ -111,7 +111,7 @@ const FocusStatement = () => {
       <View>
         {focusStorage.reverse().map((item) => (
           <View key={item.id} style={styles.pieContainer}>
-            <Text style={styles.date}>{currentMonth}/{currentDay}/{currentYear}</Text>
+            <Text style={styles.date}>{item.date}</Text>
             <Text style={styles.add}>{item.myFocus}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
               <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
