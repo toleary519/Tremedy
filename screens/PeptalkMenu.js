@@ -50,6 +50,11 @@ const PepTalkMenu = ({ navigation }) => (
         5-4-3-2-1
       </Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("CheckIn")} delayPressIn={150}>
+      <Text style={styles.add}>
+        Quick Check In
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
       <Text style={styles.add}>
       Your Experiences
@@ -74,6 +79,8 @@ const PepTalkMenu = ({ navigation }) => (
   </View>
 );
 
+// used overflow: hidden below to prevent corners.
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -81,9 +88,11 @@ const styles = StyleSheet.create({
     backgroundColor:"#1B2A41"
   },
   add: {
+    overflow: "hidden",
     borderRadius: 10,
     borderWidth: 4,
-    borderColor: "#D7D9D7",
+    borderColor: "#F4743B",
+    backgroundColor: "#D2EAEB",
     marginTop: 21,
     width: "90%",
     left: "5%",
@@ -92,7 +101,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 25,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: "#1B2A41",
   },
 });
 
