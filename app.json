@@ -18,11 +18,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true, 
+      "supportsTablet": true,
       "bundleIdentifier": "com.thomas.DontWorkFlow"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4f099d5d-0bcc-459d-b31a-9390cfa07fcd"
+      }
     }
   }
 }
