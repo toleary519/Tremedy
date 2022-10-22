@@ -11,117 +11,123 @@ const FocusStatement = () => {
   const [focusStorage, setFocusStorage] = useState(focusStorage ? focusStorage : [])
   const [myFocus, setMyFocus] = useState("") 
 
+  let sortedEntries = focusStorage.sort((a, b) => {
+    return b.id - a.id;
+  });
+
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem('storedFocus')
+      const jsonValue = await AsyncStorage.getItem("storedFocus");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       setFocusStorage(savedData);
-    } catch(e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const storeData = async (focusStorage) => {
     try {
-      const jsonValue = JSON.stringify(focusStorage)
-      await AsyncStorage.setItem('storedFocus', jsonValue)
+      const jsonValue = JSON.stringify(focusStorage);
+      await AsyncStorage.setItem("storedFocus", jsonValue);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
-    const handleAdd = () => {
+  const handleAdd = () => {
+    let currentDate = new Date();
+    let currentDay = currentDate.getDate();
+    let currentMonth = currentDate.getMonth() + 1;
+    let currentYear = currentDate.getFullYear();
+    let orderId = currentDate.getTime();
 
-      let currentDate = new Date();
-      let currentDay = currentDate.getDate();
-      let currentMonth = currentDate.getMonth() + 1;
-      let currentYear = currentDate.getFullYear();
-        
-      let newFocus = {
-        id: myFocus,
-        myFocus: myFocus,
-        date: `${currentMonth}/${currentDay}/${currentYear}`
-      };
-
-      const newList = [...focusStorage, newFocus]
-      
-      setFocusStorage(newList);
-      setMyFocus("");
-      storeData(newList);
-      getData();
-    }  
-
-    const handleDelete = ({ item }) => {
-      let index = 0
-      // find the index of item to delete
-      for (let obj of focusStorage) {
-        if (obj.id !== item.id) {
-          index++;
-        }
-        else {
-          break;
-        }
-      }
-      // filter array for display 
-      setFocusStorage(focusStorage.filter((val) => val.id !== item.id).reverse());
-      // make permanent delete
-      focusStorage.splice(index, 1)
-      // save deletion of item
-      storeData(focusStorage.reverse());
-    }
-
-    const errorCheck = () => {
-      if (!myFocus.replace(/\s+/g, "")) {
-        Alert.alert("Entry Error", `Fill out all fields to submit.`, [
-          { text: "Got It" },
-        ]);
-        return;
-      } else {
-        handleAdd();
-      }
+    let newFocus = {
+      id: orderId,
+      myFocus: myFocus,
+      date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
-    React.useEffect(() => {
-    getData()
-    }, []);
+    const newList = [...focusStorage, newFocus];
 
+    setFocusStorage(newList);
+    setMyFocus("");
+    storeData(newList);
+    getData();
+  };
+
+  const handleDelete = ({ item }) => {
+    let index = 0;
+    // find the index of item to delete
+    for (let obj of focusStorage) {
+      if (obj.id !== item.id) {
+        index++;
+      } else {
+        break;
+      }
+    }
+    // filter array for display
+    setFocusStorage(focusStorage.filter((val) => val.id !== item.id));
+    // make permanent delete
+    focusStorage.splice(index, 1);
+    // save deletion of item
+    storeData(focusStorage);
+  };
+
+  const errorCheck = () => {
+    if (!myFocus.replace(/\s+/g, "")) {
+      Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+        { text: "Got It" },
+      ]);
+      return;
+    } else {
+      handleAdd();
+    }
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <View style={styles.container}>
-    <KeyboardAwareScrollView extraHeight={250}>
-      <Text style={styles.header}>
-        Think of your focus. Who you want to be and who you are.
-      </Text>
-      <Text style={styles.headerTwo}>
-        Enter it below. As you grow update it if you feel the need and when in doubt refer to it as a guiding principle.
-      </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setMyFocus(text)}
-        value={myFocus}
-        placeholder={"focus statement"} 
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
-      />
-      <TouchableOpacity onPress={() => errorCheck()}>
-        <MaterialIcons style={styles.icon} name="add-circle" />
-      </TouchableOpacity>
-      <View>
-        {focusStorage.reverse().map((item) => (
-          <View key={item.id} style={styles.pieContainer}>
-            <Text style={styles.date}>{item.date}</Text>
-            <Text style={styles.add}>{item.myFocus}</Text>
-            <TouchableOpacity onPress={() => handleDelete({ item })}>
-              <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
-    </KeyboardAwareScrollView>
+      <KeyboardAwareScrollView extraHeight={250}>
+        <Text style={styles.header}>
+          Think of your focus. Who you want to be and who you are.
+        </Text>
+        <Text style={styles.headerTwo}>
+          Enter it below. As you grow update it if you feel the need and when in
+          doubt refer to it as a guiding principle.
+        </Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setMyFocus(text)}
+          value={myFocus}
+          placeholder={"focus statement"}
+          multiline
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}
+        />
+        <TouchableOpacity onPress={() => errorCheck()}>
+          <MaterialIcons style={styles.icon} name="add-circle" />
+        </TouchableOpacity>
+        <View>
+          {sortedEntries.map((item) => (
+            <View key={item.id} style={styles.pieContainer}>
+              <Text style={styles.date}>{item.date}</Text>
+              <Text style={styles.add}>{item.myFocus}</Text>
+              <TouchableOpacity onPress={() => handleDelete({ item })}>
+                <MaterialIcons
+                  style={styles.deleteIcon}
+                  name="delete-forever"
+                />
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
+      </KeyboardAwareScrollView>
     </View>
-  )
+  );
 };
 const styles = StyleSheet.create({
   container: {
