@@ -9,108 +9,113 @@ const BadTimes = () => {
   const [badStorage, setBadStorage] = useState(badStorage ? badStorage : [])
   const [note, setNote] = useState("")
 
+  let sortedEntries = badStorage.sort((a, b) => {
+    return b.id - a.id;
+  });
+
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem('storedBad')
+      const jsonValue = await AsyncStorage.getItem("storedBad");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       setBadStorage(savedData);
-    } catch(e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const storeData = async (badStorage) => {
     try {
-      const jsonValue = JSON.stringify(badStorage)
-      await AsyncStorage.setItem('storedBad', jsonValue)
+      const jsonValue = JSON.stringify(badStorage);
+      await AsyncStorage.setItem("storedBad", jsonValue);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
-  
+  };
+
   const handleAdd = () => {
-        
-        let newNote = {
-          id: note,
-          message: note
-        };
-        
-        const newList = [...badStorage, newNote]
-        
-        setBadStorage(newList);
-        setNote("");
-        storeData(newList);
-        getData(); 
-    }
+    let currentDate = new Date();
+    let orderId = currentDate.getTime();
 
-    const handleDelete = ({ item }) => {
-      let index = 0
-      // find the index of item to delete
-      for (let obj of badStorage) {
-        if (obj.id !== item.id) {
-          index++;
-        }
-        else {
-          break;
-        }
-      }
-      // filter array for display 
-      setBadStorage(badStorage.filter((val) => val.id !== item.id).reverse());
-      // make permanent delete
-      badStorage.splice(index, 1)
-      // save deletion of item
-      storeData(badStorage.reverse());
-    }
-
-    const errorCheck = () => {
-      if (!note.replace(/\s+/g, "")) {
-        Alert.alert("Entry Error", `Fill out all fields to submit.`, [
-          { text: "Got It" },
-        ]);
-        return;
-      } else {
-        handleAdd();
-      }
+    let newNote = {
+      id: orderId,
+      message: note,
     };
 
-    React.useEffect(() => {
-    getData()
-    }, []);
+    const newList = [...badStorage, newNote];
+
+    setBadStorage(newList);
+    setNote("");
+    storeData(newList);
+    getData();
+  };
+
+  const handleDelete = ({ item }) => {
+    let index = 0;
+    // find the index of item to delete
+    for (let obj of badStorage) {
+      if (obj.id !== item.id) {
+        index++;
+      } else {
+        break;
+      }
+    }
+    // filter array for display
+    setBadStorage(badStorage.filter((val) => val.id !== item.id));
+    // make permanent delete
+    badStorage.splice(index, 1);
+    // save deletion of item
+    storeData(badStorage);
+  };
+
+  const errorCheck = () => {
+    if (!note.replace(/\s+/g, "")) {
+      Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+        { text: "Got It" },
+      ]);
+      return;
+    } else {
+      handleAdd();
+    }
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView extraHeight={200}>
-      <Text style={styles.header}>
-      “You are free to choose, but you are not free to alter
-       the consequences of your decisions.” - Ezra Taft Benson
-      </Text>
-      <Text style={styles.headerTwo}>
-        These are some lows. You are NOT these lows, and you don't have to be.
-      </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setNote(text)} 
-        value={note}
-        placeholder={"New Note"} 
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
-      />
-      <TouchableOpacity onPress={() => errorCheck()}>
-        <MaterialIcons style={styles.icon} name="add-circle" />
-      </TouchableOpacity>
-        {badStorage.reverse().map((item) => (
+        <Text style={styles.header}>
+          “You are free to choose, but you are not free to alter the
+          consequences of your decisions.” - Ezra Taft Benson
+        </Text>
+        <Text style={styles.headerTwo}>
+          These are some lows. You are NOT these lows, and you don't have to be.
+        </Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setNote(text)}
+          value={note}
+          placeholder={"New Note"}
+          multiline
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}
+        />
+        <TouchableOpacity onPress={() => errorCheck()}>
+          <MaterialIcons style={styles.icon} name="add-circle" />
+        </TouchableOpacity>
+        {sortedEntries.map((item) => (
           <View key={item.id} style={styles.memory}>
             <Text style={styles.add}>{item.message}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
-              <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
+              <MaterialIcons style={styles.deleteIcon} name="delete-forever" />
             </TouchableOpacity>
           </View>
         ))}
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
     </View>
-  )
+  );
 }
   
 
