@@ -17,6 +17,10 @@ const GoodTimes = () => {
   );
   const [note, setNote] = useState("");
 
+  let sortedEntries = goodStorage.sort((a, b) => {
+    return b.id - a.id;
+  });
+
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedgood");
@@ -37,8 +41,11 @@ const GoodTimes = () => {
   };
 
   const handleAdd = () => {
+    let currentDate = new Date();
+    let orderId = currentDate.getTime();
+
     let newNote = {
-      id: note,
+      id: orderId,
       message: note,
     };
 
@@ -61,11 +68,11 @@ const GoodTimes = () => {
       }
     }
     // filter array for display
-    setGoodStorage(goodStorage.filter((val) => val.id !== item.id).reverse());
+    setGoodStorage(goodStorage.filter((val) => val.id !== item.id));
     // make permanent delete
     goodStorage.splice(index, 1);
     // save deletion of item
-    storeData(goodStorage.reverse());
+    storeData(goodStorage);
   };
 
   const errorCheck = () => {
@@ -106,7 +113,7 @@ const GoodTimes = () => {
         <TouchableOpacity onPress={() => errorCheck()}>
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
-        {goodStorage.reverse().map((item) => (
+        {sortedEntries.map((item) => (
           <View key={item.id} style={styles.memory}>
             <Text style={styles.add}>{item.message}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
