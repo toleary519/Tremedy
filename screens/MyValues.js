@@ -16,6 +16,10 @@ const MyValues = () => {
   const [storage, setStorage] = useState(storage ? storage : []);
   const [myValue, setMyValue] = useState("");
 
+  let sortedEntries = storage.sort((a, b) => {
+    return b.id - a.id;
+  });
+
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedValues");
@@ -36,8 +40,11 @@ const MyValues = () => {
   };
 
   const handleAdd = () => {
+    let currentDate = new Date();
+    let orderId = currentDate.getTime();
+
     let newValue = {
-      id: myValue,
+      id: orderId,
       myValue: myValue,
     };
 
@@ -60,11 +67,11 @@ const MyValues = () => {
       }
     }
     // filter array for display
-    setStorage(storage.filter((val) => val.id !== item.id).reverse());
+    setStorage(storage.filter((val) => val.id !== item.id));
     // make permanent delete
     storage.splice(index, 1);
     // save deletion of item
-    storeData(storage.reverse());
+    storeData(storage);
   };
 
   const errorCheck = () => {
@@ -117,7 +124,7 @@ const MyValues = () => {
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
         <View>
-          {storage.reverse().map((item) => (
+          {sortedEntries.map((item) => (
             <View key={item.id} style={styles.pieContainer}>
               <Text style={styles.add}>{item.myValue}</Text>
               <TouchableOpacity onPress={() => handleDelete({ item })}>
