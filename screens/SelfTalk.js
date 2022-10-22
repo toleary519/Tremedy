@@ -17,6 +17,10 @@ const SelfTalk = () => {
   const [initial, setInitial] = useState("");
   const [rational, setRational] = useState("");
 
+  let sortedEntries = selfTalk.sort((a, b) => {
+    return b.id - a.id;
+  });
+
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedSelfTalk");
@@ -37,17 +41,17 @@ const SelfTalk = () => {
   };
 
   const handleAdd = () => {
-
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
-    
+    let orderId = currentDate.getTime();
+
     let newSelfTalk = {
-      id: `${rational}${initial}`,
+      id: orderId,
       initial: initial,
       rational: rational,
-      date: `${currentMonth}/${currentDay}/${currentYear}`
+      date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
     const newList = [...selfTalk, newSelfTalk];
@@ -70,11 +74,11 @@ const SelfTalk = () => {
       }
     }
     // filter array for display
-    setSelfTalk(selfTalk.filter((val) => val.id !== item.id).reverse());
+    setSelfTalk(selfTalk.filter((val) => val.id !== item.id));
     // make permanent delete
     selfTalk.splice(index, 1);
     // save deletion of item
-    storeData(selfTalk.reverse());
+    storeData(selfTalk);
   };
 
   const errorCheck = () => {
@@ -131,7 +135,7 @@ const SelfTalk = () => {
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
         <View>
-          {selfTalk.reverse().map((item) => (
+          {sortedEntries.map((item) => (
             <View key={item.id} style={styles.pieContainer}>
               <Text style={styles.date}>{item.date}</Text>
               <Text style={styles.add}> Initial Thought: {item.initial}</Text>

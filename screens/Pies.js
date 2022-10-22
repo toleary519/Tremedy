@@ -18,6 +18,10 @@ const Pies = () => {
   const [emotions, setEmotions] = useState("");
   const [spiritual, setSpiritual] = useState("");
 
+  let sortedEntries = pieStorage.sort((a, b) => {
+    return b.id - a.id;
+  });
+
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedPie");
@@ -38,19 +42,19 @@ const Pies = () => {
   };
 
   const handleAdd = () => {
-
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
+    let orderId = currentDate.getTime();
 
     let newPie = {
-      id: `${physical}${emotions}`,
+      id: orderId,
       physical: physical,
       insights: insights,
       emotions: emotions,
       spiritual: spiritual,
-      date: `${currentMonth}/${currentDay}/${currentYear}`
+      date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
     const newList = [...pieStorage, newPie];
@@ -75,15 +79,14 @@ const Pies = () => {
       }
     }
     // filter array for display
-    setPieStorage(pieStorage.filter((val) => val.id !== item.id).reverse());
+    setPieStorage(pieStorage.filter((val) => val.id !== item.id));
     // make permanent delete
     pieStorage.splice(index, 1);
     // save deletion of item
-    storeData(pieStorage.reverse());
+    storeData(pieStorage);
   };
 
   const errorCheck = () => {
-    
     if (
       !physical.replace(/\s+/g, "") ||
       !insights.replace(/\s+/g, "") ||
@@ -162,7 +165,7 @@ const Pies = () => {
         </TouchableOpacity>
 
         <View>
-          {pieStorage.reverse().map((item) => (
+          {sortedEntries.map((item) => (
             <View key={item.id} style={styles.pieContainer}>
               <Text style={styles.date}>{item.date}</Text>
               <Text style={styles.add}> P: {item.physical}</Text>
