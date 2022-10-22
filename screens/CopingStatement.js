@@ -11,64 +11,67 @@ const CopingStatement = () => {
   const [copingStorage, setCopingStorage] = useState(copingStorage ? copingStorage : [])
   const [myCoping, setMyCoping] = useState("") 
 
+  let sortedEntries = copingStorage.sort((a, b) => {
+    return b.id - a.id;
+  });
+
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem('storedcoping')
+      const jsonValue = await AsyncStorage.getItem("storedcoping");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       setCopingStorage(savedData);
-    } catch(e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const storeData = async (copingStorage) => {
     try {
-      const jsonValue = JSON.stringify(copingStorage)
-      await AsyncStorage.setItem('storedcoping', jsonValue)
+      const jsonValue = JSON.stringify(copingStorage);
+      await AsyncStorage.setItem("storedcoping", jsonValue);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
-    const handleAdd = () => {
+  const handleAdd = () => {
+    let currentDate = new Date();
+    let currentDay = currentDate.getDate();
+    let currentMonth = currentDate.getMonth() + 1;
+    let currentYear = currentDate.getFullYear();
+    let orderId = currentDate.getTime();
 
-      let currentDate = new Date();
-      let currentDay = currentDate.getDate();
-      let currentMonth = currentDate.getMonth() + 1;
-      let currentYear = currentDate.getFullYear();
-        
-      let newCoping = {
-        id: myCoping,
-        myCoping: myCoping,
-        date: `${currentMonth}/${currentDay}/${currentYear}`
-      };
+    let newCoping = {
+      id: orderId,
+      myCoping: myCoping,
+      date: `${currentMonth}/${currentDay}/${currentYear}`,
+    };
 
-      const newList = [...copingStorage, newCoping]
-      
-      setCopingStorage(newList);
-      setMyCoping("");
-      storeData(newList);
-      getData();
-    }  
+    const newList = [...copingStorage, newCoping];
 
-    const handleDelete = ({ item }) => {
-      let index = 0
-      // find the index of item to delete
-      for (let obj of copingStorage) {
-        if (obj.id !== item.id) {
-          index++;
-        }
-        else {
-          break;
-        }
+    setCopingStorage(newList);
+    setMyCoping("");
+    storeData(newList);
+    getData();
+  };
+
+  const handleDelete = ({ item }) => {
+    let index = 0;
+    // find the index of item to delete
+    for (let obj of copingStorage) {
+      if (obj.id !== item.id) {
+        index++;
+      } else {
+        break;
       }
-      // filter array for display 
-      setCopingStorage(copingStorage.filter((val) => val.id !== item.id).reverse());
-      // make permanent delete
-      copingStorage.splice(index, 1)
-      // save deletion of item
-      storeData(copingStorage.reverse());
     }
+    // filter array for display
+    setCopingStorage(copingStorage.filter((val) => val.id !== item.id));
+    // make permanent delete
+    copingStorage.splice(index, 1);
+    // save deletion of item
+    storeData(copingStorage);
+  };
 
     React.useEffect(() => {
     getData()
@@ -87,40 +90,45 @@ const CopingStatement = () => {
 
   return (
     <View style={styles.container}>
-    <KeyboardAwareScrollView extraHeight={175}>
-      <Text style={styles.header}>
-        Think of a coping statement that in concise and impactful. A rational nudge from yourself to help you stay on course.
-      </Text>
-      <Text style={styles.headerTwo}>
-        Enter it below. As you grow update it if you feel the need and when tempted or in doubt refer back to it.
-      </Text>
-      <TextInput 
-        style={styles.input} 
-        onChangeText={(text) => setMyCoping(text)}
-        value={myCoping}
-        placeholder={"coping statement"} 
-        multiline
-        keyboardType="default"
-        color="#D7D9D7"
-        placeholderTextColor={"#F1F7EE"}    
-      />
-      <TouchableOpacity onPress={() => errorCheck()}>
-        <MaterialIcons style={styles.icon} name="add-circle" />
-      </TouchableOpacity>
-      <View>
-        {copingStorage.reverse().map((item) => (
-          <View key={item.id} style={styles.pieContainer}>
-            <Text style={styles.date}>{item.date}</Text>
-            <Text style={styles.add}>{item.myCoping}</Text>
-            <TouchableOpacity onPress={() => handleDelete({ item })}>
-              <MaterialIcons style={styles.deleteIcon} name="delete-forever"/>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
-    </KeyboardAwareScrollView>
+      <KeyboardAwareScrollView extraHeight={175}>
+        <Text style={styles.header}>
+          Think of a coping statement that in concise and impactful. A rational
+          nudge from yourself to help you stay on course.
+        </Text>
+        <Text style={styles.headerTwo}>
+          Enter it below. As you grow update it if you feel the need and when
+          tempted or in doubt refer back to it.
+        </Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setMyCoping(text)}
+          value={myCoping}
+          placeholder={"coping statement"}
+          multiline
+          keyboardType="default"
+          color="#D7D9D7"
+          placeholderTextColor={"#F1F7EE"}
+        />
+        <TouchableOpacity onPress={() => errorCheck()}>
+          <MaterialIcons style={styles.icon} name="add-circle" />
+        </TouchableOpacity>
+        <View>
+          {sortedEntries.map((item) => (
+            <View key={item.id} style={styles.pieContainer}>
+              <Text style={styles.date}>{item.date}</Text>
+              <Text style={styles.add}>{item.myCoping}</Text>
+              <TouchableOpacity onPress={() => handleDelete({ item })}>
+                <MaterialIcons
+                  style={styles.deleteIcon}
+                  name="delete-forever"
+                />
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
+      </KeyboardAwareScrollView>
     </View>
-  )
+  );
 };
 const styles = StyleSheet.create({
   container: {
