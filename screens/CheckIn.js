@@ -13,11 +13,15 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CheckIn = () => {
-  const [checkinStorage, setCheckinStorage] = useState(
+  let [checkinStorage, setCheckinStorage] = useState(
     checkinStorage ? checkinStorage : []
+  );
+  let [reportStorage, setReportStorage] = useState(
+    reportStorage ? reportStorage : []
   );
   let [face, setFace] = useState(4);
   let [checkin, setCheckin] = useState("");
+  let [flagged, setFlagged] = useState(false);
 
   let sortedEntries = checkinStorage.sort((a, b) => {
     return b.id - a.id;
@@ -26,8 +30,11 @@ const CheckIn = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedCheckin");
+      const savedReportJson = await AsyncStorage.getItem("reportArray");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      let savedReportData = savedReportJson ? JSON.parse(savedReportJson) : [];
       setCheckinStorage(savedData);
+      setReportStorage(savedReportData);
     } catch (e) {
       console.log(e);
     }
@@ -37,6 +44,7 @@ const CheckIn = () => {
     try {
       const jsonValue = JSON.stringify(checkinStorage);
       await AsyncStorage.setItem("storedCheckin", jsonValue);
+      await AsyncStorage.setItem("reportArray", jsonValue);
     } catch (e) {
       console.log(e);
     }
@@ -54,12 +62,14 @@ const CheckIn = () => {
       id: orderId,
       face: saveFace,
       myCheckin: checkin,
+      flag: flagged,
       date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
     const newList = [...checkinStorage, newCheckin];
 
     setCheckinStorage(newList);
+    setReportStorage(newList);
     setCheckin("");
     storeData(newList);
     getData();
