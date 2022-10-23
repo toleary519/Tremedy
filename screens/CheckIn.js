@@ -35,6 +35,8 @@ const CheckIn = () => {
       let savedReportData = savedReportJson ? JSON.parse(savedReportJson) : [];
       setCheckinStorage(savedData);
       setReportStorage(savedReportData);
+      console.log("check:", checkinStorage);
+      console.log("report", reportStorage);
     } catch (e) {
       console.log(e);
     }
@@ -62,7 +64,6 @@ const CheckIn = () => {
       id: orderId,
       face: saveFace,
       myCheckin: checkin,
-      flag: flagged,
       date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
