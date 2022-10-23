@@ -38,6 +38,12 @@ const PepTalkMenu = ({ navigation }) => (
         <Text style={styles.add}>My Values</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={() => navigation.navigate("Report")}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>My Past Week</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => navigation.navigate("CheckIn")}
         delayPressIn={150}
       >
@@ -106,7 +112,7 @@ const PepTalkMenu = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    paddingTop: 15,
     backgroundColor: "#1B2A41",
   },
   add: {
