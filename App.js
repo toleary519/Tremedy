@@ -43,6 +43,7 @@ import { StatusBar } from "expo-status-bar";
 const Stack = createNativeStackNavigator();
 
 function App() {
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={{ flex: 1 }}>
