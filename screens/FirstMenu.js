@@ -1,31 +1,49 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Text, StyleSheet, TouchableOpacity, View, Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const FirstMenu = ({ navigation }) => (
-  <View style={styles.container}>
-    <TouchableOpacity onPress={() => navigation.navigate("PepTalk")} delayPressIn={150}>
-      <Text style={styles.add}>
-        Tool Box
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
-      <Text style={styles.add}>
-        Sober Contacts
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("UrgeMenu")} delayPressIn={150}>
-      <Text style={styles.add}>
-        Lapse
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("Emergency")} delayPressIn={150}>
-      <Text style={styles.emergency}>
-        Emergency
-      </Text>
-    </TouchableOpacity>
-  </View>
-);
+const FirstMenu = ({ navigation }) => {
+  const confirmDelete = () =>
+    Alert.alert("Confirm Delete", `are you sure?`, [
+      {
+        text: "Yes",
+        onPress: () => AsyncStorage.clear(),
+      },
+      { text: "Nope", onPress: () => console.log("closed") },
+    ]);
+
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("PepTalk")}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>Tool Box</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("SoberContacts")}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>Sober Contacts</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("UrgeMenu")}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>Lapse</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Emergency")}
+        delayPressIn={150}
+      >
+        <Text style={styles.emergency}>Emergency</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => confirmDelete()} delayPressIn={150}>
+        <Text style={styles.emergency}>Delete Data</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
