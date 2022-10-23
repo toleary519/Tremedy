@@ -40,13 +40,18 @@ const CopingStatement = () => {
   };
 
   const flagAlert = () => {
+
+    let onPress = () => {
+      setFlag(true);
+      handleAdd();
+    };
+
     Alert.alert("Flag this for therapist?", `you two can review it together`, [
       {
         text: "Yes",
-        onPress: () => {
-          setFlag(true), handleAdd();
-        },
+        onPress: onPress(),
       },
+
       { text: "Nope" },
     ]);
   };

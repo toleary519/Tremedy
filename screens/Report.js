@@ -46,7 +46,7 @@ const Report = () => {
   let weekAgo = currentDate - 7 * 24 * 60 * 60 * 1000;
 
   let fullReport = reportStorage
-    .filter((x) => x.id >= weekAgo)
+    .filter((x) => (x.id >= weekAgo && x.flag) || x.face)
     .sort((a, b) => {
       return b.id - a.id;
     });
