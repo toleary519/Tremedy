@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -18,21 +17,33 @@ const Report = () => {
   let [reportStorage, setReportStorage] = useState(
     reportStorage ? reportStorage : []
   );
-  let [pastReports, setPastReports] = useState([]);
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("reportArray");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      setReportStorage(savedData);
+      const copeValue = await AsyncStorage.getItem("storedcoping");
+      const checkValue = await AsyncStorage.getItem("storedCheckin");
+      let copeData = copeValue ? JSON.parse(copeValue) : [];
+      let checkData = checkValue ? JSON.parse(checkValue) : [];
+      setReportStorage([...copeData, ...checkData]);
+      console.log("inside Report getData", reportStorage);
     } catch (e) {
       console.log(e);
     }
   };
 
+  // const getCheckData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("reportArray");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     setReportStorage(savedData);
+  //     console.log("inside Report getData", savedData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
   let currentDate = new Date().getTime();
   let weekAgo = currentDate - 7 * 24 * 60 * 60 * 1000;
-  //   let range = currentDate - weekAgo;
 
   let fullReport = reportStorage
     .filter((x) => x.id >= weekAgo)
@@ -41,13 +52,14 @@ const Report = () => {
     });
 
   let fullChecks = fullReport
-    .filter((x) => !x.flagged)
+    .filter((x) => !x.flag && x.face)
     .sort((a, b) => {
       return b.id - a.id;
     });
 
+  // you could add && x.flagged
   let fullFlags = fullReport
-    .filter((x) => !x.face)
+    .filter((x) => !x.face && x.flag)
     .sort((a, b) => {
       return b.id - a.id;
     });
@@ -68,7 +80,15 @@ const Report = () => {
             }}
             delayPressIn={150}
           >
-            <Text style={styles.menuButton}>Full Report</Text>
+            <Text
+              style={
+                showFull
+                  ? [styles.menuButton, styles.selectedButton]
+                  : styles.menuButton
+              }
+            >
+              Full Report
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -78,7 +98,15 @@ const Report = () => {
             }}
             delayPressIn={150}
           >
-            <Text style={styles.menuButton}>Check-Ins</Text>
+            <Text
+              style={
+                showChecks
+                  ? [styles.menuButton, styles.selectedButton]
+                  : styles.menuButton
+              }
+            >
+              Check-Ins
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -88,13 +116,47 @@ const Report = () => {
             }}
             delayPressIn={150}
           >
-            <Text style={styles.menuButton}>Flags</Text>
+            <Text
+              style={
+                showFlags
+                  ? [styles.menuButton, styles.selectedButton]
+                  : styles.menuButton
+              }
+            >
+              Flags
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}} delayPressIn={150}>
+            <Text style={styles.menuButton}>Share Your Week</Text>
           </TouchableOpacity>
         </View>
         {reportStorage ? (
-          <View style={{ marginTop: 30 }}>
+          <View style={{ marginTop: 7 }}>
             {showFull
               ? fullReport.map((item) => (
+                  <View key={item.id} style={styles.pieContainer}>
+                    <Text style={[styles.add, { fontSize: 15 }]}>
+                      {item.date}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.add,
+                        { paddingRight: 10, paddingLeft: 10 },
+                      ]}
+                    >
+                      {item.face ? item.face : null}
+                    </Text>
+                    <Text style={styles.add}>
+                      {item.myCheckin ? item.myCheckin : null}
+                      {item.myCoping ? item.myCoping : null}
+                    </Text>
+
+                    {/* {item.X ? item.X : null} */}
+                  </View>
+                ))
+              : null}
+            {showChecks
+              ? fullChecks.map((item) => (
                   <View key={item.id} style={styles.pieContainer}>
                     <Text style={[styles.add, { fontSize: 15 }]}>
                       {item.date}
@@ -115,18 +177,6 @@ const Report = () => {
                   </View>
                 ))
               : null}
-            {showChecks
-              ? fullChecks.map((item) => (
-                  <View key={item.id} style={styles.pieContainer}>
-                    <Text style={styles.add}>
-                      {item.date}
-                      {item.face ? item.face : null}
-                      {item.myCheckin ? item.myCheckin : null}
-                      {/* {item.X ? item.X : null} */}
-                    </Text>
-                  </View>
-                ))
-              : null}
             {showFlags
               ? fullFlags.map((item) => (
                   <View key={item.id} style={styles.pieContainer}>
@@ -134,7 +184,7 @@ const Report = () => {
                       {item.date}
                       {item.face ? item.face : null}
                       {item.myCheckin ? item.myCheckin : null}
-                      {/* {item.X ? item.X : null} */}
+                      {item.myCoping ? item.myCoping : null}
                     </Text>
                   </View>
                 ))
@@ -144,7 +194,7 @@ const Report = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -168,24 +218,37 @@ const styles = StyleSheet.create({
     color: "#D7D9D7",
   },
   buttonNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
+    // flexDirection: "row",
+    marginRight: 5,
+    marginLeft: 5,
+    // justifyContent: "center",
+    // alignItems: "center",
+    width: "90%",
+    left: "3%",
   },
   menuButton: {
+    overflow: "hidden",
     borderRadius: 10,
-    borderWidth: 4,
+    borderWidth: 3,
     borderColor: "#D7D9D7",
-    marginTop: 21,
+    marginTop: 15,
+    marginRight: 5,
+    marginLeft: 5,
     textAlign: "center",
-    padding: 8,
+    padding: 4,
     fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
+  selectedButton: {
+    overflow: "hidden",
+    borderColor: "#F4743B",
+    backgroundColor: "#D2EAEB",
+    color: "#1B2A41",
+  },
   pieContainer: {
     borderRadius: 10,
-    borderWidth: 4,
+    borderWidth: 2,
     // flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
