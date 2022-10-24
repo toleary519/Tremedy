@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Text, StyleSheet, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
-import { A } from '@expo/html-elements';
+import { SimpleLineIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const FocusStatement = () => {
-    
-  const [focusStorage, setFocusStorage] = useState(focusStorage ? focusStorage : [])
-  const [myFocus, setMyFocus] = useState("") 
+  const [focusStorage, setFocusStorage] = useState(
+    focusStorage ? focusStorage : []
+  );
+  const [myFocus, setMyFocus] = useState("");
+  let [selection, setSelection] = useState(false);
+  const [myStyle, setMyStyle] = useState(false);
 
   let sortedEntries = focusStorage.sort((a, b) => {
     return b.id - a.id;
@@ -20,6 +23,7 @@ const FocusStatement = () => {
       const jsonValue = await AsyncStorage.getItem("storedFocus");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       setFocusStorage(savedData);
+      console.log("get focus data", focusStorage);
     } catch (e) {
       console.log(e);
     }
@@ -29,9 +33,29 @@ const FocusStatement = () => {
     try {
       const jsonValue = JSON.stringify(focusStorage);
       await AsyncStorage.setItem("storedFocus", jsonValue);
+      console.log("Store Focus:", focusStorage);
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const press = () => {
+    setSelection((selection) => !selection);
+    console.log("inside press - flag", selection);
+    handleAdd();
+    setSelection((selection) => !selection);
+    console.log("inside press after add and switch - flag", selection);
+  };
+
+  const flagAlert = () => {
+    Alert.alert("Flag this for therapist?", `You can review it together.`, [
+      {
+        text: "Yes",
+        onPress: () => press(),
+      },
+
+      { text: "Nope", onPress: () => handleAdd() },
+    ]);
   };
 
   const handleAdd = () => {
@@ -44,6 +68,7 @@ const FocusStatement = () => {
     let newFocus = {
       id: orderId,
       myFocus: myFocus,
+      flag: selection,
       date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
@@ -53,7 +78,8 @@ const FocusStatement = () => {
     setMyFocus("");
     storeData(newList);
     getData();
-  };
+    // setSelection(false);
+  };;
 
   const handleDelete = ({ item }) => {
     let index = 0;
@@ -80,13 +106,20 @@ const FocusStatement = () => {
       ]);
       return;
     } else {
-      handleAdd();
+      flagAlert();
     }
   };
 
   React.useEffect(() => {
     getData();
   }, []);
+
+  const handleClick = (id) => {
+    setMyStyle((prevState) => ({
+      ...myStyle,
+      [id]: !prevState[id],
+    }));
+  };
 
   return (
     <View style={styles.container}>
@@ -114,7 +147,24 @@ const FocusStatement = () => {
         <View>
           {sortedEntries.map((item) => (
             <View key={item.id} style={styles.pieContainer}>
-              <Text style={styles.date}>{item.date}</Text>
+              <View style={styles.entryTop}>
+                <Text style={styles.date}>{item.date}</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    handleClick(item.id);
+                  }}
+                >
+                  <SimpleLineIcons
+                    style={
+                      myStyle[`${item.id}`]
+                        ? [styles.fIcon, styles.selected]
+                        : styles.fIcon
+                    }
+                    name="flag"
+                  />
+                </TouchableOpacity>
+              </View>
+
               <Text style={styles.add}>{item.myFocus}</Text>
               <TouchableOpacity onPress={() => handleDelete({ item })}>
                 <MaterialIcons
@@ -132,8 +182,8 @@ const FocusStatement = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#1B2A41",
-    paddingBottom: 30
+    backgroundColor: "#1B2A41",
+    paddingBottom: 30,
   },
   pieContainer: {
     borderRadius: 10,
@@ -207,7 +257,7 @@ const styles = StyleSheet.create({
     width: "80%",
     marginTop: 21,
     textAlign: "center",
-    justifyContent: "center",  
+    justifyContent: "center",
     padding: 10,
     left: "10%",
     fontSize: 20,
@@ -220,6 +270,20 @@ const styles = StyleSheet.create({
     left: "45%",
     fontSize: 30,
     color: "#D7D9D7",
+  },
+  entryTop: {
+    flexDirection: "row",
+  },
+  fIcon: {
+    marginRight: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    fontSize: 30,
+    color: "#D7D9D7",
+    textAlign: "center",
+  },
+  selected: {
+    color: "#D84C36",
   },
 });
 

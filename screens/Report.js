@@ -22,25 +22,16 @@ const Report = () => {
     try {
       const copeValue = await AsyncStorage.getItem("storedcoping");
       const checkValue = await AsyncStorage.getItem("storedCheckin");
+      const focusValue = await AsyncStorage.getItem("storedFocus");
       let copeData = copeValue ? JSON.parse(copeValue) : [];
       let checkData = checkValue ? JSON.parse(checkValue) : [];
-      setReportStorage([...copeData, ...checkData]);
+      let focusData = focusValue ? JSON.parse(focusValue) : [];
+      setReportStorage([...copeData, ...checkData, ...focusData]);
       console.log("inside Report getData", reportStorage);
     } catch (e) {
       console.log(e);
     }
   };
-
-  // const getCheckData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("reportArray");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     setReportStorage(savedData);
-  //     console.log("inside Report getData", savedData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   let currentDate = new Date().getTime();
   let weekAgo = currentDate - 7 * 24 * 60 * 60 * 1000;
@@ -149,6 +140,7 @@ const Report = () => {
                     <Text style={styles.add}>
                       {item.myCheckin ? item.myCheckin : null}
                       {item.myCoping ? item.myCoping : null}
+                      {item.myFocus ? item.myFocus : null}
                     </Text>
 
                     {/* {item.X ? item.X : null} */}
@@ -185,6 +177,7 @@ const Report = () => {
                       {item.face ? item.face : null}
                       {item.myCheckin ? item.myCheckin : null}
                       {item.myCoping ? item.myCoping : null}
+                      {item.myFocus ? item.myFocus : null}
                     </Text>
                   </View>
                 ))

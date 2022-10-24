@@ -21,7 +21,6 @@ const CheckIn = () => {
   );
   let [face, setFace] = useState(4);
   let [checkin, setCheckin] = useState("");
-  let [flagged, setFlagged] = useState(false);
 
   let sortedEntries = checkinStorage.sort((a, b) => {
     return b.id - a.id;

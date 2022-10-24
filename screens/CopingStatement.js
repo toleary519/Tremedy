@@ -11,9 +11,7 @@ const CopingStatement = () => {
     copingStorage ? copingStorage : []
   );
   const [myCoping, setMyCoping] = useState("");
-  const [flagged, setFlagged] = useState(flagged ? flagged : []);
-  const [flagIndicator, setFlagIndicator] = useState(false);
-  const [flag, setFlag] = useState(false);
+  let [flag, setFlag] = useState(false);
   let sortedEntries = copingStorage.sort((a, b) => {
     return b.id - a.id;
   });
@@ -40,16 +38,15 @@ const CopingStatement = () => {
   };
 
   const flagAlert = () => {
-
     let onPress = () => {
       setFlag(true);
       handleAdd();
     };
 
-    Alert.alert("Flag this for therapist?", `you two can review it together`, [
+    Alert.alert("Flag this for therapist?", `You can review it together.`, [
       {
         text: "Yes",
-        onPress: onPress(),
+        onPress: () => onPress(),
       },
 
       { text: "Nope" },
@@ -79,14 +76,6 @@ const CopingStatement = () => {
     setFlag(false);
   };
 
-  // const handleFlagAdd = (item) => {
-  //   console.log("inside handleFlagAdd - Before Set 444444444", flagged);
-  //   let newList = [...flagged, item];
-  //   setFlagged(newList);
-  //   console.log("inside handleFlagAdd - Before Set 444444444", flagged);
-  //   storeReportData(flagged);
-  // };
-
   const handleDelete = ({ item }) => {
     let index = 0;
     // find the index of item to delete
@@ -105,23 +94,23 @@ const CopingStatement = () => {
     storeData(copingStorage);
   };
 
-  const handleFlagDelete = ({ item }) => {
-    let index = 0;
-    // find the index of item to delete
-    for (let obj of flagged) {
-      if (obj.id !== item.id) {
-        index++;
-      } else {
-        break;
-      }
-    }
-    // filter array for display
-    setFlagged(flagged.filter((val) => val.id !== item.id));
-    // make permanent delete
-    flagged.splice(index, 1);
-    // save deletion of item
-    storeReportData(flagged);
-  };
+  // const handleFlagDelete = ({ item }) => {
+  //   let index = 0;
+  //   // find the index of item to delete
+  //   for (let obj of flagged) {
+  //     if (obj.id !== item.id) {
+  //       index++;
+  //     } else {
+  //       break;
+  //     }
+  //   }
+  //   // filter array for display
+  //   setFlagged(flagged.filter((val) => val.id !== item.id));
+  //   // make permanent delete
+  //   flagged.splice(index, 1);
+  //   // save deletion of item
+  //   storeReportData(flagged);
+  // };
 
   React.useEffect(() => {
     getData();
@@ -204,7 +193,8 @@ const CopingStatement = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};;
+};;;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
