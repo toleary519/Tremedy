@@ -17,7 +17,19 @@ const PepTalkMenu = ({ navigation }) => (
         onPress={() => navigation.navigate("PercievedThreatMenu")}
         delayPressIn={150}
       >
-        <Text style={styles.add}>I'm In a State of Percieved Threat</Text>
+        <Text style={styles.add}>Elevated State</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Report")}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>My Past Week</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate()}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>My Routine</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate("FocusStatement")}
@@ -38,12 +50,6 @@ const PepTalkMenu = ({ navigation }) => (
         <Text style={styles.add}>My Values</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Report")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>My Past Week</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
         onPress={() => navigation.navigate("CheckIn")}
         delayPressIn={150}
       >
@@ -61,18 +67,18 @@ const PepTalkMenu = ({ navigation }) => (
       >
         <Text style={styles.add}>PIES Check-In</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => navigation.navigate("Stoic")}
         delayPressIn={150}
       >
         <Text style={styles.add}>Stoic Questions</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
+      </TouchableOpacity> */}
+      {/* <TouchableOpacity
         onPress={() => navigation.navigate("Breathe")}
         delayPressIn={150}
       >
         <Text style={styles.add}>Breathe</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity
         onPress={() => navigation.navigate("Five")}
         delayPressIn={150}
@@ -89,7 +95,7 @@ const PepTalkMenu = ({ navigation }) => (
         onPress={() => navigation.navigate("SoberContacts")}
         delayPressIn={150}
       >
-        <Text style={styles.add}>Sober Contacts</Text>
+        <Text style={styles.add}>Support Contacts</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate("ProCon")}

@@ -11,11 +11,11 @@ const CopingStatement = () => {
     copingStorage ? copingStorage : []
   );
   const [myCoping, setMyCoping] = useState("");
-  let [flag, setFlag] = useState(false);
   let sortedEntries = copingStorage.sort((a, b) => {
     return b.id - a.id;
   });
 
+  // hlp.getData("storedcoping", setCopingStorage)
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedcoping");
@@ -27,6 +27,7 @@ const CopingStatement = () => {
     }
   };
 
+  // hlp.storeData(storage);
   const storeData = async (copingStorage) => {
     try {
       const jsonValue = JSON.stringify(copingStorage);
@@ -193,7 +194,7 @@ const CopingStatement = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};;;
+};;;;
 
 const styles = StyleSheet.create({
   container: {

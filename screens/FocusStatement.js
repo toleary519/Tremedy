@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, View, Alert, TextInput, TouchableOpacity } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Alert,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -11,7 +17,7 @@ const FocusStatement = () => {
     focusStorage ? focusStorage : []
   );
   const [myFocus, setMyFocus] = useState("");
-  let [selection, setSelection] = useState(false);
+  let [flag, setFlag] = useState(false);
   const [myStyle, setMyStyle] = useState(false);
 
   let sortedEntries = focusStorage.sort((a, b) => {
@@ -39,26 +45,27 @@ const FocusStatement = () => {
     }
   };
 
-  const press = () => {
-    setSelection((selection) => !selection);
-    console.log("inside press - flag", selection);
-    handleAdd();
-    setSelection((selection) => !selection);
-    console.log("inside press after add and switch - flag", selection);
-  };
-
   const flagAlert = () => {
+    const pressTrue = () => {
+      let flag = true;
+      handleAdd(flag);
+    };
+    const pressFalse = () => {
+      let flag = false;
+      handleAdd(flag);
+    };
+
     Alert.alert("Flag this for therapist?", `You can review it together.`, [
       {
         text: "Yes",
-        onPress: () => press(),
+        onPress: () => pressTrue(),
       },
 
-      { text: "Nope", onPress: () => handleAdd() },
+      { text: "Nope", onPress: () => pressFalse() },
     ]);
   };
 
-  const handleAdd = () => {
+  const handleAdd = (flag) => {
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
@@ -68,7 +75,7 @@ const FocusStatement = () => {
     let newFocus = {
       id: orderId,
       myFocus: myFocus,
-      flag: selection,
+      flag: flag,
       date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
@@ -78,8 +85,9 @@ const FocusStatement = () => {
     setMyFocus("");
     storeData(newList);
     getData();
-    // setSelection(false);
-  };;
+    setFlag(false);
+  };
+  
 
   const handleDelete = ({ item }) => {
     let index = 0;
