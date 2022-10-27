@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, Text, StyleSheet, Alert, TouchableOpacity } from "react-native";
-import { MaterialIcons } from '@expo/vector-icons'; 
+import {
+  Text,
+  StyleSheet,
+  View,
+  Alert,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const BadTimes = () => {
-  
-  const [badStorage, setBadStorage] = useState(badStorage ? badStorage : [])
-  const [note, setNote] = useState("")
+  const [badStorage, setBadStorage] = useState(badStorage ? badStorage : []);
+  const [note, setNote] = useState("");
 
   let sortedEntries = badStorage.sort((a, b) => {
     return b.id - a.id;
@@ -32,13 +39,14 @@ const BadTimes = () => {
     }
   };
 
-  const handleAdd = () => {
+  const handleAdd = (flag) => {
     let currentDate = new Date();
     let orderId = currentDate.getTime();
 
     let newNote = {
       id: orderId,
-      message: note,
+      flag: flag,
+      myBad: note,
     };
 
     const newList = [...badStorage, newNote];
@@ -47,6 +55,27 @@ const BadTimes = () => {
     setNote("");
     storeData(newList);
     getData();
+  };
+
+  const flagAlert = () => {
+    const pressTrue = () => {
+      let flag = true;
+      handleAdd(flag);
+    };
+
+    const pressFalse = () => {
+      let flag = false;
+      handleAdd(flag);
+    };
+
+    Alert.alert("Flag this for therapist?", `You can review it together.`, [
+      {
+        text: "Yes",
+        onPress: () => pressTrue(),
+      },
+
+      { text: "Nope", onPress: () => pressFalse() },
+    ]);
   };
 
   const handleDelete = ({ item }) => {
@@ -74,8 +103,15 @@ const BadTimes = () => {
       ]);
       return;
     } else {
-      handleAdd();
+      flagAlert();
     }
+  };
+
+  const handleFlag = (i) => {
+    let currentItem = sortedEntries[i];
+    currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    storeData(badStorage);
+    getData();
   };
 
   React.useEffect(() => {
@@ -105,24 +141,40 @@ const BadTimes = () => {
         <TouchableOpacity onPress={() => errorCheck()}>
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
-        {sortedEntries.map((item) => (
+        {sortedEntries.map((item, i) => (
           <View key={item.id} style={styles.memory}>
-            <Text style={styles.add}>{item.message}</Text>
-            <TouchableOpacity onPress={() => handleDelete({ item })}>
-              <MaterialIcons style={styles.deleteIcon} name="delete-forever" />
-            </TouchableOpacity>
+            <View style={styles.entryTop}>
+              <TouchableOpacity
+                onPress={() => {
+                  handleFlag(i);
+                }}
+              >
+                <SimpleLineIcons
+                  style={
+                    item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
+                  }
+                  name="flag"
+                />
+              </TouchableOpacity>
+              <Text style={styles.add}>{item.myBad}</Text>
+              <TouchableOpacity onPress={() => handleDelete({ item })}>
+                <MaterialIcons
+                  style={styles.deleteIcon}
+                  name="delete-forever"
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         ))}
       </KeyboardAwareScrollView>
     </View>
   );
-}
-  
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#1B2A41"
+    backgroundColor: "#1B2A41",
   },
   memory: {
     borderRadius: 10,
@@ -192,6 +244,20 @@ const styles = StyleSheet.create({
     left: "46%",
     fontSize: 30,
     color: "#D7D9D7",
+  },
+  entryTop: {
+    flexDirection: "row",
+  },
+  fIcon: {
+    marginRight: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    fontSize: 30,
+    color: "#D7D9D7",
+    textAlign: "center",
+  },
+  selected: {
+    color: "#D84C36",
   },
 });
 
