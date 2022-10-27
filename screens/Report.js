@@ -23,10 +23,29 @@ const Report = () => {
       const copeValue = await AsyncStorage.getItem("storedcoping");
       const checkValue = await AsyncStorage.getItem("storedCheckin");
       const focusValue = await AsyncStorage.getItem("storedFocus");
+      const piesValue = await AsyncStorage.getItem("storedPie");
+      const goodValue = await AsyncStorage.getItem("storedGood");
+      const badValue = await AsyncStorage.getItem("storedBad");
+      const valueValue = await AsyncStorage.getItem("storedValues");
+      const selfTalkValue = await AsyncStorage.getItem("storedValues");
       let copeData = copeValue ? JSON.parse(copeValue) : [];
       let checkData = checkValue ? JSON.parse(checkValue) : [];
       let focusData = focusValue ? JSON.parse(focusValue) : [];
-      setReportStorage([...copeData, ...checkData, ...focusData]);
+      let piesData = piesValue ? JSON.parse(piesValue) : [];
+      let goodData = goodValue ? JSON.parse(goodValue) : [];
+      let badData = badValue ? JSON.parse(badValue) : [];
+      let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
+      let valueData = valueValue ? JSON.parse(valueValue) : [];
+      setReportStorage([
+        ...copeData,
+        ...checkData,
+        ...focusData,
+        ...piesData,
+        ...goodData,
+        ...badData,
+        ...selfData,
+        ...valueData,
+      ]);
       console.log("inside Report getData", reportStorage);
     } catch (e) {
       console.log(e);
