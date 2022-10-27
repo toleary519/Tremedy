@@ -17,7 +17,6 @@ const FocusStatement = () => {
     focusStorage ? focusStorage : []
   );
   const [myFocus, setMyFocus] = useState("");
-  const [myStyle, setMyStyle] = useState(false);
 
   let sortedEntries = focusStorage.sort((a, b) => {
     return b.id - a.id;
