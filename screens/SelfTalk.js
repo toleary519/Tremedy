@@ -6,8 +6,8 @@ import {
   Alert,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
 } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -40,7 +40,7 @@ const SelfTalk = () => {
     }
   };
 
-  const handleAdd = () => {
+  const handleAdd = (flag) => {
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
@@ -49,6 +49,7 @@ const SelfTalk = () => {
 
     let newSelfTalk = {
       id: orderId,
+      flag: flag,
       initial: initial,
       rational: rational,
       date: `${currentMonth}/${currentDay}/${currentYear}`,
@@ -61,6 +62,27 @@ const SelfTalk = () => {
     setRational("");
     storeData(newList);
     getData();
+  };
+
+  const flagAlert = () => {
+    const pressTrue = () => {
+      let flag = true;
+      handleAdd(flag);
+    };
+
+    const pressFalse = () => {
+      let flag = false;
+      handleAdd(flag);
+    };
+
+    Alert.alert("Flag this for therapist?", `You can review it together.`, [
+      {
+        text: "Yes",
+        onPress: () => pressTrue(),
+      },
+
+      { text: "Nope", onPress: () => pressFalse() },
+    ]);
   };
 
   const handleDelete = ({ item }) => {
@@ -88,8 +110,15 @@ const SelfTalk = () => {
       ]);
       return;
     } else {
-      handleAdd();
+      flagAlert();
     }
+  };
+
+  const handleFlag = (i) => {
+    let currentItem = sortedEntries[i];
+    currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    storeData(selfTalk);
+    getData();
   };
 
   React.useEffect(() => {
@@ -135,9 +164,23 @@ const SelfTalk = () => {
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
         <View>
-          {sortedEntries.map((item) => (
+          {sortedEntries.map((item, i) => (
             <View key={item.id} style={styles.pieContainer}>
-              <Text style={styles.date}>{item.date}</Text>
+              <View style={styles.entryTop}>
+                <Text style={styles.date}>{item.date}</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    handleFlag(i);
+                  }}
+                >
+                  <SimpleLineIcons
+                    style={
+                      item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
+                    }
+                    name="flag"
+                  />
+                </TouchableOpacity>
+              </View>
               <Text style={styles.add}> Initial Thought: {item.initial}</Text>
               <Text style={styles.add}> Rational Thought: {item.rational}</Text>
               <TouchableOpacity onPress={() => handleDelete({ item })}>
@@ -245,6 +288,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "#2f8587",
+  },
+  entryTop: {
+    flexDirection: "row",
+  },
+  fIcon: {
+    marginRight: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    fontSize: 30,
+    color: "#D7D9D7",
+    textAlign: "center",
+  },
+  selected: {
+    color: "#D84C36",
   },
 });
 
