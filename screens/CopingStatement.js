@@ -11,11 +11,11 @@ const CopingStatement = () => {
     copingStorage ? copingStorage : []
   );
   const [myCoping, setMyCoping] = useState("");
+
   let sortedEntries = copingStorage.sort((a, b) => {
     return b.id - a.id;
   });
 
-  // hlp.getData("storedcoping", setCopingStorage)
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedCoping");
@@ -26,7 +26,6 @@ const CopingStatement = () => {
     }
   };
 
-  // hlp.storeData(storage);
   const storeData = async (copingStorage) => {
     try {
       const jsonValue = JSON.stringify(copingStorage);
@@ -37,22 +36,26 @@ const CopingStatement = () => {
   };
 
   const flagAlert = () => {
-    let onPress = () => {
-      setFlag(true);
-      handleAdd();
+    const pressTrue = () => {
+      let flag = true;
+      handleAdd(flag);
+    };
+
+    const pressFalse = () => {
+      let flag = false;
+      handleAdd(flag);
     };
 
     Alert.alert("Flag this for therapist?", `You can review it together.`, [
       {
         text: "Yes",
-        onPress: () => onPress(),
+        onPress: () => pressTrue(),
       },
 
-      { text: "Nope" },
+      { text: "Nope", onPress: () => pressFalse() },
     ]);
   };
-
-  const handleAdd = () => {
+  const handleAdd = (flag) => {
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
     let currentMonth = currentDate.getMonth() + 1;
@@ -71,8 +74,10 @@ const CopingStatement = () => {
     setCopingStorage(newList);
     setMyCoping("");
     storeData(newList);
+    {
+      console.log("sorted: ", sortedEntries);
+    }
     getData();
-    setFlag(false);
   };
 
   const handleDelete = ({ item }) => {
@@ -93,24 +98,6 @@ const CopingStatement = () => {
     storeData(copingStorage);
   };
 
-  // const handleFlagDelete = ({ item }) => {
-  //   let index = 0;
-  //   // find the index of item to delete
-  //   for (let obj of flagged) {
-  //     if (obj.id !== item.id) {
-  //       index++;
-  //     } else {
-  //       break;
-  //     }
-  //   }
-  //   // filter array for display
-  //   setFlagged(flagged.filter((val) => val.id !== item.id));
-  //   // make permanent delete
-  //   flagged.splice(index, 1);
-  //   // save deletion of item
-  //   storeReportData(flagged);
-  // };
-
   React.useEffect(() => {
     getData();
   }, []);
@@ -126,13 +113,11 @@ const CopingStatement = () => {
     }
   };
 
-  const [myStyle, setMyStyle] = useState(false);
-
-  const handleClick = (id) => {
-    setMyStyle((prevState) => ({
-      ...myStyle,
-      [id]: !prevState[id],
-    }));
+  const handleFlag = (i) => {
+    let currentItem = sortedEntries[i];
+    currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    storeData(copingStorage);
+    getData();
   };
 
   return (
@@ -160,20 +145,19 @@ const CopingStatement = () => {
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
         <View>
-          {sortedEntries.map((item) => (
+          {sortedEntries.map((item, i) => (
             <View key={item.id} style={styles.pieContainer}>
               <View style={styles.entryTop}>
                 <Text style={styles.date}>{item.date}</Text>
+
                 <TouchableOpacity
                   onPress={() => {
-                    handleClick(item.id);
+                    handleFlag(i);
                   }}
                 >
                   <SimpleLineIcons
                     style={
-                      myStyle[`${item.id}`]
-                        ? [styles.fIcon, styles.selected]
-                        : styles.fIcon
+                      item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
                     }
                     name="flag"
                   />
