@@ -18,10 +18,9 @@ const CopingStatement = () => {
   // hlp.getData("storedcoping", setCopingStorage)
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("storedcoping");
+      const jsonValue = await AsyncStorage.getItem("storedCoping");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       setCopingStorage(savedData);
-      console.log("Cope: ", copingStorage);
     } catch (e) {
       console.log(e);
     }
@@ -31,8 +30,7 @@ const CopingStatement = () => {
   const storeData = async (copingStorage) => {
     try {
       const jsonValue = JSON.stringify(copingStorage);
-      await AsyncStorage.setItem("storedcoping", jsonValue);
-      console.log("Store Cope:", copingStorage);
+      await AsyncStorage.setItem("storedCoping", jsonValue);
     } catch (e) {
       console.log("1", e);
     }
