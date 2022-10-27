@@ -20,22 +20,22 @@ const Report = () => {
 
   const getData = async () => {
     try {
-      const copeValue = await AsyncStorage.getItem("storedcoping");
+      const copeValue = await AsyncStorage.getItem("storedCoping");
       const checkValue = await AsyncStorage.getItem("storedCheckin");
       const focusValue = await AsyncStorage.getItem("storedFocus");
       const piesValue = await AsyncStorage.getItem("storedPie");
       const goodValue = await AsyncStorage.getItem("storedGood");
       const badValue = await AsyncStorage.getItem("storedBad");
       const valueValue = await AsyncStorage.getItem("storedValues");
-      const selfTalkValue = await AsyncStorage.getItem("storedValues");
+      const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
       let copeData = copeValue ? JSON.parse(copeValue) : [];
       let checkData = checkValue ? JSON.parse(checkValue) : [];
       let focusData = focusValue ? JSON.parse(focusValue) : [];
       let piesData = piesValue ? JSON.parse(piesValue) : [];
       let goodData = goodValue ? JSON.parse(goodValue) : [];
       let badData = badValue ? JSON.parse(badValue) : [];
-      let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
       let valueData = valueValue ? JSON.parse(valueValue) : [];
+      let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
       setReportStorage([
         ...copeData,
         ...checkData,
@@ -160,9 +160,26 @@ const Report = () => {
                       {item.myCheckin ? item.myCheckin : null}
                       {item.myCoping ? item.myCoping : null}
                       {item.myFocus ? item.myFocus : null}
+                      {item.myBad ? item.myBad : null}
+                      {item.myGood ? item.myGood : null}
+                      {item.myValue ? item.myValue : null}
                     </Text>
-
-                    {/* {item.X ? item.X : null} */}
+                    {item.physical ? (
+                      <View style={{ flexDirection: "column" }}>
+                        <Text style={styles.add}>P: {item.physical}</Text>
+                        <Text style={styles.add}>I: {item.insights}</Text>
+                        <Text style={styles.add}>E: {item.emotions}</Text>
+                        <Text style={styles.add}>S: {item.spiritual}</Text>
+                      </View>
+                    ) : null}
+                    {item.initial ? (
+                      <View style={{ flexDirection: "column" }}>
+                        <Text style={styles.add}>- Initial Thought -</Text>
+                        <Text style={styles.add}>{item.initial}</Text>
+                        <Text style={styles.add}>- Rational Thought -</Text>
+                        <Text style={styles.add}>{item.rational}</Text>
+                      </View>
+                    ) : null}
                   </View>
                 ))
               : null}
@@ -191,13 +208,33 @@ const Report = () => {
             {showFlags
               ? fullFlags.map((item) => (
                   <View key={item.id} style={styles.pieContainer}>
-                    <Text style={styles.add}>
+                    <Text style={[styles.add, { fontSize: 15 }]}>
                       {item.date}
-                      {item.face ? item.face : null}
+                    </Text>
+                    <Text style={styles.add}>
                       {item.myCheckin ? item.myCheckin : null}
                       {item.myCoping ? item.myCoping : null}
                       {item.myFocus ? item.myFocus : null}
+                      {item.myBad ? item.myBad : null}
+                      {item.myGood ? item.myGood : null}
+                      {item.myValue ? item.myValue : null}
                     </Text>
+                    {item.physical ? (
+                      <View style={{ flexDirection: "column" }}>
+                        <Text style={styles.add}>P: {item.physical}</Text>
+                        <Text style={styles.add}>I: {item.insights}</Text>
+                        <Text style={styles.add}>E: {item.emotions}</Text>
+                        <Text style={styles.add}>S: {item.spiritual}</Text>
+                      </View>
+                    ) : null}
+                    {item.initial ? (
+                      <View style={{ flexDirection: "column" }}>
+                        <Text style={styles.add}>- Initial Thought -</Text>
+                        <Text style={styles.add}>{item.initial}</Text>
+                        <Text style={styles.add}>- Rational Thought -</Text>
+                        <Text style={styles.add}>{item.rational}</Text>
+                      </View>
+                    ) : null}
                   </View>
                 ))
               : null}
