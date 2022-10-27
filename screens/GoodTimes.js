@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
-  View,
-  TextInput,
   Text,
   StyleSheet,
+  View,
   Alert,
+  TextInput,
   TouchableOpacity,
 } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -40,13 +41,14 @@ const GoodTimes = () => {
     }
   };
 
-  const handleAdd = () => {
+  const handleAdd = (flag) => {
     let currentDate = new Date();
     let orderId = currentDate.getTime();
 
     let newNote = {
       id: orderId,
-      message: note,
+      flag: flag,
+      myGood: note,
     };
 
     const newList = [...goodStorage, newNote];
@@ -55,6 +57,27 @@ const GoodTimes = () => {
     setNote("");
     storeData(newList);
     getData();
+  };
+
+  const flagAlert = () => {
+    const pressTrue = () => {
+      let flag = true;
+      handleAdd(flag);
+    };
+
+    const pressFalse = () => {
+      let flag = false;
+      handleAdd(flag);
+    };
+
+    Alert.alert("Flag this for therapist?", `You can review it together.`, [
+      {
+        text: "Yes",
+        onPress: () => pressTrue(),
+      },
+
+      { text: "Nope", onPress: () => pressFalse() },
+    ]);
   };
 
   const handleDelete = ({ item }) => {
@@ -82,8 +105,15 @@ const GoodTimes = () => {
       ]);
       return;
     } else {
-      handleAdd();
+      flagAlert();
     }
+  };
+
+  const handleFlag = (i) => {
+    let currentItem = sortedEntries[i];
+    currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    storeData(goodStorage);
+    getData();
   };
 
   React.useEffect(() => {
@@ -113,9 +143,21 @@ const GoodTimes = () => {
         <TouchableOpacity onPress={() => errorCheck()}>
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
-        {sortedEntries.map((item) => (
+        {sortedEntries.map((item, i) => (
           <View key={item.id} style={styles.memory}>
-            <Text style={styles.add}>{item.message}</Text>
+            <TouchableOpacity
+              onPress={() => {
+                handleFlag(i);
+              }}
+            >
+              <SimpleLineIcons
+                style={
+                  item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
+                }
+                name="flag"
+              />
+            </TouchableOpacity>
+            <Text style={styles.add}>{item.myGood}</Text>
             <TouchableOpacity onPress={() => handleDelete({ item })}>
               <MaterialIcons style={styles.deleteIcon} name="delete-forever" />
             </TouchableOpacity>
@@ -199,6 +241,20 @@ const styles = StyleSheet.create({
     left: "46%",
     fontSize: 30,
     color: "#D7D9D7",
+  },
+  entryTop: {
+    flexDirection: "row",
+  },
+  fIcon: {
+    marginRight: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    fontSize: 30,
+    color: "#D7D9D7",
+    textAlign: "center",
+  },
+  selected: {
+    color: "#D84C36",
   },
 });
 
