@@ -17,7 +17,6 @@ const FocusStatement = () => {
     focusStorage ? focusStorage : []
   );
   const [myFocus, setMyFocus] = useState("");
-  let [flag, setFlag] = useState(false);
   const [myStyle, setMyStyle] = useState(false);
 
   let sortedEntries = focusStorage.sort((a, b) => {
@@ -50,6 +49,7 @@ const FocusStatement = () => {
       let flag = true;
       handleAdd(flag);
     };
+
     const pressFalse = () => {
       let flag = false;
       handleAdd(flag);
@@ -85,9 +85,7 @@ const FocusStatement = () => {
     setMyFocus("");
     storeData(newList);
     getData();
-    setFlag(false);
   };
-  
 
   const handleDelete = ({ item }) => {
     let index = 0;
@@ -118,16 +116,16 @@ const FocusStatement = () => {
     }
   };
 
+  const handleFlag = (i) => {
+    let currentItem = sortedEntries[i];
+    currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    storeData(focusStorage);
+    getData();
+  };
+
   React.useEffect(() => {
     getData();
   }, []);
-
-  const handleClick = (id) => {
-    setMyStyle((prevState) => ({
-      ...myStyle,
-      [id]: !prevState[id],
-    }));
-  };
 
   return (
     <View style={styles.container}>
@@ -153,20 +151,18 @@ const FocusStatement = () => {
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
         <View>
-          {sortedEntries.map((item) => (
+          {sortedEntries.map((item, i) => (
             <View key={item.id} style={styles.pieContainer}>
               <View style={styles.entryTop}>
                 <Text style={styles.date}>{item.date}</Text>
                 <TouchableOpacity
                   onPress={() => {
-                    handleClick(item.id);
+                    handleFlag(i);
                   }}
                 >
                   <SimpleLineIcons
                     style={
-                      myStyle[`${item.id}`]
-                        ? [styles.fIcon, styles.selected]
-                        : styles.fIcon
+                      item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
                     }
                     name="flag"
                   />
@@ -186,7 +182,7 @@ const FocusStatement = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};
+};;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
