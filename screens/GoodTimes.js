@@ -23,7 +23,7 @@ const GoodTimes = () => {
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("storedgood");
+      const jsonValue = await AsyncStorage.getItem("storedGood");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       setGoodStorage(savedData);
     } catch (e) {
@@ -34,7 +34,7 @@ const GoodTimes = () => {
   const storeData = async (goodStorage) => {
     try {
       const jsonValue = JSON.stringify(goodStorage);
-      await AsyncStorage.setItem("storedgood", jsonValue);
+      await AsyncStorage.setItem("storedGood", jsonValue);
     } catch (e) {
       console.log(e);
     }
