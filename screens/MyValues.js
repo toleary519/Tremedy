@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { A } from "@expo/html-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -39,12 +40,13 @@ const MyValues = () => {
     }
   };
 
-  const handleAdd = () => {
+  const handleAdd = (flag) => {
     let currentDate = new Date();
     let orderId = currentDate.getTime();
 
     let newValue = {
       id: orderId,
+      flag: flag,
       myValue: myValue,
     };
 
@@ -54,6 +56,27 @@ const MyValues = () => {
     setMyValue("");
     storeData(newList);
     getData();
+  };
+
+  const flagAlert = () => {
+    const pressTrue = () => {
+      let flag = true;
+      handleAdd(flag);
+    };
+
+    const pressFalse = () => {
+      let flag = false;
+      handleAdd(flag);
+    };
+
+    Alert.alert("Flag this for therapist?", `You can review it together.`, [
+      {
+        text: "Yes",
+        onPress: () => pressTrue(),
+      },
+
+      { text: "Nope", onPress: () => pressFalse() },
+    ]);
   };
 
   const handleDelete = ({ item }) => {
@@ -81,8 +104,15 @@ const MyValues = () => {
       ]);
       return;
     } else {
-      handleAdd();
+      flagAlert();
     }
+  };
+
+  const handleFlag = (i) => {
+    let currentItem = sortedEntries[i];
+    currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    storeData(storage);
+    getData();
   };
 
   React.useEffect(() => {
@@ -124,8 +154,22 @@ const MyValues = () => {
           <MaterialIcons style={styles.icon} name="add-circle" />
         </TouchableOpacity>
         <View>
-          {sortedEntries.map((item) => (
+          {sortedEntries.map((item, i) => (
             <View key={item.id} style={styles.pieContainer}>
+              <View style={styles.entryTop}>
+                <TouchableOpacity
+                  onPress={() => {
+                    handleFlag(i);
+                  }}
+                >
+                  <SimpleLineIcons
+                    style={
+                      item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
+                    }
+                    name="flag"
+                  />
+                </TouchableOpacity>
+              </View>
               <Text style={styles.add}>{item.myValue}</Text>
               <TouchableOpacity onPress={() => handleDelete({ item })}>
                 <MaterialIcons
@@ -231,6 +275,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "#2f8587",
+  },
+  entryTop: {
+    flexDirection: "row",
+  },
+  fIcon: {
+    marginRight: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    fontSize: 30,
+    color: "#D7D9D7",
+    textAlign: "center",
+  },
+  selected: {
+    color: "#D84C36",
   },
 });
 
