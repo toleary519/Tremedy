@@ -7,10 +7,10 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Activities = () => {
-   
-  let fakeDB = []
   
-  const [activeStorage, setActiveStorage] = useState(fakeDB)
+  const [activeStorage, setActiveStorage] = useState(
+    activeStorage ? activeStorage : []
+  );
   const [activity, setActivity] = useState("") 
 
   let sortedEntries = activeStorage.sort((a, b) => {
