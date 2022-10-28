@@ -1,85 +1,97 @@
-import { useState } from "react";
-// import alert
-import { SimpleLineIcons } from "@expo/vector-icons";
+// import {
+//   Text,
+//   StyleSheet,
+//   View,
+//   Alert,
+//   TextInput,
+//   TouchableOpacity,
+// } from "react-native";
+// import { SimpleLineIcons } from "@expo/vector-icons";
 
+// // in handle add
+// (flag)
+// flag: flag,
 
-const [x, setX] = useState(x ? x : [])
-const [flag, setFlag] = useState(false)
-const [myStyle, setMyStyle] = useState(false);
+// const flagAlert = () => {
+//   const pressTrue = () => {
+//     let flag = true;
+//     handleAdd(flag);
+//   };
 
-// just above handleAdd
-const flagAlert = () => {
+//   const pressFalse = () => {
+//     let flag = false;
+//     handleAdd(flag);
+//   };
 
-    let onPress = () => {
-      setFlag(true);
-      handleAdd();
-    };
+//   Alert.alert("Flag this for therapist?", `You can review it together.`, [
+//     {
+//       text: "Yes",
+//       onPress: () => pressTrue(),
+//     },
 
-    Alert.alert("Flag this for therapist?", `You two can review it together.`, [
-      {
-        text: "Yes",
-        onPress: onPress(),
-      },
+//     { text: "Nope", onPress: () => pressFalse() },
+//   ]);
+// };
 
-      { text: "Nope" },
-    ]);
-  };
+// // under delete
+// const errorCheck = () => {
+//   if (!entry.replace(/\s+/g, "")) {
+//     Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+//       { text: "Got It" },
+//     ]);
+//     return;
+//   } else {
+//     flagAlert();
+//   }
+// };
 
-//   in handle add 
-flag: flag
+// const handleFlag = (i) => {
+//   let currentItem = sortedEntries[i];
+//   currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+//   storeData(focusStorage);
+//   getData();
+// };
 
+// // handleFlag change storage
 
-// bottom of add
-setStorage
-setfieldType
-storeD
-getData
-setFlag(false)
+// <TouchableOpacity
+// onPress={() => {
+//   handleFlag(i);
+// }}
+// >
+// <View style={styles.entryTop}>
+//                 <Text style={styles.date}>{item.date}</Text>
+//                 {item.flag ? <Text style={styles.title}>PageName</Text> : null}
+//                 <TouchableOpacity
+//                   onPress={() => {
+//                     handleFlag(i);
+//                   }}
+//                 >
+//                   <SimpleLineIcons
+//                     style={
+//                       item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
+//                     }
+//                     name="flag"
+//                   />
+//                 </TouchableOpacity>
+//               </View>
 
-// just above return 
+// // styles
 
-const handleClick = (id) => {
-    setMyStyle((prevState) => ({
-      ...myStyle,
-      [id]: !prevState[id],
-    }));
-  };
+// entryTop: {
+//     flexDirection: "row",
+//   },
+//   fIcon: {
+//     marginRight: 10,
+//     paddingTop: 20,
+//     paddingBottom: 20,
+//     fontSize: 30,
+//     color: "#D7D9D7",
+//     textAlign: "center",
+//   },
+//   selected: {
+//     color: "#D84C36",
+//   },
 
-// in error check replace
-
-flagAlert()
-
-// inside of map under piecontainer : 
-
-<View style={styles.entryTop}>
-                <Text style={styles.date}>{item.date}</Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    handleClick(item.id);
-                  }}
-                >
-                  <SimpleLineIcons
-                    style={
-                      myStyle[`${item.id}`]
-                        ? [styles.fIcon, styles.selected]
-                        : styles.fIcon
-                    }
-                    name="flag"
-                  />
-                </TouchableOpacity>
-              </View>
-
-entryTop: {
-    flexDirection: "row",
-  },
-  fIcon: {
-    marginRight: 10,
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 30,
-    color: "#D7D9D7",
-    textAlign: "center",
-  },
-  selected: {
-    color: "#D84C36",
-  },
+//   {/* for the report render  */}
+//   {item.flag ? <Text style={styles.title}>PageName</Text> : null}

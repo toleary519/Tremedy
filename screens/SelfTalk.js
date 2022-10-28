@@ -75,14 +75,18 @@ const SelfTalk = () => {
       handleAdd(flag);
     };
 
-    Alert.alert("Flag this for therapist?", `You can review it together.`, [
-      {
-        text: "Yes",
-        onPress: () => pressTrue(),
-      },
+    Alert.alert(
+      `Flag this in "My Past Week?"`,
+      `Manage flags in User Settings.`,
+      [
+        {
+          text: "Yes",
+          onPress: () => pressTrue(),
+        },
 
-      { text: "Nope", onPress: () => pressFalse() },
-    ]);
+        { text: "Nope", onPress: () => pressFalse() },
+      ]
+    );
   };
 
   const handleDelete = ({ item }) => {

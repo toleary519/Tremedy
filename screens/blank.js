@@ -13,27 +13,27 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 const xyz = () => {
-  const [storage, set] = useState(storage ? storage : []);
+  const [XY, setST] = useState(XY ? XY : []);
   const [entry, setEnt] = useState("");
 
-  let sortedEntries = storage.sort((a, b) => {
+  let sortedEntries = XY.sort((a, b) => {
     return b.id - a.id;
   });
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem(string - storage);
+      const jsonValue = await AsyncStorage.getItem(stringStorage);
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      set(savedData);
+      setST(savedData);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const storeData = async (storage) => {
+  const storeData = async (XY) => {
     try {
-      const jsonValue = JSON.stringify(storage);
-      await AsyncStorage.setItem(string - storage, jsonValue);
+      const jsonValue = JSON.stringify(XY);
+      await AsyncStorage.setItem(stringStorage, jsonValue);
     } catch (e) {
       console.log("1", e);
     }
@@ -50,15 +50,20 @@ const xyz = () => {
       handleAdd(flag);
     };
 
-    Alert.alert("Flag this for therapist?", `You can review it together.`, [
-      {
-        text: "Yes",
-        onPress: () => pressTrue(),
-      },
+    Alert.alert(
+      `Flag this in "My Past Week?"`,
+      `Manage flags in User Settings.`,
+      [
+        {
+          text: "Yes",
+          onPress: () => pressTrue(),
+        },
 
-      { text: "Nope", onPress: () => pressFalse() },
-    ]);
+        { text: "Nope", onPress: () => pressFalse() },
+      ]
+    );
   };
+
   const handleAdd = (flag) => {
     let currentDate = new Date();
     let currentDay = currentDate.getDate();
@@ -73,9 +78,9 @@ const xyz = () => {
       date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
-    const newList = [...storage, newItem];
+    const newList = [...XY, newItem];
 
-    set(newList);
+    setST(newList);
     setEnt("");
     storeData(newList);
     {
@@ -87,7 +92,7 @@ const xyz = () => {
   const handleDelete = ({ item }) => {
     let index = 0;
     // find the index of item to delete
-    for (let obj of storage) {
+    for (let obj of XY) {
       if (obj.id !== item.id) {
         index++;
       } else {
@@ -95,11 +100,11 @@ const xyz = () => {
       }
     }
     // filter array for display
-    set(storage.filter((val) => val.id !== item.id));
+    setST(XY.filter((val) => val.id !== item.id));
     // make permanent delete
-    storage.splice(index, 1);
+    XY.splice(index, 1);
     // save deletion of item
-    storeData(storage);
+    storeData(XY);
   };
 
   React.useEffect(() => {
@@ -120,7 +125,7 @@ const xyz = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
-    storeData(storage);
+    storeData(XY);
     getData();
   };
 
@@ -235,6 +240,8 @@ const styles = StyleSheet.create({
     color: "#D7D9D7",
   },
   headerTwo: {
+    // borderRadius: 10,
+    // borderWidth: 4,
     paddingTop: 30,
     textAlign: "center",
     justifyContent: "flex-start",
@@ -288,4 +295,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { UserSettings };
+export { xyz };
