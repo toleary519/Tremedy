@@ -10,50 +10,14 @@ import {
 } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { pageOptions } from "./optionsList";
 
 const PepTalkMenu = ({ navigation }) => {
-  let [routineList, setRoutineList] = useState(
-    routineList ? routineList : pageOptions
-  );
-
-  let pageOptions = [
-    {
-      id: 0,
-      selected: true,
-      pageName: "PercievedThreatMenu",
-      title: "Elevated State",
-    },
-    { id: 1, selected: false, pageName: "Report", title: "My Past Week" },
-    {
-      id: 2,
-      selected: false,
-      pageName: "FocusStatement",
-      title: "My Focus Statement",
-    },
-    {
-      id: 3,
-      selected: false,
-      pageName: "CopingStatement",
-      title: "My Coping Statement",
-    },
-    { id: 4, selected: false, pageName: "MyValues", title: "My Values" },
-    { id: 5, selected: false, pageName: "CheckIn", title: "Quick Check-In" },
-    { id: 6, selected: false, pageName: "SelfTalk", title: "+ Self-Talk" },
-    { id: 7, selected: false, pageName: "Pies", title: "PIES Check-In" },
-    { id: 8, selected: false, pageName: "Five", title: "5-4-3-2-1" },
-    { id: 9, selected: false, pageName: "NotesMenu", title: "Experiences" },
-    {
-      id: 10,
-      selected: false,
-      pageName: "SoberContacts",
-      title: "Support Contacts",
-    },
-    { id: 11, selected: false, pageName: "ProCon", title: "Pros & Cons" },
-    { id: 12, selected: false, pageName: "Activities", title: "Activities" },
-    { id: 13, selected: false, pageName: "Routine", title: "My Routine" },
-  ];
+  let [routineList, setRoutineList] = useState(routineList ? routineList : []);
 
   const getData = async () => {
     try {
@@ -74,44 +38,49 @@ const PepTalkMenu = ({ navigation }) => {
     }
   };
 
-  // const handleAdd = (selection, i, routineList) => {
-  //   let currentDate = new Date();
-  //   let currentDay = currentDate.getDate();
-  //   let currentMonth = currentDate.getMonth() + 1;
-  //   let currentYear = currentDate.getFullYear();
-  //   let orderId = currentDate.getTime();
+  const handleAdd = ({ item }) => {
+    let newItem = {
+      id: item.id,
+      pageName: item.pageName,
+      selected: true,
+      title: item.title,
+    };
 
-  //   let newItem = {
-  //     id: pageOptions[i].id,
-  //     pageName: pageOptions[i].pageName,
-  //     selection: selection,
-  //   };
+    const newList = [...routineList, newItem];
 
-  //   const newList = [...routineList, newItem];
-
-  //   setRoutineList(newList);
-  //   storeData(newList);
-  //   getData();
-  // };
-
-  const handleSelection = (i) => {
-    let currentItem = pageOptions.filter((x) => x.id === i);
-
-    routineList.contains();
-
-    currentItem.selection
-      ? (currentItem.selection = false)
-      : (currentItem.selection = true);
-
-    for (let routineItem of routineList) {
-      if (routineItem.id === i) {
-        routineItem = currentItem;
-      }
-    }
-
-    storeData(routineList);
+    setRoutineList(newList);
+    storeData(newList);
     getData();
   };
+
+  const handleDelete = ({ item }) => {
+    let index = 0;
+    // find the index of item to delete
+    for (let obj of routineList) {
+      if (obj.id !== item.id) {
+        index++;
+      } else {
+        break;
+      }
+    }
+    // filter array for display
+    setRoutineList(routineList.filter((val) => val.id !== item.id));
+    // make permanent delete
+    routineList.splice(index, 1);
+    // save deletion of item
+    storeData(routineList);
+  };
+
+  const verify = ({ item }) => {
+    for (let x of routineList) {
+      if (x.id === item.id) {
+        return x.selected;
+      }
+    }
+    return false;
+  };
+
+  const count = routineList.length ? routineList.length : 0;
 
   React.useEffect(() => {
     getData();
@@ -121,29 +90,35 @@ const PepTalkMenu = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
         {pageOptions.map((item, i) => (
-          <View key={item.id} style={styles.element}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate(item.pageName)}
-              delayPressIn={150}
-            >
-              <Text style={styles.add}>{item.title}</Text>
-            </TouchableOpacity>
-
-            {item.selection ? (
+          <View key={item.id} value={item} style={styles.element}>
+            <View style={styles.spacer}></View>
+            <View style={styles.left}>
               <TouchableOpacity
-                onPress={() => handleSelection(i)}
+                onPress={() => navigation.navigate(item.pageName)}
                 delayPressIn={150}
               >
-                <Text style={styles.inRoutine}> - from Routine</Text>
+                <Text style={styles.add}>{item.title}</Text>
               </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                onPress={() => handleSelection(pageOptions, i)}
-                delayPressIn={150}
-              >
-                <Text style={styles.outRoutine}> + to Routine</Text>
-              </TouchableOpacity>
-            )}
+            </View>
+            <View style={styles.right}>
+              {verify({ item }) ? (
+                <TouchableOpacity
+                  onPress={() => handleDelete({ item })}
+                  delayPressIn={150}
+                >
+                  <Feather name="check-circle" style={styles.inRoutine} />
+                </TouchableOpacity>
+              ) : item.pageName === "Routine" ? (
+                <Text style={styles.text}>{count}</Text>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => handleAdd({ item })}
+                  delayPressIn={150}
+                >
+                  <Feather name="plus" style={styles.outRoutine} />
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -161,25 +136,22 @@ const styles = StyleSheet.create({
   },
   element: {
     overflow: "hidden",
+    flexDirection: "row",
+    alignItems: "center",
     borderRadius: 10,
     borderWidth: 4,
     borderColor: "#F4743B",
     backgroundColor: "#D2EAEB",
     marginTop: 21,
     width: "90%",
-    left: "5%",
+    left: "2%",
   },
   add: {
     color: "#1B2A41",
     fontSize: 25,
     padding: 10,
     fontWeight: "bold",
-    textAlign: "flex-start",
-  },
-  routineButton: {
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: "#F4743B",
+    textAlign: "center",
   },
   inRoutine: {
     color: "green",
@@ -190,11 +162,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   left: {
-    width: "90%",
+    flex: 8,
+    alignItems: "center",
   },
   right: {
-    right: "65%",
-    width: "15%",
+    flex: 1,
+  },
+  spacer: {
+    flex: 1,
+  },
+  text: {
+    color: "green",
+    fontSize: 20,
   },
 });
 
