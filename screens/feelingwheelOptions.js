@@ -1,4 +1,4 @@
-export const feelingwheel = [
+export const feelingWheel = [
   {
     Anger: {
       Rage: ["Hostile", "Hate"],
@@ -38,7 +38,6 @@ export const feelingwheel = [
       Overcome: ["Grief", "Powerless"],
       Moved: ["Stimulated", "Touched"],
     },
-
     Sadness: {
       Despair: { 1: "Grief", 2: "Powerless" },
       Neglected: { 1: "Isolated", 2: "Lonely" },
