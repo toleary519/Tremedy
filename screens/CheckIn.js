@@ -132,12 +132,14 @@ const CheckIn = () => {
     !feelOne ? setFeelOne(setOne[temp]) : null;
     feelOne && !feelTwo ? setFeelTwo(setTwo[temp]) : null;
     feelOne && feelTwo ? setFeelThree(setThree[temp]) : null;
+    setTemp(0);
   };
 
   const handleBack = () => {
-    // feelOne && !feelTwo && !feelThree ? setFeelOne("") : null;
-    // feelOne && feelTwo && !feelThree ? setFeelTwo("") : null;
+    feelOne && !feelTwo && !feelThree ? setFeelOne(0) : null;
+    feelOne && feelTwo && !feelThree ? setFeelTwo(0) : null;
     feelOne && feelTwo && feelThree ? setFeelThree(0) : null;
+    setTemp(0);
   };
 
   const setOne = !feelOne ? Object.keys(feelingWheel[0]) : null;
@@ -152,7 +154,7 @@ const CheckIn = () => {
 
   return (
     <View style={styles.container}>
-      <KeyboardAwareScrollView extraHeight={0}>
+      <View style={styles.firstBox}>
         <Text style={styles.add}>How are you feeling?</Text>
         <Text style={styles.face}>{handleFace(face)}</Text>
         <Slider
@@ -164,30 +166,25 @@ const CheckIn = () => {
           onValueChange={setFace}
           minimumTrackTintColor={"#D7D9D7"}
         />
-      </KeyboardAwareScrollView>
+      </View>
+
       {/* -------------------------------------------------FEELWHEEL-------------------------- */}
+
       <View style={styles.feelWheelContainer}>
-        <View style={styles.feelChoiceDisplay}>
-          <Text style={styles.display}>{feelOne}</Text>
-          <Text style={styles.display}>{feelTwo}</Text>
-          <Text style={styles.display}>{feelThree}</Text>
+        <View style={styles.feelChoiceDisplayCase}>
+          <View style={styles.feelChoiceDisplay}>
+            {!feelOne ? <Text style={styles.display}> </Text> : null}
+            {feelOne ? <Text style={styles.display}>{feelOne}</Text> : null}
+            {feelTwo ? <Text style={styles.display}>{feelTwo}</Text> : null}
+            {feelThree ? <Text style={styles.display}>{feelThree}</Text> : null}
+          </View>
         </View>
-        {true ? (
+        <View style={styles.pickerBoxCase}>
           <View style={styles.pickerBox}>
-            <View style={styles.buttonBox}>
-              {feelOne ? (
-                <TouchableOpacity onPress={() => setFeeling(temp)}>
-                  <FontAwesome
-                    name="chevron-circle-left"
-                    style={[styles.nextButton, { marginRight: "5%" }]}
-                  />
-                </TouchableOpacity>
-              ) : null}
-            </View>
             {!feelOne && !feelTwo && !feelThree ? (
               <WheelPicker
-                itemStyle={styles.pickerWindow}
                 visibleRest={1}
+                itemStyle={styles.pickerItem}
                 itemTextStyle={styles.picker}
                 selectedIndex={temp}
                 options={setOne}
@@ -196,11 +193,11 @@ const CheckIn = () => {
                 }}
               />
             ) : null}
+
             {feelOne && !feelTwo && !feelThree ? (
               <WheelPicker
-                itemStyle={styles.picker}
                 visibleRest={1}
-                itemHeight={25}
+                itemStyle={styles.pickerItem}
                 itemTextStyle={styles.picker}
                 selectedIndex={temp}
                 options={setTwo}
@@ -211,7 +208,7 @@ const CheckIn = () => {
             ) : null}
             {feelOne && feelTwo && !feelThree ? (
               <WheelPicker
-                itemStyle={styles.picker}
+                itemStyle={styles.pickerItem}
                 visibleRest={1}
                 itemTextStyle={styles.picker}
                 selectedIndex={temp}
@@ -221,23 +218,29 @@ const CheckIn = () => {
                 }}
               />
             ) : null}
-            {feelThree ? null : (
-              <View style={styles.buttonBox}>
+
+            <View style={styles.buttonBox}>
+              {feelOne ? (
+                <TouchableOpacity onPress={() => handleBack()}>
+                  <FontAwesome
+                    name="chevron-circle-left"
+                    style={[styles.nextButton, { marginRight: "5%" }]}
+                  />
+                </TouchableOpacity>
+              ) : null}
+              {feelThree ? null : (
                 <TouchableOpacity onPress={() => setFeeling(temp)}>
                   <FontAwesome
                     name="chevron-circle-right"
                     style={[styles.nextButton, { marginLeft: "5%" }]}
                   />
                 </TouchableOpacity>
-              </View>
-            )}
+              )}
+            </View>
           </View>
-        ) : (
-          <TouchableOpacity onPress={() => setFeeling(temp)}>
-            <FontAwesome5 name="backspace" style={styles.nextButton} />
-          </TouchableOpacity>
-        )}
+        </View>
       </View>
+
       <KeyboardAwareScrollView extraHeight={250}>
         <Text style={[styles.add, { paddingBottom: 0 }]}>
           Anything else you want to say about how you are feeling?
@@ -279,7 +282,7 @@ const CheckIn = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 25,
+    paddingTop: 5,
     paddingBottom: 25,
     backgroundColor: "#1B2A41",
   },
@@ -288,7 +291,6 @@ const styles = StyleSheet.create({
     width: "80%",
     left: "10%",
     textAlign: "center",
-    justifyContent: "flex-end",
     padding: 10,
     fontSize: 25,
     fontWeight: "bold",
@@ -304,6 +306,8 @@ const styles = StyleSheet.create({
     borderColor: "#D7D9D7",
   },
   slider: {
+    // borderWidth: 3,
+    // borderColor: "red",
     marginTop: 20,
     width: "80%",
     left: "10%",
@@ -311,6 +315,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   face: {
+    // borderWidth: 3,
+    // borderColor: "blue",
     marginTop: 10,
     width: "80%",
     left: "10%",
@@ -344,7 +350,6 @@ const styles = StyleSheet.create({
     width: "90%",
     left: "5%",
     textAlign: "center",
-    justifyContent: "flex-end",
     padding: 10,
     fontSize: 18,
     fontWeight: "bold",
@@ -357,17 +362,17 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: "#D7D9D7",
   },
-  feelChoiceDisplay: {
-    borderWidth: 3,
-    borderColor: "red",
-    width: "90%",
-    left: "15%",
-    flexDirection: "row",
+  feelChoiceDisplayCase: {
     justifyContent: "center",
-    alignItems: "center",
+    flexDirection: "row",
+  },
+  feelChoiceDisplay: {
+    marginTop: 7,
+    width: "90%",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   display: {
-    textAlign: "center",
     padding: 10,
     fontSize: 25,
     fontWeight: "bold",
@@ -378,22 +383,32 @@ const styles = StyleSheet.create({
     color: "#D7D9D7",
   },
   pickerBox: {
-    borderWidth: 3,
-    borderColor: "green",
+    width: "90%",
+  },
+  pickerBoxCase: {
+    justifyContent: "center",
+    flexDirection: "row",
+    // borderWidth: 3,
+    // borderColor: "gold",
+  },
+  feelWheelContainer: {},
+  buttonBox: {
+    marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  sliderBox: {
+    flex: 1.5,
     width: "95%",
     left: "2.5%",
-    flexDirection: "row",
-    alignItems: "center",
   },
-  pickerWindow: {
-    borderWidth: 3,
-    borderColor: "red",
+  pickerItem: {
+    backgroundColor: "#1B2A41",
   },
-  buttonBox: {
-    // borderWidth: 3,
-    // borderColor: "red",
-    flex: 1,
-    alignItems: "center",
+  picker: {
+    height: 75,
+    color: "#D7D9D7",
+    fontSize: 40,
   },
 });
 

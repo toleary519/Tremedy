@@ -39,12 +39,12 @@ export const feelingWheel = [
       Moved: ["Stimulated", "Touched"],
     },
     Sadness: {
-      Despair: { 1: "Grief", 2: "Powerless" },
-      Neglected: { 1: "Isolated", 2: "Lonely" },
-      Shameful: { 1: "Regretful", 2: "Guilty" },
-      Disappointed: { 1: "Dismayed", 2: "Displeased" },
-      Suffering: { 1: "Depressed", 2: "Sorrow" },
-      Pained: { 1: "Agony", 2: "Hurt" },
+      Despair: ["Grief", "Powerless"],
+      Neglected: ["Isolated", "Lonely"],
+      Shameful: ["Regretful", "Guilty"],
+      Disappointed: ["Dismayed", "Displeased"],
+      Suffering: ["Depressed", "Sorrow"],
+      Pained: ["Agony", "Hurt"],
     },
   },
 ];
