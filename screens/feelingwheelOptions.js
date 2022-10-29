@@ -3,7 +3,7 @@ export const feelingWheel = [
     Anger: {
       Rage: ["Hostile", "Hate"],
       Exasperated: ["Frustrated", "Agitated"],
-      Irratble: ["Aggravated", "Annoyed"],
+      Irratable: ["Aggravated", "Annoyed"],
       Envy: ["Jealous", "Resentful"],
       Disgust: ["Revolted", "Contempt"],
     },
@@ -48,3 +48,27 @@ export const feelingWheel = [
     },
   },
 ];
+
+export const handleFace = (face) => {
+  if (face === 1) {
+    return "😔";
+  }
+  if (face === 2) {
+    return "😞";
+  }
+  if (face === 3) {
+    return "🙁";
+  }
+  if (face === 4) {
+    return "😐";
+  }
+  if (face === 5) {
+    return "🙂";
+  }
+  if (face === 6) {
+    return "😀";
+  }
+  if (face === 7) {
+    return "😁";
+  }
+};
