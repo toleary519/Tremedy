@@ -135,9 +135,9 @@ const CheckIn = () => {
   };
 
   const handleBack = () => {
-    feelOne && !feelTwo && !feelThree ? setFeelOne("") : null;
-    feelOne && feelTwo && !feelThree ? setFeelTwo("") : null;
-    feelOne && feelTwo && feelThree ? setFeelThree("") : null;
+    // feelOne && !feelTwo && !feelThree ? setFeelOne("") : null;
+    // feelOne && feelTwo && !feelThree ? setFeelTwo("") : null;
+    feelOne && feelTwo && feelThree ? setFeelThree(0) : null;
   };
 
   const setOne = !feelOne ? Object.keys(feelingWheel[0]) : null;
@@ -152,29 +152,29 @@ const CheckIn = () => {
 
   return (
     <View style={styles.container}>
-      <KeyboardAwareScrollView extraHeight={250}>
-        <View style={styles.sliderBox}>
-          <Text style={styles.add}>How are you feeling?</Text>
-          <Text style={styles.face}>{handleFace(face)}</Text>
-          <Slider
-            style={styles.slider}
-            minimumValue={1}
-            maximumValue={7}
-            step={1}
-            value={face ? face : 4}
-            onValueChange={setFace}
-            minimumTrackTintColor={"#D7D9D7"}
-          />
+      <KeyboardAwareScrollView extraHeight={0}>
+        <Text style={styles.add}>How are you feeling?</Text>
+        <Text style={styles.face}>{handleFace(face)}</Text>
+        <Slider
+          style={styles.slider}
+          minimumValue={1}
+          maximumValue={7}
+          step={1}
+          value={face ? face : 4}
+          onValueChange={setFace}
+          minimumTrackTintColor={"#D7D9D7"}
+        />
+      </KeyboardAwareScrollView>
+      {/* -------------------------------------------------FEELWHEEL-------------------------- */}
+      <View style={styles.feelWheelContainer}>
+        <View style={styles.feelChoiceDisplay}>
+          <Text style={styles.display}>{feelOne}</Text>
+          <Text style={styles.display}>{feelTwo}</Text>
+          <Text style={styles.display}>{feelThree}</Text>
         </View>
-        {/* -------------------------------------------------FEELWHEEL-------------------------- */}
-        <View style={styles.feelWheelContainer}>
-          <View style={styles.feelChoiceDisplay}>
-            <Text style={styles.display}>{feelOne}</Text>
-            <Text style={styles.display}>{feelTwo}</Text>
-            <Text style={styles.display}>{feelThree}</Text>
-          </View>
-          {true ? (
-            <View style={styles.pickerBox}>
+        {true ? (
+          <View style={styles.pickerBox}>
+            <View style={styles.buttonBox}>
               {feelOne ? (
                 <TouchableOpacity onPress={() => setFeeling(temp)}>
                   <FontAwesome
@@ -183,72 +183,65 @@ const CheckIn = () => {
                   />
                 </TouchableOpacity>
               ) : null}
-              {!feelOne && !feelTwo && !feelThree ? (
-                <View style={styles.feelOneBox}>
-                  <WheelPicker
-                    itemStyle={styles.picker}
-                    itemTextStyle={styles.picker}
-                    selectedIndex={temp}
-                    options={setOne}
-                    onChange={(x) => {
-                      setTemp(x);
-                    }}
-                  />
-                </View>
-              ) : null}
-              {feelOne && !feelTwo && !feelThree ? (
-                <View style={styles.feelTwoBox}>
-                  <WheelPicker
-                    itemStyle={styles.picker}
-                    itemTextStyle={styles.picker}
-                    selectedIndex={temp}
-                    options={setTwo}
-                    onChange={(x) => {
-                      setTemp(x);
-                    }}
-                  />
-                </View>
-              ) : null}
-              {feelOne && feelTwo && !feelThree ? (
-                <View style={styles.feelThreeBox}>
-                  <WheelPicker
-                    itemStyle={styles.picker}
-                    itemTextStyle={styles.picker}
-                    selectedIndex={temp}
-                    options={setThree}
-                    onChange={(x) => {
-                      setTemp(x);
-                    }}
-                  />
-                </View>
-              ) : null}
-              {feelThree ? null : (
+            </View>
+            {!feelOne && !feelTwo && !feelThree ? (
+              <WheelPicker
+                itemStyle={styles.pickerWindow}
+                visibleRest={1}
+                itemTextStyle={styles.picker}
+                selectedIndex={temp}
+                options={setOne}
+                onChange={(x) => {
+                  setTemp(x);
+                }}
+              />
+            ) : null}
+            {feelOne && !feelTwo && !feelThree ? (
+              <WheelPicker
+                itemStyle={styles.picker}
+                visibleRest={1}
+                itemHeight={25}
+                itemTextStyle={styles.picker}
+                selectedIndex={temp}
+                options={setTwo}
+                onChange={(x) => {
+                  setTemp(x);
+                }}
+              />
+            ) : null}
+            {feelOne && feelTwo && !feelThree ? (
+              <WheelPicker
+                itemStyle={styles.picker}
+                visibleRest={1}
+                itemTextStyle={styles.picker}
+                selectedIndex={temp}
+                options={setThree}
+                onChange={(x) => {
+                  setTemp(x);
+                }}
+              />
+            ) : null}
+            {feelThree ? null : (
+              <View style={styles.buttonBox}>
                 <TouchableOpacity onPress={() => setFeeling(temp)}>
                   <FontAwesome
                     name="chevron-circle-right"
                     style={[styles.nextButton, { marginLeft: "5%" }]}
                   />
                 </TouchableOpacity>
-              )}
-            </View>
-          ) : (
-            <TouchableOpacity onPress={() => setFeeling(temp)}>
-              <FontAwesome5 name="backspace" style={styles.nextButton} />
-            </TouchableOpacity>
-          )}
-          {/* <View style={styles.buttonNav}>
-            <TouchableOpacity onPress={() => handleBack()}>
-              <FontAwesome5 name="backspace" style={styles.nextButton} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setFeeling(temp)}>
-              <Feather name="check-circle" style={styles.nextButton} />
-            </TouchableOpacity>
-          </View> */}
-        </View>
+              </View>
+            )}
+          </View>
+        ) : (
+          <TouchableOpacity onPress={() => setFeeling(temp)}>
+            <FontAwesome5 name="backspace" style={styles.nextButton} />
+          </TouchableOpacity>
+        )}
+      </View>
+      <KeyboardAwareScrollView extraHeight={250}>
         <Text style={[styles.add, { paddingBottom: 0 }]}>
           Anything else you want to say about how you are feeling?
         </Text>
-
         <TextInput
           style={styles.input}
           onChangeText={(t) => setCheckin(t)}
@@ -287,6 +280,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 25,
+    paddingBottom: 25,
     backgroundColor: "#1B2A41",
   },
   add: {
@@ -310,19 +304,19 @@ const styles = StyleSheet.create({
     borderColor: "#D7D9D7",
   },
   slider: {
-    marginTop: 30,
+    marginTop: 20,
     width: "80%",
     left: "10%",
     fontSize: 25,
     fontWeight: "bold",
   },
   face: {
-    marginTop: 40,
+    marginTop: 10,
     width: "80%",
     left: "10%",
     textAlign: "center",
     justifyContent: "flex-end",
-    fontSize: 70,
+    fontSize: 60,
   },
   icon: {
     paddingTop: 20,
@@ -364,10 +358,12 @@ const styles = StyleSheet.create({
     color: "#D7D9D7",
   },
   feelChoiceDisplay: {
-    marginTop: 10,
-    width: "80%",
-    left: "10%",
+    borderWidth: 3,
+    borderColor: "red",
+    width: "90%",
+    left: "15%",
     flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
   },
   display: {
@@ -378,28 +374,27 @@ const styles = StyleSheet.create({
     color: "#D7D9D7",
   },
   nextButton: {
-    fontSize: 30,
+    fontSize: 40,
     color: "#D7D9D7",
-  },
-  picker: {
-    backgroundColor: "#1B2A41",
-    color: "#D7D9D7",
-    fontSize: 35,
   },
   pickerBox: {
-    width: "80%",
-    left: "10%",
+    borderWidth: 3,
+    borderColor: "green",
+    width: "95%",
+    left: "2.5%",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
   },
-  buttonNav: {
-    flexDirection: "row",
-    color: "#D7D9D7",
+  pickerWindow: {
+    borderWidth: 3,
+    borderColor: "red",
+  },
+  buttonBox: {
+    // borderWidth: 3,
+    // borderColor: "red",
+    flex: 1,
     alignItems: "center",
-    justifyContent: "space-around",
   },
-  sliderBox: {},
 });
 
 export { CheckIn };
