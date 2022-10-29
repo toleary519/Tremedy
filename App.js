@@ -37,13 +37,13 @@ import { CopingStatement } from "./screens/CopingStatement";
 import { CheckIn } from "./screens/CheckIn";
 import { JustOne } from "./screens/JustOne";
 import { Report } from "./screens/Report";
+import { Routine } from "./screens/Routine";
 import MyStack from "./routes/homeStack";
 import { StatusBar } from "expo-status-bar";
 
 const Stack = createNativeStackNavigator();
 
 function App() {
-
   return (
     <View style={styles.container}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -205,6 +205,11 @@ function App() {
               name="Report"
               component={Report}
               options={{ title: "Past Week" }}
+            />
+            <Stack.Screen
+              name="Routine"
+              component={Routine}
+              options={{ title: "My Routine" }}
             />
             <Stack.Screen
               name="One"

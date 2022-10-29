@@ -1,117 +1,155 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   StyleSheet,
   View,
+  Alert,
+  TextInput,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
-  FlatList,
 } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const PepTalkMenu = ({ navigation }) => (
-  <View style={styles.container}>
-    <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("PercievedThreatMenu")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Elevated State</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Report")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>My Past Week</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate()}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>My Routine</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("FocusStatement")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>My Focus Statement</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("CopingStatement")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Coping Statement</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("MyValues")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>My Values</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("CheckIn")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Quick Check In</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("SelfTalk")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>+ Self-Talk</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Pies")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>PIES Check-In</Text>
-      </TouchableOpacity>
-      {/* <TouchableOpacity
-        onPress={() => navigation.navigate("Stoic")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Stoic Questions</Text>
-      </TouchableOpacity> */}
-      {/* <TouchableOpacity
-        onPress={() => navigation.navigate("Breathe")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Breathe</Text>
-      </TouchableOpacity> */}
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Five")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>5-4-3-2-1</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("NotesMenu")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Your Experiences</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("SoberContacts")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Support Contacts</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("ProCon")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Pros & Cons</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Activities")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Activities</Text>
-      </TouchableOpacity>
-    </ScrollView>
-  </View>
-);
+const PepTalkMenu = ({ navigation }) => {
+  let [routineList, setRoutineList] = useState(
+    routineList ? routineList : pageOptions
+  );
+
+  let pageOptions = [
+    {
+      id: 0,
+      selected: true,
+      pageName: "PercievedThreatMenu",
+      title: "Elevated State",
+    },
+    { id: 1, selected: false, pageName: "Report", title: "My Past Week" },
+    {
+      id: 2,
+      selected: false,
+      pageName: "FocusStatement",
+      title: "My Focus Statement",
+    },
+    {
+      id: 3,
+      selected: false,
+      pageName: "CopingStatement",
+      title: "My Coping Statement",
+    },
+    { id: 4, selected: false, pageName: "MyValues", title: "My Values" },
+    { id: 5, selected: false, pageName: "CheckIn", title: "Quick Check-In" },
+    { id: 6, selected: false, pageName: "SelfTalk", title: "+ Self-Talk" },
+    { id: 7, selected: false, pageName: "Pies", title: "PIES Check-In" },
+    { id: 8, selected: false, pageName: "Five", title: "5-4-3-2-1" },
+    { id: 9, selected: false, pageName: "NotesMenu", title: "Experiences" },
+    {
+      id: 10,
+      selected: false,
+      pageName: "SoberContacts",
+      title: "Support Contacts",
+    },
+    { id: 11, selected: false, pageName: "ProCon", title: "Pros & Cons" },
+    { id: 12, selected: false, pageName: "Activities", title: "Activities" },
+    { id: 13, selected: false, pageName: "Routine", title: "My Routine" },
+  ];
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("savedRoutine");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setRoutineList(savedData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const storeData = async (routineList) => {
+    try {
+      const jsonValue = JSON.stringify(routineList);
+      await AsyncStorage.setItem("savedRoutine", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // const handleAdd = (selection, i, routineList) => {
+  //   let currentDate = new Date();
+  //   let currentDay = currentDate.getDate();
+  //   let currentMonth = currentDate.getMonth() + 1;
+  //   let currentYear = currentDate.getFullYear();
+  //   let orderId = currentDate.getTime();
+
+  //   let newItem = {
+  //     id: pageOptions[i].id,
+  //     pageName: pageOptions[i].pageName,
+  //     selection: selection,
+  //   };
+
+  //   const newList = [...routineList, newItem];
+
+  //   setRoutineList(newList);
+  //   storeData(newList);
+  //   getData();
+  // };
+
+  const handleSelection = (i) => {
+    let currentItem = pageOptions.filter((x) => x.id === i);
+
+    routineList.contains();
+
+    currentItem.selection
+      ? (currentItem.selection = false)
+      : (currentItem.selection = true);
+
+    for (let routineItem of routineList) {
+      if (routineItem.id === i) {
+        routineItem = currentItem;
+      }
+    }
+
+    storeData(routineList);
+    getData();
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
+        {pageOptions.map((item, i) => (
+          <View key={item.id} style={styles.element}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(item.pageName)}
+              delayPressIn={150}
+            >
+              <Text style={styles.add}>{item.title}</Text>
+            </TouchableOpacity>
+
+            {item.selection ? (
+              <TouchableOpacity
+                onPress={() => handleSelection(i)}
+                delayPressIn={150}
+              >
+                <Text style={styles.inRoutine}> - from Routine</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={() => handleSelection(pageOptions, i)}
+                delayPressIn={150}
+              >
+                <Text style={styles.outRoutine}> + to Routine</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
 
 // used overflow: hidden below to prevent corners.
 
@@ -121,7 +159,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: "#1B2A41",
   },
-  add: {
+  element: {
     overflow: "hidden",
     borderRadius: 10,
     borderWidth: 4,
@@ -130,12 +168,33 @@ const styles = StyleSheet.create({
     marginTop: 21,
     width: "90%",
     left: "5%",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 25,
-    fontWeight: "bold",
+  },
+  add: {
     color: "#1B2A41",
+    fontSize: 25,
+    padding: 10,
+    fontWeight: "bold",
+    textAlign: "flex-start",
+  },
+  routineButton: {
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "#F4743B",
+  },
+  inRoutine: {
+    color: "green",
+    fontSize: 20,
+  },
+  outRoutine: {
+    color: "brown",
+    fontSize: 20,
+  },
+  left: {
+    width: "90%",
+  },
+  right: {
+    right: "65%",
+    width: "15%",
   },
 });
 
