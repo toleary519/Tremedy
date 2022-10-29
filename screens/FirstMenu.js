@@ -24,7 +24,7 @@ const FirstMenu = ({ navigation }) => {
         onPress={() => navigation.navigate("SoberContacts")}
         delayPressIn={150}
       >
-        <Text style={styles.add}>Sober Contacts</Text>
+        <Text style={styles.add}>Support Contacts</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate("UrgeMenu")}
