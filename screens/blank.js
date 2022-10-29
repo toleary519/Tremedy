@@ -83,9 +83,6 @@ const xyz = () => {
     setST(newList);
     setEnt("");
     storeData(newList);
-    {
-      console.log("sorted: ", sortedEntries);
-    }
     getData();
   };
 
