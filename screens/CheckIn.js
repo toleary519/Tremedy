@@ -9,11 +9,11 @@ import {
 } from "react-native";
 import { handleFace, feelingWheel } from "./feelingwheelOptions";
 import Slider from "@react-native-community/slider";
-import WheelPicker from "react-native-wheely";
+// import WheelPicker from "react-native-wheely";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-// import { Picker } from "@react-native-picker/picker";
+import { Picker } from "@react-native-picker/picker";
 import { FontAwesome } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -30,7 +30,7 @@ const CheckIn = () => {
   let [feelOne, setFeelOne] = useState(feelOne ? feelOne : "");
   let [feelTwo, setFeelTwo] = useState(feelTwo ? feelTwo : "");
   let [feelThree, setFeelThree] = useState(feelThree ? feelThree : "");
-  let [temp, setTemp] = useState(0);
+  let [temp, setTemp] = useState("");
 
   let sortedEntries = checkinStorage.sort((a, b) => {
     return b.id - a.id;
@@ -44,8 +44,8 @@ const CheckIn = () => {
       let savedReportData = savedReportJson ? JSON.parse(savedReportJson) : [];
       setCheckinStorage(savedData);
       setReportStorage(savedReportData);
-      console.log("check:", checkinStorage);
-      console.log("report", reportStorage);
+      console.log("check: ", checkinStorage);
+      console.log("report ", reportStorage);
     } catch (e) {
       console.log(e);
     }
@@ -133,24 +133,39 @@ const CheckIn = () => {
   };
 
   const setFeeling = (temp) => {
-    !feelOne ? setFeelOne(setOne[temp]) : null;
-    feelOne && !feelTwo ? setFeelTwo(setTwo[temp]) : null;
-    feelOne && feelTwo ? setFeelThree(setThree[temp]) : null;
-    setTemp(0);
+    // console.log("setOne : " + setOne);
+    console.log("temp: ", temp);
+    !feelOne ? setFeelOne(temp) : null;
+    feelOne && !feelTwo ? setFeelTwo(temp) : null;
+    feelOne && feelTwo ? setFeelThree(temp) : null;
+    setTemp("");
   };
 
   const handleBack = () => {
-    feelOne && !feelTwo && !feelThree ? setFeelOne(0) : null;
-    feelOne && feelTwo && !feelThree ? setFeelTwo(0) : null;
-    feelOne && feelTwo && feelThree ? setFeelThree(0) : null;
-    setTemp(0);
+    feelOne && !feelTwo && !feelThree
+      ? () => {
+          setFeelOne(null);
+          // setTemp(setOne[0]);
+        }
+      : null;
+    feelOne && feelTwo && !feelThree
+      ? () => {
+          setFeelTwo(null);
+          // setTemp(setOne[0]);
+        }
+      : null;
+    feelOne && feelTwo && feelThree
+      ? () => {
+          console.log("hit 3 - ", feelThree, temp);
+          setFeelThree(null);
+          // setTemp(setTwo[0]);
+        }
+      : null;
   };
 
-  const setOne = !feelOne ? Object.keys(feelingWheel[0]) : null;
-  const setTwo =
-    feelOne && !feelTwo ? Object.keys(feelingWheel[0][feelOne]) : null;
-  const setThree =
-    feelOne && feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
+  const setOne = Object.keys(feelingWheel[0]);
+  const setTwo = feelOne ? Object.keys(feelingWheel[0][feelOne]) : null;
+  const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
 
   React.useEffect(() => {
     getData();
@@ -192,42 +207,44 @@ const CheckIn = () => {
             <View style={styles.pickerBoxCase}>
               <View style={styles.pickerBox}>
                 {!feelOne && !feelTwo && !feelThree ? (
-                  <WheelPicker
-                    visibleRest={1}
+                  <Picker
                     itemStyle={styles.pickerItem}
-                    // containerStyle={}
-                    itemTextStyle={styles.picker}
-                    selectedIndex={temp}
-                    options={setOne}
-                    onChange={(x) => {
+                    selectedValue={!temp ? setTemp(setOne[0]) : temp}
+                    onValueChange={(x) => {
                       setTemp(x);
                     }}
-                  />
+                  >
+                    {setOne.map((item) => (
+                      <Picker.Item key={item} value={item} label={item} />
+                    ))}
+                  </Picker>
                 ) : null}
 
                 {feelOne && !feelTwo && !feelThree ? (
-                  <WheelPicker
-                    visibleRest={1}
+                  <Picker
                     itemStyle={styles.pickerItem}
-                    itemTextStyle={styles.picker}
-                    selectedIndex={temp}
-                    options={setTwo}
-                    onChange={(x) => {
+                    selectedValue={!temp ? setTemp(setTwo[0]) : temp}
+                    onValueChange={(x) => {
                       setTemp(x);
                     }}
-                  />
+                  >
+                    {setTwo.map((item) => (
+                      <Picker.Item key={item} value={item} label={item} />
+                    ))}
+                  </Picker>
                 ) : null}
                 {feelOne && feelTwo && !feelThree ? (
-                  <WheelPicker
+                  <Picker
                     itemStyle={styles.pickerItem}
-                    visibleRest={1}
-                    itemTextStyle={styles.picker}
-                    selectedIndex={temp}
-                    options={setThree}
-                    onChange={(x) => {
+                    selectedValue={!temp ? setTemp(setThree[0]) : temp}
+                    onValueChange={(x) => {
                       setTemp(x);
                     }}
-                  />
+                  >
+                    {setThree.map((item) => (
+                      <Picker.Item key={item} value={item} label={item} />
+                    ))}
+                  </Picker>
                 ) : null}
                 <View style={styles.buttonBox}>
                   {feelOne ? (
@@ -295,7 +312,7 @@ const CheckIn = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // position: "relative",
+    flex: 1,
     paddingTop: 10,
     paddingBottom: 25,
     backgroundColor: "#1B2A41",
@@ -426,6 +443,9 @@ const styles = StyleSheet.create({
     // left: "2.5%",
   },
   pickerItem: {
+    height: 90,
+    color: "#D7D9D7",
+    fontSize: 40,
     backgroundColor: "#1B2A41",
   },
   picker: {
