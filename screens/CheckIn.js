@@ -13,6 +13,7 @@ import WheelPicker from "react-native-wheely";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+// import { Picker } from "@react-native-picker/picker";
 import { FontAwesome } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -66,7 +67,7 @@ const CheckIn = () => {
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
     let orderId = currentDate.getTime();
-    let saveFace = handleFace();
+    let saveFace = handleFace(face);
 
     let newCheckin = {
       id: orderId,
@@ -157,130 +158,135 @@ const CheckIn = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.firstBox}>
-        <Text style={styles.add}>How are you feeling?</Text>
-        <Text style={styles.face}>{handleFace(face)}</Text>
-        <Slider
-          style={styles.slider}
-          minimumValue={1}
-          maximumValue={7}
-          step={1}
-          value={face ? face : 4}
-          onValueChange={setFace}
-          minimumTrackTintColor={"#D7D9D7"}
-        />
-      </View>
-
-      {/* -------------------------------------------------FEELWHEEL-------------------------- */}
-
-      <View style={styles.feelWheelContainer}>
-        <View style={styles.feelChoiceDisplayCase}>
-          <View style={styles.feelChoiceDisplay}>
-            {!feelOne ? <Text style={styles.display}> </Text> : null}
-            {feelOne ? <Text style={styles.display}>{feelOne}</Text> : null}
-            {feelTwo ? <Text style={styles.display}>{feelTwo}</Text> : null}
-            {feelThree ? <Text style={styles.display}>{feelThree}</Text> : null}
-          </View>
-        </View>
-        <View style={styles.pickerBoxCase}>
-          <View style={styles.pickerBox}>
-            {!feelOne && !feelTwo && !feelThree ? (
-              <WheelPicker
-                visibleRest={1}
-                itemStyle={styles.pickerItem}
-                itemTextStyle={styles.picker}
-                selectedIndex={temp}
-                options={setOne}
-                onChange={(x) => {
-                  setTemp(x);
-                }}
-              />
-            ) : null}
-
-            {feelOne && !feelTwo && !feelThree ? (
-              <WheelPicker
-                visibleRest={1}
-                itemStyle={styles.pickerItem}
-                itemTextStyle={styles.picker}
-                selectedIndex={temp}
-                options={setTwo}
-                onChange={(x) => {
-                  setTemp(x);
-                }}
-              />
-            ) : null}
-            {feelOne && feelTwo && !feelThree ? (
-              <WheelPicker
-                itemStyle={styles.pickerItem}
-                visibleRest={1}
-                itemTextStyle={styles.picker}
-                selectedIndex={temp}
-                options={setThree}
-                onChange={(x) => {
-                  setTemp(x);
-                }}
-              />
-            ) : null}
-            <View style={styles.buttonBox}>
-              {feelOne ? (
-                <TouchableOpacity onPress={() => handleBack()}>
-                  <FontAwesome
-                    name="chevron-circle-left"
-                    style={[styles.nextButton, { marginRight: "5%" }]}
-                  />
-                </TouchableOpacity>
-              ) : null}
-              {feelThree ? null : (
-                <TouchableOpacity onPress={() => setFeeling(temp)}>
-                  <FontAwesome
-                    name="chevron-circle-right"
-                    style={[styles.nextButton, { marginLeft: "5%" }]}
-                  />
-                </TouchableOpacity>
-              )}
-            </View>
-          </View>
-        </View>
-      </View>
       <KeyboardAwareScrollView extraHeight={250}>
-        <Text style={[styles.add, { paddingBottom: 0 }]}>
-          Anything else you want to say about how you are feeling?
-        </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(t) => setCheckin(t)}
-          value={checkin}
-          placeholder={"enter text"}
-          multiline
-          keyboardType="default"
-          color="#D7D9D7"
-          placeholderTextColor={"#F1F7EE"}
-        />
-        <TouchableOpacity onPress={() => errorCheck()}>
-          <MaterialIcons style={styles.icon} name="add-circle" />
-        </TouchableOpacity>
-        <View>
-          {sortedEntries.map((item) => (
-            <View key={item.id} style={styles.pieContainer}>
-              <Text style={styles.date}>{item.date}</Text>
-              <View style={styles.displayCase}>
-                <View style={styles.feelChoiceDisplay}>
-                  <Text style={styles.display}>{feelOne}</Text>
-                  <Text style={styles.display}>{feelTwo}</Text>
-                  <Text style={styles.display}>{feelThree}</Text>
+        <View style={styles.firstBox}>
+          <Text style={styles.add}>How are you feeling?</Text>
+          <Text style={styles.face}>{handleFace(face)}</Text>
+          <Slider
+            style={styles.slider}
+            minimumValue={1}
+            maximumValue={7}
+            step={1}
+            value={face ? face : 4}
+            onValueChange={setFace}
+            minimumTrackTintColor={"#D7D9D7"}
+          />
+
+          {/* -------------------------------------------------FEELWHEEL-------------------------- */}
+          <View style={[styles.pieContainer, { borderWidth: 0 }]}>
+            <View style={styles.feelChoiceDisplayCase}>
+              {feelOne ? (
+                <View style={{ flexDirection: "row" }}>
+                  {feelOne ? (
+                    <Text style={styles.display}>{feelOne}</Text>
+                  ) : null}
+                  {feelTwo ? (
+                    <Text style={styles.display}>{feelTwo}</Text>
+                  ) : null}
+                  {feelThree ? (
+                    <Text style={styles.display}>{feelThree}</Text>
+                  ) : null}
                 </View>
-                <Text style={styles.add}>
-                  {item.face} {item.myCheckin}
-                </Text>
-              </View>
-              <TouchableOpacity onPress={() => handleDelete({ item })}>
-                <MaterialIcons
-                  style={styles.deleteIcon}
-                  name="delete-forever"
-                />
-              </TouchableOpacity>
+              ) : null}
             </View>
-          ))}
+            <View style={styles.pickerBoxCase}>
+              <View style={styles.pickerBox}>
+                {!feelOne && !feelTwo && !feelThree ? (
+                  <WheelPicker
+                    visibleRest={1}
+                    itemStyle={styles.pickerItem}
+                    // containerStyle={}
+                    itemTextStyle={styles.picker}
+                    selectedIndex={temp}
+                    options={setOne}
+                    onChange={(x) => {
+                      setTemp(x);
+                    }}
+                  />
+                ) : null}
+
+                {feelOne && !feelTwo && !feelThree ? (
+                  <WheelPicker
+                    visibleRest={1}
+                    itemStyle={styles.pickerItem}
+                    itemTextStyle={styles.picker}
+                    selectedIndex={temp}
+                    options={setTwo}
+                    onChange={(x) => {
+                      setTemp(x);
+                    }}
+                  />
+                ) : null}
+                {feelOne && feelTwo && !feelThree ? (
+                  <WheelPicker
+                    itemStyle={styles.pickerItem}
+                    visibleRest={1}
+                    itemTextStyle={styles.picker}
+                    selectedIndex={temp}
+                    options={setThree}
+                    onChange={(x) => {
+                      setTemp(x);
+                    }}
+                  />
+                ) : null}
+                <View style={styles.buttonBox}>
+                  {feelOne ? (
+                    <TouchableOpacity onPress={() => handleBack()}>
+                      <FontAwesome
+                        name="chevron-circle-left"
+                        style={[styles.nextButton, { marginRight: "5%" }]}
+                      />
+                    </TouchableOpacity>
+                  ) : null}
+                  {feelThree ? null : ( // <View style={[styles.nextButton, { marginLeft: "5%" }]} />
+                    <TouchableOpacity onPress={() => setFeeling(temp)}>
+                      <FontAwesome
+                        name="chevron-circle-right"
+                        style={[styles.nextButton, { marginLeft: "5%" }]}
+                      />
+                    </TouchableOpacity>
+                  )}
+                </View>
+              </View>
+            </View>
+          </View>
+          <Text style={[styles.add, { paddingBottom: 0, fontSize: 18 }]}>
+            Is there anything else you want to say about how you are feeling?
+          </Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(t) => setCheckin(t)}
+            value={checkin}
+            placeholder={"enter text"}
+            multiline
+            keyboardType="default"
+            color="#D7D9D7"
+            placeholderTextColor={"#F1F7EE"}
+          />
+          <TouchableOpacity onPress={() => errorCheck()}>
+            <MaterialIcons style={styles.icon} name="add-circle" />
+          </TouchableOpacity>
+          <View>
+            {sortedEntries.map((item) => (
+              <View key={item.id} style={styles.pieContainer}>
+                <Text style={styles.date}>{item.date}</Text>
+                <Text style={styles.face}>{item.face}</Text>
+                <View style={styles.displayCase}>
+                  <View style={styles.feelChoiceDisplay}>
+                    <Text style={styles.display}>{item.feelOne}</Text>
+                    <Text style={styles.display}>{item.feelTwo}</Text>
+                    <Text style={styles.display}>{item.feelThree}</Text>
+                  </View>
+                  <Text style={styles.add}>
+                    {item.face} {item.myCheckin}
+                  </Text>
+                </View>
+                <TouchableOpacity onPress={() => handleDelete({ item })}>
+                  <MaterialIcons style={styles.icon} name="delete-forever" />
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
         </View>
       </KeyboardAwareScrollView>
     </View>
@@ -289,15 +295,22 @@ const CheckIn = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 5,
+    // position: "relative",
+    paddingTop: 10,
     paddingBottom: 25,
     backgroundColor: "#1B2A41",
   },
+  firstBox: {
+    width: "90%",
+    left: "5%",
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    textAlign: "center",
+  },
   add: {
     marginTop: 21,
-    width: "85%",
-    left: "8%",
+    // width: "85%",
     textAlign: "center",
     padding: 10,
     fontSize: 25,
@@ -309,75 +322,70 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     marginTop: 7,
     marginBottom: 7,
-    width: "95%",
-    left: "2.5%",
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    // width: "90%",
+    textAlign: "center",
     borderColor: "#D7D9D7",
   },
   slider: {
-    // borderWidth: 3,
-    // borderColor: "red",
     marginTop: 20,
     width: "80%",
-    left: "10%",
+    // left: "10%",
     fontSize: 25,
     fontWeight: "bold",
+    textAlign: "center",
   },
   face: {
-    // borderWidth: 3,
-    // borderColor: "blue",
     marginTop: 10,
-    width: "80%",
-    left: "10%",
+    // width: "85%",
+    // left: "10%",
     textAlign: "center",
-    justifyContent: "flex-end",
-    fontSize: 60,
+    // justifyContent: "flex-end",
+    fontSize: 40,
   },
   icon: {
     paddingTop: 20,
     paddingBottom: 20,
-    fontSize: 30,
+    fontSize: 40,
     color: "#D7D9D7",
+    // width: "85%",
     textAlign: "center",
   },
   input: {
     borderRadius: 10,
     borderWidth: 4,
     borderColor: "#D7D9D7",
-    width: "80%",
+    width: "90%",
     marginTop: 21,
     textAlign: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
     padding: 10,
-    left: "10%",
+    // left: "10%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#2f8587",
   },
   date: {
     marginTop: 5,
-    width: "90%",
-    left: "5%",
+    // width: "85%",
+    // left: "5%",
     textAlign: "center",
     padding: 10,
     fontSize: 18,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
-  deleteIcon: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    left: "45%",
-    fontSize: 30,
-    color: "#D7D9D7",
-  },
   feelChoiceDisplayCase: {
+    marginTop: 10,
     justifyContent: "center",
     flexDirection: "row",
   },
   feelChoiceDisplay: {
-    marginTop: 7,
-    width: "90%",
-    justifyContent: "center",
+    // marginTop: 7,
+    // width: "90%",
+    // justifyContent: "center",
     flexDirection: "row",
   },
   display: {
@@ -387,39 +395,43 @@ const styles = StyleSheet.create({
     color: "#D7D9D7",
   },
   nextButton: {
+    // width: "85%",
     fontSize: 40,
     color: "#D7D9D7",
+    textAlign: "center",
+    // borderWidth: 3,
+    // borderColor: "blue",
   },
   pickerBox: {
     width: "90%",
   },
   pickerBoxCase: {
-    justifyContent: "center",
+    // width: "90%",
+    textAlign: "center",
+    // justifyContent: "center",
     flexDirection: "row",
     // borderWidth: 3,
     // borderColor: "gold",
   },
-  feelWheelContainer: {},
+
   buttonBox: {
+    // width: "85%",
     marginTop: 20,
     flexDirection: "row",
     justifyContent: "center",
   },
   sliderBox: {
-    flex: 1.5,
-    width: "95%",
-    left: "2.5%",
+    // flex: 1.5,
+    // width: "95%",
+    // left: "2.5%",
   },
   pickerItem: {
     backgroundColor: "#1B2A41",
   },
   picker: {
-    height: 75,
+    height: 90,
     color: "#D7D9D7",
     fontSize: 40,
-  },
-  displayCase: {
-    alignItems: "center",
   },
 });
 
