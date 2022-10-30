@@ -71,6 +71,9 @@ const CheckIn = () => {
     let newCheckin = {
       id: orderId,
       face: saveFace,
+      feelOne: feelOne,
+      feelTwo: feelTwo,
+      feelThree: feelThree,
       myCheckin: checkin,
       date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
@@ -218,7 +221,6 @@ const CheckIn = () => {
                 }}
               />
             ) : null}
-
             <View style={styles.buttonBox}>
               {feelOne ? (
                 <TouchableOpacity onPress={() => handleBack()}>
@@ -240,7 +242,6 @@ const CheckIn = () => {
           </View>
         </View>
       </View>
-
       <KeyboardAwareScrollView extraHeight={250}>
         <Text style={[styles.add, { paddingBottom: 0 }]}>
           Anything else you want to say about how you are feeling?
@@ -262,9 +263,16 @@ const CheckIn = () => {
           {sortedEntries.map((item) => (
             <View key={item.id} style={styles.pieContainer}>
               <Text style={styles.date}>{item.date}</Text>
-              <Text style={styles.add}>
-                {item.face} {item.myCheckin}
-              </Text>
+              <View style={styles.displayCase}>
+                <View style={styles.feelChoiceDisplay}>
+                  <Text style={styles.display}>{feelOne}</Text>
+                  <Text style={styles.display}>{feelTwo}</Text>
+                  <Text style={styles.display}>{feelThree}</Text>
+                </View>
+                <Text style={styles.add}>
+                  {item.face} {item.myCheckin}
+                </Text>
+              </View>
               <TouchableOpacity onPress={() => handleDelete({ item })}>
                 <MaterialIcons
                   style={styles.deleteIcon}
@@ -288,8 +296,8 @@ const styles = StyleSheet.create({
   },
   add: {
     marginTop: 21,
-    width: "80%",
-    left: "10%",
+    width: "85%",
+    left: "8%",
     textAlign: "center",
     padding: 10,
     fontSize: 25,
@@ -409,6 +417,9 @@ const styles = StyleSheet.create({
     height: 75,
     color: "#D7D9D7",
     fontSize: 40,
+  },
+  displayCase: {
+    alignItems: "center",
   },
 });
 

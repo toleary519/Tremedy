@@ -155,6 +155,15 @@ const Report = () => {
                       ]}
                     >
                       {item.face ? item.face : null}
+                      {item.feelOne ? (
+                        <View style={styles.feelChoiceDisplayCase}>
+                          <View style={styles.feelChoiceDisplay}>
+                            <Text style={styles.display}>{feelOne}</Text>
+                            <Text style={styles.display}>{feelTwo}</Text>
+                            <Text style={styles.display}>{feelThree}</Text>
+                          </View>
+                        </View>
+                      ) : null}
                     </Text>
                     <Text style={styles.add}>
                       {item.myCheckin ? item.myCheckin : null}
@@ -174,9 +183,9 @@ const Report = () => {
                     ) : null}
                     {item.initial ? (
                       <View style={{ flexDirection: "column" }}>
-                        <Text style={styles.add}>- Initial Thought -</Text>
+                        <Text style={styles.add}>Initial Thought:</Text>
                         <Text style={styles.add}>{item.initial}</Text>
-                        <Text style={styles.add}>- Rational Thought -</Text>
+                        <Text style={styles.add}>Rational Thought:</Text>
                         <Text style={styles.add}>{item.rational}</Text>
                       </View>
                     ) : null}
@@ -200,8 +209,6 @@ const Report = () => {
                     <Text style={styles.add}>
                       {item.myCheckin ? item.myCheckin : null}
                     </Text>
-
-                    {/* {item.X ? item.X : null} */}
                   </View>
                 ))
               : null}
@@ -306,6 +313,22 @@ const styles = StyleSheet.create({
     width: "90%",
     left: "5%",
     borderColor: "#D7D9D7",
+  },
+  feelChoiceDisplayCase: {
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+  feelChoiceDisplay: {
+    marginTop: 7,
+    width: "90%",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+  display: {
+    padding: 10,
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#D7D9D7",
   },
 });
 
