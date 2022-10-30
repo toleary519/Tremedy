@@ -44,8 +44,6 @@ const CheckIn = () => {
       let savedReportData = savedReportJson ? JSON.parse(savedReportJson) : [];
       setCheckinStorage(savedData);
       setReportStorage(savedReportData);
-      console.log("check: ", checkinStorage);
-      console.log("report ", reportStorage);
     } catch (e) {
       console.log(e);
     }
@@ -133,8 +131,6 @@ const CheckIn = () => {
   };
 
   const setFeeling = (temp) => {
-    // console.log("setOne : " + setOne);
-    console.log("temp: ", temp);
     !feelOne ? setFeelOne(temp) : null;
     feelOne && !feelTwo ? setFeelTwo(temp) : null;
     feelOne && feelTwo ? setFeelThree(temp) : null;
@@ -142,25 +138,22 @@ const CheckIn = () => {
   };
 
   const handleBack = () => {
-    feelOne && !feelTwo && !feelThree
-      ? () => {
-          setFeelOne(null);
-          // setTemp(setOne[0]);
-        }
-      : null;
-    feelOne && feelTwo && !feelThree
-      ? () => {
-          setFeelTwo(null);
-          // setTemp(setOne[0]);
-        }
-      : null;
-    feelOne && feelTwo && feelThree
-      ? () => {
-          console.log("hit 3 - ", feelThree, temp);
-          setFeelThree(null);
-          // setTemp(setTwo[0]);
-        }
-      : null;
+    const backOne = () => {
+      setFeelOne("");
+      setTemp("");
+    };
+    const backTwo = () => {
+      setFeelTwo("");
+      setTemp("");
+    };
+    const backThree = () => {
+      setFeelThree("");
+      setTemp("");
+    };
+
+    feelOne && !feelTwo && !feelThree ? backOne() : null;
+    feelOne && feelTwo && !feelThree ? backTwo() : null;
+    feelOne && feelTwo && feelThree ? backThree() : null;
   };
 
   const setOne = Object.keys(feelingWheel[0]);
@@ -327,7 +320,6 @@ const styles = StyleSheet.create({
   },
   add: {
     marginTop: 21,
-    // width: "85%",
     textAlign: "center",
     padding: 10,
     fontSize: 25,
@@ -342,24 +334,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignContent: "center",
-    // width: "90%",
     textAlign: "center",
     borderColor: "#D7D9D7",
   },
   slider: {
     marginTop: 20,
     width: "80%",
-    // left: "10%",
     fontSize: 25,
     fontWeight: "bold",
     textAlign: "center",
   },
   face: {
     marginTop: 10,
-    // width: "85%",
-    // left: "10%",
     textAlign: "center",
-    // justifyContent: "flex-end",
     fontSize: 40,
   },
   icon: {
@@ -367,7 +354,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     fontSize: 40,
     color: "#D7D9D7",
-    // width: "85%",
     textAlign: "center",
   },
   input: {
@@ -377,17 +363,13 @@ const styles = StyleSheet.create({
     width: "90%",
     marginTop: 21,
     textAlign: "center",
-    // justifyContent: "center",
     padding: 10,
-    // left: "10%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#2f8587",
   },
   date: {
     marginTop: 5,
-    // width: "85%",
-    // left: "5%",
     textAlign: "center",
     padding: 10,
     fontSize: 18,
@@ -400,9 +382,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   feelChoiceDisplay: {
-    // marginTop: 7,
-    // width: "90%",
-    // justifyContent: "center",
     flexDirection: "row",
   },
   display: {
@@ -412,35 +391,21 @@ const styles = StyleSheet.create({
     color: "#D7D9D7",
   },
   nextButton: {
-    // width: "85%",
     fontSize: 40,
     color: "#D7D9D7",
     textAlign: "center",
-    // borderWidth: 3,
-    // borderColor: "blue",
   },
   pickerBox: {
     width: "90%",
   },
   pickerBoxCase: {
-    // width: "90%",
     textAlign: "center",
-    // justifyContent: "center",
     flexDirection: "row",
-    // borderWidth: 3,
-    // borderColor: "gold",
   },
-
   buttonBox: {
-    // width: "85%",
     marginTop: 20,
     flexDirection: "row",
     justifyContent: "center",
-  },
-  sliderBox: {
-    // flex: 1.5,
-    // width: "95%",
-    // left: "2.5%",
   },
   pickerItem: {
     height: 90,
