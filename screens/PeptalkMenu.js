@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#D2EAEB",
     marginTop: 21,
     width: "90%",
-    left: "2%",
+    left: "1.5%",
   },
   add: {
     color: "#1B2A41",
