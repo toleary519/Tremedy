@@ -144,51 +144,55 @@ const Report = () => {
           <View style={{ marginTop: 7 }}>
             {showFull
               ? fullReport.map((item) => (
-                  <View key={item.id} style={styles.pieContainer}>
-                    <Text style={[styles.add, { fontSize: 15 }]}>
-                      {item.date}
-                    </Text>
-                    <Text
-                      style={[
-                        styles.add,
-                        { paddingRight: 10, paddingLeft: 10 },
-                      ]}
-                    >
-                      {item.face ? item.face : null}
-                      {item.feelOne ? (
-                        <View style={styles.feelChoiceDisplayCase}>
-                          <View style={styles.feelChoiceDisplay}>
-                            <Text style={styles.display}>{feelOne}</Text>
-                            <Text style={styles.display}>{feelTwo}</Text>
-                            <Text style={styles.display}>{feelThree}</Text>
+                  <View style={styles.displayBlock}>
+                    <View key={item.id} style={styles.pieContainer}>
+                      <Text style={[styles.add, { fontSize: 15 }]}>
+                        {item.date}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.add,
+                          { paddingRight: 10, paddingLeft: 10 },
+                        ]}
+                      >
+                        {item.face ? item.face : null}
+                        {item.feelOne ? (
+                          <View style={styles.feelChoiceDisplayCase}>
+                            <View style={styles.feelChoiceDisplay}>
+                              <Text style={styles.display}>{item.feelOne}</Text>
+                              <Text style={styles.display}>{item.feelTwo}</Text>
+                              <Text style={styles.display}>
+                                {item.feelThree}
+                              </Text>
+                            </View>
                           </View>
+                        ) : null}
+                      </Text>
+                      <Text style={styles.add}>
+                        {item.myCheckin ? item.myCheckin : null}
+                        {item.myCoping ? item.myCoping : null}
+                        {item.myFocus ? item.myFocus : null}
+                        {item.myBad ? item.myBad : null}
+                        {item.myGood ? item.myGood : null}
+                        {item.myValue ? item.myValue : null}
+                      </Text>
+                      {item.physical ? (
+                        <View style={{ flexDirection: "column" }}>
+                          <Text style={styles.add}>P: {item.physical}</Text>
+                          <Text style={styles.add}>I: {item.insights}</Text>
+                          <Text style={styles.add}>E: {item.emotions}</Text>
+                          <Text style={styles.add}>S: {item.spiritual}</Text>
                         </View>
                       ) : null}
-                    </Text>
-                    <Text style={styles.add}>
-                      {item.myCheckin ? item.myCheckin : null}
-                      {item.myCoping ? item.myCoping : null}
-                      {item.myFocus ? item.myFocus : null}
-                      {item.myBad ? item.myBad : null}
-                      {item.myGood ? item.myGood : null}
-                      {item.myValue ? item.myValue : null}
-                    </Text>
-                    {item.physical ? (
-                      <View style={{ flexDirection: "column" }}>
-                        <Text style={styles.add}>P: {item.physical}</Text>
-                        <Text style={styles.add}>I: {item.insights}</Text>
-                        <Text style={styles.add}>E: {item.emotions}</Text>
-                        <Text style={styles.add}>S: {item.spiritual}</Text>
-                      </View>
-                    ) : null}
-                    {item.initial ? (
-                      <View style={{ flexDirection: "column" }}>
-                        <Text style={styles.add}>Initial Thought:</Text>
-                        <Text style={styles.add}>{item.initial}</Text>
-                        <Text style={styles.add}>Rational Thought:</Text>
-                        <Text style={styles.add}>{item.rational}</Text>
-                      </View>
-                    ) : null}
+                      {item.initial ? (
+                        <View style={{ flexDirection: "column" }}>
+                          <Text style={styles.add}>Initial Thought:</Text>
+                          <Text style={styles.add}>{item.initial}</Text>
+                          <Text style={styles.add}>Rational Thought:</Text>
+                          <Text style={styles.add}>{item.rational}</Text>
+                        </View>
+                      ) : null}
+                    </View>
                   </View>
                 ))
               : null}
@@ -260,25 +264,16 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   add: {
-    // borderRadius: 10,
-    // borderWidth: 4,
-    // borderColor: "#D7D9D7",
     margin: 5,
-    // width: "80%",
-    // left: "10%",
     textAlign: "center",
     alignItems: "center",
-    // padding: 10,
     fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
   buttonNav: {
-    // flexDirection: "row",
     marginRight: 5,
     marginLeft: 5,
-    // justifyContent: "center",
-    // alignItems: "center",
     width: "90%",
     left: "3%",
   },
@@ -302,30 +297,30 @@ const styles = StyleSheet.create({
     backgroundColor: "#D2EAEB",
     color: "#1B2A41",
   },
+  displayBlock: {
+    alignItems: "center",
+  },
   pieContainer: {
     borderRadius: 10,
     borderWidth: 2,
-    // flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
     marginTop: 5,
     marginBottom: 7,
     width: "90%",
-    left: "5%",
+    // left: "5%",
     borderColor: "#D7D9D7",
   },
   feelChoiceDisplayCase: {
-    justifyContent: "center",
-    flexDirection: "row",
+    // justifyContent: "center",
+    // flexDirection: "row",
   },
   feelChoiceDisplay: {
     marginTop: 7,
     width: "90%",
-    justifyContent: "center",
+    // justifyContent: "center",
     flexDirection: "row",
   },
   display: {
-    padding: 10,
+    paddingHorizontal: 3,
     fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
