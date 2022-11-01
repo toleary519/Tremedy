@@ -15,37 +15,53 @@ const FirstMenu = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
+        style={styles.element}
         onPress={() => navigation.navigate("PepTalk")}
         delayPressIn={150}
       >
         <Text style={styles.add}>Tool Box</Text>
+        <Text style={styles.sub}>All of the tools and your routine.</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        style={styles.element}
         onPress={() => navigation.navigate("SoberContacts")}
         delayPressIn={150}
       >
         <Text style={styles.add}>Support Contacts</Text>
+        <Text style={styles.sub}>The want you to call. Call.</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        style={styles.element}
         onPress={() => navigation.navigate("UrgeMenu")}
         delayPressIn={150}
       >
         <Text style={styles.add}>Lapse</Text>
+        <Text style={styles.sub}>It happened, its okay, what's next?</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Emergency")}
-        delayPressIn={150}
-      >
-        <Text style={styles.emergency}>Emergency</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
+        style={styles.element}
         onPress={() => navigation.navigate("UserSettings")}
         delayPressIn={150}
       >
         <Text style={styles.add}>User Settings</Text>
+        <Text style={styles.sub}>Manage personal info, flags etc.</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => confirmDelete()} delayPressIn={150}>
+      <TouchableOpacity
+        style={styles.element}
+        onPress={() => navigation.navigate("Emergency")}
+        delayPressIn={150}
+      >
+        <Text style={styles.emergency}>Emergency</Text>
+        <Text style={styles.eSub}>If you need it call now.</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.element}
+        onPress={() => confirmDelete()}
+        delayPressIn={150}
+      >
         <Text style={styles.emergency}>Delete Data</Text>
+        <Text style={styles.eSub}>deletes everything</Text>
       </TouchableOpacity>
     </View>
   );
@@ -54,48 +70,63 @@ const FirstMenu = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
-    backgroundColor: "#1B2A41"
+    paddingTop: 15,
+    backgroundColor: "#1B2A41",
+  },
+  element: {
+    marginTop: 5,
+    marginBottom: 10,
+    borderBottomColor: "#3C5E90",
+    justifyContent: "flex-start",
+    borderBottomColor: "#3C5E90",
+    borderBottomWidth: 1,
+    width: "90%",
+    left: "5%",
   },
   add: {
-    marginTop: 30,
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    width: "80%",
-    left: "10%",
-    padding: 10,
+    marginTop: 20,
+    textAlign: "flex-start",
+    marginBottom: 2,
+    fontWeight: "bold",
+    color: "#D7D9D7",
     fontSize: 40,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
-
   emergency: {
-    marginTop: 30,
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "red",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    width: "80%",
-    left: "10%",
-    padding: 10,
+    marginTop: 20,
+    textAlign: "flex-start",
+    marginBottom: 2,
+    fontWeight: "bold",
+    color: "#D7D9D7",
     fontSize: 40,
     fontWeight: "bold",
     color: "red",
   },
-
-  icon: {
-    borderRadius: "3px",
-    borderColor: "red",    
-    justifyContent: "center",
+  sub: {
+    marginTop: 5,
+    // width: "90%",
+    // left: "5%",
+    textAlign: "flex-start",
     alignItems: "center",
-    fontSize: "60", 
-    padding: 60,
-    color: "#D7D9D7"
-  }
+    opacity: 0.5,
+    marginBottom: 5,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#D7D9D7",
+  },
+  eSub: {
+    marginTop: 5,
+    // width: "90%",
+    // left: "5%",
+    textAlign: "flex-start",
+    alignItems: "center",
+    opacity: 0.6,
+    marginBottom: 5,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "red",
+  },
 });
 
 export { FirstMenu }

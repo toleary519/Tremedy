@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { look } from "../assets/styles";
 
 const Routine = ({ navigation }) => {
   let [selectedRoutine, setSelectedRoutine] = useState(
@@ -74,38 +75,57 @@ const Routine = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={look.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
-        <View style={styles.displayContainer}>
-          {selectedRoutine
-            ? selectedRoutine.map((item, i) => (
-                <View key={item.id} style={styles.element}>
+        {selectedRoutine
+          ? selectedRoutine.map((item, i) => (
+              <View
+                key={item.id}
+                style={[
+                  look.element,
+                  { flex: 6, flexDirection: "row" },
+                  look.border,
+                ]}
+              >
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(item.pageName)}
+                  delayPressIn={150}
+                >
+                  <Text style={look.add}>{item.title}</Text>
+                  <Text style={look.sub}>{item.sub}</Text>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    flex: 2,
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                    // marginRight: "10%",
+                  }}
+                >
                   <TouchableOpacity
                     onPress={i === end ? () => endCheck() : () => swapDown(i)}
-                    style={styles.left}
+                    style={[look.outRoutine]}
                     delayPressIn={150}
                   >
-                    <Feather name="chevrons-down" style={styles.arrow} />
+                    <Feather
+                      name="chevrons-down"
+                      style={[look.outRoutine, { fontSize: 30 }]}
+                    />
                   </TouchableOpacity>
-                  <View style={styles.middle}>
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate(item.pageName)}
-                      delayPressIn={150}
-                    >
-                      <Text style={styles.add}>{item.title}</Text>
-                    </TouchableOpacity>
-                  </View>
                   <TouchableOpacity
                     onPress={i === 0 ? () => endCheck() : () => swapUp(i)}
-                    style={styles.right}
+                    style={look.inRoutine}
                     delayPressIn={150}
                   >
-                    <Feather name="chevrons-up" style={styles.arrow} />
+                    <Feather
+                      name="chevrons-up"
+                      style={[look.inRoutine, { fontSize: 30 }]}
+                    />
                   </TouchableOpacity>
                 </View>
-              ))
-            : null}
-        </View>
+              </View>
+            ))
+          : null}
       </ScrollView>
     </View>
   );
@@ -113,50 +133,5 @@ const Routine = ({ navigation }) => {
 
 // used overflow: hidden below to prevent corners.
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: "#1B2A41",
-  },
-  displayContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-  },
-  element: {
-    overflow: "hidden",
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#32746D",
-    backgroundColor: "#D2EAEB",
-    marginTop: 21,
-    width: "90%",
-  },
-  add: {
-    color: "#1B2A41",
-    fontSize: 25,
-    padding: 10,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  arrow: {
-    color: "#1B2A41",
-    fontSize: 24,
-  },
-  left: {
-    flex: 1,
-    alignItems: "center",
-  },
-  middle: {
-    flex: 8,
-  },
-  right: {
-    flex: 1,
-    alignItems: "center",
-  },
-});
 
 export { Routine };

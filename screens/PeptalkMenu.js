@@ -8,13 +8,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { SimpleLineIcons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { pageOptions } from "./optionsList";
+import { look } from "../assets/styles";
 
 const PepTalkMenu = ({ navigation }) => {
   let [routineList, setRoutineList] = useState(routineList ? routineList : []);
@@ -42,6 +39,7 @@ const PepTalkMenu = ({ navigation }) => {
     let newItem = {
       id: item.id,
       pageName: item.pageName,
+      sub: item.sub,
       selected: true,
       title: item.title,
     };
@@ -87,37 +85,39 @@ const PepTalkMenu = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={look.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
         {pageOptions.map((item, i) => (
-          <View key={item.id} value={item} style={styles.element}>
-            <View style={styles.spacer}></View>
-            <View style={styles.left}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate(item.pageName)}
-                delayPressIn={150}
-              >
-                <Text style={styles.add}>{item.title}</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.right}>
-              {verify({ item }) ? (
+          <View key={item.id} style={look.border}>
+            <View value={item} style={look.element}>
+              <View style={styles.left}>
                 <TouchableOpacity
-                  onPress={() => handleDelete({ item })}
+                  onPress={() => navigation.navigate(item.pageName)}
                   delayPressIn={150}
                 >
-                  <Feather name="check-circle" style={styles.inRoutine} />
+                  <Text style={look.add}>{item.title}</Text>
+                  <Text style={look.sub}>{item.sub}</Text>
                 </TouchableOpacity>
-              ) : item.pageName === "Routine" ? (
-                <Text style={styles.text}>{count}</Text>
-              ) : (
-                <TouchableOpacity
-                  onPress={() => handleAdd({ item })}
-                  delayPressIn={150}
-                >
-                  <Feather name="plus" style={styles.outRoutine} />
-                </TouchableOpacity>
-              )}
+              </View>
+              <View style={styles.right}>
+                {verify({ item }) ? (
+                  <TouchableOpacity
+                    onPress={() => handleDelete({ item })}
+                    delayPressIn={150}
+                  >
+                    <Feather name="check-circle" style={look.inRoutine} />
+                  </TouchableOpacity>
+                ) : item.pageName === "Routine" ? (
+                  <Text style={styles.text}>{count}</Text>
+                ) : (
+                  <TouchableOpacity
+                    onPress={() => handleAdd({ item })}
+                    delayPressIn={150}
+                  >
+                    <Feather name="plus" style={look.outRoutine} />
+                  </TouchableOpacity>
+                )}
+              </View>
             </View>
           </View>
         ))}
@@ -129,54 +129,16 @@ const PepTalkMenu = ({ navigation }) => {
 // used overflow: hidden below to prevent corners.
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: "#1B2A41",
-    // backgroundColor: "#3C5E90",
-  },
-  element: {
-    overflow: "hidden",
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#32746D",
-    backgroundColor: "#D2EAEB",
-    marginTop: 20,
-    width: "90%",
-    left: "1.5%",
-  },
-  add: {
-    color: "#000000",
-    // color: "#1B2A41",
-    fontSize: 25,
-    padding: 10,
-    fontWeight: "bold",
-    textAlign: "center",
-    textAlign: "flex-start",
-  },
-  inRoutine: {
-    color: "green",
-    fontSize: 20,
-  },
-  outRoutine: {
-    color: "brown",
-    fontSize: 20,
-  },
   left: {
     flex: 8,
-    alignItems: "center",
   },
   right: {
-    flex: 1,
-  },
-  spacer: {
     flex: 1,
   },
   text: {
     color: "green",
     fontSize: 20,
+    left: "10%",
   },
 });
 
