@@ -45,4 +45,36 @@ export const look = {
     width: "90%",
     left: "5%",
   },
+  fIcon: {
+    marginRight: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    fontSize: 30,
+    color: "#D7D9D7",
+    textAlign: "center",
+  },
+  selected: {
+    color: "#D84C36",
+  },
+  icon: {
+    paddingTop: 20,
+    paddingBottom: 20,
+    fontSize: 30,
+    color: "#D7D9D7",
+  },
+  entryTop: {
+    flexDirection: "row",
+  },
+
+  date: {
+    marginTop: 5,
+    width: "90%",
+    left: "5%",
+    textAlign: "center",
+    justifyContent: "flex-end",
+    padding: 10,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#D7D9D7",
+  },
 };

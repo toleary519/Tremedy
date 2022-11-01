@@ -11,6 +11,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { look } from "../assets/styles";
 
 const FocusStatement = () => {
   const [focusStorage, setFocusStorage] = useState(
@@ -131,17 +132,17 @@ const FocusStatement = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={look.container}>
       <KeyboardAwareScrollView extraHeight={250}>
-        <Text style={styles.header}>
+        <Text style={look.add}>
           Think of your focus. Who you want to be and who you are.
         </Text>
-        <Text style={styles.headerTwo}>
+        <Text style={look.sub}>
           Enter it below. As you grow update it if you feel the need and when in
           doubt refer to it as a guiding principle.
         </Text>
         <TextInput
-          style={styles.input}
+          style={look.add}
           onChangeText={(text) => setMyFocus(text)}
           value={myFocus}
           placeholder={"focus statement"}
@@ -151,147 +152,143 @@ const FocusStatement = () => {
           placeholderTextColor={"#F1F7EE"}
         />
         <TouchableOpacity onPress={() => errorCheck()}>
-          <MaterialIcons style={styles.icon} name="add-circle" />
+          <MaterialIcons style={look.icon} name="add-circle" />
         </TouchableOpacity>
         <View>
           {sortedEntries.map((item, i) => (
-            <View key={item.id} style={styles.pieContainer}>
-              <View style={styles.entryTop}>
-                <Text style={styles.date}>{item.date}</Text>
+            <View key={item.id} style={look.border}>
+              <View style={look.element}>
+                <Text style={look.date}>{item.date}</Text>
                 <TouchableOpacity
                   onPress={() => {
                     handleFlag(i);
                   }}
                 >
                   <SimpleLineIcons
-                    style={
-                      item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
-                    }
+                    style={item.flag ? [look.fIcon, look.selected] : look.fIcon}
                     name="flag"
                   />
                 </TouchableOpacity>
               </View>
-
-              <Text style={styles.add}>{item.myFocus}</Text>
-              <TouchableOpacity onPress={() => handleDelete({ item })}>
-                <MaterialIcons
-                  style={styles.deleteIcon}
-                  name="delete-forever"
-                />
-              </TouchableOpacity>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={look.add}>{item.myFocus}</Text>
+                <TouchableOpacity onPress={() => handleDelete({ item })}>
+                  <MaterialIcons style={look.icon} name="delete-forever" />
+                </TouchableOpacity>
+              </View>
             </View>
           ))}
         </View>
       </KeyboardAwareScrollView>
     </View>
   );
-};;
+};
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1B2A41",
-    paddingBottom: 30,
-  },
-  pieContainer: {
-    borderRadius: 10,
-    borderWidth: 4,
-    marginTop: 7,
-    marginBottom: 7,
-    width: "95%",
-    left: "2.5%",
-    borderColor: "#D7D9D7",
-  },
-  elementContainer: {
-    flexDirection: "row",
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  add: {
-    marginTop: 5,
-    width: "90%",
-    left: "5%",
-    textAlign: "flex-start",
-    alignItems: "center",
-    marginBottom: 5,
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  date: {
-    marginTop: 5,
-    width: "90%",
-    left: "5%",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  header: {
-    paddingTop: 30,
-    textAlign: "center",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: 10,
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  headerTwo: {
-    // borderRadius: 10,
-    // borderWidth: 4,
-    paddingTop: 30,
-    textAlign: "center",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  icon: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 30,
-    color: "#D7D9D7",
-    textAlign: "center",
-  },
-  input: {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    width: "80%",
-    marginTop: 21,
-    textAlign: "center",
-    justifyContent: "center",
-    padding: 10,
-    left: "10%",
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#2f8587",
-  },
-  deleteIcon: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    left: "45%",
-    fontSize: 30,
-    color: "#D7D9D7",
-  },
-  entryTop: {
-    flexDirection: "row",
-  },
-  fIcon: {
-    marginRight: 10,
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 30,
-    color: "#D7D9D7",
-    textAlign: "center",
-  },
-  selected: {
-    color: "#D84C36",
-  },
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: "#1B2A41",
+  //   paddingBottom: 30,
+  // },
+  // pieContainer: {
+  //   borderRadius: 10,
+  //   borderWidth: 4,
+  //   marginTop: 7,
+  //   marginBottom: 7,
+  //   width: "95%",
+  //   left: "2.5%",
+  //   borderColor: "#D7D9D7",
+  // },
+  // elementContainer: {
+  //   flexDirection: "row",
+  //   marginTop: 10,
+  //   marginBottom: 10,
+  // },
+  // add: {
+  //   marginTop: 5,
+  //   width: "90%",
+  //   left: "5%",
+  //   textAlign: "flex-start",
+  //   alignItems: "center",
+  //   marginBottom: 5,
+  //   fontSize: 18,
+  //   fontWeight: "bold",
+  //   color: "#D7D9D7",
+  // },
+  // date: {
+  //   marginTop: 5,
+  //   width: "90%",
+  //   left: "5%",
+  //   textAlign: "center",
+  //   justifyContent: "flex-end",
+  //   padding: 10,
+  //   fontSize: 18,
+  //   fontWeight: "bold",
+  //   color: "#D7D9D7",
+  // },
+  // header: {
+  //   paddingTop: 30,
+  //   textAlign: "center",
+  //   justifyContent: "flex-start",
+  //   alignItems: "flex-start",
+  //   padding: 10,
+  //   fontSize: 25,
+  //   fontWeight: "bold",
+  //   color: "#D7D9D7",
+  // },
+  // headerTwo: {
+  //   // borderRadius: 10,
+  //   // borderWidth: 4,
+  //   paddingTop: 30,
+  //   textAlign: "center",
+  //   justifyContent: "flex-start",
+  //   alignItems: "flex-start",
+  //   padding: 10,
+  //   fontSize: 20,
+  //   fontWeight: "bold",
+  //   color: "#D7D9D7",
+  // },
+  // icon: {
+  //   paddingTop: 20,
+  //   paddingBottom: 20,
+  //   fontSize: 30,
+  //   color: "#D7D9D7",
+  //   textAlign: "center",
+  // },
+  // input: {
+  //   borderRadius: 10,
+  //   borderWidth: 4,
+  //   borderColor: "#D7D9D7",
+  //   width: "80%",
+  //   marginTop: 21,
+  //   textAlign: "center",
+  //   justifyContent: "center",
+  //   padding: 10,
+  //   left: "10%",
+  //   fontSize: 20,
+  //   fontWeight: "bold",
+  //   color: "#2f8587",
+  // },
+  // deleteIcon: {
+  //   paddingTop: 20,
+  //   paddingBottom: 20,
+  //   left: "45%",
+  //   fontSize: 30,
+  //   color: "#D7D9D7",
+  // },
+  // entryTop: {
+  //   flexDirection: "row",
+  // },
+  // fIcon: {
+  //   marginRight: 10,
+  //   paddingTop: 20,
+  //   paddingBottom: 20,
+  //   fontSize: 30,
+  //   color: "#D7D9D7",
+  //   textAlign: "center",
+  // },
+  // selected: {
+  //   color: "#D84C36",
+  // },
 });
 
 export { FocusStatement };
