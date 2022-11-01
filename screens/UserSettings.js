@@ -8,13 +8,47 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import { openContactForm } from "react-native-contacts";
 
-const xyz = () => {
+const UserSettings = () => {
   const [storage, set] = useState(storage ? storage : []);
-  const [entry, setEnt] = useState("");
+  const [flags, setFlags] = useState(true);
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [issue, setIssue] = useState("");
+  const [email, setEmail] = useState("");
+  const [reportLength, setReportLength] = useState(7);
+
+  const settingsOptions = [
+    {
+      title: "My Info",
+      subtitle: "All about you",
+    },
+    {
+      title: "My Pin",
+      subtitle: "Create or reset your pin.",
+    },
+    {
+      title: "Manage Flags",
+      subtitle: "Select which flags you want to be prompted to mark.",
+    },
+    {
+      title: "Delete Data",
+      subtitle: "Delete all data stored on your device.",
+    },
+    {
+      title: "Report Length",
+      subtitle: "How many weeks do you want to review at onece?",
+    },
+    {
+      title: "Billing Information",
+      subtitle: "Change cards or subsciption.",
+    },
+  ];
 
   let sortedEntries = storage.sort((a, b) => {
     return b.id - a.id;
@@ -39,38 +73,14 @@ const xyz = () => {
     }
   };
 
-  const flagAlert = () => {
-    const pressTrue = () => {
-      let flag = true;
-      handleAdd(flag);
-    };
-
-    const pressFalse = () => {
-      let flag = false;
-      handleAdd(flag);
-    };
-
-    Alert.alert("Flag this for therapist?", `You can review it together.`, [
-      {
-        text: "Yes",
-        onPress: () => pressTrue(),
-      },
-
-      { text: "Nope", onPress: () => pressFalse() },
-    ]);
-  };
   const handleAdd = (flag) => {
     let currentDate = new Date();
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth() + 1;
-    let currentYear = currentDate.getFullYear();
     let orderId = currentDate.getTime();
 
     let newItem = {
       id: orderId,
       entry: entry,
       flag: flag,
-      date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
     const newList = [...storage, newItem];
@@ -126,57 +136,21 @@ const xyz = () => {
 
   return (
     <View style={styles.container}>
-      <KeyboardAwareScrollView extraHeight={175}>
-        <Text style={styles.header}>
-          Think of a coping statement that in concise and impactful. A rational
-          nudge from yourself to help you stay on course.
-        </Text>
-        <Text style={styles.headerTwo}>
-          Enter it below. As you grow update it if you feel the need and when
-          tempted or in doubt refer back to it.
-        </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setEnt(text)}
-          value={entry}
-          placeholder={"coping statement"}
-          multiline
-          keyboardType="default"
-          color="#D7D9D7"
-          placeholderTextColor={"#F1F7EE"}
-        />
-        <TouchableOpacity onPress={() => errorCheck()}>
-          <MaterialIcons style={styles.icon} name="add-circle" />
-        </TouchableOpacity>
-        <View>
-          {sortedEntries.map((item, i) => (
-            <View key={item.id} style={styles.pieContainer}>
-              <View style={styles.entryTop}>
-                <Text style={styles.date}>{item.date}</Text>
-
-                <TouchableOpacity
-                  onPress={() => {
-                    handleFlag(i);
-                  }}
-                >
-                  <SimpleLineIcons
-                    style={
-                      item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
-                    }
-                    name="flag"
-                  />
-                </TouchableOpacity>
-              </View>
-              <Text style={styles.add}>{item.entry}</Text>
-              <TouchableOpacity onPress={() => handleDelete({ item })}>
-                <MaterialIcons
-                  style={styles.deleteIcon}
-                  name="delete-forever"
-                />
-              </TouchableOpacity>
-            </View>
-          ))}
-        </View>
+      <KeyboardAwareScrollView>
+        {settingsOptions.map((item, i) => (
+          <TouchableOpacity key={i}>
+            <Text style={styles.add}>{item.title}</Text>
+            <Text style={styles.sub}>{item.subtitle}</Text>
+            <View
+              style={{
+                borderBottomColor: "#3C5E90",
+                borderBottomWidth: 3,
+                width: "90%",
+                left: "5%",
+              }}
+            />
+          </TouchableOpacity>
+        ))}
       </KeyboardAwareScrollView>
     </View>
   );
@@ -208,15 +182,28 @@ const styles = StyleSheet.create({
     left: "5%",
     textAlign: "flex-start",
     alignItems: "center",
-    marginBottom: 5,
+    marginBottom: 2,
     fontSize: 18,
     fontWeight: "bold",
+    color: "#D7D9D7",
+  },
+  sub: {
+    marginTop: 5,
+    width: "90%",
+    left: "5%",
+    textAlign: "flex-start",
+    alignItems: "center",
+    opacity: 0.6,
+    marginBottom: 5,
+    fontSize: 12,
+    fontWeight: "bold",
+    borderBottomWidth: 3,
+    borderBottomColor: "white",
     color: "#D7D9D7",
   },
   date: {
     marginTop: 5,
     width: "90%",
-    left: "5%",
     textAlign: "center",
     justifyContent: "flex-end",
     padding: 10,

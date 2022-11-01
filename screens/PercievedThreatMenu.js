@@ -90,16 +90,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#1B2A41"
+    backgroundColor: "#1B2A41",
   },
   exercise: {
     flexDirection: "row",
-    width: "90%",
-    justifyContent: "center",
+    // width: "90%",
+    justifyContent: "flex-start",
   },
   add: {
     marginTop: 21,
-    textAlign: "center",
+    // textAlign: "center",
     padding: 1,
     fontSize: 25,
     fontWeight: "bold",
@@ -120,8 +120,8 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "#D7D9D7",
     marginTop: 21,
-    textAlign: "center",
-    justifyContent: "flex-end",
+    // textAlign: "center",
+    // justifyContent: "flex-end",
     padding: 10,
     marginRight: 25,
     fontSize: 25,
@@ -137,39 +137,38 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#D7D9D7",
   },
-  icon: { 
+  icon: {
     justifyContent: "center",
     alignItems: "center",
-    fontSize: "40", 
+    fontSize: "40",
     padding: 10,
     marginTop: 13,
-    color: "#D7D9D7"
+    color: "#D7D9D7",
   },
-  breatheIcon: { 
+  breatheIcon: {
     justifyContent: "center",
     alignItems: "center",
-    fontSize: "40", 
+    fontSize: "40",
     padding: 10,
     marginTop: 28,
-    color: "#D7D9D7"
+    color: "#D7D9D7",
   },
-  iconDone: {  
+  iconDone: {
     justifyContent: "center",
     alignItems: "center",
-    fontSize: "40", 
+    fontSize: "40",
     padding: 10,
     marginTop: 13,
-    color: "green"
+    color: "green",
   },
-  breatheIconDone: {  
+  breatheIconDone: {
     justifyContent: "center",
     alignItems: "center",
-    fontSize: "40", 
+    fontSize: "40",
     padding: 10,
     marginTop: 28,
-    color: "green"
+    color: "green",
   },
-
 });
 
 export { PercievedThreatMenu }

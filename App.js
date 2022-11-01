@@ -38,6 +38,7 @@ import { CheckIn } from "./screens/CheckIn";
 import { JustOne } from "./screens/JustOne";
 import { Report } from "./screens/Report";
 import { Routine } from "./screens/Routine";
+import { UserSettings } from "./screens/UserSettings";
 import MyStack from "./routes/homeStack";
 import { StatusBar } from "expo-status-bar";
 
@@ -160,6 +161,11 @@ function App() {
               name="SelfTalk"
               component={SelfTalk}
               options={{ title: "Thought Challenging" }}
+            />
+            <Stack.Screen
+              name="UserSettings"
+              component={UserSettings}
+              options={{ title: "User Settings" }}
             />
             <Stack.Screen
               name="MyValues"

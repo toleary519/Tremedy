@@ -9,9 +9,6 @@ import {
   ScrollView,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { SimpleLineIcons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Routine = ({ navigation }) => {
@@ -79,34 +76,36 @@ const Routine = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
-        {selectedRoutine
-          ? selectedRoutine.map((item, i) => (
-              <View key={item.id} style={styles.element}>
-                <TouchableOpacity
-                  onPress={i === end ? () => endCheck() : () => swapDown(i)}
-                  style={styles.left}
-                  delayPressIn={150}
-                >
-                  <Feather name="chevrons-down" style={styles.arrow} />
-                </TouchableOpacity>
-                <View style={styles.middle}>
+        <View style={styles.displayContainer}>
+          {selectedRoutine
+            ? selectedRoutine.map((item, i) => (
+                <View key={item.id} style={styles.element}>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate(item.pageName)}
+                    onPress={i === end ? () => endCheck() : () => swapDown(i)}
+                    style={styles.left}
                     delayPressIn={150}
                   >
-                    <Text style={styles.add}>{item.title}</Text>
+                    <Feather name="chevrons-down" style={styles.arrow} />
+                  </TouchableOpacity>
+                  <View style={styles.middle}>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate(item.pageName)}
+                      delayPressIn={150}
+                    >
+                      <Text style={styles.add}>{item.title}</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <TouchableOpacity
+                    onPress={i === 0 ? () => endCheck() : () => swapUp(i)}
+                    style={styles.right}
+                    delayPressIn={150}
+                  >
+                    <Feather name="chevrons-up" style={styles.arrow} />
                   </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  onPress={i === 0 ? () => endCheck() : () => swapUp(i)}
-                  style={styles.right}
-                  delayPressIn={150}
-                >
-                  <Feather name="chevrons-up" style={styles.arrow} />
-                </TouchableOpacity>
-              </View>
-            ))
-          : null}
+              ))
+            : null}
+        </View>
       </ScrollView>
     </View>
   );
@@ -120,18 +119,21 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: "#1B2A41",
   },
+  displayContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+  },
   element: {
     overflow: "hidden",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
     borderRadius: 10,
     borderWidth: 4,
-    borderColor: "#F4743B",
+    borderColor: "#32746D",
     backgroundColor: "#D2EAEB",
     marginTop: 21,
     width: "90%",
-    left: "5%",
   },
   add: {
     color: "#1B2A41",
@@ -146,21 +148,14 @@ const styles = StyleSheet.create({
   },
   left: {
     flex: 1,
-    // justifyContent: "center",
     alignItems: "center",
-    // borderWidth: 2,
-    // borderColor: "black",
   },
   middle: {
     flex: 8,
-    // borderWidth: 2,
-    // borderColor: "black",
   },
   right: {
     flex: 1,
     alignItems: "center",
-    // borderWidth: 2,
-    // borderColor: "black",
   },
 });
 

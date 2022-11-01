@@ -38,6 +38,12 @@ const FirstMenu = ({ navigation }) => {
       >
         <Text style={styles.emergency}>Emergency</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("UserSettings")}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>User Settings</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => confirmDelete()} delayPressIn={150}>
         <Text style={styles.emergency}>Delete Data</Text>
       </TouchableOpacity>

@@ -81,6 +81,7 @@ const Report = () => {
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView>
+        {console.log("report storage : ", reportStorage)}
         <View style={styles.buttonNav}>
           <TouchableOpacity
             onPress={() => {
@@ -240,9 +241,9 @@ const Report = () => {
                     ) : null}
                     {item.initial ? (
                       <View style={{ flexDirection: "column" }}>
-                        <Text style={styles.add}>- Initial Thought -</Text>
+                        <Text style={styles.add}> Initial Thought </Text>
                         <Text style={styles.add}>{item.initial}</Text>
-                        <Text style={styles.add}>- Rational Thought -</Text>
+                        <Text style={styles.add}> Rational Thought </Text>
                         <Text style={styles.add}>{item.rational}</Text>
                       </View>
                     ) : null}
@@ -306,21 +307,15 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 7,
     width: "90%",
-    // left: "5%",
     borderColor: "#D7D9D7",
   },
-  feelChoiceDisplayCase: {
-    // justifyContent: "center",
-    // flexDirection: "row",
-  },
+  feelChoiceDisplayCase: {},
   feelChoiceDisplay: {
     marginTop: 7,
     width: "90%",
-    // justifyContent: "center",
     flexDirection: "row",
   },
   display: {
-    paddingHorizontal: 3,
     fontSize: 25,
     fontWeight: "bold",
     color: "#D7D9D7",
