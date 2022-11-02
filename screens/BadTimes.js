@@ -11,6 +11,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { look } from "../assets/styles";
 
 const BadTimes = () => {
   const [badStorage, setBadStorage] = useState(badStorage ? badStorage : []);
@@ -123,50 +124,53 @@ const BadTimes = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={look.container}>
       <KeyboardAwareScrollView extraHeight={200}>
-        <Text style={styles.header}>
-          “You are free to choose, but you are not free to alter the
-          consequences of your decisions.” - Ezra Taft Benson
-        </Text>
-        <Text style={styles.headerTwo}>
-          These are some lows. You are NOT these lows, and you don't have to be.
-        </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setNote(text)}
-          value={note}
-          placeholder={"New Note"}
-          multiline
-          keyboardType="default"
-          color="#D7D9D7"
-          placeholderTextColor={"#F1F7EE"}
-        />
-        <TouchableOpacity onPress={() => errorCheck()}>
-          <MaterialIcons style={styles.icon} name="add-circle" />
-        </TouchableOpacity>
+        <View style={look.topBox}>
+          <Text style={look.header}>
+            “You are free to choose, but you are not free to alter the
+            consequences of your decisions.” - Ezra Taft Benson
+          </Text>
+          <Text style={look.subHeader}>
+            These are some lows. You are NOT these lows, and you don't have to
+            be.
+          </Text>
+          <TextInput
+            style={look.input}
+            onChangeText={(text) => setNote(text)}
+            value={note}
+            placeholder={"New Note"}
+            multiline
+            keyboardType="default"
+          />
+          <View>
+            <TouchableOpacity onPress={() => errorCheck()}>
+              <MaterialIcons style={look.centerIcon} name="add-circle" />
+            </TouchableOpacity>
+          </View>
+        </View>
         {sortedEntries.map((item, i) => (
-          <View key={item.id} style={styles.memory}>
-            <View style={styles.entryTop}>
+          <View key={item.id} style={look.border}>
+            <View style={look.elementHeader}>
+              <TouchableOpacity onPress={() => handleDelete({ item })}>
+                <MaterialIcons
+                  style={[look.fIcon, look.canIcon]}
+                  name="delete-forever"
+                />
+              </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
                   handleFlag(i);
                 }}
               >
                 <SimpleLineIcons
-                  style={
-                    item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
-                  }
+                  style={item.flag ? [look.fIcon, look.selected] : look.fIcon}
                   name="flag"
                 />
               </TouchableOpacity>
-              <Text style={styles.add}>{item.myBad}</Text>
-              <TouchableOpacity onPress={() => handleDelete({ item })}>
-                <MaterialIcons
-                  style={styles.deleteIcon}
-                  name="delete-forever"
-                />
-              </TouchableOpacity>
+            </View>
+            <View style={[look.element, look.renderElementBody]}>
+              <Text style={look.add}>{item.myBad}</Text>
             </View>
           </View>
         ))}
@@ -175,94 +179,6 @@ const BadTimes = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1B2A41",
-  },
-  memory: {
-    borderRadius: 10,
-    borderWidth: 4,
-    marginTop: 7,
-    marginBottom: 7,
-    width: "95%",
-    left: "2.5%",
-    borderColor: "#D7D9D7",
-  },
-  add: {
-    width: "90%",
-    left: "5%",
-    marginTop: 21,
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  input: {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    width: "90%",
-    left: "5%",
-    marginTop: 21,
-    textAlign: "center",
-    justifyContent: "center",
-    padding: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#2f8587",
-  },
-  header: {
-    paddingTop: 40,
-    textAlign: "center",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  headerTwo: {
-    paddingTop: 30,
-    textAlign: "center",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: 10,
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  icon: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 40,
-    color: "#D7D9D7",
-    textAlign: "center",
-  },
-  deleteIcon: {
-    paddingTop: 10,
-    paddingBottom: 20,
-    left: "46%",
-    fontSize: 30,
-    color: "#D7D9D7",
-  },
-  entryTop: {
-    flexDirection: "row",
-  },
-  fIcon: {
-    marginRight: 10,
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 30,
-    color: "#D7D9D7",
-    textAlign: "center",
-  },
-  selected: {
-    color: "#D84C36",
-  },
-});
+const styles = StyleSheet.create({});
 
 export { BadTimes }

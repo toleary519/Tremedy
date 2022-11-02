@@ -1,88 +1,43 @@
 import React from "react";
 import { Text, StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { look } from "../assets/styles";
 
 const NotesMenu = ({ navigation }) => (
-  <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 30}} >
-      <Text style={styles.summary}>
-      Read or record some moments of life that shone because you were sober and some of the worst things that happened when you were not.  
+  <View style={look.container}>
+    <View style={look.topBox}>
+      <Text style={look.header}>
+        Record and reflect on moments from your life here. When positive events
+        or feelings find you, write them down. If you need to review some
+        negatives in your past, write them down.
       </Text>
-      <Text style={styles.summary}>
-      Reflect on them. 
+      <Text style={[look.subHeader, { marginTop: "5%" }]}>
+        Remind yourself how far you've come.
       </Text>
-    <TouchableOpacity onPress={() => navigation.navigate("GoodTimes")} delayPressIn={150}>
-      <Text style={styles.good}>
-        The good times
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("BadTimes")} delayPressIn={150}>
-      <Text style={styles.bad}>
-        The bad times
-      </Text>
-    </TouchableOpacity>
-  </ScrollView>
     </View>
+    <View style={look.border}>
+      <View style={look.element}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("GoodTimes")}
+          delayPressIn={150}
+        >
+          <Text style={[look.add, { fontSize: 30, marginTop: "7%" }]}>
+            The good times.
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+    <View style={look.border}>
+      <View style={look.element}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("BadTimes")}
+          delayPressIn={150}
+        >
+          <Text style={[look.add, { fontSize: 30 }]}>The bad times.</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
 );
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 70,
-    backgroundColor:"#1B2A41"
-  },
-  good: {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    marginTop: 21,
-    width: "90%",
-    left: "5%",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#59DA59",
-  },
-
-  bad: {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    marginTop: 21,
-    width: "90%",
-    left: "5%",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#D84C36",
-  },
-
-  summary: {
-    borderColor: "#D7D9D7",
-    marginTop: 21,
-    width: "90%",
-    left: "5%",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-
-  // icon: {
-  //   borderRadius: "3px",
-  //   borderColor: "red",    
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   fontSize: "60", 
-  //   padding: 60,
-  //   color: "#1B2A41"
-  // }
-});
 
 export { NotesMenu }

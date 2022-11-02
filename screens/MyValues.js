@@ -12,6 +12,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { A } from "@expo/html-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { look } from "../assets/styles";
 
 const MyValues = () => {
   const [storage, setStorage] = useState(storage ? storage : []);
@@ -124,66 +125,62 @@ const MyValues = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={look.container}>
       <KeyboardAwareScrollView extraHeight={200}>
-        <Text style={styles.header}>
-          Look through your core values and assess how this action would align
-          with them.
-        </Text>
-        <Text style={styles.headerTwo}>
-          If you are unsure, look through this list of values and take some time
-          to choose a few that truly resonate with you.
-        </Text>
-        <A
-          style={styles.link}
-          href={`https://www.guilford.com/add/miller2/values.pdf`}
-        >
-          Core Values List
-        </A>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setMyValue(text)}
-          value={myValue}
-          placeholder={"new value"}
-          multiline
-          keyboardType="default"
-          color="#D7D9D7"
-          placeholderTextColor={"#F1F7EE"}
-        />
-        <TouchableOpacity
-          onPress={() => {
-            errorCheck();
-          }}
-        >
-          <MaterialIcons style={styles.icon} name="add-circle" />
-        </TouchableOpacity>
-        <View>
-          {sortedEntries.map((item, i) => (
-            <View key={item.id} style={styles.pieContainer}>
-              <View style={styles.entryTop}>
-                <TouchableOpacity
-                  onPress={() => {
-                    handleFlag(i);
-                  }}
-                >
-                  <SimpleLineIcons
-                    style={
-                      item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
-                    }
-                    name="flag"
-                  />
-                </TouchableOpacity>
-              </View>
-              <Text style={styles.add}>{item.myValue}</Text>
+        <View style={look.topBox}>
+          <Text style={look.header}>
+            Look through your core values and assess how this action would align
+            with them.
+          </Text>
+          <Text style={look.subHeader}>
+            If you are unsure, look through this list of values and take some
+            time to choose a few that truly resonate with you.
+          </Text>
+          <A
+            style={[look.add, { color: "#FC9F5B" }]}
+            href={`https://www.guilford.com/add/miller2/values.pdf`}
+          >
+            Core Values List
+          </A>
+          <TextInput
+            style={look.input}
+            onChangeText={(text) => setMyValue(text)}
+            value={myValue}
+            placeholder={"New value"}
+            multiline
+            keyboardType="default"
+          />
+          <View>
+            <TouchableOpacity onPress={() => errorCheck()}>
+              <MaterialIcons style={look.centerIcon} name="add-circle" />
+            </TouchableOpacity>
+          </View>
+        </View>
+        {sortedEntries.map((item, i) => (
+          <View key={item.id} style={look.border}>
+            <View style={look.elementHeader}>
               <TouchableOpacity onPress={() => handleDelete({ item })}>
                 <MaterialIcons
-                  style={styles.deleteIcon}
+                  style={[look.icon, look.canIcon]}
                   name="delete-forever"
                 />
               </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  handleFlag(i);
+                }}
+              >
+                <SimpleLineIcons
+                  style={item.flag ? [look.fIcon, look.selected] : look.fIcon}
+                  name="flag"
+                />
+              </TouchableOpacity>
             </View>
-          ))}
-        </View>
+            <View style={look.renderElementBody}>
+              <Text style={look.add}>{item.myValue}</Text>
+            </View>
+          </View>
+        ))}
       </KeyboardAwareScrollView>
     </View>
   );
