@@ -127,14 +127,18 @@ const BadTimes = () => {
     <View style={look.container}>
       <KeyboardAwareScrollView extraHeight={200}>
         <View style={look.topBox}>
-          <Text style={look.header}>
-            “You are free to choose, but you are not free to alter the
-            consequences of your decisions.” - Ezra Taft Benson
-          </Text>
-          <Text style={look.subHeader}>
-            These are some lows. You are NOT these lows, and you don't have to
-            be.
-          </Text>
+          <View style={look.header}>
+            <Text style={look.add}>
+              “You are free to choose, but you are not free to alter the
+              consequences of your decisions.” - Ezra Taft Benson
+            </Text>
+          </View>
+          <View style={look.subHeader}>
+            <Text style={look.sub}>
+              These are some lows. You are not these lows, and you don't have to
+              be.
+            </Text>
+          </View>
           <TextInput
             style={look.input}
             onChangeText={(text) => setNote(text)}
@@ -145,35 +149,38 @@ const BadTimes = () => {
           />
           <View>
             <TouchableOpacity onPress={() => errorCheck()}>
-              <MaterialIcons style={look.centerIcon} name="add-circle" />
+              <MaterialIcons
+                style={[look.icon, look.centerIcon]}
+                name="add-circle"
+              />
             </TouchableOpacity>
           </View>
+          {sortedEntries.map((item, i) => (
+            <View key={item.id} style={look.border}>
+              <View style={look.elementHeader}>
+                <TouchableOpacity onPress={() => handleDelete({ item })}>
+                  <MaterialIcons
+                    style={[look.fIcon, look.canIcon]}
+                    name="delete-forever"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    handleFlag(i);
+                  }}
+                >
+                  <SimpleLineIcons
+                    style={item.flag ? [look.fIcon, look.selected] : look.fIcon}
+                    name="flag"
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={look.element}>
+                <Text style={look.add}>{item.myBad}</Text>
+              </View>
+            </View>
+          ))}
         </View>
-        {sortedEntries.map((item, i) => (
-          <View key={item.id} style={look.border}>
-            <View style={look.elementHeader}>
-              <TouchableOpacity onPress={() => handleDelete({ item })}>
-                <MaterialIcons
-                  style={[look.fIcon, look.canIcon]}
-                  name="delete-forever"
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  handleFlag(i);
-                }}
-              >
-                <SimpleLineIcons
-                  style={item.flag ? [look.fIcon, look.selected] : look.fIcon}
-                  name="flag"
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={[look.element, look.renderElementBody]}>
-              <Text style={look.add}>{item.myBad}</Text>
-            </View>
-          </View>
-        ))}
       </KeyboardAwareScrollView>
     </View>
   );

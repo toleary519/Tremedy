@@ -77,55 +77,59 @@ const Routine = ({ navigation }) => {
   return (
     <View style={look.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
-        {selectedRoutine
-          ? selectedRoutine.map((item, i) => (
-              <View
-                key={item.id}
-                style={[
-                  look.element,
-                  { flex: 6, flexDirection: "row" },
-                  look.border,
-                ]}
-              >
-                <TouchableOpacity
-                  onPress={() => navigation.navigate(item.pageName)}
-                  delayPressIn={150}
-                >
-                  <Text style={look.add}>{item.title}</Text>
-                  <Text style={look.sub}>{item.sub}</Text>
-                </TouchableOpacity>
+        <View style={look.topBox}>
+          {selectedRoutine
+            ? selectedRoutine.map((item, i) => (
                 <View
-                  style={{
-                    flex: 2,
-                    flexDirection: "row",
-                    justifyContent: "flex-end",
-                    // marginRight: "10%",
-                  }}
+                  key={item.id}
+                  style={[
+                    look.element,
+                    { flex: 6, flexDirection: "row" },
+                    look.border,
+                  ]}
                 >
                   <TouchableOpacity
-                    onPress={i === end ? () => endCheck() : () => swapDown(i)}
-                    style={[look.outRoutine]}
+                    onPress={() => navigation.navigate(item.pageName)}
                     delayPressIn={150}
                   >
-                    <Feather
-                      name="chevrons-down"
-                      style={[look.outRoutine, { fontSize: 30 }]}
-                    />
+                    <Text style={look.add}>{item.title}</Text>
+                    <Text style={look.sub}>{item.sub}</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={i === 0 ? () => endCheck() : () => swapUp(i)}
-                    style={look.inRoutine}
-                    delayPressIn={150}
+                  <View
+                    style={{
+                      flex: 2,
+                      flexDirection: "row",
+                      justifyContent: "flex-end",
+                    }}
                   >
-                    <Feather
-                      name="chevrons-up"
-                      style={[look.inRoutine, { fontSize: 30 }]}
-                    />
-                  </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={i === end ? () => endCheck() : () => swapDown(i)}
+                      style={[look.outRoutine]}
+                      delayPressIn={150}
+                    >
+                      <Feather
+                        name="chevron-down"
+                        style={[
+                          look.outRoutine,
+                          { fontSize: 35, marginRight: 20, opacity: 0.7 },
+                        ]}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={i === 0 ? () => endCheck() : () => swapUp(i)}
+                      style={look.inRoutine}
+                      delayPressIn={150}
+                    >
+                      <Feather
+                        name="chevron-up"
+                        style={[look.inRoutine, { fontSize: 35, opacity: 0.7 }]}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            ))
-          : null}
+              ))
+            : null}
+        </View>
       </ScrollView>
     </View>
   );

@@ -7,19 +7,16 @@ export const look = {
   border: {
     borderBottomColor: "#3C5E90",
     borderBottomWidth: 1,
-    width: "90%",
-    left: "5%",
   },
   topBox: {
     flexDirection: "column",
-    alignItems: "center",
     justifyContent: "flex-start",
     width: "90%",
+    left: "5%",
   },
   // ___________________Top of the pages
   header: {
     marginTop: 5,
-    width: "90%",
     marginBottom: 2,
     fontSize: 20,
     fontWeight: "bold",
@@ -27,7 +24,6 @@ export const look = {
   },
   subHeader: {
     marginTop: 5,
-    width: "90%",
     marginBottom: 2,
     fontSize: 15,
     fontWeight: "bold",
@@ -38,8 +34,7 @@ export const look = {
     borderColor: "#3C5E90",
     borderRadius: 8,
     marginTop: 21,
-    width: "95%",
-    left: "5%",
+
     padding: 10,
     fontSize: 20,
     fontWeight: "bold",
@@ -52,7 +47,6 @@ export const look = {
     marginTop: 10,
     marginBottom: 10,
     borderBottomColor: "#3C5E90",
-    // alignItems: "center",
     justifyContent: "flex-start",
   },
   elementHeader: {
@@ -69,7 +63,6 @@ export const look = {
     marginBottom: 10,
     color: "#D7D9D7",
     borderBottomColor: "#3C5E90",
-    // alignItems: "center",
     textAlign: "center",
     justifyContent: "flex-start",
     fontSize: 18,
@@ -83,10 +76,12 @@ export const look = {
     fontWeight: "bold",
     color: "#D7D9D7",
   },
+  pieBox: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   // ________________________Text & Icons
   add: {
-    // borderWidth: 4,
-    // borderColor: "green",
     marginTop: 5,
     marginBottom: 2,
     fontSize: 18,
@@ -112,8 +107,6 @@ export const look = {
     fontSize: 20,
   },
   fIcon: {
-    // borderWidth: 4,
-    // borderColor: "green",
     marginRight: 10,
     paddingTop: 10,
     fontSize: 18,
@@ -144,7 +137,26 @@ export const look = {
     paddingBottom: 0,
     fontSize: 30,
     color: "#D7D9D7",
-    // textAlign: "center",
-    left: "5%",
+    textAlign: "center",
   },
 };
+
+// ______________________template for entry pages 
+// return (
+  // <View style={look.container}>
+  //  <KeyboardAwareScrollView extraHeight={200}>
+  //   <View style={look.topBox}>
+  //   <View style={look.header}></View>
+  //   <View style={look.subHeader}></View>
+  //     {/* input */}
+  //     {/* add icon style={[look.icon, look.centerIcon]} */}
+  //     {/* map  */}
+  //   <View style={look.border}></View>
+  //   <View style={look.elementHeader></View>
+  //   style={[look.icon, look.canIcon]}
+  //   <View style={look.element}></View>
+  // </View>
+  // </KeyboardAwareScrollView>
+  // </View> 
+// )
+// };

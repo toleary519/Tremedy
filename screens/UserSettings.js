@@ -42,7 +42,7 @@ const UserSettings = () => {
     },
     {
       title: "Report Length",
-      subtitle: "How many weeks do you want to review at onece?",
+      subtitle: "How many weeks do you want to review at once?",
     },
     {
       title: "Billing Information",
@@ -137,6 +137,7 @@ const UserSettings = () => {
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView>
+        <View style={{ marginTop: 20 }} />
         {settingsOptions.map((item, i) => (
           <TouchableOpacity key={i}>
             <Text style={styles.add}>{item.title}</Text>
@@ -162,20 +163,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#1B2A41",
     paddingBottom: 30,
   },
-  pieContainer: {
-    borderRadius: 10,
-    borderWidth: 4,
-    marginTop: 7,
-    marginBottom: 7,
-    width: "95%",
-    left: "2.5%",
-    borderColor: "#D7D9D7",
-  },
-  elementContainer: {
-    flexDirection: "row",
-    marginTop: 10,
-    marginBottom: 10,
-  },
   add: {
     marginTop: 5,
     width: "90%",
@@ -200,78 +187,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
     borderBottomColor: "white",
     color: "#D7D9D7",
-  },
-  date: {
-    marginTop: 5,
-    width: "90%",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  header: {
-    paddingTop: 30,
-    textAlign: "center",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: 10,
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  headerTwo: {
-    paddingTop: 30,
-    textAlign: "center",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  icon: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 30,
-    color: "#D7D9D7",
-    textAlign: "center",
-  },
-  input: {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    width: "80%",
-    marginTop: 21,
-    textAlign: "center",
-    justifyContent: "center",
-    padding: 10,
-    left: "10%",
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#2f8587",
-  },
-  deleteIcon: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    left: "45%",
-    fontSize: 30,
-    color: "#D7D9D7",
-  },
-  entryTop: {
-    flexDirection: "row",
-  },
-  fIcon: {
-    marginRight: 10,
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 30,
-    color: "#D7D9D7",
-    textAlign: "center",
-  },
-  selected: {
-    color: "#D84C36",
   },
 });
 

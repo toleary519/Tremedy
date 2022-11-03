@@ -87,40 +87,42 @@ const PepTalkMenu = ({ navigation }) => {
   return (
     <View style={look.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
-        {pageOptions.map((item, i) => (
-          <View key={item.id} style={look.border}>
-            <View value={item} style={look.element}>
-              <View style={styles.left}>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate(item.pageName)}
-                  delayPressIn={150}
-                >
-                  <Text style={look.add}>{item.title}</Text>
-                  <Text style={look.sub}>{item.sub}</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.right}>
-                {verify({ item }) ? (
+        <View style={look.topBox}>
+          {pageOptions.map((item, i) => (
+            <View key={item.id} style={look.border}>
+              <View value={item} style={look.element}>
+                <View style={styles.left}>
                   <TouchableOpacity
-                    onPress={() => handleDelete({ item })}
+                    onPress={() => navigation.navigate(item.pageName)}
                     delayPressIn={150}
                   >
-                    <Feather name="check-circle" style={look.inRoutine} />
+                    <Text style={look.add}>{item.title}</Text>
+                    <Text style={look.sub}>{item.sub}</Text>
                   </TouchableOpacity>
-                ) : item.pageName === "Routine" ? (
-                  <Text style={styles.text}>{count}</Text>
-                ) : (
-                  <TouchableOpacity
-                    onPress={() => handleAdd({ item })}
-                    delayPressIn={150}
-                  >
-                    <Feather name="plus" style={look.outRoutine} />
-                  </TouchableOpacity>
-                )}
+                </View>
+                <View style={styles.right}>
+                  {verify({ item }) ? (
+                    <TouchableOpacity
+                      onPress={() => handleDelete({ item })}
+                      delayPressIn={150}
+                    >
+                      <Feather name="check-circle" style={look.inRoutine} />
+                    </TouchableOpacity>
+                  ) : item.pageName === "Routine" ? (
+                    <Text style={styles.text}>{count}</Text>
+                  ) : (
+                    <TouchableOpacity
+                      onPress={() => handleAdd({ item })}
+                      delayPressIn={150}
+                    >
+                      <Feather name="plus" style={look.outRoutine} />
+                    </TouchableOpacity>
+                  )}
+                </View>
               </View>
             </View>
-          </View>
-        ))}
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
@@ -134,6 +136,7 @@ const styles = StyleSheet.create({
   },
   right: {
     flex: 1,
+    justifyContent: "center",
   },
   text: {
     color: "green",

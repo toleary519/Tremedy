@@ -11,6 +11,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { look } from "../assets/styles";
 
 const Pies = () => {
   const [pieStorage, setPieStorage] = useState(pieStorage ? pieStorage : []);
@@ -141,91 +142,106 @@ const Pies = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <KeyboardAwareScrollView extraHeight={180}>
-        <Text style={styles.header}>How do you feel today?</Text>
-        <Text style={styles.headerTwo}>Physical Body</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setPhysical(text)}
-          value={physical}
-          placeholder={"new entry"}
-          multiline
-          keyboardType="default"
-          color="#D7D9D7"
-          placeholderTextColor={"#F1F7EE"}
-        />
-        <Text style={styles.headerTwo}>Insights or Thoughts</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setInsights(text)}
-          value={insights}
-          placeholder={"new entry"}
-          multiline
-          keyboardType="default"
-          color="#D7D9D7"
-          placeholderTextColor={"#F1F7EE"}
-        />
-        <Text style={styles.headerTwo}>Emotions or Feelings</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setEmotions(text)}
-          placeholder={"new entry"}
-          value={emotions}
-          multiline
-          keyboardType="default"
-          color="#D7D9D7"
-          placeholderTextColor={"#F1F7EE"}
-        />
-        <Text style={styles.headerTwo}>
-          Spiritual Connection to Self, Others or a Higher Power
-        </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setSpiritual(text)}
-          placeholder={"new entry"}
-          value={spiritual}
-          multiline
-          keyboardType="default"
-          color="#D7D9D7"
-          placeholderTextColor={"#F1F7EE"}
-        />
-        <TouchableOpacity
-          onPress={() => {
-            errorCheck();
-          }}
-        >
-          <MaterialIcons style={styles.icon} name="add-circle" />
-        </TouchableOpacity>
+    <View style={look.container}>
+      <KeyboardAwareScrollView extraHeight={200}>
+        <View style={look.topBox}>
+          <View style={look.header}>
+            <Text style={[look.add, { fontSize: 25 }]}>
+              How do you feel today?
+            </Text>
+          </View>
+          <View style={look.pieBox}>
+            <Text style={look.add}>Physical Body</Text>
+          </View>
+          <TextInput
+            style={look.input}
+            onChangeText={(text) => setPhysical(text)}
+            value={physical}
+            placeholder={"new entry"}
+            multiline
+            keyboardType="default"
+          />
+          <View style={look.pieBox}>
+            <Text style={look.add}>Insights or Thoughts</Text>
+          </View>
+          <TextInput
+            style={look.input}
+            onChangeText={(text) => setInsights(text)}
+            value={insights}
+            placeholder={"new entry"}
+            multiline
+            keyboardType="default"
+          />
+          <View style={look.pieBox}>
+            <Text style={look.add}>Emotions or Feelings</Text>
+          </View>
+          <TextInput
+            style={look.input}
+            onChangeText={(text) => setEmotions(text)}
+            placeholder={"new entry"}
+            value={emotions}
+            multiline
+            keyboardType="default"
+          />
+          <View style={look.pieBox}>
+            <Text style={look.add}>
+              Spiritual Connection to Self, Others or a Higher Power
+            </Text>
+          </View>
+          <TextInput
+            style={look.input}
+            onChangeText={(text) => setSpiritual(text)}
+            placeholder={"new entry"}
+            value={spiritual}
+            multiline
+            keyboardType="default"
+          />
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                errorCheck();
+              }}
+            >
+              <MaterialIcons
+                style={[look.icon, look.centerIcon]}
+                name="add-circle"
+              />
+            </TouchableOpacity>
+          </View>
 
-        <View>
           {sortedEntries.map((item, i) => (
-            <View key={item.id} style={styles.pieContainer}>
-              <View style={styles.entryTop}>
-                <Text style={styles.date}>{item.date}</Text>
+            <View key={item.id} style={look.border}>
+              <View style={look.elementHeader}>
+                <TouchableOpacity onPress={() => handleDelete({ item })}>
+                  <MaterialIcons
+                    style={[look.icon, look.canIcon]}
+                    name="delete-forever"
+                  />
+                </TouchableOpacity>
+                <Text style={look.date}>{item.date}</Text>
                 <TouchableOpacity
                   onPress={() => {
                     handleFlag(i);
                   }}
                 >
                   <SimpleLineIcons
-                    style={
-                      item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
-                    }
+                    style={item.flag ? [look.fIcon, look.selected] : look.fIcon}
                     name="flag"
                   />
                 </TouchableOpacity>
               </View>
-              <Text style={styles.add}> P: {item.physical}</Text>
-              <Text style={styles.add}> I: {item.insights}</Text>
-              <Text style={styles.add}> E: {item.emotions}</Text>
-              <Text style={styles.add}> S: {item.spiritual}</Text>
-              <TouchableOpacity onPress={() => handleDelete({ item })}>
-                <MaterialIcons
-                  style={styles.deleteIcon}
-                  name="delete-forever"
-                />
-              </TouchableOpacity>
+              <View style={look.element}>
+                <Text style={look.add}>P: {item.physical}</Text>
+              </View>
+              <View style={look.element}>
+                <Text style={look.add}>I: {item.insights}</Text>
+              </View>
+              <View style={look.element}>
+                <Text style={look.add}>E: {item.emotions}</Text>
+              </View>
+              <View style={look.element}>
+                <Text style={look.add}>S: {item.spiritual}</Text>
+              </View>
             </View>
           ))}
         </View>
@@ -233,6 +249,100 @@ const Pies = () => {
     </View>
   );
 };
+
+//   return (
+//     <View style={look.container}>
+//       <KeyboardAwareScrollView extraHeight={180}>
+//         <Text style={styles.header}>How do you feel today?</Text>
+//         <Text style={styles.headerTwo}>Physical Body</Text>
+//         <TextInput
+//           style={styles.input}
+//           onChangeText={(text) => setPhysical(text)}
+//           value={physical}
+//           placeholder={"new entry"}
+//           multiline
+//           keyboardType="default"
+//           color="#D7D9D7"
+//           placeholderTextColor={"#F1F7EE"}
+//         />
+//         <Text style={styles.headerTwo}>Insights or Thoughts</Text>
+//         <TextInput
+//           style={styles.input}
+//           onChangeText={(text) => setInsights(text)}
+//           value={insights}
+//           placeholder={"new entry"}
+//           multiline
+//           keyboardType="default"
+//           color="#D7D9D7"
+//           placeholderTextColor={"#F1F7EE"}
+//         />
+//         <Text style={styles.headerTwo}>Emotions or Feelings</Text>
+//         <TextInput
+//           style={styles.input}
+//           onChangeText={(text) => setEmotions(text)}
+//           placeholder={"new entry"}
+//           value={emotions}
+//           multiline
+//           keyboardType="default"
+//           color="#D7D9D7"
+//           placeholderTextColor={"#F1F7EE"}
+//         />
+//         <Text style={styles.headerTwo}>
+//           Spiritual Connection to Self, Others or a Higher Power
+//         </Text>
+//         <TextInput
+//           style={styles.input}
+//           onChangeText={(text) => setSpiritual(text)}
+//           placeholder={"new entry"}
+//           value={spiritual}
+//           multiline
+//           keyboardType="default"
+//           color="#D7D9D7"
+//           placeholderTextColor={"#F1F7EE"}
+//         />
+//         <TouchableOpacity
+//           onPress={() => {
+//             errorCheck();
+//           }}
+//         >
+//           <MaterialIcons style={styles.icon} name="add-circle" />
+//         </TouchableOpacity>
+
+//         <View>
+//           {sortedEntries.map((item, i) => (
+//             <View key={item.id} style={styles.pieContainer}>
+//               <View style={styles.entryTop}>
+//                 <Text style={styles.date}>{item.date}</Text>
+//                 <TouchableOpacity
+//                   onPress={() => {
+//                     handleFlag(i);
+//                   }}
+//                 >
+//                   <SimpleLineIcons
+//                     style={
+//                       item.flag ? [styles.fIcon, styles.selected] : styles.fIcon
+//                     }
+//                     name="flag"
+//                   />
+//                 </TouchableOpacity>
+//               </View>
+//               <Text style={styles.add}> P: {item.physical}</Text>
+//               <Text style={styles.add}> I: {item.insights}</Text>
+//               <Text style={styles.add}> E: {item.emotions}</Text>
+//               <Text style={styles.add}> S: {item.spiritual}</Text>
+//               <TouchableOpacity onPress={() => handleDelete({ item })}>
+//                 <MaterialIcons
+//                   style={styles.deleteIcon}
+//                   name="delete-forever"
+//                 />
+//               </TouchableOpacity>
+//             </View>
+//           ))}
+//         </View>
+//       </KeyboardAwareScrollView>
+//     </View>
+//   );
+// };
 
 const styles = StyleSheet.create({
   container: {

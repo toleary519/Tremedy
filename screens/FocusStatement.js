@@ -133,31 +133,46 @@ const FocusStatement = () => {
 
   return (
     <View style={look.container}>
-      <KeyboardAwareScrollView extraHeight={250}>
-        <Text style={look.add}>
-          Think of your focus. Who you want to be and who you are.
-        </Text>
-        <Text style={look.sub}>
-          Enter it below. As you grow update it if you feel the need and when in
-          doubt refer to it as a guiding principle.
-        </Text>
-        <TextInput
-          style={look.add}
-          onChangeText={(text) => setMyFocus(text)}
-          value={myFocus}
-          placeholder={"focus statement"}
-          multiline
-          keyboardType="default"
-          color="#D7D9D7"
-          placeholderTextColor={"#F1F7EE"}
-        />
-        <TouchableOpacity onPress={() => errorCheck()}>
-          <MaterialIcons style={look.icon} name="add-circle" />
-        </TouchableOpacity>
-        <View>
+      <KeyboardAwareScrollView extraHeight={200}>
+        <View style={look.topBox}>
+          <View style={look.header}>
+            <Text style={look.add}>
+              Think of your focus. Who you want to be and who you are.
+            </Text>
+          </View>
+          <View style={look.subHeader}>
+            <Text style={look.sub}>
+              Enter it below. As you grow update it if you feel the need and
+              when in doubt refer to it as a guiding principle.
+            </Text>
+          </View>
+          <TextInput
+            style={look.input}
+            onChangeText={(text) => setMyFocus(text)}
+            value={myFocus}
+            placeholder={"focus statement"}
+            multiline
+            keyboardType="default"
+          />
+
+          <View>
+            <TouchableOpacity onPress={() => errorCheck()}>
+              <MaterialIcons
+                style={[look.icon, look.centerIcon]}
+                name="add-circle"
+              />
+            </TouchableOpacity>
+          </View>
+
           {sortedEntries.map((item, i) => (
             <View key={item.id} style={look.border}>
-              <View style={look.element}>
+              <View style={look.elementHeader}>
+                <TouchableOpacity onPress={() => handleDelete({ item })}>
+                  <MaterialIcons
+                    style={[look.icon, look.canIcon]}
+                    name="delete-forever"
+                  />
+                </TouchableOpacity>
                 <Text style={look.date}>{item.date}</Text>
                 <TouchableOpacity
                   onPress={() => {
@@ -170,11 +185,8 @@ const FocusStatement = () => {
                   />
                 </TouchableOpacity>
               </View>
-              <View style={{ flexDirection: "row" }}>
+              <View style={look.element}>
                 <Text style={look.add}>{item.myFocus}</Text>
-                <TouchableOpacity onPress={() => handleDelete({ item })}>
-                  <MaterialIcons style={look.icon} name="delete-forever" />
-                </TouchableOpacity>
               </View>
             </View>
           ))}
@@ -183,113 +195,6 @@ const FocusStatement = () => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: "#1B2A41",
-  //   paddingBottom: 30,
-  // },
-  // pieContainer: {
-  //   borderRadius: 10,
-  //   borderWidth: 4,
-  //   marginTop: 7,
-  //   marginBottom: 7,
-  //   width: "95%",
-  //   left: "2.5%",
-  //   borderColor: "#D7D9D7",
-  // },
-  // elementContainer: {
-  //   flexDirection: "row",
-  //   marginTop: 10,
-  //   marginBottom: 10,
-  // },
-  // add: {
-  //   marginTop: 5,
-  //   width: "90%",
-  //   left: "5%",
-  //   textAlign: "flex-start",
-  //   alignItems: "center",
-  //   marginBottom: 5,
-  //   fontSize: 18,
-  //   fontWeight: "bold",
-  //   color: "#D7D9D7",
-  // },
-  // date: {
-  //   marginTop: 5,
-  //   width: "90%",
-  //   left: "5%",
-  //   textAlign: "center",
-  //   justifyContent: "flex-end",
-  //   padding: 10,
-  //   fontSize: 18,
-  //   fontWeight: "bold",
-  //   color: "#D7D9D7",
-  // },
-  // header: {
-  //   paddingTop: 30,
-  //   textAlign: "center",
-  //   justifyContent: "flex-start",
-  //   alignItems: "flex-start",
-  //   padding: 10,
-  //   fontSize: 25,
-  //   fontWeight: "bold",
-  //   color: "#D7D9D7",
-  // },
-  // headerTwo: {
-  //   // borderRadius: 10,
-  //   // borderWidth: 4,
-  //   paddingTop: 30,
-  //   textAlign: "center",
-  //   justifyContent: "flex-start",
-  //   alignItems: "flex-start",
-  //   padding: 10,
-  //   fontSize: 20,
-  //   fontWeight: "bold",
-  //   color: "#D7D9D7",
-  // },
-  // icon: {
-  //   paddingTop: 20,
-  //   paddingBottom: 20,
-  //   fontSize: 30,
-  //   color: "#D7D9D7",
-  //   textAlign: "center",
-  // },
-  // input: {
-  //   borderRadius: 10,
-  //   borderWidth: 4,
-  //   borderColor: "#D7D9D7",
-  //   width: "80%",
-  //   marginTop: 21,
-  //   textAlign: "center",
-  //   justifyContent: "center",
-  //   padding: 10,
-  //   left: "10%",
-  //   fontSize: 20,
-  //   fontWeight: "bold",
-  //   color: "#2f8587",
-  // },
-  // deleteIcon: {
-  //   paddingTop: 20,
-  //   paddingBottom: 20,
-  //   left: "45%",
-  //   fontSize: 30,
-  //   color: "#D7D9D7",
-  // },
-  // entryTop: {
-  //   flexDirection: "row",
-  // },
-  // fIcon: {
-  //   marginRight: 10,
-  //   paddingTop: 20,
-  //   paddingBottom: 20,
-  //   fontSize: 30,
-  //   color: "#D7D9D7",
-  //   textAlign: "center",
-  // },
-  // selected: {
-  //   color: "#D84C36",
-  // },
-});
 
 export { FocusStatement };
 
