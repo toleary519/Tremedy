@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity, View, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ScrollView } from "react-native-gesture-handler";
 
 const FirstMenu = ({ navigation }) => {
   const confirmDelete = () =>
@@ -14,55 +15,57 @@ const FirstMenu = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.element}
-        onPress={() => navigation.navigate("PepTalk")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Tool Box</Text>
-        <Text style={styles.sub}>All of the tools and your routine.</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.element}
-        onPress={() => navigation.navigate("SoberContacts")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Support Contacts</Text>
-        <Text style={styles.sub}>The want you to call. Call.</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.element}
-        onPress={() => navigation.navigate("UrgeMenu")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>Lapse</Text>
-        <Text style={styles.sub}>It happened, its okay, what's next?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.element}
-        onPress={() => navigation.navigate("UserSettings")}
-        delayPressIn={150}
-      >
-        <Text style={styles.add}>User Settings</Text>
-        <Text style={styles.sub}>Manage personal info, flags etc.</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.element}
-        onPress={() => navigation.navigate("Emergency")}
-        delayPressIn={150}
-      >
-        <Text style={styles.emergency}>Emergency</Text>
-        <Text style={styles.eSub}>If you need it call now.</Text>
-      </TouchableOpacity>
+      <ScrollView>
+        <TouchableOpacity
+          style={styles.element}
+          onPress={() => navigation.navigate("PepTalk")}
+          delayPressIn={150}
+        >
+          <Text style={styles.add}>Tool Box</Text>
+          <Text style={styles.sub}>All of the tools and your routine.</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.element}
+          onPress={() => navigation.navigate("SupportContacts")}
+          delayPressIn={150}
+        >
+          <Text style={styles.add}>Support Contacts</Text>
+          <Text style={styles.sub}>The want you to call. Call.</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.element}
+          onPress={() => navigation.navigate("UrgeMenu")}
+          delayPressIn={150}
+        >
+          <Text style={styles.add}>Lapse</Text>
+          <Text style={styles.sub}>It happened, its okay, what's next?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.element}
+          onPress={() => navigation.navigate("UserSettings")}
+          delayPressIn={150}
+        >
+          <Text style={styles.add}>User Settings</Text>
+          <Text style={styles.sub}>Manage personal info, flags etc.</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.element}
+          onPress={() => navigation.navigate("Emergency")}
+          delayPressIn={150}
+        >
+          <Text style={styles.emergency}>Emergency</Text>
+          <Text style={styles.eSub}>If you need it call now.</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.element}
-        onPress={() => confirmDelete()}
-        delayPressIn={150}
-      >
-        <Text style={styles.emergency}>Delete Data</Text>
-        <Text style={styles.eSub}>deletes everything</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.element}
+          onPress={() => confirmDelete()}
+          delayPressIn={150}
+        >
+          <Text style={styles.emergency}>Delete Data</Text>
+          <Text style={styles.eSub}>deletes everything</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };

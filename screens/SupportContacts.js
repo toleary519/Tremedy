@@ -1,39 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, TouchableOpacity, ScrollView,  } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import * as Contacts from "expo-contacts";
-import call from 'react-native-phone-call'
+import call from "react-native-phone-call";
 
-const SoberContacts = () => {
-
-  let filteredContacts = []
+const SupportContacts = () => {
+  let filteredContacts = [];
 
   const [contacts, setContacts] = useState([]);
 
   const makeCall = (item) => {
-
     const args = {
       number: `1${item.phoneNumbers[0].digits}}`,
-      prompt: false, 
-      skipCanOpen: true
-    }
+      prompt: false,
+      skipCanOpen: true,
+    };
 
     call(args);
-
-  }
+  };
 
   useEffect(() => {
     (async () => {
       const { status } = await Contacts.requestPermissionsAsync();
-      if (status === 'granted') {
+      if (status === "granted") {
         const { data } = await Contacts.getContactsAsync();
 
         if (data.length > 0) {
           const contacts = data;
-          setContacts(contacts)
-        }
-        else {
+          setContacts(contacts);
+        } else {
           setError('Add some "2174" company contacts');
         }
       }
@@ -43,37 +45,48 @@ const SoberContacts = () => {
   for (let sober of contacts) {
     // console.log("SOBER******************************", sober)
     if (sober.company && sober.company.includes("2174")) {
-      filteredContacts.push(sober)
+      filteredContacts.push(sober);
     }
   }
-        
-return (
-  <ScrollView style={styles.container}>
-    <Text style={styles.summary}> All of these people would love to hear from you.</Text>
-    <Text style={styles.summaryTwo}> CALL US! There are no judgements here.</Text>
-    <Text style={styles.summaryThree}> To add a sober contact put "2174" anywhere in the 
-    company field of their contact card.</Text>
-    {filteredContacts.map((item) => (
-    <TouchableOpacity 
-      style={styles.contactContainer} 
-      key={item.phoneNumbers[0].number}
-      onPress={() => makeCall(item)} 
-      delayPressIn={150}>
-      <Text style={styles.add}>{item.firstName}</Text>
-      <Text style={styles.add}>{item.lastName ? item.lastName : null}</Text>
-      <Text style={styles.add}>{item.phoneNumbers[0].number}</Text>
-    </TouchableOpacity>))} 
-  </ScrollView>
-  )
+
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.summary}>
+        {" "}
+        All of these people would love to hear from you.
+      </Text>
+      <Text style={styles.summaryTwo}>
+        {" "}
+        CALL US! There are no judgements here.
+      </Text>
+      <Text style={styles.summaryThree}>
+        {" "}
+        To add a sober contact put "2174" anywhere in the company field of their
+        contact card.
+      </Text>
+      {filteredContacts.map((item) => (
+        <TouchableOpacity
+          style={styles.contactContainer}
+          key={item.phoneNumbers[0].number}
+          onPress={() => makeCall(item)}
+          delayPressIn={150}
+        >
+          <Text style={styles.add}>{item.firstName}</Text>
+          <Text style={styles.add}>{item.lastName ? item.lastName : null}</Text>
+          <Text style={styles.add}>{item.phoneNumbers[0].number}</Text>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
+  );
 };
 
-export { SoberContacts };
+export { SupportContacts };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#1B2A41",
-    paddingBottom: 15
+    backgroundColor: "#1B2A41",
+    paddingBottom: 15,
   },
   add: {
     padding: 5,
@@ -110,13 +123,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#D7D9D7",
   },
-  icon: {  
+  icon: {
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 20, 
+    fontSize: 20,
     paddingLeft: 20,
-    color: "#1B2A41"
-  }, 
+    color: "#1B2A41",
+  },
   contactContainer: {
     flexDirection: "row",
     borderRadius: 10,
@@ -129,5 +142,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     color: "#D7D9D7",
-  }
+  },
 });

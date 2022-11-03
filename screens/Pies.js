@@ -146,52 +146,52 @@ const Pies = () => {
       <KeyboardAwareScrollView extraHeight={200}>
         <View style={look.topBox}>
           <View style={look.header}>
-            <Text style={[look.add, { fontSize: 25 }]}>
+            <Text style={[look.add, { fontSize: 26 }]}>
               How do you feel today?
             </Text>
           </View>
-          <View style={look.pieBox}>
+          {/* <View style={look.pieBox}>
             <Text style={look.add}>Physical Body</Text>
-          </View>
+          </View> */}
           <TextInput
             style={look.input}
             onChangeText={(text) => setPhysical(text)}
             value={physical}
-            placeholder={"new entry"}
+            placeholder={"Physical Body"}
             multiline
             keyboardType="default"
           />
-          <View style={look.pieBox}>
+          {/* <View style={look.pieBox}>
             <Text style={look.add}>Insights or Thoughts</Text>
-          </View>
+          </View> */}
           <TextInput
             style={look.input}
             onChangeText={(text) => setInsights(text)}
             value={insights}
-            placeholder={"new entry"}
+            placeholder={"Insights or Thoughts"}
             multiline
             keyboardType="default"
           />
-          <View style={look.pieBox}>
+          {/* <View style={look.pieBox}>
             <Text style={look.add}>Emotions or Feelings</Text>
-          </View>
+          </View> */}
           <TextInput
             style={look.input}
             onChangeText={(text) => setEmotions(text)}
-            placeholder={"new entry"}
+            placeholder={"Emotions or Feelings"}
             value={emotions}
             multiline
             keyboardType="default"
           />
-          <View style={look.pieBox}>
+          {/* <View style={look.pieBox}>
             <Text style={look.add}>
-              Spiritual Connection to Self, Others or a Higher Power
-            </Text>
-          </View>
+              Spiritual Connection to Self, Others or Higher Power
+            </Text> */}
+          {/* </View> */}
           <TextInput
             style={look.input}
             onChangeText={(text) => setSpiritual(text)}
-            placeholder={"new entry"}
+            placeholder={"Spiritual Connection to Self, Others or Higher Power"}
             value={spiritual}
             multiline
             keyboardType="default"

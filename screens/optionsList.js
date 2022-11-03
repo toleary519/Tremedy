@@ -72,7 +72,7 @@ export const pageOptions = [
   {
     id: 11,
     selected: false,
-    pageName: "Support Contacts",
+    pageName: "SupportContacts",
     sub: "Call the people who will be there for you.",
     title: "Support Contacts",
   },

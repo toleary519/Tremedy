@@ -139,6 +139,21 @@ export const look = {
     color: "#D7D9D7",
     textAlign: "center",
   },
+  right: {
+    width: "47.5%",
+    // borderWidth: 2,
+    // borderColor: "green",
+  },
+  left: {
+    width: "47.5%",
+    // borderWidth: 2,
+    // borderColor: "red",
+  },
+  pContainer: {
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "#1B2A41",
+  },
 };
 
 // ______________________template for entry pages 

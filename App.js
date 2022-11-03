@@ -8,7 +8,7 @@ import { PepTalkMenu } from "./screens/PepTalkMenu";
 import { UrgeMenu } from "./screens/UrgeMenu";
 import { PlanningMenu } from "./screens/PlanningMenu";
 import { NotesMenu } from "./screens/NotesMenu";
-import { SoberContacts } from "./screens/SoberContacts"
+import { SupportContacts } from "./screens/SupportContacts";
 import { BadTimes } from "./screens/BadTimes";
 import ProConPage from "./screens/ProConPage";
 import { GoodTimes } from "./screens/GoodTimes";
@@ -108,9 +108,9 @@ function App() {
               options={{ title: "Find A Meeting" }}
             />
             <Stack.Screen
-              name="SoberContacts"
-              component={SoberContacts}
-              options={{ title: "Sober Contacts" }}
+              name="SupportContacts"
+              component={SupportContacts}
+              options={{ title: "Support Contacts" }}
             />
             <Stack.Screen
               name="OutsideMenu"
