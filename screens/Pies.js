@@ -53,6 +53,7 @@ const Pies = () => {
     let newPie = {
       id: orderId,
       flag: flag,
+      title: "PIES Check-In",
       physical: physical,
       insights: insights,
       emotions: emotions,

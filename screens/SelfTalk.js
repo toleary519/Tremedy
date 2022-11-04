@@ -51,6 +51,7 @@ const SelfTalk = () => {
     let newSelfTalk = {
       id: orderId,
       flag: flag,
+      title: "+ Self-Talk",
       initial: initial,
       rational: rational,
       date: `${currentMonth}/${currentDay}/${currentYear}`,

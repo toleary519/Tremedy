@@ -154,6 +154,18 @@ export const look = {
     flexDirection: "row",
     backgroundColor: "#1B2A41",
   },
+  reportButton: {
+    marginTop: 15,
+
+    // textAlign: "center",
+    padding: 4,
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#D7D9D7",
+  },
+  reportSelected: {
+    color: "green",
+  },
 };
 
 // ______________________template for entry pages 

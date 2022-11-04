@@ -30,8 +30,9 @@ const CopingStatement = () => {
     try {
       const jsonValue = JSON.stringify(copingStorage);
       await AsyncStorage.setItem("storedCoping", jsonValue);
+      console.log(copingStorage);
     } catch (e) {
-      console.log("1", e);
+      // console.log("1", e);
     }
   };
 
@@ -69,6 +70,7 @@ const CopingStatement = () => {
 
     let newCoping = {
       id: orderId,
+      title: "Coping Statement",
       myCoping: myCoping,
       flag: flag,
       date: `${currentMonth}/${currentDay}/${currentYear}`,
@@ -79,11 +81,12 @@ const CopingStatement = () => {
     setCopingStorage(newList);
     setMyCoping("");
     storeData(newList);
-    {
-      console.log("sorted: ", sortedEntries);
-    }
+    // {
+    //   console.log("copeStorgae: ", copingStorage);
+    //   console.log("New List: ", newList);
+    // }
     getData();
-  };
+  };;
 
   const handleDelete = ({ item }) => {
     let index = 0;
@@ -157,6 +160,7 @@ const CopingStatement = () => {
           </TouchableOpacity>
           {sortedEntries.map((item, i) => (
             <View key={item.id} style={look.border}>
+              {/* {console.log("item : ", item)} */}
               <View style={look.elementHeader}>
                 <TouchableOpacity onPress={() => handleDelete({ item })}>
                   <MaterialIcons
