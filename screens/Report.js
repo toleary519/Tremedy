@@ -69,6 +69,8 @@ const Report = () => {
       return b.id - a.id;
     });
 
+  let rando = Math.random().toString(36).slice(2);
+
   React.useEffect(() => {
     getData();
   }, []);
@@ -150,13 +152,19 @@ const Report = () => {
             {reportStorage ? (
               <View>
                 {showFull
-                  ? fullReport.map((item) => <View>{Entries({ item })}</View>)
+                  ? fullReport.map((item) => (
+                      <View key={rando}>{Entries({ item })}</View>
+                    ))
                   : null}
                 {showChecks
-                  ? fullChecks.map((item) => <View>{CheckVal({ item })}</View>)
+                  ? fullChecks.map((item) => (
+                      <View key={rando}>{CheckVal({ item })}</View>
+                    ))
                   : null}
                 {showFlags
-                  ? fullFlags.map((item) => <View>{Entries({ item })}</View>)
+                  ? fullFlags.map((item) => (
+                      <View key={rando}>{Entries({ item })}</View>
+                    ))
                   : null}
               </View>
             ) : null}

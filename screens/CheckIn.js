@@ -17,6 +17,7 @@ import { Picker } from "@react-native-picker/picker";
 import { FontAwesome } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { look } from "../assets/styles";
 
 const CheckIn = () => {
   let [checkinStorage, setCheckinStorage] = useState(
@@ -25,7 +26,10 @@ const CheckIn = () => {
   let [reportStorage, setReportStorage] = useState(
     reportStorage ? reportStorage : []
   );
-  let [face, setFace] = useState(4);
+  // let [face, setFace] = useState(4);
+  let [phys, setPhys] = useState(5);
+  let [mental, setMental] = useState(5);
+  let [outlook, setOutlook] = useState(5);
   let [checkin, setCheckin] = useState("");
   let [feelOne, setFeelOne] = useState(feelOne ? feelOne : "");
   let [feelTwo, setFeelTwo] = useState(feelTwo ? feelTwo : "");
@@ -165,20 +169,90 @@ const CheckIn = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={look.container}>
       <KeyboardAwareScrollView extraHeight={250}>
-        <View style={styles.firstBox}>
-          <Text style={styles.add}>How are you feeling?</Text>
-          <Text style={styles.face}>{handleFace(face)}</Text>
-          <Slider
-            style={styles.slider}
-            minimumValue={1}
-            maximumValue={7}
-            step={1}
-            value={face ? face : 4}
-            onValueChange={setFace}
-            minimumTrackTintColor={"#D7D9D7"}
-          />
+        <View style={look.topBox}>
+          <View style={look.border}>
+            <View style={[look.header]}>
+              <Text style={look.add}>How are you feeling?</Text>
+              <Text style={look.sub}>10 being best.</Text>
+            </View>
+            <View style={[look.sliderBox, look.checkMarginTop]}>
+              <View style={look.subHeader}>
+                <Text style={look.sub}>Physically</Text>
+              </View>
+              <Slider
+                style={look.slider}
+                minimumValue={1}
+                maximumValue={10}
+                step={1}
+                value={phys}
+                onValueChange={setPhys}
+                minimumTrackTintColor={"#D7D9D7"}
+              />
+              <View>
+                <Text style={look.add}>{phys}</Text>
+              </View>
+            </View>
+          </View>
+          <View style={look.border}>
+            <View style={[look.sliderBox, look.checkMarginTop]}>
+              <View style={look.subHeader}>
+                <Text style={look.sub}>Emotionally</Text>
+              </View>
+              <Slider
+                style={look.slider}
+                minimumValue={1}
+                maximumValue={10}
+                step={1}
+                value={mental}
+                onValueChange={setMental}
+                minimumTrackTintColor={"#D7D9D7"}
+              />
+              <View>
+                <Text style={look.add}>{mental}</Text>
+              </View>
+            </View>
+          </View>
+          <View style={look.border}>
+            <View style={[look.sliderBox, look.checkMarginTop]}>
+              <View style={look.subHeader}>
+                <Text style={look.sub}>Outlook</Text>
+                {/* <Text style={look.sub}></Text> */}
+              </View>
+              <Slider
+                style={look.slider}
+                minimumValue={1}
+                maximumValue={10}
+                step={1}
+                value={outlook}
+                onValueChange={setOutlook}
+                minimumTrackTintColor={"#D7D9D7"}
+              />
+              <View>
+                <Text style={look.add}>{outlook}</Text>
+              </View>
+            </View>
+          </View>
+          {/* <View style={look.border}>
+            <View style={[look.sliderBox, look.checkMarginTop]}>
+              <View style={look.subHeader}>
+                <Text style={look.sub}>Physically</Text>
+              </View>
+              <Slider
+                style={look.slider}
+                minimumValue={1}
+                maximumValue={10}
+                step={1}
+                value={4}
+                onValueChange={setFace}
+                minimumTrackTintColor={"#D7D9D7"}
+              />
+              <View>
+                <Text style={look.face}>{handleFace(face)}</Text>
+              </View>
+            </View>
+          </View> */}
 
           {/* -------------------------------------------------FEELWHEEL-------------------------- */}
           <View style={[styles.pieContainer, { borderWidth: 0 }]}>
@@ -304,120 +378,120 @@ const CheckIn = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 10,
-    paddingBottom: 25,
-    backgroundColor: "#1B2A41",
-  },
-  firstBox: {
-    width: "90%",
-    left: "5%",
-    alignItems: "center",
-    justifyContent: "center",
-    alignContent: "center",
-    textAlign: "center",
-  },
-  add: {
-    marginTop: 21,
-    textAlign: "center",
-    padding: 10,
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  pieContainer: {
-    borderRadius: 10,
-    borderWidth: 4,
-    marginTop: 7,
-    marginBottom: 7,
-    alignItems: "center",
-    justifyContent: "center",
-    alignContent: "center",
-    textAlign: "center",
-    borderColor: "#D7D9D7",
-  },
-  slider: {
-    marginTop: 20,
-    width: "80%",
-    fontSize: 25,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  face: {
-    marginTop: 10,
-    textAlign: "center",
-    fontSize: 40,
-  },
-  icon: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 40,
-    color: "#D7D9D7",
-    textAlign: "center",
-  },
-  input: {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    width: "90%",
-    marginTop: 21,
-    textAlign: "center",
-    padding: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#2f8587",
-  },
-  date: {
-    marginTop: 5,
-    textAlign: "center",
-    padding: 10,
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  feelChoiceDisplayCase: {
-    marginTop: 10,
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  feelChoiceDisplay: {
-    flexDirection: "row",
-  },
-  display: {
-    padding: 10,
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  nextButton: {
-    fontSize: 40,
-    color: "#D7D9D7",
-    textAlign: "center",
-  },
-  pickerBox: {
-    width: "90%",
-  },
-  pickerBoxCase: {
-    textAlign: "center",
-    flexDirection: "row",
-  },
-  buttonBox: {
-    marginTop: 20,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  pickerItem: {
-    height: 90,
-    color: "#D7D9D7",
-    fontSize: 40,
-    backgroundColor: "#1B2A41",
-  },
-  picker: {
-    height: 90,
-    color: "#D7D9D7",
-    fontSize: 40,
-  },
+  // container: {
+  //   flex: 1,
+  //   paddingTop: 10,
+  //   paddingBottom: 25,
+  //   backgroundColor: "#1B2A41",
+  // },
+  // firstBox: {
+  //   width: "90%",
+  //   left: "5%",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   alignContent: "center",
+  //   textAlign: "center",
+  // },
+  // add: {
+  //   marginTop: 21,
+  //   textAlign: "center",
+  //   padding: 10,
+  //   fontSize: 25,
+  //   fontWeight: "bold",
+  //   color: "#D7D9D7",
+  // },
+  // pieContainer: {
+  //   borderRadius: 10,
+  //   borderWidth: 4,
+  //   marginTop: 7,
+  //   marginBottom: 7,
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   alignContent: "center",
+  //   textAlign: "center",
+  //   borderColor: "#D7D9D7",
+  // },
+  // slider: {
+  //   marginTop: 20,
+  //   width: "80%",
+  //   fontSize: 25,
+  //   fontWeight: "bold",
+  //   textAlign: "center",
+  // },
+  // face: {
+  //   marginTop: 10,
+  //   textAlign: "center",
+  //   fontSize: 40,
+  // },
+  // icon: {
+  //   paddingTop: 20,
+  //   paddingBottom: 20,
+  //   fontSize: 40,
+  //   color: "#D7D9D7",
+  //   textAlign: "center",
+  // },
+  // input: {
+  //   borderRadius: 10,
+  //   borderWidth: 4,
+  //   borderColor: "#D7D9D7",
+  //   width: "90%",
+  //   marginTop: 21,
+  //   textAlign: "center",
+  //   padding: 10,
+  //   fontSize: 20,
+  //   fontWeight: "bold",
+  //   color: "#2f8587",
+  // },
+  // date: {
+  //   marginTop: 5,
+  //   textAlign: "center",
+  //   padding: 10,
+  //   fontSize: 18,
+  //   fontWeight: "bold",
+  //   color: "#D7D9D7",
+  // },
+  // feelChoiceDisplayCase: {
+  //   marginTop: 10,
+  //   justifyContent: "center",
+  //   flexDirection: "row",
+  // },
+  // feelChoiceDisplay: {
+  //   flexDirection: "row",
+  // },
+  // display: {
+  //   padding: 10,
+  //   fontSize: 25,
+  //   fontWeight: "bold",
+  //   color: "#D7D9D7",
+  // },
+  // nextButton: {
+  //   fontSize: 40,
+  //   color: "#D7D9D7",
+  //   textAlign: "center",
+  // },
+  // pickerBox: {
+  //   width: "90%",
+  // },
+  // pickerBoxCase: {
+  //   textAlign: "center",
+  //   flexDirection: "row",
+  // },
+  // buttonBox: {
+  //   marginTop: 20,
+  //   flexDirection: "row",
+  //   justifyContent: "center",
+  // },
+  // pickerItem: {
+  //   height: 90,
+  //   color: "#D7D9D7",
+  //   fontSize: 40,
+  //   backgroundColor: "#1B2A41",
+  // },
+  // picker: {
+  //   height: 90,
+  //   color: "#D7D9D7",
+  //   fontSize: 40,
+  // },
 });
 
 export { CheckIn };

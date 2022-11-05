@@ -94,7 +94,7 @@ export const look = {
     alignItems: "center",
     opacity: 0.6,
     marginBottom: 5,
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
@@ -146,8 +146,6 @@ export const look = {
   },
   left: {
     width: "47.5%",
-    // borderWidth: 2,
-    // borderColor: "red",
   },
   pContainer: {
     flex: 1,
@@ -165,6 +163,30 @@ export const look = {
   },
   reportSelected: {
     color: "green",
+  },
+  slider: {
+    width: "70%",
+    fontSize: 8,
+    fontWeight: "bold",
+    // textAlign: "center",
+  },
+  sliderBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: "3%",
+    // borderWidth: 2,
+    // borderColor: "red",
+  },
+  checkMarginTop: {
+    marginTop: "5%",
+  },
+  checkMarginRight: {
+    marginRight: "5%",
+  },
+  face: {
+    // marginTop: 10,
+    // textAlign: "center",
+    fontSize: 30,
   },
 };
 
