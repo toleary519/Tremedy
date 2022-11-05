@@ -125,7 +125,7 @@ function App() {
             <Stack.Screen
               name="PercievedThreatMenu"
               component={PercievedThreatMenu}
-              options={{ title: "Percieved Threat" }}
+              options={{ title: "Elevated State" }}
             />
             <Stack.Screen
               name="EyeInstruct"

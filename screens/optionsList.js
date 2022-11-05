@@ -98,3 +98,36 @@ export const pageOptions = [
     title: "5-4-3-2-1",
   },
 ];
+
+export const elevatedOptions = [
+  {
+    id: 1,
+    pageName: "Breathe",
+    sub: "A guided breathing exercize.",
+    title: "Breathe",
+  },
+  {
+    id: 2,
+    pageName: "PMRInstruct",
+    sub: "Calm from the head down.",
+    title: "Progressive Muscle Relaxation",
+  },
+  {
+    id: 3,
+    pageName: "EyeInstruct",
+    title: "Left & Right",
+    sub: "Lateral Eye Movements",
+  },
+  {
+    id: 4,
+    pageName: "KneadInstruct",
+    title: "Knead your feet",
+    sub: "A grounding exercize.",
+  },
+  {
+    id: 5,
+    pageName: "AnkleInstruct",
+    title: "Rock the ankles",
+    sub: "A an exercize for when standing in line.",
+  },
+];

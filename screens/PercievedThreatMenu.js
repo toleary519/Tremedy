@@ -1,89 +1,231 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { FontAwesome } from '@expo/vector-icons'; 
-import { AntDesign } from '@expo/vector-icons'; 
+import {
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ScrollView,
+} from "react-native";
+import { elevatedOptions } from "./optionsList";
+import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { look } from "../assets/styles";
 
 const PercievedThreatMenu = ({ navigation }) => {
-  const [eyeDone, setEyeDone] = useState(false);
-  const [breatheDone, setBreatheDone] = useState(false);
-  const [kneadDone, setKneadDone] = useState(false);
-  const [anklesDone, setAnklesDone] = useState(false);
-  const [PMRDone, setPMRDone] = useState(false);
+  // const [eyeDone, setEyeDone] = useState(false);
+  // const [breatheDone, setBreatheDone] = useState(false);
+  // const [kneadDone, setKneadDone] = useState(false);
+  // const [anklesDone, setAnklesDone] = useState(false);
+  // const [PMRDone, setPMRDone] = useState(false);
 
-  const handleREDO = () => {
-    setEyeDone(false);
-    setBreatheDone(false);
-    setKneadDone(false);
-    setAnklesDone(false);
-    setPMRDone(false);
-  }
+  // const handleREDO = () => {
+  //   setEyeDone(false);
+  //   setBreatheDone(false);
+  //   setKneadDone(false);
+  //   setAnklesDone(false);
+  //   setPMRDone(false);
+  // };
+
+  let endCheck = () => {
+    Alert.alert(`Whoops!`, `You're already at the end of the list.`, [
+      {
+        text: "OK",
+        style: "cancel",
+        onPress: () => {
+          return;
+        },
+      },
+    ]);
+  };
+
+  const swapUp = (i) => {
+    var temp = elevatedOptions[i];
+
+    elevatedOptions[i] = elevatedOptions[i - 1];
+    elevatedOptions[i - 1] = temp;
+
+    storeData(elevatedOptions);
+    getData();
+  };
+
+  const swapDown = (i) => {
+    var temp = elevatedOptions[i];
+
+    elevatedOptions[i] = elevatedOptions[i + 1];
+    elevatedOptions[i + 1] = temp;
+
+    storeData(elevatedOptions);
+    getData();
+  };
+
+  const end = elevatedOptions.length - 1;
 
   return (
-  <View style={styles.container}>
-    <Text style={styles.summary}> Complete these exercises, pressing
-     the buttons on the right to mark them as you make your way through. </Text>
-    <View style={styles.exercise}>
-      <TouchableOpacity onPress={() => navigation.navigate("Breathe")} delayPressIn={150}>
-        <Text style={styles.breathe}>
-          Breathe
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setBreatheDone(true)}>
-        <MaterialCommunityIcons style={ breatheDone ? styles.breatheIconDone : styles.breatheIcon} name="gesture-tap-button"/>
-      </TouchableOpacity>
-    </View>    
-    <View style={styles.exercise}>
-      <TouchableOpacity onPress={() => navigation.navigate("ProgressiveMuscle")} delayPressIn={150}>
-        <Text style={styles.add}>
-          {`Progressive \n Muscle \n Relaxation`}
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("PMRInstruct")} delayPressIn={150}>
-        <FontAwesome style={styles.icon} name="question-circle" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setPMRDone(true)}>
-        <MaterialCommunityIcons style={ PMRDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
-      </TouchableOpacity>
-    </View>    
-    <View style={styles.exercise}>
-      <Text style={styles.add}>
-        Eye Exercise
-      </Text>
-      <TouchableOpacity onPress={() => navigation.navigate("EyeInstruct")} delayPressIn={150}>
-        <FontAwesome style={styles.icon} name="question-circle" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setEyeDone(true)}>
-        <MaterialCommunityIcons style={ eyeDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
-      </TouchableOpacity>
+    <View style={look.container}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
+        <View style={look.topBox}>
+          {elevatedOptions
+            ? elevatedOptions.map((item, i) => (
+                <View
+                  key={item.id}
+                  style={[
+                    look.element,
+                    { flex: 6, flexDirection: "row" },
+                    look.border,
+                  ]}
+                >
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate(item.pageName)}
+                    delayPressIn={150}
+                  >
+                    <Text style={look.add}>{item.title}</Text>
+                    <Text style={look.sub}>{item.sub}</Text>
+                  </TouchableOpacity>
+                  <View
+                    style={{
+                      flex: 2,
+                      flexDirection: "row",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <TouchableOpacity
+                      onPress={i === end ? () => endCheck() : () => swapDown(i)}
+                      style={[look.outRoutine]}
+                      delayPressIn={150}
+                    >
+                      <Feather
+                        name="chevron-down"
+                        style={[
+                          look.outRoutine,
+                          { fontSize: 35, marginRight: 20, opacity: 0.7 },
+                        ]}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={i === 0 ? () => endCheck() : () => swapUp(i)}
+                      style={look.inRoutine}
+                      delayPressIn={150}
+                    >
+                      <Feather
+                        name="chevron-up"
+                        style={[look.inRoutine, { fontSize: 35, opacity: 0.7 }]}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))
+            : null}
+        </View>
+      </ScrollView>
     </View>
-    <View style={styles.exercise}>
-      <Text style={styles.add}>
-        Knead Feet
-      </Text>
-      <TouchableOpacity onPress={() => navigation.navigate("KneadInstruct")} delayPressIn={150}>
-        <FontAwesome style={styles.icon} name="question-circle" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setKneadDone(true)}>
-        <MaterialCommunityIcons style={ kneadDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
-      </TouchableOpacity>
-    </View>
-    <View style={styles.exercise}>
-      <Text style={styles.add}>
-        Ankle Rock
-      </Text>
-      <TouchableOpacity onPress={() => navigation.navigate("AnkleInstruct")} delayPressIn={150}>
-        <FontAwesome style={styles.icon} name="question-circle" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setAnklesDone(true)}>
-        <MaterialCommunityIcons style={ anklesDone ? styles.iconDone : styles.icon} name="gesture-tap-button"/>
-      </TouchableOpacity>
-    </View>
-      <TouchableOpacity onPress={() => handleREDO()}>
-        <AntDesign style={styles.icon} name="retweet"/>
-      </TouchableOpacity>
-  </View>
-)};
+  );
+};
+// <View style={look.container}>
+//   <View style={look.topBox}>
+//     <View style={look.header}>
+//       <Text style={look.add}>
+//         Complete these exercises, pressing the buttons on the right to mark
+//         them as you make your way through.
+//       </Text>
+//     </View>
+//     <View style={look.border}>
+//       <View style={look.element}>
+//         <View style={styles.left}>
+//           <TouchableOpacity
+//             onPress={() => navigation.navigate("Breathe")}
+//             delayPressIn={150}
+//           >
+//             <Text style={look.add}>Breathe</Text>
+//             <Text style={look.subHeader}>
+//               A guided breathing animation.
+//             </Text>
+//           </TouchableOpacity>
+//         </View>
+//       </View>
+//       <View style={look.right}>
+//         <TouchableOpacity onPress={() => setBreatheDone(true)}>
+//           <Feather
+//             name="check-circle"
+//             style={breatheDone ? look.icon : look.selected}
+//           />
+//         </TouchableOpacity>
+//       </View>
+//     </View>
+//     <View style={look.border}>
+//       <TouchableOpacity
+//         onPress={() => navigation.navigate("ProgressiveMuscle")}
+//         delayPressIn={150}
+//       >
+//         <Text style={look.add}>
+//           {`Progressive \n Muscle \n Relaxation`}
+//         </Text>
+//       </TouchableOpacity>
+//       <TouchableOpacity
+//         onPress={() => navigation.navigate("PMRInstruct")}
+//         delayPressIn={150}
+//       >
+//         <FontAwesome style={look.icon} name="question-circle" />
+//       </TouchableOpacity>
+//       <TouchableOpacity onPress={() => setPMRDone(true)}>
+//         <Feather
+//           name="check-circle"
+//           style={PMRDone ? look.iconDone : look.icon}
+//         />
+//       </TouchableOpacity>
+//     </View>
+//     <View style={look.border}>
+//       <Text style={look.add}>Lateral Eye Movements</Text>
+//       <TouchableOpacity
+//         onPress={() => navigation.navigate("EyeInstruct")}
+//         delayPressIn={150}
+//       >
+//         <FontAwesome style={look.icon} name="question-circle" />
+//       </TouchableOpacity>
+//       <TouchableOpacity onPress={() => setEyeDone(true)}>
+//         <Feather
+//           name="check-circle"
+//           style={eyeDone ? look.iconDone : look.icon}
+//         />
+//       </TouchableOpacity>
+//     </View>
+//     <View style={look.border}>
+//       <Text style={look.add}>Knead Feet</Text>
+//       <TouchableOpacity
+//         onPress={() => navigation.navigate("KneadInstruct")}
+//         delayPressIn={150}
+//       >
+//         <FontAwesome style={look.icon} name="question-circle" />
+//       </TouchableOpacity>
+//       <TouchableOpacity onPress={() => setKneadDone(true)}>
+//         <Feather
+//           name="check-circle"
+//           style={kneadDone ? look.iconDone : look.icon}
+//         />
+//       </TouchableOpacity>
+//     </View>
+//     <View style={look.border}>
+//       <Text style={look.add}>Ankle Rock</Text>
+//       <TouchableOpacity
+//         onPress={() => navigation.navigate("AnkleInstruct")}
+//         delayPressIn={150}
+//       >
+//         <FontAwesome style={look.icon} name="question-circle" />
+//       </TouchableOpacity>
+//       <TouchableOpacity onPress={() => setAnklesDone(true)}>
+//         <Feather
+//           name="check-circle"
+//           style={anklesDone ? look.iconDone : look.icon}
+//         />
+//       </TouchableOpacity>
+//     </View>
+//     <TouchableOpacity onPress={() => handleREDO()}>
+//       <AntDesign style={look.icon} name="retweet" />
+//     </TouchableOpacity>
+//   </View>
+// </View>
+//   );
+// };
 
 const styles = StyleSheet.create({
   container: {
@@ -92,7 +234,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#1B2A41",
   },
-  exercise: {
+  border: {
     flexDirection: "row",
     // width: "90%",
     justifyContent: "flex-start",
