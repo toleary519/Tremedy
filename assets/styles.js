@@ -22,6 +22,15 @@ export const look = {
     fontWeight: "bold",
     color: "#D7D9D7",
   },
+  checkWordHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 5,
+    marginBottom: "5%",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#D7D9D7",
+  },
   subHeader: {
     marginTop: 5,
     marginBottom: 2,
@@ -34,7 +43,6 @@ export const look = {
     borderColor: "#3C5E90",
     borderRadius: 8,
     marginTop: 21,
-
     padding: 10,
     fontSize: 20,
     fontWeight: "bold",
@@ -131,7 +139,6 @@ export const look = {
     fontSize: 30,
     color: "#D7D9D7",
   },
-
   centerIcon: {
     paddingTop: 15,
     paddingBottom: 0,
@@ -154,7 +161,6 @@ export const look = {
   },
   reportButton: {
     marginTop: 15,
-
     // textAlign: "center",
     padding: 4,
     fontSize: 25,
@@ -182,6 +188,11 @@ export const look = {
   },
   checkMarginRight: {
     marginRight: "5%",
+  },
+  checkBoxButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   face: {
     // marginTop: 10,

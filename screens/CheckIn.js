@@ -11,8 +11,6 @@ import { handleFace, feelingWheel } from "./feelingwheelOptions";
 import Slider from "@react-native-community/slider";
 // import WheelPicker from "react-native-wheely";
 import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import { FontAwesome } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -27,9 +25,9 @@ const CheckIn = () => {
     reportStorage ? reportStorage : []
   );
   // let [face, setFace] = useState(4);
-  let [phys, setPhys] = useState(5);
-  let [mental, setMental] = useState(5);
-  let [outlook, setOutlook] = useState(5);
+  let [phys, setPhys] = useState(1);
+  let [mental, setMental] = useState(1);
+  let [outlook, setOutlook] = useState(1);
   let [checkin, setCheckin] = useState("");
   let [feelOne, setFeelOne] = useState(feelOne ? feelOne : "");
   let [feelTwo, setFeelTwo] = useState(feelTwo ? feelTwo : "");
@@ -69,11 +67,10 @@ const CheckIn = () => {
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
     let orderId = currentDate.getTime();
-    let saveFace = handleFace(face);
 
     let newCheckin = {
       id: orderId,
-      face: saveFace,
+      title: "Check-In",
       feelOne: feelOne,
       feelTwo: feelTwo,
       feelThree: feelThree,
@@ -173,8 +170,10 @@ const CheckIn = () => {
       <KeyboardAwareScrollView extraHeight={250}>
         <View style={look.topBox}>
           <View style={look.border}>
-            <View style={[look.header]}>
-              <Text style={look.add}>How are you feeling?</Text>
+            <View style={look.header}>
+              <Text style={[look.add, { fontSize: 24 }]}>
+                How are you feeling?
+              </Text>
               <Text style={look.sub}>10 being best.</Text>
             </View>
             <View style={[look.sliderBox, look.checkMarginTop]}>
@@ -188,7 +187,7 @@ const CheckIn = () => {
                 step={1}
                 value={phys}
                 onValueChange={setPhys}
-                minimumTrackTintColor={"#D7D9D7"}
+                minimumTrackTintColor={"green"}
               />
               <View>
                 <Text style={look.add}>{phys}</Text>
@@ -207,7 +206,7 @@ const CheckIn = () => {
                 step={1}
                 value={mental}
                 onValueChange={setMental}
-                minimumTrackTintColor={"#D7D9D7"}
+                minimumTrackTintColor={"green"}
               />
               <View>
                 <Text style={look.add}>{mental}</Text>
@@ -227,147 +226,139 @@ const CheckIn = () => {
                 step={1}
                 value={outlook}
                 onValueChange={setOutlook}
-                minimumTrackTintColor={"#D7D9D7"}
+                minimumTrackTintColor={"green"}
               />
               <View>
                 <Text style={look.add}>{outlook}</Text>
               </View>
             </View>
           </View>
-          {/* <View style={look.border}>
-            <View style={[look.sliderBox, look.checkMarginTop]}>
-              <View style={look.subHeader}>
-                <Text style={look.sub}>Physically</Text>
-              </View>
-              <Slider
-                style={look.slider}
-                minimumValue={1}
-                maximumValue={10}
-                step={1}
-                value={4}
-                onValueChange={setFace}
-                minimumTrackTintColor={"#D7D9D7"}
-              />
-              <View>
-                <Text style={look.face}>{handleFace(face)}</Text>
-              </View>
-            </View>
-          </View> */}
 
           {/* -------------------------------------------------FEELWHEEL-------------------------- */}
-          <View style={[styles.pieContainer, { borderWidth: 0 }]}>
-            <View style={styles.feelChoiceDisplayCase}>
-              {feelOne ? (
-                <View style={{ flexDirection: "row" }}>
-                  {feelOne ? (
-                    <Text style={styles.display}>{feelOne}</Text>
-                  ) : null}
-                  {feelTwo ? (
-                    <Text style={styles.display}>{feelTwo}</Text>
-                  ) : null}
-                  {feelThree ? (
-                    <Text style={styles.display}>{feelThree}</Text>
-                  ) : null}
-                </View>
-              ) : null}
-            </View>
-            <View style={styles.pickerBoxCase}>
-              <View style={styles.pickerBox}>
-                {!feelOne && !feelTwo && !feelThree ? (
-                  <Picker
-                    itemStyle={styles.pickerItem}
-                    selectedValue={!temp ? setTemp(setOne[0]) : temp}
-                    onValueChange={(x) => {
-                      setTemp(x);
-                    }}
-                  >
-                    {setOne.map((item) => (
-                      <Picker.Item key={item} value={item} label={item} />
-                    ))}
-                  </Picker>
-                ) : null}
 
-                {feelOne && !feelTwo && !feelThree ? (
-                  <Picker
-                    itemStyle={styles.pickerItem}
-                    selectedValue={!temp ? setTemp(setTwo[0]) : temp}
-                    onValueChange={(x) => {
-                      setTemp(x);
-                    }}
-                  >
-                    {setTwo.map((item) => (
-                      <Picker.Item key={item} value={item} label={item} />
-                    ))}
-                  </Picker>
-                ) : null}
-                {feelOne && feelTwo && !feelThree ? (
-                  <Picker
-                    itemStyle={styles.pickerItem}
-                    selectedValue={!temp ? setTemp(setThree[0]) : temp}
-                    onValueChange={(x) => {
-                      setTemp(x);
-                    }}
-                  >
-                    {setThree.map((item) => (
-                      <Picker.Item key={item} value={item} label={item} />
-                    ))}
-                  </Picker>
-                ) : null}
-                <View style={styles.buttonBox}>
-                  {feelOne ? (
-                    <TouchableOpacity onPress={() => handleBack()}>
-                      <FontAwesome
-                        name="chevron-circle-left"
-                        style={[styles.nextButton, { marginRight: "5%" }]}
-                      />
-                    </TouchableOpacity>
-                  ) : null}
-                  {feelThree ? null : ( // <View style={[styles.nextButton, { marginLeft: "5%" }]} />
-                    <TouchableOpacity onPress={() => setFeeling(temp)}>
-                      <FontAwesome
-                        name="chevron-circle-right"
-                        style={[styles.nextButton, { marginLeft: "5%" }]}
-                      />
-                    </TouchableOpacity>
-                  )}
-                </View>
+          <View style={look.checkWordHeader}>
+            {feelOne ? (
+              <View style={look.header}>
+                {feelOne ? <Text style={look.add}>{feelOne}</Text> : null}
+                {feelTwo ? <Text style={look.add}>{feelTwo}</Text> : null}
+                {feelThree ? <Text style={look.add}>{feelThree}</Text> : null}
               </View>
-            </View>
+            ) : (
+              <Text style={look.add}>Pick three words.</Text>
+            )}
           </View>
-          <Text style={[styles.add, { paddingBottom: 0, fontSize: 18 }]}>
-            Is there anything else you want to say about how you are feeling?
-          </Text>
+
+          <View style={look.picker}>
+            {!feelOne && !feelTwo && !feelThree ? (
+              <Picker
+                itemStyle={{ fontSize: 20, height: 50, color: "#D7D9D7" }}
+                selectedValue={!temp ? setTemp(setOne[0]) : temp}
+                onValueChange={(x) => {
+                  setTemp(x);
+                }}
+              >
+                {setOne.map((item) => (
+                  <Picker.Item key={item} value={item} label={item} />
+                ))}
+              </Picker>
+            ) : null}
+          </View>
+          <View style={look.picker}>
+            {feelOne && !feelTwo && !feelThree ? (
+              <Picker
+                itemStyle={{ fontSize: 20, height: 50, color: "#D7D9D7" }}
+                selectedValue={!temp ? setTemp(setTwo[0]) : temp}
+                onValueChange={(x) => {
+                  setTemp(x);
+                }}
+              >
+                {setTwo.map((item) => (
+                  <Picker.Item
+                    key={item}
+                    value={item}
+                    label={item}
+                    style={look.picker}
+                  />
+                ))}
+              </Picker>
+            ) : null}
+          </View>
+          <View style={look.picker}>
+            {feelOne && feelTwo && !feelThree ? (
+              <Picker
+                itemStyle={{ fontSize: 20, height: 50, color: "#D7D9D7" }}
+                selectedValue={!temp ? setTemp(setThree[0]) : temp}
+                onValueChange={(x) => {
+                  setTemp(x);
+                }}
+              >
+                {setThree.map((item) => (
+                  <Picker.Item key={item} value={item} label={item} />
+                ))}
+              </Picker>
+            ) : null}
+          </View>
+          <View style={look.checkBoxButton}>
+            {feelOne ? (
+              <TouchableOpacity onPress={() => handleBack()}>
+                <FontAwesome
+                  name="chevron-circle-left"
+                  style={[look.icon, { marginRight: "5%" }]}
+                />
+              </TouchableOpacity>
+            ) : null}
+            {feelThree ? null : (
+              <TouchableOpacity onPress={() => setFeeling(temp)}>
+                <FontAwesome name="chevron-circle-right" style={[look.icon]} />
+              </TouchableOpacity>
+            )}
+          </View>
+          <View style={[look.header, { marginBottom: 5 }]}>
+            <Text style={look.add}>
+              Is there anything else you want to say about how you are feeling?
+            </Text>
+          </View>
           <TextInput
-            style={styles.input}
+            style={look.input}
             onChangeText={(t) => setCheckin(t)}
             value={checkin}
-            placeholder={"enter text"}
+            placeholder={"..."}
             multiline
             keyboardType="default"
-            color="#D7D9D7"
-            placeholderTextColor={"#F1F7EE"}
           />
-          <TouchableOpacity onPress={() => errorCheck()}>
-            <MaterialIcons style={styles.icon} name="add-circle" />
+          <TouchableOpacity style={look.border} onPress={() => errorCheck()}>
+            <MaterialIcons
+              style={[look.icon, look.centerIcon, { paddingBottom: 15 }]}
+              name="add-circle"
+            />
           </TouchableOpacity>
           <View>
             {sortedEntries.map((item) => (
-              <View key={item.id} style={styles.pieContainer}>
-                <Text style={styles.date}>{item.date}</Text>
-                <Text style={styles.face}>{item.face}</Text>
-                <View style={styles.displayCase}>
-                  <View style={styles.feelChoiceDisplay}>
-                    <Text style={styles.display}>{item.feelOne}</Text>
-                    <Text style={styles.display}>{item.feelTwo}</Text>
-                    <Text style={styles.display}>{item.feelThree}</Text>
-                  </View>
-                  <Text style={styles.add}>
-                    {item.face} {item.myCheckin}
-                  </Text>
+              <View key={item.id} style={look.border}>
+                <View style={look.elementHeader}>
+                  <TouchableOpacity onPress={() => handleDelete({ item })}>
+                    <MaterialIcons
+                      style={[look.icon, look.canIcon]}
+                      name="delete-forever"
+                    />
+                  </TouchableOpacity>
+                  <Text style={look.sub}>{item.date}</Text>
                 </View>
-                <TouchableOpacity onPress={() => handleDelete({ item })}>
-                  <MaterialIcons style={styles.icon} name="delete-forever" />
-                </TouchableOpacity>
+                <View style={look.elementHeader}>
+                  <Text style={look.sub}>Physical : {phys}</Text>
+                  <Text style={look.sub}>Emotional : {mental}</Text>
+                  <Text style={look.sub}>Outlook : {outlook}</Text>
+                </View>
+                <View style={look.elementHeader}>
+                  <Text style={look.add}>{item.feelOne}</Text>
+                  <Text style={look.add}>{item.feelTwo}</Text>
+                  <Text style={look.add}>{item.feelThree}</Text>
+                </View>
+                {item.myCheckin ? (
+                  <View style={look.element}>
+                    <Text style={look.add}>{item.myCheckin}</Text>
+                  </View>
+                ) : null}
               </View>
             ))}
           </View>
