@@ -1,18 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
-import { get } from "react-native/Libraries/Utilities/PixelRatio";
 
 const Scream = () => {
   const [best, setBest] = useState(best ? best : null);

@@ -54,7 +54,7 @@ const FirstMenu = ({ navigation }) => {
           delayPressIn={150}
         >
           <Text style={styles.emergency}>Emergency</Text>
-          <Text style={styles.eSub}>If you need it call now.</Text>
+          <Text style={styles.eSub}>If you need it, call now.</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
