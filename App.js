@@ -10,7 +10,7 @@ import { PlanningMenu } from "./screens/PlanningMenu";
 import { NotesMenu } from "./screens/NotesMenu";
 import { SupportContacts } from "./screens/SupportContacts";
 import { BadTimes } from "./screens/BadTimes";
-import ProConPage from "./screens/ProConPage";
+import { ProCon } from "./screens/ProConPage";
 import { GoodTimes } from "./screens/GoodTimes";
 import { OutsideMenu } from "./screens/OutsideMenu";
 import { Meetings } from "./screens/Meetings";
@@ -39,6 +39,8 @@ import { JustOne } from "./screens/JustOne";
 import { Report } from "./screens/Report";
 import { Routine } from "./screens/Routine";
 import { UserSettings } from "./screens/UserSettings";
+import { Scream } from "./screens/Scream";
+
 import MyStack from "./routes/homeStack";
 import { StatusBar } from "expo-status-bar";
 
@@ -244,8 +246,13 @@ function App() {
             />
             <Stack.Screen
               name="ProCon"
-              component={ProConPage}
+              component={ProCon}
               options={{ title: "PROs & CONs" }}
+            />
+            <Stack.Screen
+              name="Scream"
+              component={Scream}
+              options={{ title: "Scream" }}
             />
           </Stack.Navigator>
         </NavigationContainer>

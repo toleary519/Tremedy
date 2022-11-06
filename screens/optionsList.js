@@ -52,14 +52,14 @@ export const pageOptions = [
     id: 10,
     selected: false,
     pageName: "NotesMenu",
-    sub: "The good and the bad, if you need to remember.",
+    sub: "The good and the bad.",
     title: "Experiences",
   },
   {
     id: 7,
     selected: false,
     pageName: "SelfTalk",
-    sub: "Challenging negative thoughts or emotions.",
+    sub: "Challenging negativity.",
     title: "+ Self-Talk",
   },
   {
@@ -97,6 +97,41 @@ export const pageOptions = [
     sub: "A grounding excersize",
     title: "5-4-3-2-1",
   },
+  {
+    id: 15,
+    selected: false,
+    pageName: "Scream",
+    title: "Scream",
+    sub: "Just let it out.",
+  },
+  {
+    id: 16,
+    selected: false,
+    pageName: "PMRInstruct",
+    sub: "Calm from the head down.",
+    title: "Progressive Muscle Relaxation",
+  },
+  {
+    id: 17,
+    selected: false,
+    pageName: "EyeInstruct",
+    title: "Left & Right",
+    sub: "Lateral Eye Movements",
+  },
+  {
+    id: 18,
+    selected: false,
+    pageName: "KneadInstruct",
+    title: "Knead your feet",
+    sub: "A grounding exercize.",
+  },
+  {
+    id: 19,
+    selected: false,
+    pageName: "AnkleInstruct",
+    title: "Rock the ankles",
+    sub: "A an exercize for when standing in line.",
+  },
 ];
 
 export const elevatedOptions = [
@@ -129,5 +164,11 @@ export const elevatedOptions = [
     pageName: "AnkleInstruct",
     title: "Rock the ankles",
     sub: "A an exercize for when standing in line.",
+  },
+  {
+    id: 6,
+    pageName: "Scream",
+    title: "Scream",
+    sub: "Just let it out.",
   },
 ];

@@ -13,20 +13,6 @@ import { Feather } from "@expo/vector-icons";
 import { look } from "../assets/styles";
 
 const PercievedThreatMenu = ({ navigation }) => {
-  // const [eyeDone, setEyeDone] = useState(false);
-  // const [breatheDone, setBreatheDone] = useState(false);
-  // const [kneadDone, setKneadDone] = useState(false);
-  // const [anklesDone, setAnklesDone] = useState(false);
-  // const [PMRDone, setPMRDone] = useState(false);
-
-  // const handleREDO = () => {
-  //   setEyeDone(false);
-  //   setBreatheDone(false);
-  //   setKneadDone(false);
-  //   setAnklesDone(false);
-  //   setPMRDone(false);
-  // };
-
   let endCheck = () => {
     Alert.alert(`Whoops!`, `You're already at the end of the list.`, [
       {
@@ -88,31 +74,7 @@ const PercievedThreatMenu = ({ navigation }) => {
                       flexDirection: "row",
                       justifyContent: "flex-end",
                     }}
-                  >
-                    <TouchableOpacity
-                      onPress={i === end ? () => endCheck() : () => swapDown(i)}
-                      style={[look.outRoutine]}
-                      delayPressIn={150}
-                    >
-                      <Feather
-                        name="chevron-down"
-                        style={[
-                          look.outRoutine,
-                          { fontSize: 35, marginRight: 20, opacity: 0.7 },
-                        ]}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={i === 0 ? () => endCheck() : () => swapUp(i)}
-                      style={look.inRoutine}
-                      delayPressIn={150}
-                    >
-                      <Feather
-                        name="chevron-up"
-                        style={[look.inRoutine, { fontSize: 35, opacity: 0.7 }]}
-                      />
-                    </TouchableOpacity>
-                  </View>
+                  ></View>
                 </View>
               ))
             : null}

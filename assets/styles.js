@@ -194,10 +194,32 @@ export const look = {
     alignItems: "center",
     justifyContent: "center",
   },
-  face: {
+  clockFont: {
     // marginTop: 10,
     // textAlign: "center",
+    fontSize: 70,
+    color: "#D7D9D7",
+    opacity: 0.9,
+  },
+  screamIconSelected: {
+    fontWeight: "bold",
+    color: "red",
+  },
+  clock: {
+    marginTop: "25%",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+  },
+  personalBest: {
+    marginTop: "10%",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
     fontSize: 30,
+    color: "#D7D9D7",
   },
 };
 

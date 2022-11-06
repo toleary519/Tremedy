@@ -135,7 +135,4 @@ const Routine = ({ navigation }) => {
   );
 };
 
-// used overflow: hidden below to prevent corners.
-
-
 export { Routine };

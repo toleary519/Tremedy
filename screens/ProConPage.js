@@ -201,4 +201,4 @@ const ProCon = () => {
   );
 };
 
-export default ProCon;
+export { ProCon };
