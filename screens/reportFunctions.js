@@ -2,9 +2,9 @@ import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { look } from "../assets/styles";
 
 const SingleVal = (x, item) => {
-  keyVal = Math.random().toString(36).slice(2);
+  // keyVal = Math.random().toString(36).slice(2);
   return (
-    <View key={keyVal} style={look.border}>
+    <View style={look.border}>
       <View style={look.elementHeader}>
         <Text style={look.sub}>{item.title}</Text>
         <Text style={look.sub}>{item.date}</Text>
@@ -17,9 +17,9 @@ const SingleVal = (x, item) => {
 };
 
 const PieVal = (item) => {
-  keyVal = Math.random().toString(36).slice(2);
+  // keyVal = Math.random().toString(36).slice(2);
   return (
-    <View key={keyVal} style={look.border}>
+    <View style={look.border}>
       <View style={look.elementHeader}>
         <Text style={look.sub}>{item.title}</Text>
         <Text style={look.sub}>{item.date}</Text>
@@ -41,9 +41,9 @@ const PieVal = (item) => {
 };
 
 const SelfVal = (item) => {
-  keyVal = Math.random().toString(36).slice(2);
+  // keyVal = Math.random().toString(36).slice(2);
   return (
-    <View key={keyVal} style={look.border}>
+    <View style={look.border}>
       <View style={look.elementHeader}>
         <Text style={look.sub}>{item.title}</Text>
         <Text style={look.sub}>{item.date}</Text>
@@ -59,21 +59,21 @@ const SelfVal = (item) => {
 };
 
 const CheckVal = (item) => {
-  keyVal = Math.random().toString(36).slice(2);
-  return <View key={keyVal} style={look.border}></View>;
+  // keyVal = Math.random().toString(36).slice(2);
+  return <View style={look.border}></View>;
 };
 
 const Entries = (item) => {
   return (
     <View>
-      {item.myCheckin ? CheckVal(item.myCheckin, { item }) : null}
-      {item.myCoping ? SingleVal(item.myCoping, { item }) : null}
-      {item.myFocus ? SingleVal(item.myFocus, { item }) : null}
-      {item.myBad ? SingleVal(item.myBad, { item }) : null}
-      {item.myGood ? SingleVal(item.myGood, { item }) : null}
-      {item.myValue ? SingleVal(item.myValue, { item }) : null}
-      {item.physical ? PieVal({ item }) : null}
-      {item.initial ? SelfVal({ item }) : null}
+      {item.myCheckin ? CheckVal(item.myCheckin, item) : null}
+      {item.myCoping ? SingleVal(item.myCoping, item) : null}
+      {item.myFocus ? SingleVal(item.myFocus, item) : null}
+      {item.myBad ? SingleVal(item.myBad, item) : null}
+      {item.myGood ? SingleVal(item.myGood, item) : null}
+      {item.myValue ? SingleVal(item.myValue, item) : null}
+      {item.physical ? PieVal(item) : null}
+      {item.initial ? SelfVal(item) : null}
     </View>
   );
 };

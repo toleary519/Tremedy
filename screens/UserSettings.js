@@ -157,16 +157,16 @@ const UserSettings = () => {
       value: null,
       window: false,
     },
-    {
-      id: 7,
-      title: "Billing Information",
-      subtitle: "Change cards or subsciption.",
-      func: creditCardInformation,
-      dropdown:
-        "Add or change card information to have access to all of Ourtre",
-      value: subscribed,
-      window: false,
-    },
+    // {
+    //   id: 7,
+    //   title: "Billing Information",
+    //   subtitle: "Change cards or subsciption.",
+    //   func: creditCardInformation,
+    //   dropdown:
+    //     "Add or change card information to have access to all of Ourtre",
+    //   value: subscribed,
+    //   window: false,
+    // },
   ];
 
   // let sortedEntries = storage.sort((a, b) => {
@@ -293,6 +293,6 @@ const UserSettings = () => {
       </View>
     </View>
   );
-};;;;;;;;;;;;;;;
+};
 
 export { UserSettings };

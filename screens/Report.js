@@ -23,7 +23,7 @@ const Report = () => {
       const valueValue = await AsyncStorage.getItem("storedValues");
       const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
       let copeData = copeValue ? JSON.parse(copeValue) : [];
-      console.log("copeValue in get data: ", copeData);
+      // console.log("copeValue in get data: ", copeData);
       let checkData = checkValue ? JSON.parse(checkValue) : [];
       let focusData = focusValue ? JSON.parse(focusValue) : [];
       let piesData = piesValue ? JSON.parse(piesValue) : [];
@@ -31,6 +31,7 @@ const Report = () => {
       let badData = badValue ? JSON.parse(badValue) : [];
       let valueData = valueValue ? JSON.parse(valueValue) : [];
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
+      console.log("selfTalkValue in get data: ", selfData);
       setReportStorage([
         ...copeData,
         ...checkData,
@@ -69,7 +70,7 @@ const Report = () => {
       return b.id - a.id;
     });
 
-  let rando = Math.random().toString(36).slice(2);
+  // let rando = Math.random().toString(36).slice(2);
 
   React.useEffect(() => {
     getData();
@@ -152,18 +153,21 @@ const Report = () => {
             {reportStorage ? (
               <View>
                 {showFull
-                  ? fullReport.map((item) => (
-                      <View key={rando}>{Entries({ item })}</View>
+                  ? fullReport.map((item, i) => (
+                      <View key={i}>
+                        {Entries(item)}
+                        {console.log("in full : ", i)}
+                      </View>
                     ))
                   : null}
                 {showChecks
-                  ? fullChecks.map((item) => (
-                      <View key={rando}>{CheckVal({ item })}</View>
+                  ? fullChecks.map((item, i) => (
+                      <View key={i}>{CheckVal(item)}</View>
                     ))
                   : null}
                 {showFlags
-                  ? fullFlags.map((item) => (
-                      <View key={rando}>{Entries({ item })}</View>
+                  ? fullFlags.map((item, i) => (
+                      <View key={i}>{Entries(item)}</View>
                     ))
                   : null}
               </View>

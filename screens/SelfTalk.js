@@ -79,7 +79,7 @@ const SelfTalk = () => {
 
     Alert.alert(
       `Flag this in "My Past Week?"`,
-      `Manage flags in User Settings.`,
+      `Manage your flags in User Settings.`,
       [
         {
           text: "Yes",

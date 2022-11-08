@@ -57,7 +57,7 @@ const FocusStatement = () => {
 
     Alert.alert(
       `Flag this in "My Past Week?"`,
-      `Manage flags in User Settings.`,
+      `Manage your flags in User Settings.`,
       [
         {
           text: "Yes",
@@ -78,6 +78,7 @@ const FocusStatement = () => {
 
     let newFocus = {
       id: orderId,
+      title: "Focus Statement",
       myFocus: myFocus,
       flag: flag,
       date: `${currentMonth}/${currentDay}/${currentYear}`,

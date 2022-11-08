@@ -132,6 +132,13 @@ export const pageOptions = [
     title: "Rock the ankles",
     sub: "A an exercize for when standing in line.",
   },
+  {
+    id: 20,
+    selected: false,
+    pageName: "NewFeature",
+    title: "I don't see it.",
+    sub: "Is there a feature you wish was here?",
+  },
 ];
 
 export const elevatedOptions = [

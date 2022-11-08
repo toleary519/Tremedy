@@ -44,12 +44,17 @@ const GoodTimes = () => {
 
   const handleAdd = (flag) => {
     let currentDate = new Date();
+    let currentDay = currentDate.getDate();
+    let currentMonth = currentDate.getMonth() + 1;
+    let currentYear = currentDate.getFullYear();
     let orderId = currentDate.getTime();
 
     let newNote = {
       id: orderId,
+      title: "Good Experiences",
       flag: flag,
       myGood: note,
+      date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
     const newList = [...goodStorage, newNote];
@@ -73,7 +78,7 @@ const GoodTimes = () => {
 
     Alert.alert(
       `Flag this in "My Past Week?"`,
-      `Manage flags in User Settings.`,
+      `Manage your flags in User Settings.`,
       [
         {
           text: "Yes",

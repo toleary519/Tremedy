@@ -40,6 +40,7 @@ import { Report } from "./screens/Report";
 import { Routine } from "./screens/Routine";
 import { UserSettings } from "./screens/UserSettings";
 import { Scream } from "./screens/Scream";
+import { NewFeature } from "./screens/NewFeature";
 
 import MyStack from "./routes/homeStack";
 import { StatusBar } from "expo-status-bar";
@@ -253,6 +254,11 @@ function App() {
               name="Scream"
               component={Scream}
               options={{ title: "Scream" }}
+            />
+            <Stack.Screen
+              name="NewFeature"
+              component={NewFeature}
+              options={{ title: "What should we build?" }}
             />
           </Stack.Navigator>
         </NavigationContainer>

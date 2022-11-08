@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 
 const Scream = () => {
-  const [best, setBest] = useState(best ? best : null);
+  const [best, setBest] = useState(best ? best : 0);
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
 

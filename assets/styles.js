@@ -242,3 +242,70 @@ export const look = {
   // </View> 
 // )
 // };
+
+// return (
+//   <View style={look.container}>
+//     <KeyboardAwareScrollView extraHeight={175}>
+//       <View style={look.topBox}>
+//         <View style={look.header}>
+//           <Text style={look.add}>
+//             Header
+//           </Text>
+//         </View>
+//         <View style={look.subHeader}>
+//           <Text style={look.sub}>
+//             Sub Header
+//           </Text>
+//         </View>
+//         <TextInput
+//           style={look.input}
+//           onChangeText={(text) => setEnt(text)}
+//           value={entry}
+//           placeholder={"what do you want to see?"}
+//           multiline
+//           keyboardType="default"
+//           color="#D7D9D7"
+//           placeholderTextColor={"#F1F7EE"}
+//         />
+//         <View style={look.drawBox}>{/* draw feature */}</View>
+//         <TouchableOpacity onPress={() => errorCheck()}>
+//           <MaterialIcons
+//             style={[look.icon, look.centerIcon]}
+//             name="add-circle"
+//           />
+//         </TouchableOpacity>
+//         <View>
+//           {sortedEntries.map((item, i) => (
+//             <View key={item.id} style={look.border}>
+//               <View style={look.elementHeader}>
+//                 <TouchableOpacity onPress={() => handleDelete({ item })}>
+//                   <MaterialIcons
+//                     style={[look.icon, look.canIcon]}
+//                     name="delete-forever"
+//                   />
+//                 </TouchableOpacity>
+//                 <Text style={look.date}>{item.date}</Text>
+//                 <TouchableOpacity
+//                   onPress={() => {
+//                     handleFlag(i);
+//                   }}
+//                 >
+//                   <SimpleLineIcons
+//                     style={
+//                       item.flag ? [look.fIcon, look.selected] : look.fIcon
+//                     }
+//                     name="flag"
+//                   />
+//                 </TouchableOpacity>
+//               </View>
+//               <View style={look.element}>
+//                 <Text style={look.add}>{item.entry}</Text>
+//               </View>
+//             </View>
+//           ))}
+//         </View>
+//       </View>
+//     </KeyboardAwareScrollView>
+//   </View>
+// );
+// };

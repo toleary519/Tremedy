@@ -43,12 +43,17 @@ const MyValues = () => {
 
   const handleAdd = (flag) => {
     let currentDate = new Date();
+    let currentDay = currentDate.getDate();
+    let currentMonth = currentDate.getMonth() + 1;
+    let currentYear = currentDate.getFullYear();
     let orderId = currentDate.getTime();
 
     let newValue = {
       id: orderId,
+      title: "Values List",
       flag: flag,
       myValue: myValue,
+      date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
     const newList = [...storage, newValue];
@@ -72,7 +77,7 @@ const MyValues = () => {
 
     Alert.alert(
       `Flag this in "My Past Week?"`,
-      `Manage flags in User Settings.`,
+      `Manage your flags in User Settings.`,
       [
         {
           text: "Yes",
