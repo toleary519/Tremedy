@@ -15,7 +15,7 @@ import { look } from "../assets/styles";
 
 const UserSettings = () => {
   // const [storage, set] = useState(storage ? storage : []);
-  // const [windowOpen, setWindowOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
   const [flags, setFlags] = useState(true);
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
@@ -70,20 +70,49 @@ const UserSettings = () => {
     // Sign Up.
   };
 
-  const windowToggle = (i) => {
-    for (let x of settingsOptions) {
-      if (x.id === i) {
-        x.window = true;
-      }
-    }
-  };
-  const closeWindow = (i) => {
-    for (let x of settingsOptions) {
-      if (x.id === i) {
-        x.window = false;
-      }
-    }
-  };
+  // const optionsDrop = (item) => {
+  //   let selectedItem = settingsOptions.filter((x) => x.id === item.id);
+
+  //   return (
+  //     <View style={[look.element, { marginBottom: 20 }]}>
+  //       <View style={look.elementHeader}>
+  //         <TouchableOpacity onPress={() => setWindowOpen(false)}>
+  //           <MaterialIcons
+  //             style={[look.icon, look.canIcon]}
+  //             name="delete-forever"
+  //           />
+  //         </TouchableOpacity>
+  //         <Text style={look.add}>{selectedItem.dropdown}</Text>
+  //       </View>
+  //       <TouchableOpacity onPress={selectedItem.func}>
+  //         <Text style={selectedItem.value ? look.inRoutine : look.outRoutine}>
+  //           {selectedItem.funcTitle}
+  //         </Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
+  // };
+
+  // const testRenderFunc = (item) => {
+  //   return (
+
+  //   );
+  // };
+
+  // const windowToggle = (i) => {
+  //   for (let x of settingsOptions) {
+  //     if (x.id === i) {
+  //       x.window = true;
+  //     }
+  //   }
+  // };
+  // const closeWindow = (i) => {
+  //   for (let x of settingsOptions) {
+  //     if (x.id === i) {
+  //       x.window = false;
+  //     }
+  //   }
+  // };
 
   let settingsOptions = [
     {
@@ -259,17 +288,16 @@ const UserSettings = () => {
         <KeyboardAwareScrollView>
           {settingsOptions.map((item, i) => (
             <View key={i} style={look.border}>
-              <TouchableOpacity onPress={() => (item.window = true)}>
+              <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
                 <View style={look.header}>
                   <Text style={look.add}>{item.title}</Text>
                   <Text style={look.sub}>{item.subtitle}</Text>
                 </View>
-              </TouchableOpacity>
-              <View>
-                {item.window ? (
+                {console.log(item)}
+                {selectedOption === i ? (
                   <View style={[look.element, { marginBottom: 20 }]}>
                     <View style={look.elementHeader}>
-                      <TouchableOpacity onPress={() => (item.window = false)}>
+                      <TouchableOpacity onPress={() => setSelectedOption(null)}>
                         <MaterialIcons
                           style={[look.icon, look.canIcon]}
                           name="delete-forever"
@@ -286,13 +314,13 @@ const UserSettings = () => {
                     </TouchableOpacity>
                   </View>
                 ) : null}
-              </View>
+              </TouchableOpacity>
             </View>
           ))}
         </KeyboardAwareScrollView>
       </View>
     </View>
   );
-};
+};;;;;;;
 
 export { UserSettings };
