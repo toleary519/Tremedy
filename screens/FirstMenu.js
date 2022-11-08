@@ -30,7 +30,7 @@ const FirstMenu = ({ navigation }) => {
           delayPressIn={150}
         >
           <Text style={styles.add}>Support Contacts</Text>
-          <Text style={styles.sub}>The want you to call. Call.</Text>
+          <Text style={styles.sub}>They want you to call. Call.</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.element}

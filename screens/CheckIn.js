@@ -105,31 +105,31 @@ const CheckIn = () => {
     storeData(checkinStorage);
   };
 
-  const errorCheck = () => {
-    let wordCount = checkin.split(/\S+/).length - 1;
-    let wordsLeft = 3 - wordCount;
+  // const errorCheck = () => {
+  //   let wordCount = checkin.split(/\S+/).length - 1;
+  //   let wordsLeft = 3 - wordCount;
 
-    if (!checkin.replace(/\s+/g, "")) {
-      Alert.alert("Entry Error", `Fill out all fields to submit.`, [
-        { text: "Got It" },
-      ]);
-      return;
-    }
-    if (wordCount < 3) {
-      Alert.alert(
-        "Entry Error",
-        `${
-          wordsLeft === 1
-            ? `One more word. You can do it.`
-            : `Two more words. You can do it`
-        }`,
-        [{ text: "Got It" }]
-      );
-      return;
-    } else {
-      handleAdd();
-    }
-  };
+  //   if (!checkin.replace(/\s+/g, "")) {
+  //     Alert.alert("Entry Error", `Fill out all fields to submit.`, [
+  //       { text: "Got It" },
+  //     ]);
+  //     return;
+  //   }
+  //   // if (wordCount < 3) {
+  //   //   Alert.alert(
+  //   //     "Entry Error",
+  //   //     `${
+  //   //       wordsLeft === 1
+  //   //         ? `One more word. You can do it.`
+  //   //         : `Two more words. You can do it`
+  //   //     }`,
+  //   //     [{ text: "Got It" }]
+  //   //   );
+  //   //   return;
+  //   // } else {
+  //     handleAdd();
+  //   }
+  // };
 
   const setFeeling = (temp) => {
     !feelOne ? setFeelOne(temp) : null;
@@ -326,7 +326,7 @@ const CheckIn = () => {
             multiline
             keyboardType="default"
           />
-          <TouchableOpacity style={look.border} onPress={() => errorCheck()}>
+          <TouchableOpacity style={look.border} onPress={() => handleAdd()}>
             <MaterialIcons
               style={[look.icon, look.centerIcon, { paddingBottom: 15 }]}
               name="add-circle"
@@ -354,11 +354,12 @@ const CheckIn = () => {
                   <Text style={look.add}>{item.feelTwo}</Text>
                   <Text style={look.add}>{item.feelThree}</Text>
                 </View>
-                {item.myCheckin ? (
-                  <View style={look.element}>
+
+                <View style={look.element}>
+                  {item.myCheckin ? (
                     <Text style={look.add}>{item.myCheckin}</Text>
-                  </View>
-                ) : null}
+                  ) : null}
+                </View>
               </View>
             ))}
           </View>
