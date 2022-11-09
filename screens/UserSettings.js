@@ -154,19 +154,19 @@ const UserSettings = () => {
   const deleteRender = (item) => {
     return (
       <View>
-        <View style={look.element}>
-          <View style={look.userHeader}>
-            <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
-            <TouchableOpacity onPress={() => deleteData()}>
-              <MaterialCommunityIcons
-                name="delete-alert-outline"
-                style={[look.toggleOff, { fontSize: 50, opacity: 0.6 }]}
-              />
-            </TouchableOpacity>
+        <View style={look.userHeader}>
+          <View>
+            <Text style={[look.add]}>{item.dropdown}</Text>
+            <Text style={[look.sub, { marginBottom: "5%" }]}>
+              {item.onText}
+            </Text>
           </View>
-        </View>
-        <View style={look.element}>
-          <Text style={look.sub}>{item.onText}</Text>
+          <TouchableOpacity onPress={() => deleteData()}>
+            <MaterialCommunityIcons
+              name="delete-alert-outline"
+              style={[look.toggleOff, { fontSize: 50, opacity: 0.6 }]}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -282,7 +282,7 @@ const UserSettings = () => {
       dropdown:
         "Substance & behavioural disorders are very common in today's world. You're not alone.",
       value: substance,
-      onText: `You will see a menu called "Lapse" on the first menu. In it are some unique features like finding meetings and specialized tools to use.`,
+      onText: `You will now see an option called "Lapse" on the first menu. In it are some unique features and specialized tools to use as well as a directory of meetings.`,
       window: false,
     },
     {
@@ -306,7 +306,7 @@ const UserSettings = () => {
       id: 4,
       title: "Delete Data",
       subtitle: "Delete all data stored on your device.",
-      dropdown: "Deleting data is final.",
+      dropdown: "This action is final.",
       onText: "All entry data will be removed.",
       window: false,
     },
@@ -337,7 +337,7 @@ const UserSettings = () => {
       title: "Billing Information",
       subtitle: "Change cards or subsciption.",
       dropdown:
-        "For testing purposes this is just a toggle now but this will be billing and credit card section.",
+        "For testing purposes this is just a toggle now but this will be a billing and credit card section.",
       onText:
         "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
       value: subscribed,
@@ -358,7 +358,21 @@ const UserSettings = () => {
       <View style={look.topBox}>
         <KeyboardAwareScrollView>
           {settingsOptions.map((item, i) => (
-            <View key={i} style={look.border}>
+            <View
+              key={i}
+              style={
+                selectedOption === i
+                  ? [
+                      look.border,
+                      {
+                        backgroundColor: "#1D3461",
+                        borderRadius: 15,
+                        padding: 10,
+                      },
+                    ]
+                  : look.border
+              }
+            >
               <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
                 <View style={look.header}>
                   <View style={look.userHeader}>

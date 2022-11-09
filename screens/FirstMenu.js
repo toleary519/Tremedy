@@ -56,15 +56,6 @@ const FirstMenu = ({ navigation }) => {
           <Text style={styles.emergency}>Emergency</Text>
           <Text style={styles.eSub}>If you need it, call now.</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.element}
-          onPress={() => confirmDelete()}
-          delayPressIn={150}
-        >
-          <Text style={styles.emergency}>Delete Data</Text>
-          <Text style={styles.eSub}>deletes everything</Text>
-        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -113,7 +104,7 @@ const styles = StyleSheet.create({
     textAlign: "flex-start",
     alignItems: "center",
     opacity: 0.5,
-    marginBottom: 5,
+    marginBottom: 10,
     fontSize: 18,
     fontWeight: "bold",
     color: "#D7D9D7",
@@ -125,7 +116,7 @@ const styles = StyleSheet.create({
     textAlign: "flex-start",
     alignItems: "center",
     opacity: 0.6,
-    marginBottom: 5,
+    marginBottom: 10,
     fontSize: 18,
     fontWeight: "bold",
     color: "red",
