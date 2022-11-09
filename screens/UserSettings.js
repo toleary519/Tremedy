@@ -293,7 +293,7 @@ const UserSettings = () => {
           <TouchableOpacity onPress={() => deleteData()}>
             <MaterialCommunityIcons
               name="delete-alert-outline"
-              style={[look.toggleOff, { fontSize: 50, opacity: 0.6 }]}
+              style={[look.toggleOff, { fontSize: 40, opacity: 0.6 }]}
             />
           </TouchableOpacity>
         </View>
@@ -408,8 +408,7 @@ const UserSettings = () => {
       title: "Substance & behavioural disorders.",
       subtitle:
         "If you are struggling with these issues there are additional tools here.",
-      dropdown:
-        "Substance & behavioural disorders are very common in today's world. You're not alone.",
+      dropdown: "Need help? You're not alone.",
 
       onText: `You will now see an option called "Lapse" on the first menu. In it are some unique features and specialized tools to use as well as a directory of meetings.`,
       window: false,
@@ -447,7 +446,7 @@ const UserSettings = () => {
         ? "Report settings can only be changed by members. The default is 1 week. To join, please see billing information below."
         : "Set a time frame between 1 and 4 weeks.",
       onText:
-        " It is recommended to choose the length of time between therapy sessions, or an interval at which you choose to review.",
+        "It is recommended to choose the length of time between therapy sessions, or an interval at which you choose to review.",
       notSubscribed:
         "There are still a number of tools you can use in the tool box!",
       window: false,
@@ -466,7 +465,7 @@ const UserSettings = () => {
       title: "Billing Information",
       subtitle: "Change cards or subsciption.",
       dropdown:
-        "For testing purposes this is just a toggle now but this will be a billing and credit card section.",
+        "For testing purposes this is just a toggle but will be a credit card billing section.",
       onText:
         "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
 
@@ -494,9 +493,9 @@ const UserSettings = () => {
                   ? [
                       look.border,
                       {
-                        backgroundColor: "#1D3461",
-                        borderRadius: 15,
-                        padding: 10,
+                        // backgroundColor: "#1D3461",
+                        // borderRadius: 15,
+                        // padding: 10,
                       },
                     ]
                   : look.border
