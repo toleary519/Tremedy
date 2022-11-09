@@ -8,13 +8,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 
 const UserSettings = () => {
-  // const [storage, set] = useState(storage ? storage : []);
   const [selectedOption, setSelectedOption] = useState(null);
   const [flags, setFlags] = useState(true);
   const [first, setFirst] = useState("");
@@ -27,7 +27,7 @@ const UserSettings = () => {
   const [email, setEmail] = useState("");
   const [substance, setSubstance] = useState(false);
   const [subscribed, setSubscibed] = useState(false);
-  const [reportLength, setReportLength] = useState(7);
+  const [rLength, setRLength] = useState(1);
 
   const deleteData = () => {
     const secondCheck = () => {
@@ -70,56 +70,205 @@ const UserSettings = () => {
     // Sign Up.
   };
 
-  // const optionsDrop = (item) => {
-  //   let selectedItem = settingsOptions.filter((x) => x.id === item.id);
+  const dropDownRender = (item) => {
+    return (
+      <View>
+        {item.id === 1 ? substanceRender(item) : null}
+        {item.id === 3 ? flagRender(item) : null}
+        {item.id === 4 ? deleteRender(item) : null}
+        {item.id === 5 ? reportRender(item) : null}
+        {item.id === 7 ? billingRender(item) : null}
+      </View>
+    );
+  };
 
-  //   return (
-  //     <View style={[look.element, { marginBottom: 20 }]}>
-  //       <View style={look.elementHeader}>
-  //         <TouchableOpacity onPress={() => setWindowOpen(false)}>
-  //           <MaterialIcons
-  //             style={[look.icon, look.canIcon]}
-  //             name="delete-forever"
-  //           />
-  //         </TouchableOpacity>
-  //         <Text style={look.add}>{selectedItem.dropdown}</Text>
-  //       </View>
-  //       <TouchableOpacity onPress={selectedItem.func}>
-  //         <Text style={selectedItem.value ? look.inRoutine : look.outRoutine}>
-  //           {selectedItem.funcTitle}
-  //         </Text>
-  //       </TouchableOpacity>
-  //     </View>
-  //   );
-  // };
+  const substanceRender = (item) => {
+    return (
+      <View>
+        <View style={look.element}>
+          <View style={look.userHeader}>
+            <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
+            <TouchableOpacity
+              onPress={
+                substance ? () => setSubstance(false) : () => setSubstance(true)
+              }
+            >
+              {substance ? (
+                <MaterialIcons
+                  name="toggle-on"
+                  style={[look.toggleOn, { paddingTop: "2%" }]}
+                />
+              ) : (
+                <MaterialIcons
+                  name="toggle-off"
+                  style={[look.toggleOff, { paddingTop: "2%" }]}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View>
+          {substance ? (
+            <View style={look.element}>
+              <Text style={look.sub}>{item.onText}</Text>
+            </View>
+          ) : null}
+        </View>
+      </View>
+    );
+  };
+  const flagRender = (item) => {
+    return (
+      <View>
+        <View style={look.element}>
+          <View style={look.userHeader}>
+            <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
+            <TouchableOpacity
+              onPress={flags ? () => setFlags(false) : () => setFlags(true)}
+            >
+              {flags ? (
+                <MaterialIcons
+                  name="toggle-on"
+                  style={[look.toggleOn, { paddingTop: "2%" }]}
+                />
+              ) : (
+                <MaterialIcons
+                  name="toggle-off"
+                  style={[look.toggleOff, { paddingTop: "2%" }]}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View>
+          {flags && item.onText ? (
+            <View style={look.element}>
+              <Text style={look.sub}>{item.onText}</Text>
+            </View>
+          ) : null}
+        </View>
+      </View>
+    );
+  };
 
-  // const testRenderFunc = (item) => {
-  //   return (
+  const deleteRender = (item) => {
+    return (
+      <View>
+        <View style={look.element}>
+          <View style={look.userHeader}>
+            <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
+            <TouchableOpacity onPress={() => deleteData()}>
+              <MaterialCommunityIcons
+                name="delete-alert-outline"
+                style={[look.toggleOff, { fontSize: 50, opacity: 0.6 }]}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={look.element}>
+          <Text style={look.sub}>{item.onText}</Text>
+        </View>
+      </View>
+    );
+  };
+  const reportRender = (item) => {
+    return (
+      <View>
+        <View style={look.calendarBox}>
+          <TouchableOpacity
+            disabled={subscribed ? false : true}
+            onPress={() => setRLength(1)}
+          >
+            <MaterialCommunityIcons
+              name="calendar-week"
+              style={rLength >= 1 ? look.selectedCalIcon : look.selectedCalIcon}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            disabled={subscribed ? false : true}
+            onPress={() => setRLength(2)}
+          >
+            <MaterialCommunityIcons
+              name="calendar-week"
+              style={rLength >= 2 ? look.selectedCalIcon : look.calendarIcon}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            disabled={subscribed ? false : true}
+            onPress={() => setRLength(3)}
+          >
+            <MaterialCommunityIcons
+              name="calendar-week"
+              style={rLength >= 3 ? look.selectedCalIcon : look.calendarIcon}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            disabled={subscribed ? false : true}
+            onPress={() => setRLength(4)}
+          >
+            <MaterialCommunityIcons
+              name="calendar-week"
+              style={rLength >= 4 ? look.selectedCalIcon : look.calendarIcon}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={[look.header, { marginBottom: "2%" }]}>
+          <Text style={subscribed ? look.add : look.sub}>{item.dropdown}</Text>
+        </View>
 
-  //   );
-  // };
-
-  // const windowToggle = (i) => {
-  //   for (let x of settingsOptions) {
-  //     if (x.id === i) {
-  //       x.window = true;
-  //     }
-  //   }
-  // };
-  // const closeWindow = (i) => {
-  //   for (let x of settingsOptions) {
-  //     if (x.id === i) {
-  //       x.window = false;
-  //     }
-  //   }
-  // };
+        <View>
+          <Text style={[look.sub, { marginTop: 0, marginBottom: 10 }]}>
+            {item.onText}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+  const billingRender = (item) => {
+    return (
+      <View>
+        <View style={look.header}>
+          <View style={look.userHeader}>
+            <Text style={[look.add, { marginBottom: 10, width: "80%" }]}>
+              {item.dropdown}
+            </Text>
+            <TouchableOpacity
+              onPress={
+                subscribed
+                  ? () => setSubscibed(false)
+                  : () => setSubscibed(true)
+              }
+            >
+              {subscribed ? (
+                <MaterialIcons
+                  name="toggle-on"
+                  style={[look.toggleOn, { paddingTop: "2%" }]}
+                />
+              ) : (
+                <MaterialIcons
+                  name="toggle-off"
+                  style={[look.toggleOff, { paddingTop: "2%" }]}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View>
+          {subscribed ? (
+            <View style={[look.element, { marginBottom: 10 }]}>
+              <Text style={look.sub}>{item.onText}</Text>
+            </View>
+          ) : null}
+        </View>
+      </View>
+    );
+  };
 
   let settingsOptions = [
     {
       id: 0,
       title: "My Info",
       subtitle: "All about you",
-      func: [setFirst, setLast, setDOB, setEmail],
       dropdown:
         "Enter your information here for report sharing and profile recovery.",
       value: [first, last, DOB, email],
@@ -127,20 +276,19 @@ const UserSettings = () => {
     },
     {
       id: 1,
-      title: "Substance abuse & behavioural disorders.",
+      title: "Substance & behavioural disorders.",
       subtitle:
         "If you are struggling with these issues there are additional tools here.",
-      func: setSubstance,
       dropdown:
-        "On the home page there will be a Lapse button for planning with unique workflows.",
+        "Substance & behavioural disorders are very common in today's world. You're not alone.",
       value: substance,
+      onText: `You will see a menu called "Lapse" on the first menu. In it are some unique features like finding meetings and specialized tools to use.`,
       window: false,
     },
     {
       id: 2,
       title: "My Pin",
       subtitle: "Create or reset your pin.",
-      func: setPin,
       dropdown: "You can enter a pin here unique to this app.",
       value: pin,
       window: false,
@@ -149,7 +297,6 @@ const UserSettings = () => {
       id: 3,
       title: "Manage Flags",
       subtitle: "Select when and how you would like to use flags.",
-      func: setFlags,
       dropdown:
         "Turning flags off here will turn off the prompt. You can click the flag icon to add items to your report.",
       value: flags,
@@ -159,128 +306,52 @@ const UserSettings = () => {
       id: 4,
       title: "Delete Data",
       subtitle: "Delete all data stored on your device.",
-      funcTitle: "Delete",
-      func: deleteData,
       dropdown: "Deleting data is final.",
-      value: null,
+      onText: "All entry data will be removed.",
       window: false,
     },
     {
       id: 5,
       title: "Report Length",
       subtitle: "How many weeks do you want in your report?",
-      func: "",
       dropdown: !subscribed
-        ? "Settings can be changed by members."
-        : "Set a time frame between 7 and 30 days. It is recommended to choose the length of time between therapy sessions.",
-      value: "",
+        ? "Report settings can only be changed by members. The default is 1 week. To join, please see billing information below."
+        : "Set a time frame between 1 and 4 weeks.",
+      onText:
+        " It is recommended to choose the length of time between therapy sessions, or an interval at which you choose to review.",
+      notSubscribed:
+        "There are still a number of tools you can use in the tool box!",
       window: false,
     },
     {
       id: 6,
       title: "Found a bug?",
       subtitle: "Help us improve your experience.",
-      func: bugReport,
       dropdown:
         "Explain as best you can the issue that you are having and we will address it as soon as possible.",
       value: null,
       window: false,
     },
+    {
+      id: 7,
+      title: "Billing Information",
+      subtitle: "Change cards or subsciption.",
+      dropdown:
+        "For testing purposes this is just a toggle now but this will be billing and credit card section.",
+      onText:
+        "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
+      value: subscribed,
+      window: false,
+    },
     // {
-    //   id: 7,
-    //   title: "Billing Information",
-    //   subtitle: "Change cards or subsciption.",
-    //   func: creditCardInformation,
-    //   dropdown:
-    //     "Add or change card information to have access to all of Ourtre",
-    //   value: subscribed,
+    //   id: 2,
+    //   title: "My Pin",
+    //   subtitle: "Create or reset your pin.",
+    //   dropdown: "You can enter a pin here unique to this app.",
+    //   value: pin,
     //   window: false,
     // },
   ];
-
-  // let sortedEntries = storage.sort((a, b) => {
-  //   return b.id - a.id;
-  // });
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem(string - storage);
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     set(savedData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // const storeData = async (storage) => {
-  //   try {
-  //     const jsonValue = JSON.stringify(storage);
-  //     await AsyncStorage.setItem(string - storage, jsonValue);
-  //   } catch (e) {
-  //     console.log("1", e);
-  //   }
-  // };
-
-  // const handleAdd = (flag) => {
-  //   let currentDate = new Date();
-  //   let orderId = currentDate.getTime();
-
-  //   let newItem = {
-  //     id: orderId,
-  //     entry: entry,
-  //     flag: flag,
-  //   };
-
-  //   const newList = [...storage, newItem];
-
-  //   set(newList);
-  //   setEnt("");
-  //   storeData(newList);
-  //   {
-  //     console.log("sorted: ", sortedEntries);
-  //   }
-  //   getData();
-  // };
-
-  // const handleDelete = ({ item }) => {
-  //   let index = 0;
-  //   // find the index of item to delete
-  //   for (let obj of storage) {
-  //     if (obj.id !== item.id) {
-  //       index++;
-  //     } else {
-  //       break;
-  //     }
-  //   }
-  //   // filter array for display
-  //   set(storage.filter((val) => val.id !== item.id));
-  //   // make permanent delete
-  //   storage.splice(index, 1);
-  //   // save deletion of item
-  //   storeData(storage);
-  // };
-
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
-
-  // const errorCheck = () => {
-  //   if (!entry.replace(/\s+/g, "")) {
-  //     Alert.alert("Entry Error", `Fill out all fields to submit.`, [
-  //       { text: "Got It" },
-  //     ]);
-  //     return;
-  //   } else {
-  //     flagAlert();
-  //   }
-  // };
-
-  // const handleFlag = (i) => {
-  //   let currentItem = sortedEntries[i];
-  //   currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
-  //   storeData(storage);
-  //   getData();
-  // };
 
   return (
     <View style={look.container}>
@@ -290,31 +361,25 @@ const UserSettings = () => {
             <View key={i} style={look.border}>
               <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
                 <View style={look.header}>
-                  <Text style={look.add}>{item.title}</Text>
+                  <View style={look.userHeader}>
+                    <Text style={look.add}>{item.title}</Text>
+                    {selectedOption === i ? (
+                      <TouchableOpacity onPress={() => setSelectedOption(null)}>
+                        <Feather
+                          name="chevron-up"
+                          style={[
+                            look.outRoutine,
+                            { fontSize: 30, opacity: 0.7 },
+                          ]}
+                        />
+                      </TouchableOpacity>
+                    ) : null}
+                  </View>
                   <Text style={look.sub}>{item.subtitle}</Text>
                 </View>
                 {console.log(item)}
-                {selectedOption === i ? (
-                  <View style={[look.element, { marginBottom: 20 }]}>
-                    <View style={look.elementHeader}>
-                      <TouchableOpacity onPress={() => setSelectedOption(null)}>
-                        <MaterialIcons
-                          style={[look.icon, look.canIcon]}
-                          name="delete-forever"
-                        />
-                      </TouchableOpacity>
-                      <Text style={look.add}>{item.dropdown}</Text>
-                    </View>
-                    <TouchableOpacity onPress={item.func}>
-                      <Text
-                        style={item.value ? look.inRoutine : look.outRoutine}
-                      >
-                        {item.funcTitle}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                ) : null}
               </TouchableOpacity>
+              {selectedOption === i ? dropDownRender(item) : null}
             </View>
           ))}
         </KeyboardAwareScrollView>

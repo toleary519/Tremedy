@@ -88,6 +88,12 @@ export const look = {
     flexDirection: "row",
     alignItems: "center",
   },
+  calendarBox: {
+    marginTop: "3%",
+    marginBottom: "3%",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
   // ________________________Text & Icons
   add: {
     marginTop: 5,
@@ -132,6 +138,18 @@ export const look = {
     paddingBottom: 20,
     fontSize: 30,
     color: "#D7D9D7",
+  },
+  calendarIcon: {
+    fontSize: 30,
+    paddingRight: "1.5%",
+    paddingLeft: "1.5%",
+    color: "#D7D9D7",
+  },
+  selectedCalIcon: {
+    fontSize: 30,
+    paddingRight: "1.5%",
+    paddingLeft: "1.5%",
+    color: "green",
   },
   headerIcon: {
     paddingTop: 20,
@@ -220,6 +238,24 @@ export const look = {
     alignContent: "center",
     fontSize: 30,
     color: "#D7D9D7",
+  },
+  userHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  toggleOff: {
+    fontSize: 60,
+    // backgroundColor: "red",
+    color: "red",
+    opacity: 0.6,
+    // overflow: "hidden",
+  },
+  toggleOn: {
+    fontSize: 60,
+    // backgroundColor: "green",
+    color: "green",
+    opacity: 0.8,
+    // overflow: "hidden",
   },
 };
 
