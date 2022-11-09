@@ -4,15 +4,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 
 const FirstMenu = ({ navigation }) => {
-  const confirmDelete = () =>
-    Alert.alert("Confirm Delete", `are you sure?`, [
-      {
-        text: "Yes",
-        onPress: () => AsyncStorage.clear(),
-      },
-      { text: "Nope", onPress: () => console.log("closed") },
-    ]);
-
   return (
     <View style={styles.container}>
       <ScrollView>

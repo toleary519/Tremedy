@@ -13,12 +13,12 @@ import { Feather } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { ThemeProvider } from "@react-navigation/native";
 
 const UserSettings = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [flags, setFlags] = useState(true);
-  const [first, setFirst] = useState("");
-  const [last, setLast] = useState("");
+  const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [DOB, setDOB] = useState("");
@@ -28,6 +28,8 @@ const UserSettings = () => {
   const [substance, setSubstance] = useState(false);
   const [subscribed, setSubscibed] = useState(false);
   const [rLength, setRLength] = useState(1);
+  const [editInfo, setEditInfo] = useState(true);
+  const [profile, setProfile] = useState(false);
 
   const deleteData = () => {
     const secondCheck = () => {
@@ -63,6 +65,21 @@ const UserSettings = () => {
     ]);
   };
 
+  const errorCheck = () => {
+    if (
+      !name.replace(/\s+/g, "") ||
+      !email.replace(/\s+/g, "") ||
+      !DOB.replace(/\s+/g, "")
+    ) {
+      Alert.alert("Entry Error", `Name, Email and DOB are required fields.`, [
+        { text: "Got It" },
+      ]);
+      return;
+    } else {
+      setProfile(true);
+    }
+  };
+
   const bugReport = () => {
     // Report a bug with email.
   };
@@ -73,6 +90,7 @@ const UserSettings = () => {
   const dropDownRender = (item) => {
     return (
       <View>
+        {item.id === 0 ? infoRender(item) : null}
         {item.id === 1 ? substanceRender(item) : null}
         {item.id === 3 ? flagRender(item) : null}
         {item.id === 4 ? deleteRender(item) : null}
@@ -82,6 +100,117 @@ const UserSettings = () => {
     );
   };
 
+  const infoRender = (item) => {
+    return (
+      <View>
+        <View style={look.element}>
+          <View style={{ width: "100%" }}>
+            <Text style={[look.add]}>{item.dropdown}</Text>
+            <View style={look.userInfoElement}>
+              {!editInfo || profile ? (
+                <View style={look.userHeader}>
+                  <View>
+                    <Text
+                      style={[
+                        look.add,
+                        { borderTopWidth: 3, borderTopColor: "#3C5E90" },
+                      ]}
+                    >
+                      {name}
+                    </Text>
+                    <Text style={[look.add]}>{email}</Text>
+                    {!city && !country ? null : (
+                      <Text style={[look.add]}>
+                        {city ? city : null}
+                        {city && country ? ", " : ""}
+                        {country ? country : null}
+                      </Text>
+                    )}
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setEditInfo(true);
+                      setProfile(false);
+                    }}
+                  >
+                    <Feather name="edit" style={look.icon} />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <View>
+                  <View style={look.header}>
+                    <Text style={look.add}>Tell us your name.</Text>
+                    <Text style={look.sub}>Any of the following,</Text>
+                    <TextInput
+                      style={look.userInput}
+                      onChangeText={(text) => setName(text)}
+                      value={name}
+                      placeholder={"First, Last, Full or Nickname"}
+                      keyboardType="default"
+                    />
+                  </View>
+                  <View style={look.header}>
+                    <Text style={look.add}>Enter your contact email.</Text>
+                    <TextInput
+                      style={look.userInput}
+                      onChangeText={(text) => setEmail(text)}
+                      value={email}
+                      placeholder={"Email"}
+                      keyboardType="default"
+                    />
+                  </View>
+                  <View style={look.header}>
+                    <Text style={look.add}>
+                      City and country where you live.
+                    </Text>
+                    <Text style={look.sub}>
+                      Why? There are location elements in Ourtre, to protect
+                      your privacy we do not collect GPS data.
+                    </Text>
+                    <TextInput
+                      style={look.userInput}
+                      onChangeText={(text) => setCity(text)}
+                      value={city}
+                      placeholder={"City"}
+                      keyboardType="default"
+                    />
+
+                    <TextInput
+                      style={look.userInput}
+                      onChangeText={(text) => setCountry(text)}
+                      value={country}
+                      placeholder={"Country"}
+                      keyboardType="default"
+                    />
+                  </View>
+                  <View style={look.header}>
+                    <Text style={look.add}>Verify your age.</Text>
+                    <Text style={look.sub}>Enter your birthday, MMDDYY</Text>
+                    <TextInput
+                      style={look.userInput}
+                      onChangeText={(text) => setDOB(text)}
+                      value={DOB}
+                      maxLength={6}
+                      placeholder={"Birthday"}
+                      keyboardType="number-pad"
+                    />
+                  </View>
+                  <View>
+                    <TouchableOpacity onPress={() => errorCheck()}>
+                      <MaterialIcons
+                        style={[look.icon, look.centerIcon]}
+                        name="add-circle"
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )}
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  };
   const substanceRender = (item) => {
     return (
       <View>
@@ -271,7 +400,7 @@ const UserSettings = () => {
       subtitle: "All about you",
       dropdown:
         "Enter your information here for report sharing and profile recovery.",
-      value: [first, last, DOB, email],
+
       window: false,
     },
     {
@@ -281,16 +410,16 @@ const UserSettings = () => {
         "If you are struggling with these issues there are additional tools here.",
       dropdown:
         "Substance & behavioural disorders are very common in today's world. You're not alone.",
-      value: substance,
+
       onText: `You will now see an option called "Lapse" on the first menu. In it are some unique features and specialized tools to use as well as a directory of meetings.`,
       window: false,
     },
     {
       id: 2,
-      title: "My Pin",
-      subtitle: "Create or reset your pin.",
+      title: "My Notifications",
+      subtitle: "How often do you want to check-in?",
       dropdown: "You can enter a pin here unique to this app.",
-      value: pin,
+
       window: false,
     },
     {
@@ -299,7 +428,7 @@ const UserSettings = () => {
       subtitle: "Select when and how you would like to use flags.",
       dropdown:
         "Turning flags off here will turn off the prompt. You can click the flag icon to add items to your report.",
-      value: flags,
+
       window: false,
     },
     {
@@ -340,7 +469,7 @@ const UserSettings = () => {
         "For testing purposes this is just a toggle now but this will be a billing and credit card section.",
       onText:
         "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
-      value: subscribed,
+
       window: false,
     },
     // {
@@ -400,6 +529,6 @@ const UserSettings = () => {
       </View>
     </View>
   );
-};;;;;;;
+};;;;;;;;;;;;;
 
 export { UserSettings };

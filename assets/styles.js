@@ -49,6 +49,17 @@ export const look = {
     color: "#2f8587",
     backgroundColor: "#D3EAEE",
   },
+  userInput: {
+    borderWidth: 3,
+    borderColor: "#3C5E90",
+    borderRadius: 8,
+    marginTop: 10,
+    padding: 10,
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#2f8587",
+    backgroundColor: "#D3EAEE",
+  },
   // _________________________elements for menus
   element: {
     flexDirection: "row",
@@ -140,13 +151,13 @@ export const look = {
     color: "#D7D9D7",
   },
   calendarIcon: {
-    fontSize: 30,
+    fontSize: 40,
     paddingRight: "1.5%",
     paddingLeft: "1.5%",
     color: "#D7D9D7",
   },
   selectedCalIcon: {
-    fontSize: 30,
+    fontSize: 40,
     paddingRight: "1.5%",
     paddingLeft: "1.5%",
     color: "green",
