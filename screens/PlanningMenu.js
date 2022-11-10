@@ -4,24 +4,29 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const PlanningMenu = ({ navigation }) => (
   <View style={styles.container}>
-    <Text style={styles.summary}>{`There isn't anything to plan. Talk to someone. Look back.\n Go Meet.`}</Text>
-  <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-      Your Sober Contacts
-    </Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
-      <Text style={styles.add}>
-      Experiences
-      </Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={() => navigation.navigate("Meetings")} delayPressIn={150}>
-    {/* <Text onPress={onPress} style={styles.add}> */}
-    <Text style={styles.add}>
-      Meetings
-    </Text>
-  </TouchableOpacity>
+    <Text
+      style={styles.summary}
+    >{`There isn't anything to plan. Talk to someone. Look back.\n Go Meet.`}</Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("SupportContacts")}
+      delayPressIn={150}
+    >
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>Your Support Contacts</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("NotesMenu")}
+      delayPressIn={150}
+    >
+      <Text style={styles.add}>Experiences</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Meetings")}
+      delayPressIn={150}
+    >
+      {/* <Text onPress={onPress} style={styles.add}> */}
+      <Text style={styles.add}>Meetings</Text>
+    </TouchableOpacity>
   </View>
 );
 

@@ -6,10 +6,9 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 import * as Contacts from "expo-contacts";
 import call from "react-native-phone-call";
+import { look } from "../assets/styles";
 
 const SupportContacts = () => {
   let filteredContacts = [];
@@ -42,41 +41,47 @@ const SupportContacts = () => {
     })();
   }, []);
 
-  for (let sober of contacts) {
-    // console.log("SOBER******************************", sober)
-    if (sober.company && sober.company.includes("2174")) {
-      filteredContacts.push(sober);
+  for (let support of contacts) {
+    if (support.company && support.company.includes("2174")) {
+      filteredContacts.push(support);
     }
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.summary}>
-        {" "}
-        All of these people would love to hear from you.
-      </Text>
-      <Text style={styles.summaryTwo}>
-        {" "}
-        CALL US! There are no judgements here.
-      </Text>
-      <Text style={styles.summaryThree}>
-        {" "}
-        To add a sober contact put "2174" anywhere in the company field of their
-        contact card.
-      </Text>
-      {filteredContacts.map((item) => (
-        <TouchableOpacity
-          style={styles.contactContainer}
-          key={item.phoneNumbers[0].number}
-          onPress={() => makeCall(item)}
-          delayPressIn={150}
-        >
-          <Text style={styles.add}>{item.firstName}</Text>
-          <Text style={styles.add}>{item.lastName ? item.lastName : null}</Text>
-          <Text style={styles.add}>{item.phoneNumbers[0].number}</Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+    <View style={look.container}>
+      <ScrollView extraHeight={175}>
+        <View style={look.topBox}>
+          <View style={look.border}>
+            <Text style={look.add}>It's okay to be feeling down.</Text>
+            <Text style={look.sub}>CALL US! There are no judgements here.</Text>
+            <Text style={look.sub}>
+              To add a support contact put "2174" anywhere in the company field
+              of their contact card.
+            </Text>
+          </View>
+          {filteredContacts.map((item, i) => (
+            <View key={i} style={[look.border]}>
+              <TouchableOpacity
+                style={look.userHeader}
+                key={item.phoneNumbers[0].number}
+                onPress={() => makeCall(item)}
+                delayPressIn={150}
+              >
+                <View style={look.element}>
+                  <Text style={look.contactAdd}>{item.firstName}</Text>
+                  <Text style={look.contactAdd}>
+                    {item.lastName ? `, ${item.lastName}` : null}
+                  </Text>
+                </View>
+                <Text style={look.contactAdd}>
+                  {item.phoneNumbers[0].number}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

@@ -13,10 +13,10 @@ import { Feather } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
-import { ThemeProvider } from "@react-navigation/native";
 
 const UserSettings = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [editInfo, setEditInfo] = useState(true);
   const [flags, setFlags] = useState(true);
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
@@ -28,8 +28,19 @@ const UserSettings = () => {
   const [substance, setSubstance] = useState(false);
   const [subscribed, setSubscibed] = useState(false);
   const [rLength, setRLength] = useState(1);
-  const [editInfo, setEditInfo] = useState(true);
   const [profile, setProfile] = useState(false);
+
+  let userToken = {
+    subscribed: subscribed,
+    rLength: rLength,
+    profile: profile,
+    substance: substance,
+    city: city,
+    country: country,
+    flags: flags,
+    name: name,
+    email: email,
+  };
 
   const deleteData = () => {
     const secondCheck = () => {
@@ -279,6 +290,39 @@ const UserSettings = () => {
       </View>
     );
   };
+  const notifyRender = (item) => {
+    return (
+      <View>
+        <View style={look.element}>
+          <View style={look.userHeader}>
+            <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
+            <TouchableOpacity
+              onPress={flags ? () => setFlags(false) : () => setFlags(true)}
+            >
+              {flags ? (
+                <MaterialIcons
+                  name="toggle-on"
+                  style={[look.toggleOn, { paddingTop: "2%" }]}
+                />
+              ) : (
+                <MaterialIcons
+                  name="toggle-off"
+                  style={[look.toggleOff, { paddingTop: "2%" }]}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View>
+          {flags && item.onText ? (
+            <View style={look.element}>
+              <Text style={look.sub}>{item.onText}</Text>
+            </View>
+          ) : null}
+        </View>
+      </View>
+    );
+  };
 
   const deleteRender = (item) => {
     return (
@@ -417,8 +461,10 @@ const UserSettings = () => {
       id: 2,
       title: "My Notifications",
       subtitle: "How often do you want to check-in?",
-      dropdown: "You can enter a pin here unique to this app.",
-
+      dropdown:
+        "Ourtre will send you a quiet notification to remind you to Check-In for your report. Check-Ins can be done in roughly 30 seconds.",
+      onText:
+        "You can check-in whenever you want in the tool box. Ideally, check-in once in the morning and again at night.",
       window: false,
     },
     {
@@ -484,7 +530,7 @@ const UserSettings = () => {
   return (
     <View style={look.container}>
       <View style={look.topBox}>
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView extraHeight={175}>
           {settingsOptions.map((item, i) => (
             <View
               key={i}
@@ -519,7 +565,6 @@ const UserSettings = () => {
                   </View>
                   <Text style={look.sub}>{item.subtitle}</Text>
                 </View>
-                {console.log(item)}
               </TouchableOpacity>
               {selectedOption === i ? dropDownRender(item) : null}
             </View>

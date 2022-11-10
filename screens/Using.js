@@ -4,24 +4,39 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const Using = ({ navigation }) => (
   <View style={styles.container}>
-    <ScrollView contentContainerStyle={{ paddingBottom: 30}}>
-      <Text style={[styles.add, {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7"}]}>Letter From Yourself</Text>
+    <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
+      <Text
+        style={[
+          styles.add,
+          {
+            borderRadius: 10,
+            borderWidth: 4,
+            borderColor: "#D7D9D7",
+          },
+        ]}
+      >
+        Letter From Yourself
+      </Text>
       <Text style={styles.header}>Game Plan</Text>
-      <Text style={styles.add}>You are going to call someone from this list.</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
-        <Text style={styles.contacts}>
-          Your Sober Contacts
-        </Text>
+      <Text style={styles.add}>
+        You are going to call someone from this list.
+      </Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("SupportContacts")}
+        delayPressIn={150}
+      >
+        <Text style={styles.contacts}>Your Support Contacts</Text>
       </TouchableOpacity>
       <Text style={styles.add}>Tell them what happened.</Text>
-      <Text style={styles.add}>Ask is they have time to unpack this with you.</Text>
+      <Text style={styles.add}>
+        Ask is they have time to unpack this with you.
+      </Text>
       <Text style={styles.add}>How you were feeling when it happened?</Text>
       <Text style={styles.add}>Where you are now.</Text>
       <Text style={styles.add}>What's your next step?</Text>
-      <Text style={styles.add}>Make a plan of managable action oriented steps.</Text>
+      <Text style={styles.add}>
+        Make a plan of managable action oriented steps.
+      </Text>
       <Text style={styles.add}>Ask them to check in on you tomorrow.</Text>
     </ScrollView>
   </View>

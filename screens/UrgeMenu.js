@@ -4,30 +4,35 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const UrgeMenu = ({ navigation }) => (
   <View style={styles.container}>
-    <TouchableOpacity onPress={() => navigation.navigate("JustOne")} delayPressIn={150}>
-      <Text style={styles.add}>
-      It's Just One
-      </Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("JustOne")}
+      delayPressIn={150}
+    >
+      <Text style={styles.add}>It's Just One</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("PlanningMenu")} delayPressIn={150}>
-      <Text style={styles.add}>
-      I'm planning
-      </Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("PlanningMenu")}
+      delayPressIn={150}
+    >
+      <Text style={styles.add}>I'm planning</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("OutsideMenu")} delayPressIn={150}>
-      <Text style={styles.add}>
-        I'm outside the store
-      </Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("OutsideMenu")}
+      delayPressIn={150}
+    >
+      <Text style={styles.add}>I'm outside the store</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("Using")} delayPressIn={150}>
-      <Text style={styles.add}>
-        I'm already using
-      </Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Using")}
+      delayPressIn={150}
+    >
+      <Text style={styles.add}>I'm already using</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
-      <Text style={styles.add}>
-        Sober Contacts
-      </Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("SupportContacts")}
+      delayPressIn={150}
+    >
+      <Text style={styles.add}>Support Contacts</Text>
     </TouchableOpacity>
   </View>
 );

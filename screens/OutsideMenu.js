@@ -4,15 +4,28 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const OutsideMenu = ({ navigation }) => (
   <View style={styles.container}>
-    <Text style={styles.summary}>Explain to the version of yourself when you were at SCHC this decision.</Text>
-    <Text style={styles.summaryTwo}>Say it OUT LOUD how this is the right move.</Text>
-    <TouchableOpacity onPress={() => navigation.navigate("SoberContacts")} delayPressIn={150}>
-      <Text style={styles.add}>Sober Contacts</Text>
+    <Text style={styles.summary}>
+      Explain to the version of yourself when you were at SCHC this decision.
+    </Text>
+    <Text style={styles.summaryTwo}>
+      Say it OUT LOUD how this is the right move.
+    </Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("SupportContacts")}
+      delayPressIn={150}
+    >
+      <Text style={styles.add}>Support Contacts</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("NotesMenu")} delayPressIn={150}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("NotesMenu")}
+      delayPressIn={150}
+    >
       <Text style={styles.add}>Your Experiences</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("Meetings")} delayPressIn={150}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Meetings")}
+      delayPressIn={150}
+    >
       <Text style={styles.add}>Meetings</Text>
     </TouchableOpacity>
   </View>

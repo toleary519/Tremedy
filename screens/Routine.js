@@ -82,26 +82,18 @@ const Routine = ({ navigation }) => {
             ? selectedRoutine.map((item, i) => (
                 <View
                   key={item.id}
-                  style={[
-                    look.element,
-                    { flex: 6, flexDirection: "row" },
-                    look.border,
-                  ]}
+                  style={[look.userHeader, look.border, { marginBottom: "3%" }]}
                 >
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate(item.pageName)}
-                    delayPressIn={150}
-                  >
-                    <Text style={look.add}>{item.title}</Text>
-                    <Text style={look.sub}>{item.sub}</Text>
-                  </TouchableOpacity>
-                  <View
-                    style={{
-                      flex: 2,
-                      flexDirection: "row",
-                      justifyContent: "flex-end",
-                    }}
-                  >
+                  <View style={{ width: "80%" }}>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate(item.pageName)}
+                      delayPressIn={150}
+                    >
+                      <Text style={look.add}>{item.title}</Text>
+                      <Text style={look.sub}>{item.sub}</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={look.element}>
                     <TouchableOpacity
                       onPress={i === end ? () => endCheck() : () => swapDown(i)}
                       style={[look.outRoutine]}

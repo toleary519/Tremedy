@@ -113,6 +113,13 @@ export const look = {
     fontWeight: "bold",
     color: "#D7D9D7",
   },
+  contactAdd: {
+    marginTop: 5,
+    marginBottom: 2,
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#D7D9D7",
+  },
   sub: {
     marginTop: 5,
     textAlign: "flex-start",
