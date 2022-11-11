@@ -21,15 +21,15 @@ const FirstMenu = ({ navigation }) => {
           delayPressIn={150}
         >
           <Text style={styles.add}>Support Contacts</Text>
-          <Text style={styles.sub}>They want you to call. Call.</Text>
+          <Text style={styles.sub}>It's hard but simple. Call.</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.element}
           onPress={() => navigation.navigate("UrgeMenu")}
           delayPressIn={150}
         >
-          <Text style={styles.add}>Lapse</Text>
-          <Text style={styles.sub}>It happened, its okay, what's next?</Text>
+          <Text style={styles.add}>We can do better.</Text>
+          <Text style={styles.sub}>Its okay, what are we doing next?</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.element}

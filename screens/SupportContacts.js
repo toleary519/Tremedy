@@ -52,11 +52,13 @@ const SupportContacts = () => {
       <ScrollView extraHeight={175}>
         <View style={look.topBox}>
           <View style={look.border}>
-            <Text style={look.add}>It's okay to be feeling down.</Text>
-            <Text style={look.sub}>CALL US! There are no judgements here.</Text>
-            <Text style={look.sub}>
+            <Text style={look.add}>
+              It's okay to be feeling whatever you're feeling.
+            </Text>
+            <Text style={look.sub}>CALL US!</Text>
+            <Text style={[look.sub, { paddingBottom: "3%" }]}>
               To add a support contact put "2174" anywhere in the company field
-              of their contact card.
+              of their contact card and they will show up here.
             </Text>
           </View>
           {filteredContacts.map((item, i) => (

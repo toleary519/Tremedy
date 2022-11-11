@@ -196,10 +196,10 @@ export const look = {
     backgroundColor: "#1B2A41",
   },
   reportButton: {
-    marginTop: 15,
+    // marginTop: 10,
     // textAlign: "center",
     padding: 4,
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: "bold",
     color: "#D7D9D7",
   },
