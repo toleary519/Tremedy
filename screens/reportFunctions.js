@@ -2,7 +2,6 @@ import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { look } from "../assets/styles";
 
 const SingleVal = (x, item) => {
-  // keyVal = Math.random().toString(36).slice(2);
   return (
     <View style={look.border}>
       <View style={look.elementHeader}>
@@ -17,7 +16,6 @@ const SingleVal = (x, item) => {
 };
 
 const PieVal = (item) => {
-  // keyVal = Math.random().toString(36).slice(2);
   return (
     <View style={look.border}>
       <View style={look.elementHeader}>
@@ -41,7 +39,6 @@ const PieVal = (item) => {
 };
 
 const SelfVal = (item) => {
-  // keyVal = Math.random().toString(36).slice(2);
   return (
     <View style={look.border}>
       <View style={look.elementHeader}>
@@ -59,14 +56,33 @@ const SelfVal = (item) => {
 };
 
 const CheckVal = (item) => {
-  // keyVal = Math.random().toString(36).slice(2);
-  return <View style={look.border}></View>;
+  return (
+    <View style={look.border}>
+      <View style={look.elementHeader}>
+        <Text style={look.sub}>{item.title}</Text>
+        <Text style={look.sub}>{item.date}</Text>
+      </View>
+      <View style={look.elementHeader}>
+        <Text style={look.sub}>Physical : {item.phys}</Text>
+        <Text style={look.sub}>Emotional : {item.mental}</Text>
+        <Text style={look.sub}>Outlook : {item.outlook}</Text>
+      </View>
+      <View style={look.elementHeader}>
+        <Text style={look.add}>{item.feelOne}</Text>
+        <Text style={look.add}>{item.feelTwo}</Text>
+        <Text style={look.add}>{item.feelThree}</Text>
+      </View>
+      <View style={look.element}>
+        {item.myCheckin ? <Text style={look.add}>{item.myCheckin}</Text> : null}
+      </View>
+    </View>
+  );
 };
 
 const Entries = (item) => {
   return (
     <View>
-      {item.myCheckin ? CheckVal(item.myCheckin, item) : null}
+      {item.check ? CheckVal(item) : null}
       {item.myCoping ? SingleVal(item.myCoping, item) : null}
       {item.myFocus ? SingleVal(item.myFocus, item) : null}
       {item.myBad ? SingleVal(item.myBad, item) : null}

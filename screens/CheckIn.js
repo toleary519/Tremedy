@@ -70,7 +70,11 @@ const CheckIn = () => {
 
     let newCheckin = {
       id: orderId,
+      check: "check",
       title: "Check-In",
+      phys: phys,
+      mental: mental,
+      outlook: outlook,
       feelOne: feelOne,
       feelTwo: feelTwo,
       feelThree: feelThree,
@@ -85,6 +89,7 @@ const CheckIn = () => {
     setCheckin("");
     storeData(newList);
     getData();
+    console.log("in handle add: ", newCheckin);
   };
 
   const handleDelete = ({ item }) => {

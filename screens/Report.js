@@ -23,7 +23,6 @@ const Report = () => {
       const valueValue = await AsyncStorage.getItem("storedValues");
       const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
       let copeData = copeValue ? JSON.parse(copeValue) : [];
-      // console.log("copeValue in get data: ", copeData);
       let checkData = checkValue ? JSON.parse(checkValue) : [];
       let focusData = focusValue ? JSON.parse(focusValue) : [];
       let piesData = piesValue ? JSON.parse(piesValue) : [];
@@ -31,7 +30,6 @@ const Report = () => {
       let badData = badValue ? JSON.parse(badValue) : [];
       let valueData = valueValue ? JSON.parse(valueValue) : [];
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
-      console.log("selfTalkValue in get data: ", selfData);
       setReportStorage([
         ...copeData,
         ...checkData,
@@ -42,7 +40,6 @@ const Report = () => {
         ...selfData,
         ...valueData,
       ]);
-      console.log("inside Report getData", reportStorage);
     } catch (e) {
       console.log(e);
     }
@@ -52,20 +49,20 @@ const Report = () => {
   let weekAgo = currentDate - 7 * 24 * 60 * 60 * 1000;
 
   let fullReport = reportStorage
-    .filter((x) => (x.id >= weekAgo && x.flag) || x.face)
+    .filter((x) => (x.id >= weekAgo && x.flag) || x.check)
     .sort((a, b) => {
       return b.id - a.id;
     });
 
   let fullChecks = fullReport
-    .filter((x) => !x.flag && x.face)
+    .filter((x) => !x.flag && x.check)
     .sort((a, b) => {
       return b.id - a.id;
     });
 
   // you could add && x.flagged
   let fullFlags = fullReport
-    .filter((x) => !x.face && x.flag)
+    .filter((x) => !x.check && x.flag)
     .sort((a, b) => {
       return b.id - a.id;
     });
@@ -155,8 +152,7 @@ const Report = () => {
                 {showFull
                   ? fullReport.map((item, i) => (
                       <View key={i}>
-                        {Entries(item)}
-                        {console.log("in full : ", i)}
+                        {item.check ? CheckVal(item) : Entries(item)}
                       </View>
                     ))
                   : null}
