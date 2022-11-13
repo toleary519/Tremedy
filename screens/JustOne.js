@@ -44,43 +44,6 @@ const JustOne = ({ navigation }) => {
             </View>
           </TouchableOpacity>
         </View>
-        {/* <View style={look.border}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("GoodTimes")}
-            delayPressIn={150}
-          >
-            <View style={look.element}>
-              <View>
-                <Text style={[look.add, { fontSize: 22, color: "green" }]}>
-                  The positives
-                </Text>
-                <Text style={look.sub}>
-                  Look at some of the things you could be giving up.
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={look.border}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("BadTimes")}
-            delayPressIn={150}
-          >
-            <View style={look.element}>
-              <View>
-                <Text
-                  style={[
-                    look.add,
-                    { fontSize: 22, color: "red", opacity: 0.8 },
-                  ]}
-                >
-                  The negatives
-                </Text>
-                <Text style={look.sub}>Do we want to go back to this?</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        </View> */}
       </View>
     </View>
   );
