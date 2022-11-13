@@ -32,28 +32,25 @@ const UrgeMenu = ({ navigation }) => (
             delayPressIn={150}
           >
             <View style={look.element}>
-              <Text style={look.add}>I'm planning</Text>
+              <View>
+                <Text style={look.add}>I'm planning</Text>
+                <Text style={look.sub}>Let's get you off that ledge.</Text>
+              </View>
             </View>
           </TouchableOpacity>
         </View>
-        <View style={look.border}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("OutsideMenu")}
-            delayPressIn={150}
-          >
-            <View style={look.element}>
-              <Text style={look.add}>I'm outside the store</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
         <View style={look.border}>
           <TouchableOpacity
             onPress={() => navigation.navigate("Using")}
             delayPressIn={150}
           >
             <View style={look.element}>
-              <Text style={look.add}>I'm already using</Text>
+              <View>
+                <Text style={look.add}>I've gone backwards</Text>
+                <Text style={look.sub}>
+                  Let's get back on track. Here we go.
+                </Text>
+              </View>
             </View>
           </TouchableOpacity>
         </View>
@@ -77,38 +74,5 @@ const UrgeMenu = ({ navigation }) => (
     </ScrollView>
   </View>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 40,
-    backgroundColor:"#1B2A41"
-  },
-  add: {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    marginTop: 20,
-    width: "80%",
-    left: "10%",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
- 
-
-  // icon: {
-  //   borderRadius: "3px",
-  //   borderColor: "red",    
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   fontSize: "60", 
-  //   padding: 60,
-  //   color: "#1B2A41"
-  // }
-});
 
 export { UrgeMenu }

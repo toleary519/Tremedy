@@ -454,7 +454,7 @@ const UserSettings = () => {
         "If you are struggling with these issues there are additional tools here.",
       dropdown: "Need help? You're not alone.",
 
-      onText: `You will now see an option called "Lapse" on the first menu. In it are some unique features and specialized tools to use as well as a directory of meetings.`,
+      onText: `You will now see an option called "We can do better" on the first menu. In it are some unique features and specialized tools to use as well as a directory of meetings.`,
       window: false,
     },
     {
@@ -492,7 +492,7 @@ const UserSettings = () => {
         ? "Report settings can only be changed by members. The default is 1 week. To join, please see billing information below."
         : "Set a time frame between 1 and 4 weeks.",
       onText:
-        "It is recommended to choose the length of time between therapy sessions, or an interval at which you choose to review.",
+        "It is recommended to choose the length of time between therapy sessions, or an interval at which you choose to review. You don't want to overload your report. All of your entries will be readable on their respective pages.",
       notSubscribed:
         "There are still a number of tools you can use in the tool box!",
       window: false,
