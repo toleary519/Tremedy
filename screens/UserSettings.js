@@ -11,6 +11,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import * as MailComposer from "expo-mail-composer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 
@@ -23,12 +24,18 @@ const UserSettings = () => {
   const [country, setCountry] = useState("");
   const [DOB, setDOB] = useState("");
   const [pin, setPin] = useState(null);
-  const [issue, setIssue] = useState("");
+  const [issue, setIssue] = useState({
+    where: "",
+    what: "",
+    expecting: "",
+    bugNotes: "",
+  });
   const [email, setEmail] = useState("");
   const [substance, setSubstance] = useState(false);
   const [subscribed, setSubscibed] = useState(false);
   const [rLength, setRLength] = useState(1);
   const [profile, setProfile] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(false);
 
   let userToken = {
     subscribed: subscribed,
@@ -76,24 +83,47 @@ const UserSettings = () => {
     ]);
   };
 
+  useEffect(() => {
+    async function checkAvailability() {
+      const isMailAvailable = await MailComposer.isAvailableAsync();
+      setIsAvailable(isMailAvailable);
+    }
+
+    checkAvailability();
+  }, []);
+
+  const sendBugMail = async () => {
+    MailComposer.composeAsync({
+      subject: `OURTRE BUG FLAG : ${issue.where}\n`,
+      body: `Dev Team, \n\nI found an issue ${
+        issue.where
+      }\n\n What happened: \n ${
+        issue.what
+      } \n \n Expected behaviour or outcome: \n ${issue.expecting} \n \n ${
+        issue.bugNotes ? `Notes: \n${issue.bugNotes}` : "No further notes."
+      }`,
+      recipients: "t.oleary@me.com",
+    });
+  };
+
   const errorCheck = () => {
     if (
       !name.replace(/\s+/g, "") ||
       !email.replace(/\s+/g, "") ||
-      !DOB.replace(/\s+/g, "")
+      !DOB.replace(/\s+/g, "") ||
+      !city.replace(/\s+/g, "")
     ) {
-      Alert.alert("Entry Error", `Name, Email and DOB are required fields.`, [
-        { text: "Got It" },
-      ]);
+      Alert.alert(
+        "Entry Error",
+        `Name, Email, City and DOB are required fields.`,
+        [{ text: "Got It" }]
+      );
       return;
     } else {
       setProfile(true);
     }
   };
 
-  const bugReport = () => {
-    // Report a bug with email.
-  };
   const creditCardInformation = () => {
     // Sign Up.
   };
@@ -106,6 +136,7 @@ const UserSettings = () => {
         {item.id === 3 ? flagRender(item) : null}
         {item.id === 4 ? deleteRender(item) : null}
         {item.id === 5 ? reportRender(item) : null}
+        {item.id === 6 ? bugRender(item) : null}
         {item.id === 7 ? billingRender(item) : null}
       </View>
     );
@@ -150,7 +181,7 @@ const UserSettings = () => {
               ) : (
                 <View>
                   <View style={look.header}>
-                    <Text style={look.add}>Tell us your name.</Text>
+                    <Text style={look.add}>Your name.</Text>
                     <Text style={look.sub}>Any of the following,</Text>
                     <TextInput
                       style={look.userInput}
@@ -175,7 +206,7 @@ const UserSettings = () => {
                       City and country where you live.
                     </Text>
                     <Text style={look.sub}>
-                      Why? There are location elements in Ourtre, to protect
+                      Why? There are location elements in Ourtre. To protect
                       your privacy we do not collect GPS data.
                     </Text>
                     <TextInput
@@ -209,7 +240,11 @@ const UserSettings = () => {
                   <View>
                     <TouchableOpacity onPress={() => errorCheck()}>
                       <MaterialIcons
-                        style={[look.icon, look.centerIcon]}
+                        style={[
+                          look.icon,
+                          look.centerIcon,
+                          { paddingBottom: "2%" },
+                        ]}
                         name="add-circle"
                       />
                     </TouchableOpacity>
@@ -222,6 +257,76 @@ const UserSettings = () => {
       </View>
     );
   };
+
+  const bugRender = (item) => {
+    return (
+      <View>
+        <View style={look.element}>
+          <View style={{ width: "100%" }}>
+            <Text style={[look.add]}>{item.dropdown}</Text>
+
+            <View style={look.header}>
+              <Text style={look.add}>Where did you find the bug?</Text>
+              <TextInput
+                style={look.userInput}
+                onChangeText={(text) => setIssue({ ...issue, where: text })}
+                value={issue.where}
+                placeholder={"Where?"}
+                multiline
+                keyboardType="default"
+              />
+            </View>
+            <View style={look.header}>
+              <Text style={look.add}>
+                What happened when you were using it?
+              </Text>
+              <TextInput
+                style={look.userInput}
+                onChangeText={(text) => setIssue({ ...issue, what: text })}
+                value={issue.what}
+                placeholder={"What"}
+                multiline
+                keyboardType="default"
+              />
+            </View>
+            <View style={look.header}>
+              <Text style={look.add}>What was the behaviour you expected?</Text>
+              <TextInput
+                style={look.userInput}
+                onChangeText={(text) => setIssue({ ...issue, expecting: text })}
+                value={issue.expecting}
+                placeholder={"What did you want to see?"}
+                multiline
+                keyboardType="default"
+              />
+            </View>
+            <View style={look.header}>
+              <Text style={look.add}>
+                Is there anything else you would like to say on this?
+              </Text>
+              <TextInput
+                style={look.userInput}
+                onChangeText={(text) => setIssue({ ...issue, bugNotes: text })}
+                value={issue.bugNotes}
+                placeholder={"optional notes"}
+                multiline
+                keyboardType="default"
+              />
+            </View>
+            <View>
+              <TouchableOpacity onPress={() => sendBugMail()}>
+                <MaterialIcons
+                  style={[look.icon, look.centerIcon, { paddingBottom: "3%" }]}
+                  name="add-circle"
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
   const substanceRender = (item) => {
     return (
       <View>
@@ -454,7 +559,7 @@ const UserSettings = () => {
         "If you are struggling with these issues there are additional tools here.",
       dropdown: "Need help? You're not alone.",
 
-      onText: `You will now see an option called "We can do better" on the first menu. In it are some unique features and specialized tools to use as well as a directory of meetings.`,
+      onText: `You will now see an option called "We can do better" on the first menu. In it are some unique features and specialized tools to use as well as lists of meetings.`,
       window: false,
     },
     {
@@ -499,10 +604,10 @@ const UserSettings = () => {
     },
     {
       id: 6,
-      title: "Found a bug?",
+      title: "Found a bug? Have an issue?",
       subtitle: "Help us improve your experience.",
       dropdown:
-        "Explain as best you can the issue that you are having and we will address it as soon as possible.",
+        "Explain as best you can the issue that you are having and what you hoped to see.",
       value: null,
       window: false,
     },
