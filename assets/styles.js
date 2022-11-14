@@ -275,6 +275,16 @@ export const look = {
     opacity: 0.8,
     // overflow: "hidden",
   },
+  image: {
+    width: "50%",
+    height: 200,
+    borderRadius: 15,
+    marginBottom: "4%",
+  },
+  imageBox: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
 };
 
 // ______________________template for entry pages 
