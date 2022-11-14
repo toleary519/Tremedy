@@ -3,17 +3,21 @@ import {
   Text,
   StyleSheet,
   View,
+  Image,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
 import * as Contacts from "expo-contacts";
+import contactImage from "../assets/contactImage.jpg";
 import call from "react-native-phone-call";
+import { FontAwesome } from "@expo/vector-icons";
 import { look } from "../assets/styles";
 
 const SupportContacts = () => {
   let filteredContacts = [];
 
   const [contacts, setContacts] = useState([]);
+  const [imageWindow, setImageWindow] = useState(false);
 
   const makeCall = (item) => {
     const args = {
@@ -60,6 +64,21 @@ const SupportContacts = () => {
               To add a support contact put "2174" anywhere in the company field
               of their contact card and they will show up here.
             </Text>
+          </View>
+          <View style={look.border}>
+            <TouchableOpacity
+              onPress={() => setImageWindow(!imageWindow ? true : false)}
+            >
+              <FontAwesome
+                style={[look.icon, look.centerIcon, { paddingBottom: "4%" }]}
+                name="question-circle"
+              />
+              {imageWindow ? (
+                <View style={look.imageBox}>
+                  <Image style={look.image} source={contactImage} />
+                </View>
+              ) : null}
+            </TouchableOpacity>
           </View>
           {filteredContacts.map((item, i) => (
             <View key={i} style={[look.border]}>
