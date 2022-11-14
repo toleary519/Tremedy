@@ -117,7 +117,7 @@ const NewFeature = () => {
 
   return (
     <View style={look.container}>
-      <KeyboardAwareScrollView style={look.scrollView}>
+      <KeyboardAwareScrollView extraHeight={200}>
         <View style={look.topBox}>
           <View style={look.header}>
             <Text style={look.add}>What would you call it?</Text>

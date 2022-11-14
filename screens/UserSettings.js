@@ -23,7 +23,6 @@ const UserSettings = () => {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [DOB, setDOB] = useState("");
-  const [pin, setPin] = useState(null);
   const [issue, setIssue] = useState({
     where: "",
     what: "",
@@ -36,17 +35,28 @@ const UserSettings = () => {
   const [rLength, setRLength] = useState(1);
   const [profile, setProfile] = useState(false);
   const [isAvailable, setIsAvailable] = useState(false);
+  const [tokenStorage, setTokenStorage] = useState(
+    tokenStorage ? tokenStorage : {}
+  );
 
-  let userToken = {
-    subscribed: subscribed,
-    rLength: rLength,
-    profile: profile,
-    substance: substance,
-    city: city,
-    country: country,
-    flags: flags,
-    name: name,
-    email: email,
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("storedUser");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setTokenStorage(savedData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const storeData = async (tokenStorage) => {
+    try {
+      const jsonValue = JSON.stringify(tokenStorage);
+      await AsyncStorage.setItem("storedUser", jsonValue);
+      console.log("storeData:", tokenStorage);
+    } catch (e) {
+      console.log("1", e);
+    }
   };
 
   const deleteData = () => {
@@ -92,14 +102,17 @@ const UserSettings = () => {
     checkAvailability();
   }, []);
 
+  React.useEffect(() => {
+    getData();
+    console.log("after get data on load: ", tokenStorage);
+  }, []);
+
   const sendBugMail = async () => {
     MailComposer.composeAsync({
-      subject: `OURTRE BUG FLAG : ${issue.where}\n`,
-      body: `Dev Team, \n\nI found an issue ${
-        issue.where
-      }\n\n What happened: \n ${
+      subject: `OURTRE BUG FLAG : ${issue.where}`,
+      body: `Dev Team, \n\nI found an issue ${issue.where}\n\n What happened: ${
         issue.what
-      } \n \n Expected behaviour or outcome: \n ${issue.expecting} \n \n ${
+      } \n \n Expected behaviour or outcome: ${issue.expecting} \n \n ${
         issue.bugNotes ? `Notes: \n${issue.bugNotes}` : "No further notes."
       }`,
       recipients: "bug.ourtre@gmail.com",
@@ -126,6 +139,28 @@ const UserSettings = () => {
 
   const creditCardInformation = () => {
     // Sign Up.
+  };
+
+  const handleChange = () => {
+    let userToken = {
+      subscribed: subscribed,
+      rLength: rLength,
+      profile: profile,
+      substance: substance,
+      city: city,
+      country: country,
+      flags: flags,
+      name: name,
+      email: email,
+    };
+
+    const newUser = { ...userToken };
+
+    setTokenStorage(newUser);
+    storeData(newUser);
+    getData();
+    console.log("user token : ", userToken);
+    console.log("token storage : ", tokenStorage);
   };
 
   const dropDownRender = (item) => {
@@ -622,14 +657,6 @@ const UserSettings = () => {
 
       window: false,
     },
-    // {
-    //   id: 2,
-    //   title: "My Pin",
-    //   subtitle: "Create or reset your pin.",
-    //   dropdown: "You can enter a pin here unique to this app.",
-    //   value: pin,
-    //   window: false,
-    // },
   ];
 
   return (
@@ -639,25 +666,19 @@ const UserSettings = () => {
           {settingsOptions.map((item, i) => (
             <View
               key={i}
-              style={
-                selectedOption === i
-                  ? [
-                      look.border,
-                      {
-                        // backgroundColor: "#1D3461",
-                        // borderRadius: 15,
-                        // padding: 10,
-                      },
-                    ]
-                  : look.border
-              }
+              style={selectedOption === i ? [look.border] : look.border}
             >
               <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
                 <View style={look.header}>
                   <View style={look.userHeader}>
                     <Text style={look.add}>{item.title}</Text>
                     {selectedOption === i ? (
-                      <TouchableOpacity onPress={() => setSelectedOption(null)}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          setSelectedOption(null);
+                          handleChange();
+                        }}
+                      >
                         <Feather
                           name="chevron-up"
                           style={[
@@ -678,6 +699,6 @@ const UserSettings = () => {
       </View>
     </View>
   );
-};;;;;;;;;;;;;
+};
 
 export { UserSettings };
