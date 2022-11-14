@@ -84,6 +84,7 @@ const Entries = (item) => {
     <View>
       {item.check ? CheckVal(item) : null}
       {item.myCoping ? SingleVal(item.myCoping, item) : null}
+      {item.myThat ? SingleVal(item.myThat, item) : null}
       {item.myFocus ? SingleVal(item.myFocus, item) : null}
       {item.myBad ? SingleVal(item.myBad, item) : null}
       {item.myGood ? SingleVal(item.myGood, item) : null}

@@ -14,6 +14,13 @@ export const pageOptions = [
     title: "Quick Check-In",
   },
   {
+    id: 2.5,
+    selected: true,
+    pageName: "That",
+    sub: "Something's up, write it down, work on it.",
+    title: "That!",
+  },
+  {
     id: 3,
     selected: false,
     pageName: "Routine",

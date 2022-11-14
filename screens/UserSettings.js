@@ -102,7 +102,7 @@ const UserSettings = () => {
       } \n \n Expected behaviour or outcome: \n ${issue.expecting} \n \n ${
         issue.bugNotes ? `Notes: \n${issue.bugNotes}` : "No further notes."
       }`,
-      recipients: "t.oleary@me.com",
+      recipients: "bug.ourtre@gmail.com",
     });
   };
 

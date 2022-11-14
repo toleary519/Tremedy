@@ -22,6 +22,7 @@ const Report = () => {
       const badValue = await AsyncStorage.getItem("storedBad");
       const valueValue = await AsyncStorage.getItem("storedValues");
       const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
+      const thatValue = await AsyncStorage.getItem("storedThat");
       let copeData = copeValue ? JSON.parse(copeValue) : [];
       let checkData = checkValue ? JSON.parse(checkValue) : [];
       let focusData = focusValue ? JSON.parse(focusValue) : [];
@@ -30,6 +31,7 @@ const Report = () => {
       let badData = badValue ? JSON.parse(badValue) : [];
       let valueData = valueValue ? JSON.parse(valueValue) : [];
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
+      let thatData = selfTalkValue ? JSON.parse(thatValue) : [];
       setReportStorage([
         ...copeData,
         ...checkData,
@@ -39,6 +41,7 @@ const Report = () => {
         ...badData,
         ...selfData,
         ...valueData,
+        ...thatData,
       ]);
     } catch (e) {
       console.log(e);

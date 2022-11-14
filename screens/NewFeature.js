@@ -8,37 +8,76 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import * as MailComposer from "expo-mail-composer";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
 
 const NewFeature = () => {
-  const [XY, setST] = useState(XY ? XY : []);
-  const [entry, setEnt] = useState("");
-
-  let sortedEntries = XY.sort((a, b) => {
-    return b.id - a.id;
+  const [isAvailable, setIsAvailable] = useState(false);
+  const [feature, setFeature] = useState({
+    name: "",
+    whatsItDo: "",
+    howsItWork: "",
+    howsItLook: "",
+    howsItHelp: "",
+    notes: "",
   });
 
-  //   const getData = async () => {
-  //     try {
-  //       const jsonValue = await AsyncStorage.getItem(stringStorage);
-  //       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //       setST(savedData);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
+  useEffect(() => {
+    async function checkAvailability() {
+      const isMailAvailable = await MailComposer.isAvailableAsync();
+      setIsAvailable(isMailAvailable);
+    }
 
-  //   const storeData = async (XY) => {
-  //     try {
-  //       const jsonValue = JSON.stringify(XY);
-  //       await AsyncStorage.setItem(stringStorage, jsonValue);
-  //     } catch (e) {
-  //       console.log("1", e);
-  //     }
-  //   };
+    checkAvailability();
+  }, []);
+
+  const sendFeatureMail = async () => {
+    // const featureEmail = () => {
+    //   return (
+    //     <View>
+    //       <Text style={[look.add, { fontSize: 20 }]}>Ourtre Team,</Text>
+    //       <Text style={look.add}>My idea is called {feature.name}</Text>
+    //       <Text />
+    //       <Text style={look.add}>This is what I think it should do:</Text>
+    //       <Text style={look.sub}>{feature.whatsItDo}</Text>
+    //       <Text />
+    //       <Text style={look.add}>This is how I think it should work:</Text>
+    //       <Text style={look.sub}>{feature.howsItWork}</Text>
+    //       <Text />
+    //       <Text style={look.add}>
+    //         This sort of thing is/would be helpful to me because:
+    //       </Text>
+    //       <Text style={look.sub}>{feature.howsItHelp}</Text>
+    //       <Text />
+    //       <Text style={look.add}>
+    //         In my mind this is how I think it should look
+    //       </Text>
+    //       <Text style={look.sub}>{feature.howsItLook}</Text>
+    //       {feature.notes ? (
+    //         <View>
+    //           <Text style={look.add}>More notes:</Text>
+    //           <Text style={look.sub}>{feature.notes}</Text>
+    //         </View>
+    //       ) : null}
+    //     </View>
+    //   );
+    // };
+    MailComposer.composeAsync({
+      subject: `New Feature Team! : ${feature.name}`,
+      body: `Ourtre Team,
+      \n\n My idea is called: ${feature.name}\n\n This is what it does: ${
+        feature.whatsItDo
+      } \n\n How it works: ${feature.howsItWork} \n\n  How I find it helpful: ${
+        feature.howsItHelp
+      } \n\n How I think it should look: ${feature.howsItLook} \n\n${
+        feature.notes ? `Notes: ${feature.notes}` : "No further notes."
+      }`,
+      recipients: "t.oleary@me.com",
+    });
+  };
 
   const flagAlert = () => {
     const pressTrue = () => {
@@ -65,52 +104,8 @@ const NewFeature = () => {
     );
   };
 
-  const handleAdd = (flag) => {
-    let currentDate = new Date();
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth() + 1;
-    let currentYear = currentDate.getFullYear();
-    let orderId = currentDate.getTime();
-
-    let newItem = {
-      id: orderId,
-      entry: entry,
-      flag: flag,
-      date: `${currentMonth}/${currentDay}/${currentYear}`,
-    };
-
-    const newList = [...XY, newItem];
-
-    setST(newList);
-    setEnt("");
-    // storeData(newList);
-    getData();
-  };
-
-  const handleDelete = ({ item }) => {
-    let index = 0;
-    // find the index of item to delete
-    for (let obj of XY) {
-      if (obj.id !== item.id) {
-        index++;
-      } else {
-        break;
-      }
-    }
-    // filter array for display
-    setST(XY.filter((val) => val.id !== item.id));
-    // make permanent delete
-    XY.splice(index, 1);
-    // save deletion of item
-    // storeData(XY);
-  };
-
-  //   React.useEffect(() => {
-  //     getData();
-  //   }, []);
-
   const errorCheck = () => {
-    if (!entry.replace(/\s+/g, "")) {
+    if (!feature.replace(/\s+/g, "")) {
       Alert.alert("Entry Error", `Fill out all fields to submit.`, [
         { text: "Got It" },
       ]);
@@ -120,74 +115,100 @@ const NewFeature = () => {
     }
   };
 
-  const handleFlag = (i) => {
-    let currentItem = sortedEntries[i];
-    currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
-    // storeData(XY);
-    // getData();
-  };
-
   return (
     <View style={look.container}>
-      <KeyboardAwareScrollView extraHeight={175}>
+      <KeyboardAwareScrollView style={look.scrollView}>
         <View style={look.topBox}>
           <View style={look.header}>
-            <Text style={look.add}>Header</Text>
-          </View>
-          <View style={look.subHeader}>
-            <Text style={look.sub}>Sub Header</Text>
-          </View>
-          <TextInput
-            style={look.input}
-            onChangeText={(text) => setEnt(text)}
-            value={entry}
-            placeholder={"what do you want to see?"}
-            multiline
-            keyboardType="default"
-            color="#D7D9D7"
-            placeholderTextColor={"#F1F7EE"}
-          />
-          <View style={look.drawBox}>{/* draw feature */}</View>
-          <TouchableOpacity onPress={() => errorCheck()}>
-            <MaterialIcons
-              style={[look.icon, look.centerIcon]}
-              name="add-circle"
+            <Text style={look.add}>What would you call it?</Text>
+            <TextInput
+              style={look.userInput}
+              onChangeText={(text) => setFeature({ ...feature, name: text })}
+              value={feature.name}
+              placeholder={"What's it called?"}
+              multiline
+              keyboardType="default"
             />
-          </TouchableOpacity>
+          </View>
+          <View style={look.header}>
+            <Text style={look.add}>What does it do?</Text>
+            <TextInput
+              style={look.userInput}
+              onChangeText={(text) =>
+                setFeature({ ...feature, whatsItDo: text })
+              }
+              value={feature.whatsItDo}
+              placeholder={"What does it do?"}
+              multiline
+              keyboardType="default"
+            />
+          </View>
+          <View style={look.header}>
+            <Text style={look.add}>In your mind how does it work?</Text>
+            <TextInput
+              style={look.userInput}
+              onChangeText={(text) =>
+                setFeature({ ...feature, howsItWork: text })
+              }
+              value={feature.howsItWork}
+              placeholder={"How's it work?"}
+              multiline
+              keyboardType="default"
+            />
+          </View>
+          <View style={look.header}>
+            <Text style={look.add}>
+              How do you find this type of thing helpful?
+            </Text>
+            <TextInput
+              style={look.userInput}
+              onChangeText={(text) =>
+                setFeature({ ...feature, howsItHelp: text })
+              }
+              value={feature.howsItHelp}
+              placeholder={"What makes it helpful to you?"}
+              multiline
+              keyboardType="default"
+            />
+          </View>
+          <View style={look.header}>
+            <Text style={look.add}>How do you think it should look?</Text>
+            <TextInput
+              style={look.userInput}
+              onChangeText={(text) =>
+                setFeature({ ...feature, howsItLook: text })
+              }
+              value={feature.howsItLook}
+              placeholder={"What does it look like?"}
+              multiline
+              keyboardType="default"
+            />
+          </View>
+          <View style={look.header}>
+            <Text style={look.add}>
+              Is there anything else you'd like to add?
+            </Text>
+            <TextInput
+              style={look.userInput}
+              onChangeText={(text) => setFeature({ ...feature, notes: text })}
+              value={feature.notes}
+              placeholder={"What does it look like?"}
+              multiline
+              keyboardType="default"
+            />
+          </View>
           <View>
-            {sortedEntries.map((item, i) => (
-              <View key={item.id} style={look.border}>
-                <View style={look.elementHeader}>
-                  <TouchableOpacity onPress={() => handleDelete({ item })}>
-                    <MaterialIcons
-                      style={[look.icon, look.canIcon]}
-                      name="delete-forever"
-                    />
-                  </TouchableOpacity>
-                  <Text style={look.date}>{item.date}</Text>
-                  <TouchableOpacity
-                    onPress={() => {
-                      handleFlag(i);
-                    }}
-                  >
-                    <SimpleLineIcons
-                      style={
-                        item.flag ? [look.fIcon, look.selected] : look.fIcon
-                      }
-                      name="flag"
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View style={look.element}>
-                  <Text style={look.add}>{item.entry}</Text>
-                </View>
-              </View>
-            ))}
+            <TouchableOpacity onPress={() => sendFeatureMail()}>
+              <MaterialIcons
+                style={[look.icon, look.centerIcon, { paddingBottom: "3%" }]}
+                name="add-circle"
+              />
+            </TouchableOpacity>
           </View>
         </View>
       </KeyboardAwareScrollView>
     </View>
   );
-};
+};;;
 
 export { NewFeature };
