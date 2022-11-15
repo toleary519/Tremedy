@@ -18,10 +18,23 @@ import { look } from "../assets/styles";
 const UserSettings = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [editInfo, setEditInfo] = useState(true);
-  const [flags, setFlags] = useState(true);
-  const [name, setName] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
+  const [token, setToken] = useState({
+    subscribed: false,
+    rLength: 1,
+    profile: false,
+    substance: false,
+    city: "",
+    country: "",
+    flags: true,
+    name: "",
+    email: "",
+  });
+  const [flags, setFlags] = useState(tokenStorage ? tokenStorage.flags : true);
+  const [name, setName] = useState(tokenStorage ? tokenStorage.name : "");
+  const [city, setCity] = useState(tokenStorage ? tokenStorage.city : "");
+  const [country, setCountry] = useState(
+    tokenStorage ? tokenStorage.country : ""
+  );
   const [DOB, setDOB] = useState("");
   const [issue, setIssue] = useState({
     where: "",
@@ -29,11 +42,19 @@ const UserSettings = () => {
     expecting: "",
     bugNotes: "",
   });
-  const [email, setEmail] = useState("");
-  const [substance, setSubstance] = useState(false);
-  const [subscribed, setSubscibed] = useState(false);
-  const [rLength, setRLength] = useState(1);
-  const [profile, setProfile] = useState(false);
+  const [email, setEmail] = useState(tokenStorage ? tokenStorage.email : "");
+  const [substance, setSubstance] = useState(
+    tokenStorage ? tokenStorage.substance : false
+  );
+  const [subscribed, setSubscibed] = useState(
+    tokenStorage ? tokenStorage.subscribed : false
+  );
+  const [rLength, setRLength] = useState(
+    tokenStorage ? tokenStorage.rLength : 1
+  );
+  const [profile, setProfile] = useState(
+    tokenStorage ? tokenStorage.profile : false
+  );
   const [isAvailable, setIsAvailable] = useState(false);
   const [tokenStorage, setTokenStorage] = useState(
     tokenStorage ? tokenStorage : {}
@@ -43,17 +64,28 @@ const UserSettings = () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+
       setTokenStorage(savedData);
+      console.log("token storage get data: ", savedData);
+      // setCity(tokenStorage.city);
+      // setCountry(tokenStorage.country);
+      // setEmail(tokenStorage.email);
+      // setFlags(tokenStorage.flags);
+      // setName(tokenStorage.name);
+      // setProfile(tokenStorage.profile);
+      // setRLength(tokenStorage.rLength);
+      // setSubscibed(tokenStorage.subscribed);
+      // setSubscibed(tokenStorage.substance);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const storeData = async (tokenStorage) => {
+  const storeData = async () => {
     try {
       const jsonValue = JSON.stringify(tokenStorage);
       await AsyncStorage.setItem("storedUser", jsonValue);
-      console.log("storeData:", tokenStorage);
+      console.log("storeData in STORE :", jsonValue);
     } catch (e) {
       console.log("1", e);
     }
@@ -98,13 +130,9 @@ const UserSettings = () => {
       const isMailAvailable = await MailComposer.isAvailableAsync();
       setIsAvailable(isMailAvailable);
     }
-
-    checkAvailability();
-  }, []);
-
-  React.useEffect(() => {
     getData();
-    console.log("after get data on load: ", tokenStorage);
+    console.log("after get data in USEEFFECT: ", tokenStorage);
+    checkAvailability();
   }, []);
 
   const sendBugMail = async () => {
@@ -154,14 +182,18 @@ const UserSettings = () => {
       email: email,
     };
 
-    const newUser = { ...userToken };
+    const newToken = { ...userToken };
 
-    setTokenStorage(newUser);
-    storeData(newUser);
+    setTokenStorage(newToken);
+    console.log("token storage after set in handlechange : ", tokenStorage);
+    storeData(newToken);
+    // console.log("user token in handle change : ", userToken);
     getData();
-    console.log("user token : ", userToken);
-    console.log("token storage : ", tokenStorage);
-  };
+    // console.log(
+    //   "token storage after get data in handlechange : ",
+    //   tokenStorage
+    // );
+  };;
 
   const dropDownRender = (item) => {
     return (
@@ -220,8 +252,10 @@ const UserSettings = () => {
                     <Text style={look.sub}>Any of the following,</Text>
                     <TextInput
                       style={look.userInput}
-                      onChangeText={(text) => setName(text)}
-                      value={name}
+                      onChangeText={(text) =>
+                        setToken({ ...token, name: text })
+                      }
+                      value={token.name}
                       placeholder={"First, Last, Full or Nickname"}
                       keyboardType="default"
                     />
@@ -230,8 +264,10 @@ const UserSettings = () => {
                     <Text style={look.add}>Enter your contact email.</Text>
                     <TextInput
                       style={look.userInput}
-                      onChangeText={(text) => setEmail(text)}
-                      value={email}
+                      onChangeText={(text) =>
+                        setToken({ ...token, email: text })
+                      }
+                      value={token.email}
                       placeholder={"Email"}
                       keyboardType="default"
                     />
@@ -246,16 +282,20 @@ const UserSettings = () => {
                     </Text>
                     <TextInput
                       style={look.userInput}
-                      onChangeText={(text) => setCity(text)}
-                      value={city}
+                      onChangeText={(text) =>
+                        setToken({ ...token, city: text })
+                      }
+                      value={token.city}
                       placeholder={"City"}
                       keyboardType="default"
                     />
 
                     <TextInput
                       style={look.userInput}
-                      onChangeText={(text) => setCountry(text)}
-                      value={country}
+                      onChangeText={(text) =>
+                        setToken({ ...token, country: text })
+                      }
+                      value={token.country}
                       placeholder={"Country"}
                       keyboardType="default"
                     />
@@ -265,8 +305,8 @@ const UserSettings = () => {
                     <Text style={look.sub}>Enter your birthday, MMDDYY</Text>
                     <TextInput
                       style={look.userInput}
-                      onChangeText={(text) => setDOB(text)}
-                      value={DOB}
+                      onChangeText={(text) => setToken({ ...token, DOB: text })}
+                      value={token.DOB}
                       maxLength={6}
                       placeholder={"Birthday"}
                       keyboardType="number-pad"
@@ -370,7 +410,9 @@ const UserSettings = () => {
             <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
             <TouchableOpacity
               onPress={
-                substance ? () => setSubstance(false) : () => setSubstance(true)
+                substance
+                  ? () => setToken({ ...token, substance: false })
+                  : () => setToken({ ...token, substance: true })
               }
             >
               {substance ? (
@@ -404,7 +446,11 @@ const UserSettings = () => {
           <View style={look.userHeader}>
             <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
             <TouchableOpacity
-              onPress={flags ? () => setFlags(false) : () => setFlags(true)}
+              onPress={
+                flags
+                  ? () => setToken({ ...token, flags: false })
+                  : () => setToken({ ...token, flags: true })
+              }
             >
               {flags ? (
                 <MaterialIcons
@@ -490,7 +536,7 @@ const UserSettings = () => {
         <View style={look.calendarBox}>
           <TouchableOpacity
             disabled={subscribed ? false : true}
-            onPress={() => setRLength(1)}
+            onPress={() => setToken({ ...token, rLength: 1 })}
           >
             <MaterialCommunityIcons
               name="calendar-week"
@@ -499,7 +545,7 @@ const UserSettings = () => {
           </TouchableOpacity>
           <TouchableOpacity
             disabled={subscribed ? false : true}
-            onPress={() => setRLength(2)}
+            onPress={() => setToken({ ...token, rLength: 2 })}
           >
             <MaterialCommunityIcons
               name="calendar-week"
@@ -508,7 +554,7 @@ const UserSettings = () => {
           </TouchableOpacity>
           <TouchableOpacity
             disabled={subscribed ? false : true}
-            onPress={() => setRLength(3)}
+            onPress={() => setToken({ ...token, rLength: 3 })}
           >
             <MaterialCommunityIcons
               name="calendar-week"
@@ -517,7 +563,7 @@ const UserSettings = () => {
           </TouchableOpacity>
           <TouchableOpacity
             disabled={subscribed ? false : true}
-            onPress={() => setRLength(4)}
+            onPress={() => setToken({ ...token, rLength: 4 })}
           >
             <MaterialCommunityIcons
               name="calendar-week"
@@ -548,8 +594,8 @@ const UserSettings = () => {
             <TouchableOpacity
               onPress={
                 subscribed
-                  ? () => setSubscibed(false)
-                  : () => setSubscibed(true)
+                  ? () => setToken({ ...token, subscribed: false })
+                  : () => setToken({ ...token, subscribed: true })
               }
             >
               {subscribed ? (
@@ -699,6 +745,6 @@ const UserSettings = () => {
       </View>
     </View>
   );
-};
+};;;
 
 export { UserSettings };
