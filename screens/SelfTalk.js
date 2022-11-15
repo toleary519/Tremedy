@@ -15,9 +15,9 @@ import { look } from "../assets/styles";
 
 const SelfTalk = () => {
   const [selfTalk, setSelfTalk] = useState(selfTalk ? selfTalk : []);
+  const [token, setToken] = useState(token ? token : {});
   const [initial, setInitial] = useState("");
   const [rational, setRational] = useState("");
-  const [token, setToken] = useState({});
 
   let sortedEntries = selfTalk.sort((a, b) => {
     return b.id - a.id;
@@ -28,7 +28,7 @@ const SelfTalk = () => {
       const jsonValue = await AsyncStorage.getItem("storedSelfTalk");
       const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
+      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setSelfTalk(savedData);
       setToken(savedTokData);
       console.log("get token data", token);

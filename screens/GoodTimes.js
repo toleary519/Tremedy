@@ -17,8 +17,8 @@ const GoodTimes = () => {
   const [goodStorage, setGoodStorage] = useState(
     goodStorage ? goodStorage : []
   );
+  const [token, setToken] = useState(token ? token : {});
   const [note, setNote] = useState("");
-  const [token, setToken] = useState({});
 
   let sortedEntries = goodStorage.sort((a, b) => {
     return b.id - a.id;
@@ -29,7 +29,7 @@ const GoodTimes = () => {
       const jsonValue = await AsyncStorage.getItem("storedGood");
       const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
+      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setGoodStorage(savedData);
       setToken(savedTokData);
       console.log("get token data", token);

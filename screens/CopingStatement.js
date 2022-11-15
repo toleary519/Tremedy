@@ -10,8 +10,8 @@ const CopingStatement = () => {
   const [copingStorage, setCopingStorage] = useState(
     copingStorage ? copingStorage : []
   );
+  const [token, setToken] = useState(token ? token : {});
   const [myCoping, setMyCoping] = useState("");
-  const [token, setToken] = useState({});
 
   let sortedEntries = copingStorage.sort((a, b) => {
     return b.id - a.id;
@@ -22,7 +22,7 @@ const CopingStatement = () => {
       const jsonValue = await AsyncStorage.getItem("storedCoping");
       const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
+      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setCopingStorage(savedData);
       setToken(savedTokData);
     } catch (e) {

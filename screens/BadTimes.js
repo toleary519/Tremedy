@@ -15,8 +15,8 @@ import { look } from "../assets/styles";
 
 const BadTimes = () => {
   const [badStorage, setBadStorage] = useState(badStorage ? badStorage : []);
+  const [token, setToken] = useState(token ? token : {});
   const [note, setNote] = useState("");
-  const [token, setToken] = useState({});
 
   let sortedEntries = badStorage.sort((a, b) => {
     return b.id - a.id;
@@ -27,7 +27,7 @@ const BadTimes = () => {
       const jsonValue = await AsyncStorage.getItem("storedBad");
       const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
+      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setBadStorage(savedData);
       setToken(savedTokData);
       console.log("token : ", token);

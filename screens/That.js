@@ -17,26 +17,26 @@ const That = () => {
   const [thatStorage, setThatStorage] = useState(
     thatStorage ? thatStorage : []
   );
-  const [that, setThat] = useState("");
-  const [token, setToken] = useState({});
+    const [token, setToken] = useState(token ? token : {});
+    const [that, setThat] = useState("");
 
-  let sortedEntries = thatStorage.sort((a, b) => {
-    return b.id - a.id;
-  });
+    let sortedEntries = thatStorage.sort((a, b) => {
+      return b.id - a.id;
+    });
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedThat");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
-      setThatStorage(savedData);
-      setToken(savedTokData);
-      console.log("get token data", token);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    const getData = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem("storedThat");
+        const jsonTokValue = await AsyncStorage.getItem("storedUser");
+        let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+        let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
+        setThatStorage(savedData);
+        setToken(savedTokData);
+        console.log("get token data", token);
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
   const storeData = async (thatStorage) => {
     try {

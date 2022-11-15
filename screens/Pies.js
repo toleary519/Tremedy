@@ -15,11 +15,11 @@ import { look } from "../assets/styles";
 
 const Pies = () => {
   const [pieStorage, setPieStorage] = useState(pieStorage ? pieStorage : []);
+  const [token, setToken] = useState(token ? token : {});
   const [physical, setPhysical] = useState("");
   const [insights, setInsights] = useState("");
   const [emotions, setEmotions] = useState("");
   const [spiritual, setSpiritual] = useState("");
-  const [token, setToken] = useState({});
 
   let sortedEntries = pieStorage.sort((a, b) => {
     return b.id - a.id;
@@ -30,7 +30,7 @@ const Pies = () => {
       const jsonValue = await AsyncStorage.getItem("storedPie");
       const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
+      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setPieStorage(savedData);
       setToken(savedTokData);
       console.log("get token data", token);
