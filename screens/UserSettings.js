@@ -18,74 +18,46 @@ import { look } from "../assets/styles";
 const UserSettings = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [editInfo, setEditInfo] = useState(true);
-  const [token, setToken] = useState({
-    subscribed: false,
-    rLength: 1,
-    profile: false,
-    substance: false,
-    city: "",
-    country: "",
-    flags: true,
-    name: "",
-    email: "",
-  });
-  const [flags, setFlags] = useState(tokenStorage ? tokenStorage.flags : true);
-  const [name, setName] = useState(tokenStorage ? tokenStorage.name : "");
-  const [city, setCity] = useState(tokenStorage ? tokenStorage.city : "");
-  const [country, setCountry] = useState(
-    tokenStorage ? tokenStorage.country : ""
+  const [token, setToken] = useState(
+    token
+      ? token
+      : {
+          subscribed: false,
+          rLength: 1,
+          profile: false,
+          substance: false,
+          DOB: "",
+          city: "",
+          country: "",
+          flags: true,
+          name: "",
+          email: "",
+        }
   );
-  const [DOB, setDOB] = useState("");
   const [issue, setIssue] = useState({
     where: "",
     what: "",
     expecting: "",
     bugNotes: "",
   });
-  const [email, setEmail] = useState(tokenStorage ? tokenStorage.email : "");
-  const [substance, setSubstance] = useState(
-    tokenStorage ? tokenStorage.substance : false
-  );
-  const [subscribed, setSubscibed] = useState(
-    tokenStorage ? tokenStorage.subscribed : false
-  );
-  const [rLength, setRLength] = useState(
-    tokenStorage ? tokenStorage.rLength : 1
-  );
-  const [profile, setProfile] = useState(
-    tokenStorage ? tokenStorage.profile : false
-  );
+
   const [isAvailable, setIsAvailable] = useState(false);
-  const [tokenStorage, setTokenStorage] = useState(
-    tokenStorage ? tokenStorage : {}
-  );
 
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-
-      setTokenStorage(savedData);
+      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
+      setToken({ ...savedData });
       console.log("token storage get data: ", savedData);
-      // setCity(tokenStorage.city);
-      // setCountry(tokenStorage.country);
-      // setEmail(tokenStorage.email);
-      // setFlags(tokenStorage.flags);
-      // setName(tokenStorage.name);
-      // setProfile(tokenStorage.profile);
-      // setRLength(tokenStorage.rLength);
-      // setSubscibed(tokenStorage.subscribed);
-      // setSubscibed(tokenStorage.substance);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const storeData = async () => {
+  const storeData = async (token) => {
     try {
-      const jsonValue = JSON.stringify(tokenStorage);
+      const jsonValue = JSON.stringify(token);
       await AsyncStorage.setItem("storedUser", jsonValue);
-      console.log("storeData in STORE :", jsonValue);
     } catch (e) {
       console.log("1", e);
     }
@@ -131,7 +103,7 @@ const UserSettings = () => {
       setIsAvailable(isMailAvailable);
     }
     getData();
-    console.log("after get data in USEEFFECT: ", tokenStorage);
+    console.log("after get data in USEEFFECT: ", token);
     checkAvailability();
   }, []);
 
@@ -149,10 +121,10 @@ const UserSettings = () => {
 
   const errorCheck = () => {
     if (
-      !name.replace(/\s+/g, "") ||
-      !email.replace(/\s+/g, "") ||
-      !DOB.replace(/\s+/g, "") ||
-      !city.replace(/\s+/g, "")
+      !token.name.replace(/\s+/g, "") ||
+      !token.email.replace(/\s+/g, "") ||
+      !token.DOB.replace(/\s+/g, "") ||
+      !token.city.replace(/\s+/g, "")
     ) {
       Alert.alert(
         "Entry Error",
@@ -161,7 +133,7 @@ const UserSettings = () => {
       );
       return;
     } else {
-      setProfile(true);
+      setToken({ ...token, profile: true });
     }
   };
 
@@ -170,30 +142,9 @@ const UserSettings = () => {
   };
 
   const handleChange = () => {
-    let userToken = {
-      subscribed: subscribed,
-      rLength: rLength,
-      profile: profile,
-      substance: substance,
-      city: city,
-      country: country,
-      flags: flags,
-      name: name,
-      email: email,
-    };
-
-    const newToken = { ...userToken };
-
-    setTokenStorage(newToken);
-    console.log("token storage after set in handlechange : ", tokenStorage);
-    storeData(newToken);
-    // console.log("user token in handle change : ", userToken);
+    storeData(token);
     getData();
-    // console.log(
-    //   "token storage after get data in handlechange : ",
-    //   tokenStorage
-    // );
-  };;
+  };
 
   const dropDownRender = (item) => {
     return (
@@ -216,7 +167,7 @@ const UserSettings = () => {
           <View style={{ width: "100%" }}>
             <Text style={[look.add]}>{item.dropdown}</Text>
             <View style={look.userInfoElement}>
-              {!editInfo || profile ? (
+              {!editInfo || token.profile ? (
                 <View style={look.userHeader}>
                   <View>
                     <Text
@@ -225,21 +176,21 @@ const UserSettings = () => {
                         { borderTopWidth: 3, borderTopColor: "#3C5E90" },
                       ]}
                     >
-                      {name}
+                      {token.name}
                     </Text>
-                    <Text style={[look.add]}>{email}</Text>
-                    {!city && !country ? null : (
+                    <Text style={[look.add]}>{token.email}</Text>
+                    {!token.city && !token.country ? null : (
                       <Text style={[look.add]}>
-                        {city ? city : null}
-                        {city && country ? ", " : ""}
-                        {country ? country : null}
+                        {token.city ? token.city : null}
+                        {token.city && token.country ? ", " : ""}
+                        {token.country ? token.country : null}
                       </Text>
                     )}
                   </View>
                   <TouchableOpacity
                     onPress={() => {
                       setEditInfo(true);
-                      setProfile(false);
+                      setToken({ ...token, profile: false });
                     }}
                   >
                     <Feather name="edit" style={look.icon} />
@@ -410,12 +361,12 @@ const UserSettings = () => {
             <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
             <TouchableOpacity
               onPress={
-                substance
+                token.substance
                   ? () => setToken({ ...token, substance: false })
                   : () => setToken({ ...token, substance: true })
               }
             >
-              {substance ? (
+              {token.substance ? (
                 <MaterialIcons
                   name="toggle-on"
                   style={[look.toggleOn, { paddingTop: "2%" }]}
@@ -430,7 +381,7 @@ const UserSettings = () => {
           </View>
         </View>
         <View>
-          {substance ? (
+          {token.substance ? (
             <View style={look.element}>
               <Text style={look.sub}>{item.onText}</Text>
             </View>
@@ -447,12 +398,12 @@ const UserSettings = () => {
             <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
             <TouchableOpacity
               onPress={
-                flags
+                token.flags
                   ? () => setToken({ ...token, flags: false })
                   : () => setToken({ ...token, flags: true })
               }
             >
-              {flags ? (
+              {token.flags ? (
                 <MaterialIcons
                   name="toggle-on"
                   style={[look.toggleOn, { paddingTop: "2%" }]}
@@ -467,7 +418,7 @@ const UserSettings = () => {
           </View>
         </View>
         <View>
-          {flags && item.onText ? (
+          {token.flags && item.onText ? (
             <View style={look.element}>
               <Text style={look.sub}>{item.onText}</Text>
             </View>
@@ -483,9 +434,13 @@ const UserSettings = () => {
           <View style={look.userHeader}>
             <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
             <TouchableOpacity
-              onPress={flags ? () => setFlags(false) : () => setFlags(true)}
+              onPress={
+                token.flags
+                  ? () => setToken({ ...token, flags: false })
+                  : () => setToken({ ...token, flags: true })
+              }
             >
-              {flags ? (
+              {token.flags ? (
                 <MaterialIcons
                   name="toggle-on"
                   style={[look.toggleOn, { paddingTop: "2%" }]}
@@ -500,7 +455,7 @@ const UserSettings = () => {
           </View>
         </View>
         <View>
-          {flags && item.onText ? (
+          {token.flags && item.onText ? (
             <View style={look.element}>
               <Text style={look.sub}>{item.onText}</Text>
             </View>
@@ -535,44 +490,54 @@ const UserSettings = () => {
       <View>
         <View style={look.calendarBox}>
           <TouchableOpacity
-            disabled={subscribed ? false : true}
+            disabled={token.subscribed ? false : true}
             onPress={() => setToken({ ...token, rLength: 1 })}
           >
             <MaterialCommunityIcons
               name="calendar-week"
-              style={rLength >= 1 ? look.selectedCalIcon : look.selectedCalIcon}
+              style={
+                token.rLength >= 1 ? look.selectedCalIcon : look.selectedCalIcon
+              }
             />
           </TouchableOpacity>
           <TouchableOpacity
-            disabled={subscribed ? false : true}
+            disabled={token.subscribed ? false : true}
             onPress={() => setToken({ ...token, rLength: 2 })}
           >
             <MaterialCommunityIcons
               name="calendar-week"
-              style={rLength >= 2 ? look.selectedCalIcon : look.calendarIcon}
+              style={
+                token.rLength >= 2 ? look.selectedCalIcon : look.calendarIcon
+              }
             />
           </TouchableOpacity>
           <TouchableOpacity
-            disabled={subscribed ? false : true}
+            disabled={token.subscribed ? false : true}
             onPress={() => setToken({ ...token, rLength: 3 })}
           >
             <MaterialCommunityIcons
               name="calendar-week"
-              style={rLength >= 3 ? look.selectedCalIcon : look.calendarIcon}
+              style={
+                token.rLength >= 3 ? look.selectedCalIcon : look.calendarIcon
+              }
             />
           </TouchableOpacity>
           <TouchableOpacity
-            disabled={subscribed ? false : true}
+            disabled={token.subscribed ? false : true}
             onPress={() => setToken({ ...token, rLength: 4 })}
           >
             <MaterialCommunityIcons
               name="calendar-week"
-              style={rLength >= 4 ? look.selectedCalIcon : look.calendarIcon}
+              style={
+                token.rLength >= 4 ? look.selectedCalIcon : look.calendarIcon
+              }
             />
           </TouchableOpacity>
         </View>
         <View style={[look.header, { marginBottom: "2%" }]}>
-          <Text style={subscribed ? look.add : look.sub}>{item.dropdown}</Text>
+          <Text style={token.subscribed ? look.add : look.sub}>
+            {item.dropdown}
+          </Text>
         </View>
 
         <View>
@@ -593,12 +558,12 @@ const UserSettings = () => {
             </Text>
             <TouchableOpacity
               onPress={
-                subscribed
+                token.subscribed
                   ? () => setToken({ ...token, subscribed: false })
                   : () => setToken({ ...token, subscribed: true })
               }
             >
-              {subscribed ? (
+              {token.subscribed ? (
                 <MaterialIcons
                   name="toggle-on"
                   style={[look.toggleOn, { paddingTop: "2%" }]}
@@ -613,7 +578,7 @@ const UserSettings = () => {
           </View>
         </View>
         <View>
-          {subscribed ? (
+          {token.subscribed ? (
             <View style={[look.element, { marginBottom: 10 }]}>
               <Text style={look.sub}>{item.onText}</Text>
             </View>
@@ -674,7 +639,7 @@ const UserSettings = () => {
       id: 5,
       title: "Report Length",
       subtitle: "How many weeks do you want in your report?",
-      dropdown: !subscribed
+      dropdown: !token.subscribed
         ? "Report settings can only be changed by members. The default is 1 week. To join, please see billing information below."
         : "Set a time frame between 1 and 4 weeks.",
       onText:
@@ -745,6 +710,6 @@ const UserSettings = () => {
       </View>
     </View>
   );
-};;;
+};
 
 export { UserSettings };
