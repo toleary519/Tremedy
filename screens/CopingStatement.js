@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -11,6 +11,7 @@ const CopingStatement = () => {
     copingStorage ? copingStorage : []
   );
   const [myCoping, setMyCoping] = useState("");
+  const [token, setToken] = useState({});
 
   let sortedEntries = copingStorage.sort((a, b) => {
     return b.id - a.id;
@@ -19,8 +20,11 @@ const CopingStatement = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedCoping");
+      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
       setCopingStorage(savedData);
+      setToken(savedTokData);
     } catch (e) {
       console.log(e);
     }
@@ -86,7 +90,7 @@ const CopingStatement = () => {
     //   console.log("New List: ", newList);
     // }
     getData();
-  };;
+  };
 
   const handleDelete = ({ item }) => {
     let index = 0;
@@ -116,8 +120,12 @@ const CopingStatement = () => {
         { text: "Got It" },
       ]);
       return;
-    } else {
+    }
+    if (token.flags) {
       flagAlert();
+    } else {
+      let flag = false;
+      handleAdd(flag);
     }
   };
 

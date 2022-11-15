@@ -293,3 +293,28 @@ const styles = StyleSheet.create({
 });
 
 export { xyz };
+
+
+// const [token, setToken] = useState({});
+
+//   const getTokenData = async () => {
+//     try {
+//       const jsonValue = await AsyncStorage.getItem("storedUser");
+//       let savedData = jsonValue ? JSON.parse(jsonValue) : {};
+//       setToken(savedData);
+//       console.log("token saved", token);
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   };
+
+//   useEffect(() => {
+//     getTokenData();
+//   }, [token]);
+
+// if (token.flags) {
+//   flagAlert();
+// } else {
+//   let flag = false;
+//   handleAdd(flag);
+// }

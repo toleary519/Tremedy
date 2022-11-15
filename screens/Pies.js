@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   StyleSheet,
@@ -19,6 +19,7 @@ const Pies = () => {
   const [insights, setInsights] = useState("");
   const [emotions, setEmotions] = useState("");
   const [spiritual, setSpiritual] = useState("");
+  const [token, setToken] = useState({});
 
   let sortedEntries = pieStorage.sort((a, b) => {
     return b.id - a.id;
@@ -27,8 +28,12 @@ const Pies = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedPie");
+      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
       setPieStorage(savedData);
+      setToken(savedTokData);
+      console.log("get token data", token);
     } catch (e) {
       console.log(e);
     }
@@ -126,8 +131,12 @@ const Pies = () => {
         { text: "Got It" },
       ]);
       return;
-    } else {
+    }
+    if (token.flags) {
       flagAlert();
+    } else {
+      let flag = false;
+      handleAdd(flag);
     }
   };
 

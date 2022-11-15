@@ -16,6 +16,7 @@ import { look } from "../assets/styles";
 const BadTimes = () => {
   const [badStorage, setBadStorage] = useState(badStorage ? badStorage : []);
   const [note, setNote] = useState("");
+  const [token, setToken] = useState({});
 
   let sortedEntries = badStorage.sort((a, b) => {
     return b.id - a.id;
@@ -24,8 +25,12 @@ const BadTimes = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedBad");
+      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
       setBadStorage(savedData);
+      setToken(savedTokData);
+      console.log("token : ", token);
     } catch (e) {
       console.log(e);
     }
@@ -112,8 +117,12 @@ const BadTimes = () => {
         { text: "Got It" },
       ]);
       return;
-    } else {
+    }
+    if (token.flags) {
       flagAlert();
+    } else {
+      let flag = false;
+      handleAdd(flag);
     }
   };
 

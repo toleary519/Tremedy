@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -48,7 +41,6 @@ const UserSettings = () => {
       const jsonValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : {};
       setToken({ ...savedData });
-      console.log("token storage get data: ", savedData);
     } catch (e) {
       console.log(e);
     }
@@ -103,7 +95,6 @@ const UserSettings = () => {
       setIsAvailable(isMailAvailable);
     }
     getData();
-    console.log("after get data in USEEFFECT: ", token);
     checkAvailability();
   }, []);
 
@@ -595,8 +586,6 @@ const UserSettings = () => {
       subtitle: "All about you",
       dropdown:
         "Enter your information here for report sharing and profile recovery.",
-
-      window: false,
     },
     {
       id: 1,
@@ -605,8 +594,7 @@ const UserSettings = () => {
         "If you are struggling with these issues there are additional tools here.",
       dropdown: "Need help? You're not alone.",
 
-      onText: `You will now see an option called "We can do better" on the first menu. In it are some unique features and specialized tools to use as well as lists of meetings.`,
-      window: false,
+      onText: `You will now see an option called "We can be better" on the first menu. In it are some unique features and specialized tools to use as well as lists of meetings. Both online and in person.`,
     },
     {
       id: 2,
@@ -616,7 +604,6 @@ const UserSettings = () => {
         "Ourtre will send you a quiet notification to remind you to Check-In for your report. Check-Ins can be done in roughly 30 seconds.",
       onText:
         "You can check-in whenever you want in the tool box. Ideally, check-in once in the morning and again at night.",
-      window: false,
     },
     {
       id: 3,
@@ -624,8 +611,6 @@ const UserSettings = () => {
       subtitle: "Select when and how you would like to use flags.",
       dropdown:
         "Turning flags off here will turn off the prompt. You can click the flag icon to add items to your report.",
-
-      window: false,
     },
     {
       id: 4,
@@ -633,7 +618,6 @@ const UserSettings = () => {
       subtitle: "Delete all data stored on your device.",
       dropdown: "This action is final.",
       onText: "All entry data will be removed.",
-      window: false,
     },
     {
       id: 5,
@@ -646,7 +630,6 @@ const UserSettings = () => {
         "It is recommended to choose the length of time between therapy sessions, or an interval at which you choose to review. You don't want to overload your report. All of your entries will be readable on their respective pages.",
       notSubscribed:
         "There are still a number of tools you can use in the tool box!",
-      window: false,
     },
     {
       id: 6,
@@ -655,7 +638,6 @@ const UserSettings = () => {
       dropdown:
         "Explain as best you can the issue that you are having and what you hoped to see.",
       value: null,
-      window: false,
     },
     {
       id: 7,
@@ -665,8 +647,6 @@ const UserSettings = () => {
         "For testing purposes this is just a toggle but will be a credit card billing section.",
       onText:
         "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
-
-      window: false,
     },
   ];
 

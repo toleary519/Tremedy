@@ -18,6 +18,7 @@ const FocusStatement = () => {
     focusStorage ? focusStorage : []
   );
   const [myFocus, setMyFocus] = useState("");
+  const [token, setToken] = useState({});
 
   let sortedEntries = focusStorage.sort((a, b) => {
     return b.id - a.id;
@@ -26,9 +27,12 @@ const FocusStatement = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedFocus");
+      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
       setFocusStorage(savedData);
-      console.log("get focus data", focusStorage);
+      setToken(savedTokData);
+      console.log("get token data", token);
     } catch (e) {
       console.log(e);
     }
@@ -116,8 +120,12 @@ const FocusStatement = () => {
         { text: "Got It" },
       ]);
       return;
-    } else {
+    }
+    if (token.flags) {
       flagAlert();
+    } else {
+      let flag = false;
+      handleAdd(flag);
     }
   };
 

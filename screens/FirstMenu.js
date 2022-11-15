@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, StyleSheet, TouchableOpacity, View, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 
 const FirstMenu = ({ navigation }) => {
+  const [token, setToken] = useState({});
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("storedUser");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
+      setToken(savedData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [token]);
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -23,14 +39,16 @@ const FirstMenu = ({ navigation }) => {
           <Text style={styles.add}>Support Contacts</Text>
           <Text style={styles.sub}>It's hard but simple. Call.</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.element}
-          onPress={() => navigation.navigate("UrgeMenu")}
-          delayPressIn={150}
-        >
-          <Text style={styles.add}>We can do better.</Text>
-          <Text style={styles.sub}>Its okay, what are we doing next?</Text>
-        </TouchableOpacity>
+        {token.substance ? (
+          <TouchableOpacity
+            style={styles.element}
+            onPress={() => navigation.navigate("UrgeMenu")}
+            delayPressIn={150}
+          >
+            <Text style={styles.add}>We can be better.</Text>
+            <Text style={styles.sub}>What are we doing about it?</Text>
+          </TouchableOpacity>
+        ) : null}
         <TouchableOpacity
           style={styles.element}
           onPress={() => navigation.navigate("UserSettings")}
@@ -114,4 +132,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { FirstMenu }
+export { FirstMenu };

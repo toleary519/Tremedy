@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   StyleSheet,
@@ -17,6 +17,7 @@ import { look } from "../assets/styles";
 const MyValues = () => {
   const [storage, setStorage] = useState(storage ? storage : []);
   const [myValue, setMyValue] = useState("");
+  const [token, setToken] = useState({});
 
   let sortedEntries = storage.sort((a, b) => {
     return b.id - a.id;
@@ -25,8 +26,12 @@ const MyValues = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedValues");
+      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      let savedTokData = jsonValue ? JSON.parse(jsonTokValue) : {};
       setStorage(savedData);
+      setToken(savedTokData);
+      console.log("get token data", token);
     } catch (e) {
       console.log(e);
     }
@@ -113,8 +118,12 @@ const MyValues = () => {
         { text: "Got It" },
       ]);
       return;
-    } else {
+    }
+    if (token.flags) {
       flagAlert();
+    } else {
+      let flag = false;
+      handleAdd(flag);
     }
   };
 
@@ -192,8 +201,6 @@ const MyValues = () => {
     </View>
   );
 };
-
-
 
 export { MyValues };
 
