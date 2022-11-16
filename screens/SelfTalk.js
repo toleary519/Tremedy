@@ -213,10 +213,16 @@ const SelfTalk = () => {
                 </TouchableOpacity>
               </View>
               <View style={look.element}>
-                <Text style={look.add}>Initial Thought: {item.initial}</Text>
+                <View>
+                  <Text style={look.sub}>Initial Thought:</Text>
+                  <Text style={look.add}>{item.initial}</Text>
+                </View>
               </View>
               <View style={look.element}>
-                <Text style={look.add}>Rational Thought: {item.rational}</Text>
+                <View>
+                  <Text style={look.sub}>Rational Thought:</Text>
+                  <Text style={look.add}>{item.rational}</Text>
+                </View>
               </View>
             </View>
           ))}

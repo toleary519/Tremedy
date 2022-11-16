@@ -65,7 +65,7 @@ export const look = {
     flexDirection: "row",
     marginTop: 10,
     marginBottom: 10,
-    borderBottomColor: "#3C5E90",
+    // borderBottomColor: "#3C5E90",
     justifyContent: "flex-start",
   },
   elementHeader: {
@@ -284,6 +284,20 @@ export const look = {
   imageBox: {
     justifyContent: "center",
     alignItems: "center",
+  },
+  pieLetter: {
+    marginRight: "3%",
+    width: "5%",
+    alignItems: "flex-end",
+    color: "#3C5E90",
+  },
+  pieText: {
+    marginTop: 5,
+    marginBottom: 2,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#D7D9D7",
+    width: "85%",
   },
 };
 

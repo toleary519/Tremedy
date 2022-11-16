@@ -23,16 +23,30 @@ const PieVal = (item) => {
         <Text style={look.sub}>{item.date}</Text>
       </View>
       <View style={look.element}>
-        <Text style={look.add}>P: {item.physical}</Text>
+        <View>
+          <Text style={look.sub}>Physically</Text>
+          <Text style={look.add}>{item.physical}</Text>
+        </View>
       </View>
       <View style={look.element}>
-        <Text style={look.add}>I: {item.insights}</Text>
+        <View>
+          <Text style={look.sub}>Insights & Thoughts</Text>
+          <Text style={look.add}>{item.insights}</Text>
+        </View>
       </View>
       <View style={look.element}>
-        <Text style={look.add}>E: {item.emotions}</Text>
+        <View>
+          <Text style={look.sub}>Emotions & Feelings</Text>
+          <Text style={look.add}>{item.emotions}</Text>
+        </View>
       </View>
       <View style={look.element}>
-        <Text style={look.add}>S: {item.spiritual}</Text>
+        <View>
+          <Text style={look.sub}>
+            Spiritual connection to self, others or higher power
+          </Text>
+          <Text style={look.add}>{item.spiritual}</Text>
+        </View>
       </View>
     </View>
   );
@@ -46,10 +60,16 @@ const SelfVal = (item) => {
         <Text style={look.sub}>{item.date}</Text>
       </View>
       <View style={look.element}>
-        <Text style={look.add}>Initial Thought: {item.initial}</Text>
+        <View>
+          <Text style={look.sub}>Initial Thought:</Text>
+          <Text style={look.add}>{item.initial}</Text>
+        </View>
       </View>
       <View style={look.element}>
-        <Text style={look.add}>Rational Thought: {item.rational}</Text>
+        <View>
+          <Text style={look.sub}>Rational Thought:</Text>
+          <Text style={look.add}>{item.rational}</Text>
+        </View>
       </View>
     </View>
   );

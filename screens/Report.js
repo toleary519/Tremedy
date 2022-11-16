@@ -52,10 +52,10 @@ const Report = () => {
     }
   };
 
-  let dayCount = token.rLength * 7;
+  let dayCount = token.rLength ? token.rLength * 7 : 7;
   console.log("DC", dayCount);
   let currentDate = new Date().getTime();
-  let weekAgo = currentDate - 7 * 24 * 60 * 60 * 1000;
+  let weekAgo = currentDate - dayCount * 24 * 60 * 60 * 1000;
 
   let fullReport = reportStorage
     .filter((x) => (x.id >= weekAgo && x.flag) || x.check)
