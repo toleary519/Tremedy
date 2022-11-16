@@ -56,6 +56,19 @@ const UrgeMenu = ({ navigation }) => (
         </View>
         <View style={look.border}>
           <TouchableOpacity
+            onPress={() => navigation.navigate("Craving")}
+            delayPressIn={150}
+          >
+            <View style={look.element}>
+              <View>
+                <Text style={look.add}>Craving Log</Text>
+                <Text style={look.sub}>Log cravings, track patterns.</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={look.border}>
+          <TouchableOpacity
             onPress={() => navigation.navigate("SupportContacts")}
             delayPressIn={150}
           >

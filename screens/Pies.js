@@ -33,7 +33,6 @@ const Pies = () => {
       let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setPieStorage(savedData);
       setToken(savedTokData);
-      console.log("get token data", token);
     } catch (e) {
       console.log(e);
     }

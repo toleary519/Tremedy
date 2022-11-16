@@ -42,6 +42,7 @@ import { UserSettings } from "./screens/UserSettings";
 import { Scream } from "./screens/Scream";
 import { NewFeature } from "./screens/NewFeature";
 import { That } from "./screens/That";
+import { Craving } from "./screens/Craving";
 
 import MyStack from "./routes/homeStack";
 import { StatusBar } from "expo-status-bar";
@@ -264,7 +265,12 @@ function App() {
             <Stack.Screen
               name="That"
               component={That}
-              options={{ title: "What should we build?" }}
+              options={{ title: "Quick Thought" }}
+            />
+            <Stack.Screen
+              name="Craving"
+              component={Craving}
+              options={{ title: "Craving Log" }}
             />
           </Stack.Navigator>
         </NavigationContainer>

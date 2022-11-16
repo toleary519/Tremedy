@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { A } from "@expo/html-elements";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Location from "expo-location";
 import { look } from "../assets/styles";
 
@@ -16,10 +16,25 @@ const Emergency = ({ navigation }) => {
   const [location, setLocation] = useState();
   const [errorMsg, setErrorMsg] = useState();
   const [address, setAddress] = useState();
+  const [token, setToken] = useState(token ? token : {});
 
   const makeCall = () => {
     // make a call to 911
   };
+
+  const getData = async () => {
+    try {
+      const jsonTokValue = await AsyncStorage.getItem("storedUser");
+      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
+      setToken(savedTokData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   // useEffect(() => {
   //   (async () => {
@@ -97,47 +112,6 @@ const Emergency = ({ navigation }) => {
       </View>
     </View>
   );
-};;;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 40,
-    backgroundColor:"#1B2A41"
-  },
-  add: {
-    borderRadius: 10,
-    borderWidth: 4,
-    borderColor: "#D7D9D7",
-    marginTop: 20,
-    width: "90%",
-    left: "5%",
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  header: {
-    paddingTop: 40,
-    textAlign: "center",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: 10,
-    fontSize: 35,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
-  icon: {
-    borderRadius: "3px",
-    borderColor: "red",    
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "60", 
-    padding: 40,
-    color: "#1B2A41"
-  }
-});
+};
 
 export { Emergency }

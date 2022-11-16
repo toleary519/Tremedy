@@ -8,12 +8,13 @@ const Report = () => {
   let [showFull, setShowFull] = useState(true);
   let [showChecks, setShowChecks] = useState(false);
   let [showFlags, setShowFlags] = useState(false);
+  const [token, setToken] = useState(token ? token : {});
   let [reportStorage, setReportStorage] = useState(
     reportStorage ? reportStorage : []
   );
-
   const getData = async () => {
     try {
+      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       const copeValue = await AsyncStorage.getItem("storedCoping");
       const checkValue = await AsyncStorage.getItem("storedCheckin");
       const focusValue = await AsyncStorage.getItem("storedFocus");
@@ -23,6 +24,7 @@ const Report = () => {
       const valueValue = await AsyncStorage.getItem("storedValues");
       const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
       const thatValue = await AsyncStorage.getItem("storedThat");
+      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       let copeData = copeValue ? JSON.parse(copeValue) : [];
       let checkData = checkValue ? JSON.parse(checkValue) : [];
       let focusData = focusValue ? JSON.parse(focusValue) : [];
@@ -32,6 +34,8 @@ const Report = () => {
       let valueData = valueValue ? JSON.parse(valueValue) : [];
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
       let thatData = selfTalkValue ? JSON.parse(thatValue) : [];
+      setToken(savedTokData);
+      console.log("token data", savedTokData);
       setReportStorage([
         ...copeData,
         ...checkData,
@@ -48,6 +52,8 @@ const Report = () => {
     }
   };
 
+  let dayCount = token.rLength * 7;
+  console.log("DC", dayCount);
   let currentDate = new Date().getTime();
   let weekAgo = currentDate - 7 * 24 * 60 * 60 * 1000;
 
@@ -69,8 +75,6 @@ const Report = () => {
     .sort((a, b) => {
       return b.id - a.id;
     });
-
-  // let rando = Math.random().toString(36).slice(2);
 
   React.useEffect(() => {
     getData();
