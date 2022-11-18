@@ -299,8 +299,7 @@ export const look = {
     color: "#D7D9D7",
     width: "85%",
   },
-};
-
+};  
 // ______________________template for entry pages 
 // return (
   // <View style={look.container}>

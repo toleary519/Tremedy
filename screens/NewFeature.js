@@ -6,6 +6,7 @@ import {
   Alert,
   TextInput,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as MailComposer from "expo-mail-composer";
@@ -14,6 +15,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
+
+// width: ${windowWidth};
 
 const NewFeature = () => {
   const [isAvailable, setIsAvailable] = useState(false);
@@ -36,37 +39,71 @@ const NewFeature = () => {
   }, []);
 
   const sendFeatureMail = async () => {
-    const html = `
-    <h1>Ourtre Test PDF</h1>
-    <div class="${look.header}">
-    <p class=${look.add}>This is an add tag</p>
-    <p class=${look.sub}>This is a sub tag</p>
-    <div>
-    <p class="look.add">My idea is called ${feature.name}</p>
-    </div>
-    </div>
-    `;
+    const windowWidth = Dimensions.get("screen").width;
+    const windowHeight = Dimensions.get("screen").height;
 
     const { uri } = await Print.printToFileAsync({
       html: `
-      <container className="${look.container}">
-      <container className="${look.topBox}">
-      <h1>Ourtre Test PDF</h1>
-      <div class="${look.header}">
-      <p className="${look.add}">This is an add tag</p>
-      <p className="${look.sub}">This is a sub tag</p>
+      <html>
+      <head>
+      <style>
+      .bg {
+        display: flex;
+        height: ${windowHeight};
+        flex-direction: column;
+        background-color: #1B2A41;
+      }
+      .topBox {
+        justify-content: flex-start;
+        margin-left: ${windowWidth * 0.1};
+      }
+      .add {
+        margin-top: 5;
+        margin-bottom: 2;
+        font-size: 18;
+        font-weight: bold;
+        color: #D7D9D7;
+      }
+      .title {
+        padding-top: ${windowHeight * 0.05};
+        font-family: monospace;
+        font-size: 25;
+        font-weight: bold;
+        color: #D7D9D7;
+        margin-left: ${windowWidth * 0.1};
+        bottom-border: 3px solid ##3C5E90;
+      }
+      .sub {
+        margin-top: 5px;
+        text-align: flex-start;
+        align-items: center;
+        opacity: 0.6;
+        margin-bottom: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        color: #D7D9D7;
+      }
+      </style>
+      </head>
+      <div class="bg">
+      <p class="title">Ourtre Test PDF</p>
+      <div class="topBox">
+      <div class="add">This is an add tag</div>
+      <div class="sub">This is a sub tag</div>
       <div>
-      <p class="look.add">My idea is called ${feature.name}</p>
+      <div class="add">My idea is called ${feature.name}</div>
+      <div class="add">Thanks,</div>
       </div>
       </div>
+      
       </container>
-      </container>
+      </html>
       `,
     });
 
     MailComposer.composeAsync({
       subject: `New Feature Team! : ${feature.name}`,
-      body: html,
+      body: "Thank you for the input, a pdf like below has been sent to our development team.",
       recipients: "t.oleary@me.com",
       attachments: [uri],
     });
