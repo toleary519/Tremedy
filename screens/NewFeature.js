@@ -20,6 +20,7 @@ import { look } from "../assets/styles";
 
 const NewFeature = () => {
   const [isAvailable, setIsAvailable] = useState(false);
+  const [token, setToken] = useState({});
   const [feature, setFeature] = useState({
     name: "",
     whatsItDo: "",
@@ -28,6 +29,20 @@ const NewFeature = () => {
     howsItHelp: "",
     notes: "",
   });
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("storedUser");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
+      setToken(savedData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [token]);
 
   useEffect(() => {
     async function checkAvailability() {
@@ -52,50 +67,80 @@ const NewFeature = () => {
         height: ${windowHeight};
         flex-direction: column;
         background-color: #1B2A41;
+        font-family: roboto, arial, sans-serif;
       }
       .topBox {
         justify-content: flex-start;
         margin-left: ${windowWidth * 0.1};
       }
       .add {
-        margin-top: 5;
-        margin-bottom: 2;
+        margin-right: ${windowWidth * 0.1};
         font-size: 18;
         font-weight: bold;
         color: #D7D9D7;
       }
       .title {
         padding-top: ${windowHeight * 0.05};
-        font-family: monospace;
         font-size: 25;
         font-weight: bold;
         color: #D7D9D7;
         margin-left: ${windowWidth * 0.1};
         bottom-border: 3px solid ##3C5E90;
       }
+      .subTitle {
+        font-size: 20;
+        font-weight: bold;
+        color: #D7D9D7;
+        margin-left: ${windowWidth * 0.1};
+        bottom-border: 3px solid ##3C5E90;
+      }
       .sub {
-        margin-top: 5px;
+        margin-right: ${windowWidth * 0.1};
         text-align: flex-start;
         align-items: center;
         opacity: 0.6;
-        margin-bottom: 5px;
         font-size: 15px;
         font-weight: bold;
         color: #D7D9D7;
       }
+      .QAbox {
+        padding-top: 3%;
+        bottom-border: 1% solid #3C5E90
+      }
       </style>
       </head>
       <div class="bg">
-      <p class="title">Ourtre Test PDF</p>
-      <div class="topBox">
-      <div class="add">This is an add tag</div>
-      <div class="sub">This is a sub tag</div>
-      <div>
-      <div class="add">My idea is called ${feature.name}</div>
-      <div class="add">Thanks,</div>
+        <p class="title">Ourtre Team,</p>
+        <p class="subTitle">I think there should be a feature called: ${
+          feature.name
+        }</p>
+        <div class="topBox">
+          <div class="QAbox">
+            <div class="sub">This is what I think it should do:</div>
+            <div class="add">${feature.whatsItDo}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">This is how I think it should work:</div>
+            <div class="add">${feature.howsItWork}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">This sort of thing is/would be helpful to me because:</div>
+            <div class="add">${feature.howsItHelp}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub"> In my mind this is how I think it should look:</div>
+            <div class="add">${feature.howsItLook}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">More notes:</div>
+            <div class="add">${feature.notes}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">Thanks, </div>
+            <div class="add">${token.name}</div>
+          </div>
+        </div>
       </div>
-      </div>
-      
       </container>
       </html>
       `,
@@ -103,7 +148,7 @@ const NewFeature = () => {
 
     MailComposer.composeAsync({
       subject: `New Feature Team! : ${feature.name}`,
-      body: "Thank you for the input, a pdf like below has been sent to our development team.",
+      body: "We're pumped for the input, the pdf below will be sent to our development team.\n\n Thanks, \n Ourtre Contact Team",
       recipients: "t.oleary@me.com",
       attachments: [uri],
     });
@@ -222,7 +267,7 @@ const NewFeature = () => {
               style={look.userInput}
               onChangeText={(text) => setFeature({ ...feature, notes: text })}
               value={feature.notes}
-              placeholder={"What does it look like?"}
+              placeholder={"Notes"}
               multiline
               keyboardType="default"
             />
