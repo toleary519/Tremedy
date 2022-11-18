@@ -35,7 +35,8 @@
     "react-native-web": "~0.18.7",
     "react-native-wheely": "^0.5.0",
     "react-navigation-stack": "^2.10.4",
-    "expo-mail-composer": "~11.3.0"
+    "expo-mail-composer": "~11.3.0",
+    "expo-print": "~11.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

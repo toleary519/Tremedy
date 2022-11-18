@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as MailComposer from "expo-mail-composer";
+import * as Print from "expo-print";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
@@ -35,47 +36,39 @@ const NewFeature = () => {
   }, []);
 
   const sendFeatureMail = async () => {
-    // const featureEmail = () => {
-    //   return (
-    //     <View>
-    //       <Text style={[look.add, { fontSize: 20 }]}>Ourtre Team,</Text>
-    //       <Text style={look.add}>My idea is called {feature.name}</Text>
-    //       <Text />
-    //       <Text style={look.add}>This is what I think it should do:</Text>
-    //       <Text style={look.sub}>{feature.whatsItDo}</Text>
-    //       <Text />
-    //       <Text style={look.add}>This is how I think it should work:</Text>
-    //       <Text style={look.sub}>{feature.howsItWork}</Text>
-    //       <Text />
-    //       <Text style={look.add}>
-    //         This sort of thing is/would be helpful to me because:
-    //       </Text>
-    //       <Text style={look.sub}>{feature.howsItHelp}</Text>
-    //       <Text />
-    //       <Text style={look.add}>
-    //         In my mind this is how I think it should look
-    //       </Text>
-    //       <Text style={look.sub}>{feature.howsItLook}</Text>
-    //       {feature.notes ? (
-    //         <View>
-    //           <Text style={look.add}>More notes:</Text>
-    //           <Text style={look.sub}>{feature.notes}</Text>
-    //         </View>
-    //       ) : null}
-    //     </View>
-    //   );
-    // };
+    const html = `
+    <h1>Ourtre Test PDF</h1>
+    <div class="${look.header}">
+    <p class=${look.add}>This is an add tag</p>
+    <p class=${look.sub}>This is a sub tag</p>
+    <div>
+    <p class="look.add">My idea is called ${feature.name}</p>
+    </div>
+    </div>
+    `;
+
+    const { uri } = await Print.printToFileAsync({
+      html: `
+      <container className="${look.container}">
+      <container className="${look.topBox}">
+      <h1>Ourtre Test PDF</h1>
+      <div class="${look.header}">
+      <p className="${look.add}">This is an add tag</p>
+      <p className="${look.sub}">This is a sub tag</p>
+      <div>
+      <p class="look.add">My idea is called ${feature.name}</p>
+      </div>
+      </div>
+      </container>
+      </container>
+      `,
+    });
+
     MailComposer.composeAsync({
       subject: `New Feature Team! : ${feature.name}`,
-      body: `Ourtre Team,
-      \n\n My idea is called: ${feature.name}\n\n This is what it does: ${
-        feature.whatsItDo
-      } \n\n How it works: ${feature.howsItWork} \n\n  How I find it helpful: ${
-        feature.howsItHelp
-      } \n\n How I think it should look: ${feature.howsItLook} \n\n${
-        feature.notes ? `Notes: ${feature.notes}` : "No further notes."
-      }`,
+      body: html,
       recipients: "t.oleary@me.com",
+      attachments: [uri],
     });
   };
 
@@ -212,3 +205,44 @@ const NewFeature = () => {
 };;;
 
 export { NewFeature };
+
+
+// `Ourtre Team,
+// \n\n My idea is called: ${feature.name}\n\n This is what it does: ${
+//   feature.whatsItDo
+// } \n\n How it works: ${feature.howsItWork} \n\n  How I find it helpful: ${
+//   feature.howsItHelp
+// } \n\n How I think it should look: ${feature.howsItLook} \n\n${
+//   feature.notes ? `Notes: ${feature.notes}` : "No further notes."
+// }`,
+
+  // const featureEmail = () => {
+    //   return (
+    //     <View>
+    //       <Text style={[look.add, { fontSize: 20 }]}>Ourtre Team,</Text>
+    //       <Text style={look.add}>My idea is called {feature.name}</Text>
+    //       <Text />
+    //       <Text style={look.add}>This is what I think it should do:</Text>
+    //       <Text style={look.sub}>{feature.whatsItDo}</Text>
+    //       <Text />
+    //       <Text style={look.add}>This is how I think it should work:</Text>
+    //       <Text style={look.sub}>{feature.howsItWork}</Text>
+    //       <Text />
+    //       <Text style={look.add}>
+    //         This sort of thing is/would be helpful to me because:
+    //       </Text>
+    //       <Text style={look.sub}>{feature.howsItHelp}</Text>
+    //       <Text />
+    //       <Text style={look.add}>
+    //         In my mind this is how I think it should look
+    //       </Text>
+    //       <Text style={look.sub}>{feature.howsItLook}</Text>
+    //       {feature.notes ? (
+    //         <View>
+    //           <Text style={look.add}>More notes:</Text>
+    //           <Text style={look.sub}>{feature.notes}</Text>
+    //         </View>
+    //       ) : null}
+    //     </View>
+    //   );
+    // };
