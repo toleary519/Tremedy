@@ -215,7 +215,7 @@ function App() {
             <Stack.Screen
               name="Report"
               component={Report}
-              options={{ title: "Past Week" }}
+              options={{ title: "The One Sheet" }}
             />
             <Stack.Screen
               name="Routine"

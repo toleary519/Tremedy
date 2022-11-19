@@ -24,9 +24,9 @@ export const look = {
   },
   checkWordHeader: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 5,
-    marginBottom: "5%",
+    justifyContent: "space-around",
+    marginTop: "2%",
+    marginBottom: "2%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#D7D9D7",

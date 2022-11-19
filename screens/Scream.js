@@ -67,7 +67,9 @@ const Scream = () => {
             <Text style={look.header}>
               Some times you just have to scream like a banshee at the moon.
             </Text>
-            <Text style={look.sub}>Free to go, no audio is saved.</Text>
+            <Text style={look.sub}>
+              No audio is saved. Shaking the phone is encouraged.
+            </Text>
           </View>
           <View style={look.elementHeader}>
             <Text style={[look.sub]}>Personal Best :</Text>

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { handleFace, feelingWheel } from "./feelingwheelOptions";
+import { feelingWheel } from "./feelingwheelOptions";
 import Slider from "@react-native-community/slider";
 // import WheelPicker from "react-native-wheely";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -21,10 +21,7 @@ const CheckIn = () => {
   let [checkinStorage, setCheckinStorage] = useState(
     checkinStorage ? checkinStorage : []
   );
-  let [reportStorage, setReportStorage] = useState(
-    reportStorage ? reportStorage : []
-  );
-  // let [face, setFace] = useState(4);
+
   let [phys, setPhys] = useState(1);
   let [mental, setMental] = useState(1);
   let [outlook, setOutlook] = useState(1);
@@ -34,6 +31,17 @@ const CheckIn = () => {
   let [feelThree, setFeelThree] = useState(feelThree ? feelThree : "");
   let [temp, setTemp] = useState("");
 
+  const checkinReset = () => {
+    setCheckin("");
+    setPhys(1);
+    setMental(1);
+    setOutlook(1);
+    setFeelOne("");
+    setFeelTwo("");
+    setFeelThree("");
+    setTemp("");
+  };
+
   let sortedEntries = checkinStorage.sort((a, b) => {
     return b.id - a.id;
   });
@@ -41,11 +49,10 @@ const CheckIn = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedCheckin");
-      const savedReportJson = await AsyncStorage.getItem("reportArray");
+
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedReportData = savedReportJson ? JSON.parse(savedReportJson) : [];
+
       setCheckinStorage(savedData);
-      setReportStorage(savedReportData);
     } catch (e) {
       console.log(e);
     }
@@ -55,7 +62,6 @@ const CheckIn = () => {
     try {
       const jsonValue = JSON.stringify(checkinStorage);
       await AsyncStorage.setItem("storedCheckin", jsonValue);
-      await AsyncStorage.setItem("reportArray", jsonValue);
     } catch (e) {
       console.log(e);
     }
@@ -67,9 +73,14 @@ const CheckIn = () => {
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
     let orderId = currentDate.getTime();
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
 
     let newCheckin = {
       id: orderId,
+      time: `${hours < 10 ? `0${hours}` : hours}:${
+        minutes < 10 ? `0${minutes}` : minutes
+      }`,
       check: "check",
       title: "Check-In",
       phys: phys,
@@ -85,8 +96,7 @@ const CheckIn = () => {
     const newList = [...checkinStorage, newCheckin];
 
     setCheckinStorage(newList);
-    setReportStorage(newList);
-    setCheckin("");
+    checkinReset();
     storeData(newList);
     getData();
     console.log("in handle add: ", newCheckin);
@@ -241,20 +251,22 @@ const CheckIn = () => {
 
           {/* -------------------------------------------------FEELWHEEL-------------------------- */}
 
-          <View style={look.checkWordHeader}>
+          <View style={[look.border]}>
             {feelOne ? (
-              <View style={look.header}>
+              <View style={look.checkWordHeader}>
                 {feelOne ? <Text style={look.add}>{feelOne}</Text> : null}
-                {feelTwo ? <Text style={look.add}>{feelTwo}</Text> : null}
                 {feelThree ? <Text style={look.add}>{feelThree}</Text> : null}
+                {feelTwo ? <Text style={look.add}>{feelTwo}</Text> : null}
               </View>
             ) : (
-              <Text style={look.add}>Pick three words.</Text>
+              <View style={look.checkWordHeader}>
+                <Text style={look.add}>Pick three words.</Text>
+              </View>
             )}
           </View>
 
-          <View style={look.picker}>
-            {!feelOne && !feelTwo && !feelThree ? (
+          {!feelOne && !feelTwo && !feelThree ? (
+            <View style={{ marginTop: "3%" }}>
               <Picker
                 itemStyle={{ fontSize: 20, height: 50, color: "#D7D9D7" }}
                 selectedValue={!temp ? setTemp(setOne[0]) : temp}
@@ -266,10 +278,10 @@ const CheckIn = () => {
                   <Picker.Item key={item} value={item} label={item} />
                 ))}
               </Picker>
-            ) : null}
-          </View>
-          <View style={look.picker}>
-            {feelOne && !feelTwo && !feelThree ? (
+            </View>
+          ) : null}
+          {feelOne && !feelTwo && !feelThree ? (
+            <View style={{ marginTop: "3%" }}>
               <Picker
                 itemStyle={{ fontSize: 20, height: 50, color: "#D7D9D7" }}
                 selectedValue={!temp ? setTemp(setTwo[0]) : temp}
@@ -286,10 +298,10 @@ const CheckIn = () => {
                   />
                 ))}
               </Picker>
-            ) : null}
-          </View>
-          <View style={look.picker}>
-            {feelOne && feelTwo && !feelThree ? (
+            </View>
+          ) : null}
+          {feelOne && feelTwo && !feelThree ? (
+            <View style={{ marginTop: "3%" }}>
               <Picker
                 itemStyle={{ fontSize: 20, height: 50, color: "#D7D9D7" }}
                 selectedValue={!temp ? setTemp(setThree[0]) : temp}
@@ -301,8 +313,8 @@ const CheckIn = () => {
                   <Picker.Item key={item} value={item} label={item} />
                 ))}
               </Picker>
-            ) : null}
-          </View>
+            </View>
+          ) : null}
           <View style={look.checkBoxButton}>
             {feelOne ? (
               <TouchableOpacity onPress={() => handleBack()}>
@@ -347,17 +359,19 @@ const CheckIn = () => {
                       name="delete-forever"
                     />
                   </TouchableOpacity>
-                  <Text style={look.sub}>{item.date}</Text>
+                  <Text style={look.sub}>
+                    {item.time} - {item.date}
+                  </Text>
                 </View>
                 <View style={look.elementHeader}>
-                  <Text style={look.sub}>Physical : {phys}</Text>
-                  <Text style={look.sub}>Emotional : {mental}</Text>
-                  <Text style={look.sub}>Outlook : {outlook}</Text>
+                  <Text style={look.sub}>Physical : {item.phys}</Text>
+                  <Text style={look.sub}>Emotional : {item.mental}</Text>
+                  <Text style={look.sub}>Outlook : {item.outlook}</Text>
                 </View>
                 <View style={look.elementHeader}>
                   <Text style={look.add}>{item.feelOne}</Text>
-                  <Text style={look.add}>{item.feelTwo}</Text>
                   <Text style={look.add}>{item.feelThree}</Text>
+                  <Text style={look.add}>{item.feelTwo}</Text>
                 </View>
 
                 <View style={look.element}>
@@ -373,122 +387,5 @@ const CheckIn = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   paddingTop: 10,
-  //   paddingBottom: 25,
-  //   backgroundColor: "#1B2A41",
-  // },
-  // firstBox: {
-  //   width: "90%",
-  //   left: "5%",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   alignContent: "center",
-  //   textAlign: "center",
-  // },
-  // add: {
-  //   marginTop: 21,
-  //   textAlign: "center",
-  //   padding: 10,
-  //   fontSize: 25,
-  //   fontWeight: "bold",
-  //   color: "#D7D9D7",
-  // },
-  // pieContainer: {
-  //   borderRadius: 10,
-  //   borderWidth: 4,
-  //   marginTop: 7,
-  //   marginBottom: 7,
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   alignContent: "center",
-  //   textAlign: "center",
-  //   borderColor: "#D7D9D7",
-  // },
-  // slider: {
-  //   marginTop: 20,
-  //   width: "80%",
-  //   fontSize: 25,
-  //   fontWeight: "bold",
-  //   textAlign: "center",
-  // },
-  // face: {
-  //   marginTop: 10,
-  //   textAlign: "center",
-  //   fontSize: 40,
-  // },
-  // icon: {
-  //   paddingTop: 20,
-  //   paddingBottom: 20,
-  //   fontSize: 40,
-  //   color: "#D7D9D7",
-  //   textAlign: "center",
-  // },
-  // input: {
-  //   borderRadius: 10,
-  //   borderWidth: 4,
-  //   borderColor: "#D7D9D7",
-  //   width: "90%",
-  //   marginTop: 21,
-  //   textAlign: "center",
-  //   padding: 10,
-  //   fontSize: 20,
-  //   fontWeight: "bold",
-  //   color: "#2f8587",
-  // },
-  // date: {
-  //   marginTop: 5,
-  //   textAlign: "center",
-  //   padding: 10,
-  //   fontSize: 18,
-  //   fontWeight: "bold",
-  //   color: "#D7D9D7",
-  // },
-  // feelChoiceDisplayCase: {
-  //   marginTop: 10,
-  //   justifyContent: "center",
-  //   flexDirection: "row",
-  // },
-  // feelChoiceDisplay: {
-  //   flexDirection: "row",
-  // },
-  // display: {
-  //   padding: 10,
-  //   fontSize: 25,
-  //   fontWeight: "bold",
-  //   color: "#D7D9D7",
-  // },
-  // nextButton: {
-  //   fontSize: 40,
-  //   color: "#D7D9D7",
-  //   textAlign: "center",
-  // },
-  // pickerBox: {
-  //   width: "90%",
-  // },
-  // pickerBoxCase: {
-  //   textAlign: "center",
-  //   flexDirection: "row",
-  // },
-  // buttonBox: {
-  //   marginTop: 20,
-  //   flexDirection: "row",
-  //   justifyContent: "center",
-  // },
-  // pickerItem: {
-  //   height: 90,
-  //   color: "#D7D9D7",
-  //   fontSize: 40,
-  //   backgroundColor: "#1B2A41",
-  // },
-  // picker: {
-  //   height: 90,
-  //   color: "#D7D9D7",
-  //   fontSize: 40,
-  // },
-});
 
 export { CheckIn };

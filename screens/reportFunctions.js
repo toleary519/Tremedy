@@ -76,11 +76,14 @@ const SelfVal = (item) => {
 };
 
 const CheckVal = (item) => {
+  console.log(item);
   return (
     <View style={look.border}>
       <View style={look.elementHeader}>
         <Text style={look.sub}>{item.title}</Text>
-        <Text style={look.sub}>{item.date}</Text>
+        <Text style={look.sub}>
+          {item.time} - {item.date}
+        </Text>
       </View>
       <View style={look.elementHeader}>
         <Text style={look.sub}>Physical : {item.phys}</Text>

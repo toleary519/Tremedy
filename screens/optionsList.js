@@ -31,8 +31,8 @@ export const pageOptions = [
     id: 4,
     selected: false,
     pageName: "Report",
-    sub: "Review your flags and check-ins.",
-    title: "My Past Week",
+    sub: "Report of check-ins and flags for review.",
+    title: "The One Sheet",
   },
   {
     id: 9,
@@ -132,13 +132,13 @@ export const pageOptions = [
     title: "Knead your feet",
     sub: "A grounding exercize.",
   },
-  {
-    id: 19,
-    selected: false,
-    pageName: "AnkleInstruct",
-    title: "Rock the ankles",
-    sub: "A an exercize for when standing in line.",
-  },
+  // {
+  //   id: 19,
+  //   selected: false,
+  //   pageName: "AnkleInstruct",
+  //   title: "Rock the ankles",
+  //   sub: "A an exercize for when standing in line.",
+  // },
   {
     id: 20,
     selected: false,

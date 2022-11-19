@@ -150,7 +150,7 @@ const Report = () => {
               onPress={() => {}}
               delayPressIn={150}
             >
-              <Text style={look.reportButton}>Share Your Week</Text>
+              <Text style={look.reportButton}>Email Report</Text>
             </TouchableOpacity>
           </View>
           <View>
