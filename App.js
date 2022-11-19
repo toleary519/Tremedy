@@ -140,7 +140,7 @@ function App() {
             <Stack.Screen
               name="KneadInstruct"
               component={KneadInstruct}
-              options={{ title: "Knead Exercise" }}
+              options={{ title: "Toes Curls" }}
             />
             <Stack.Screen
               name="Activities"

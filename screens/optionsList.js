@@ -170,19 +170,22 @@ export const elevatedOptions = [
   {
     id: 4,
     pageName: "KneadInstruct",
-    title: "Knead your feet",
+    title: "Toe curls",
     sub: "A grounding exercize.",
   },
   {
     id: 5,
-    pageName: "AnkleInstruct",
-    title: "Rock the ankles",
-    sub: "A an exercize for when standing in line.",
-  },
-  {
-    id: 6,
     pageName: "Scream",
     title: "Scream",
     sub: "Just let it out.",
   },
 ];
+
+
+
+// {
+//   id: 4,
+//   pageName: "AnkleInstruct",
+//   title: "Memorize the pattern",
+//   sub: "Focus on and follow a cubes changing pattern.",
+// },

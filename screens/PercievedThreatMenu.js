@@ -13,39 +13,39 @@ import { Feather } from "@expo/vector-icons";
 import { look } from "../assets/styles";
 
 const PercievedThreatMenu = ({ navigation }) => {
-  let endCheck = () => {
-    Alert.alert(`Whoops!`, `You're already at the end of the list.`, [
-      {
-        text: "OK",
-        style: "cancel",
-        onPress: () => {
-          return;
-        },
-      },
-    ]);
-  };
+  // let endCheck = () => {
+  //   Alert.alert(`Whoops!`, `You're already at the end of the list.`, [
+  //     {
+  //       text: "OK",
+  //       style: "cancel",
+  //       onPress: () => {
+  //         return;
+  //       },
+  //     },
+  //   ]);
+  // };
 
-  const swapUp = (i) => {
-    var temp = elevatedOptions[i];
+  // const swapUp = (i) => {
+  //   var temp = elevatedOptions[i];
 
-    elevatedOptions[i] = elevatedOptions[i - 1];
-    elevatedOptions[i - 1] = temp;
+  //   elevatedOptions[i] = elevatedOptions[i - 1];
+  //   elevatedOptions[i - 1] = temp;
 
-    storeData(elevatedOptions);
-    getData();
-  };
+  //   storeData(elevatedOptions);
+  //   getData();
+  // };
 
-  const swapDown = (i) => {
-    var temp = elevatedOptions[i];
+  // const swapDown = (i) => {
+  //   var temp = elevatedOptions[i];
 
-    elevatedOptions[i] = elevatedOptions[i + 1];
-    elevatedOptions[i + 1] = temp;
+  //   elevatedOptions[i] = elevatedOptions[i + 1];
+  //   elevatedOptions[i + 1] = temp;
 
-    storeData(elevatedOptions);
-    getData();
-  };
+  //   storeData(elevatedOptions);
+  //   getData();
+  // };
 
-  const end = elevatedOptions.length - 1;
+  // const end = elevatedOptions.length - 1;
 
   return (
     <View style={look.container}>

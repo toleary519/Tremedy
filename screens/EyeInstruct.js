@@ -1,32 +1,41 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Text, StyleSheet, Image, View } from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { look } from "../assets/styles";
 
 const EyeInstruct = () => (
-  <View style={styles.container}>
-  <Text style={styles.add}>Pick a point in front of you and focus your eyes on it. 
-  Without moving anything but your eyes look as far left as you can. 
-  HOLD for 5 seconds and return to the centre. Repeat looking to the the right. 
-  Complete the full cycle 5 times.</Text>
+  <View style={look.container}>
+    <View style={look.topBox}>
+      <View style={[look.border, { marginBottom: "4%", marginTop: "8%" }]}>
+        <Text style={[look.add, { marginBottom: "4%" }]}>
+          Pick a point and keeping your head still, follow it with your eyes.
+        </Text>
+      </View>
+      <Image
+        style={{ height: "60%", width: "100%" }}
+        source={require("../assets/LEM.gif")}
+      />
+    </View>
   </View>
 );
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#1B2A41"
-  },
-  add: {
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 15,
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#D7D9D7",
-  },
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     backgroundColor: "#1B2A41"
+//   },
+//   add: {
+//     textAlign: "center",
+//     justifyContent: "flex-end",
+//     padding: 15,
+//     fontSize: 30,
+//     fontWeight: "bold",
+//     color: "#D7D9D7",
+//   },
 
+  // style={{ height: '80%', width: '100%' }}
   // icon: {
   //   borderRadius: "3px",
   //   borderColor: "red",    
@@ -36,6 +45,6 @@ const styles = StyleSheet.create({
   //   padding: 60,
   //   color: "#1B2A41"
   // }
-});
+// });
 
 export { EyeInstruct };
