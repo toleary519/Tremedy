@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  Alert,
+  TextInput,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as MailComposer from "expo-mail-composer";
+import * as Print from "expo-print";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 
@@ -99,14 +107,93 @@ const UserSettings = () => {
   }, []);
 
   const sendBugMail = async () => {
+    const windowWidth = Dimensions.get("screen").width;
+    const windowHeight = Dimensions.get("screen").height;
+
+    const { uri } = await Print.printToFileAsync({
+      html: `
+      <html>
+      <head>
+      <style>
+      .bg {
+        display: flex;
+        height: ${windowHeight};
+        flex-direction: column;
+        background-color: #1B2A41;
+        font-family: roboto, arial, sans-serif;
+      }
+      .topBox {
+        justify-content: flex-start;
+        margin-left: ${windowWidth * 0.1};
+      }
+      .add {
+        margin-right: ${windowWidth * 0.1};
+        font-size: 18;
+        font-weight: bold;
+        color: #D7D9D7;
+      }
+      .title {
+        padding-top: ${windowHeight * 0.05};
+        font-size: 25;
+        font-weight: bold;
+        color: #D7D9D7;
+        margin-left: ${windowWidth * 0.1};
+        bottom-border: 3px solid ##3C5E90;
+      }
+      .subTitle {
+        font-size: 20;
+        font-weight: bold;
+        color: #D7D9D7;
+        margin-left: ${windowWidth * 0.1};
+        bottom-border: 3px solid ##3C5E90;
+      }
+      .sub {
+        margin-right: ${windowWidth * 0.1};
+        text-align: flex-start;
+        align-items: center;
+        opacity: 0.6;
+        font-size: 15px;
+        font-weight: bold;
+        color: #D7D9D7;
+      }
+      .QAbox {
+        padding-top: 3%;
+        bottom-border: 1% solid #3C5E90
+      }
+      </style>
+      </head>
+      <div class="bg">
+        <p class="title">Ourtre Team,</p>
+        <p class="subTitle">I have found a bug in: ${issue.where}</p>
+        <div class="topBox">
+          <div class="QAbox">
+            <div class="sub">This is what happened:</div>
+            <div class="add">${issue.what}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">This is what I was expecting:</div>
+            <div class="add">${issue.expecting}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">Additional notes or ideas:</div>
+            <div class="add">${issue.bugNotes}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">Thanks, </div>
+            <div class="add">${token.name}</div>
+          </div>
+        </div>
+      </div>
+      </container>
+      </html>
+      `,
+    });
+
     MailComposer.composeAsync({
       subject: `OURTRE BUG FLAG : ${issue.where}`,
-      body: `Dev Team, \n\nI found an issue ${issue.where}\n\n What happened: ${
-        issue.what
-      } \n \n Expected behaviour or outcome: ${issue.expecting} \n \n ${
-        issue.bugNotes ? `Notes: \n${issue.bugNotes}` : "No further notes."
-      }`,
-      recipients: "bug.ourtre@gmail.com",
+      body: "Thanks for letting us know! The pdf below will be sent to our development team.\n\n Thanks, \n Ourtre Bug Team",
+      recipients: "t.oleary@me.com",
+      attachments: [uri],
     });
   };
 
