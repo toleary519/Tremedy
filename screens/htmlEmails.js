@@ -13,14 +13,14 @@ import { color } from "../assets/colors";
 const windowWidth = Dimensions.get("screen").width;
 const windowHeight = Dimensions.get("screen").height;
 
-const emailTop = {
+const emailStyle = {
   html: `
     <style>
     .bg {
         display: flex;
         height: ${windowHeight};
         flex-direction: column;
-        background-color: #1B2A41;
+        background-color: ${color.bg};
         font-family: roboto, arial, sans-serif;
     }
     .topBox {
@@ -31,22 +31,22 @@ const emailTop = {
         margin-right: ${windowWidth * 0.1};
         font-size: 18;
         font-weight: bold;
-        color: #D7D9D7;
+        color: ${color.font};
     }
     .title {
         padding-top: ${windowHeight * 0.05};
         font-size: 25;
         font-weight: bold;
-        color: #D7D9D7;
+        color: ${color.font};
         margin-left: ${windowWidth * 0.1};
-        bottom-border: 3px solid ##3C5E90;
+        bottom-border: 3px solid ${color.border};
     }
     .subTitle {
         font-size: 20;
         font-weight: bold;
-        color: #D7D9D7;
+        color: ${color.font};
         margin-left: ${windowWidth * 0.1};
-        bottom-border: 3px solid ##3C5E90;
+        bottom-border: 3px solid ${color.border};
     }
     .sub {
         margin-right: ${windowWidth * 0.1};
@@ -55,7 +55,7 @@ const emailTop = {
         opacity: 0.6;
         font-size: 15px;
         font-weight: bold;
-        color: #D7D9D7;
+        color: ${color.font};
     }
     .border {
         borderBottomColor: ${color.border};
@@ -69,7 +69,7 @@ const emailTop = {
     }
     .QAbox {
         padding-top: 3%;
-        bottom-border: 1% solid #3C5E90
+        bottom-border: 1% solid ${color.border}
     }
     
     `,
@@ -263,4 +263,4 @@ const emailEntries = (item) => {
   return emailElement;
 };
 
-export { emailEntries, checkEmail, bugEmail, featureEmail, emailTop };
+export { emailEntries, checkEmail, bugEmail, featureEmail, emailStyle };
