@@ -56,6 +56,21 @@ const UrgeMenu = ({ navigation }) => (
         </View>
         <View style={look.border}>
           <TouchableOpacity
+            onPress={() => navigation.navigate("Meetings")}
+            delayPressIn={150}
+          >
+            <View style={look.element}>
+              <View>
+                <Text style={look.add}>Meetings</Text>
+                <Text style={look.sub}>
+                  Find meetings in your area happening now.
+                </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={look.border}>
+          <TouchableOpacity
             onPress={() => navigation.navigate("Craving")}
             delayPressIn={150}
           >
@@ -63,6 +78,23 @@ const UrgeMenu = ({ navigation }) => (
               <View>
                 <Text style={look.add}>Craving Log</Text>
                 <Text style={look.sub}>Log cravings, track patterns.</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={look.border}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Values")}
+            delayPressIn={150}
+          >
+            <View style={look.element}>
+              <View>
+                <Text style={look.add}>
+                  How does this align with your values?
+                </Text>
+                <Text style={look.sub}>
+                  No bullshit. How does that behaviour get you these?
+                </Text>
               </View>
             </View>
           </TouchableOpacity>

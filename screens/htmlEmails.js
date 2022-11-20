@@ -13,11 +13,19 @@ import { color } from "../assets/colors";
 const windowWidth = Dimensions.get("screen").width;
 const windowHeight = Dimensions.get("screen").height;
 
-const emailStyle = {
-  html: `
+const emailStyle = () => {
+  return `
     <style>
     .bg {
         display: flex;
+        height: ${windowHeight};
+        flex-direction: column;
+        background-color: ${color.bg};
+        font-family: roboto, arial, sans-serif;
+    }
+    .reportBg {
+        display: flex;
+        flex-wrap: wrap;
         height: ${windowHeight};
         flex-direction: column;
         background-color: ${color.bg};
@@ -71,15 +79,23 @@ const emailStyle = {
         padding-top: 3%;
         bottom-border: 1% solid ${color.border}
     }
-    
-    `,
+    .reportBox {
+      margin: ${windowWidth * 0.05};
+      height: ${windowHeight * 0.16};
+      width: ${windowWidth * 0.5};
+      border: 3px solid ${color.border};
+    }
+    </style>
+    `;
 };
 
 const featureEmail = (feature, token) => {
   return `
       <div class="bg">
         <p class="title">Ourtre Team,</p>
-        <p class="subTitle">I think there should be a feature called: ${feature.name}</p>
+        <div class="border">
+          <p class="subTitle">I think there should be a feature called: ${feature.name}</p>
+        </div>
         <div class="topBox">
           <div class="QAbox">
             <div class="sub">This is what I think it should do:</div>
@@ -110,7 +126,7 @@ const featureEmail = (feature, token) => {
       `;
 };
 
-export const bugEmail = (issue, token) => {
+const bugEmail = (issue, token) => {
   return `
 
     <div class="bg">
@@ -139,7 +155,7 @@ export const bugEmail = (issue, token) => {
     `;
 };
 
-export const singleEmail = (x, item) => {
+const singleEmail = (x, item) => {
   return ` 
  
     <div class="border">
@@ -155,7 +171,7 @@ export const singleEmail = (x, item) => {
     `;
 };
 
-export const pieEmail = (item) => {
+const pieEmail = (item) => {
   return ` 
  
     <div class="border">
@@ -192,7 +208,7 @@ export const pieEmail = (item) => {
     `;
 };
 
-export const selfEmail = (item) => {
+const selfEmail = (item) => {
   return ` 
   
     <div class="border">
@@ -217,9 +233,8 @@ export const selfEmail = (item) => {
     `;
 };
 
-export const checkEmail = (item) => {
-  return ` 
-    
+const checkEmail = (item) => {
+  return `   
     <div class="border">
         <div class="elementHeader">
             <div class="sub">${item.title}</div>
@@ -246,21 +261,15 @@ export const checkEmail = (item) => {
 };
 
 const emailEntries = (item) => {
-  let emailElement = [];
-
-  const push = (item) => {
-    item.check ? emailElement.push(checkEmail(item)) : null;
-    item.myCoping ? emailElement.push(singleEmail(item.myCoping, item)) : null;
-    item.myThat ? emailElement.push(singleEmail(item.myThat, item)) : null;
-    item.myFocus ? emailElement.push(singleEmail(item.myFocus, item)) : null;
-    item.myBad ? emailElement.push(singleEmail(item.myBad, item)) : null;
-    item.myGood ? emailElement.push(singleEmail(item.myGood, item)) : null;
-    item.myValue ? emailElement.push(singleEmail(item.myValue, item)) : null;
-    item.physical ? emailElement.push(pieEmail(item)) : null;
-    item.initial ? emailElement.push(pieEmail(item)) : null;
-  };
-  push();
-  return emailElement;
+  item.check ? checkEmail(item) : null;
+  item.myCoping ? singleEmail(item.myCoping, item) : null;
+  item.myThat ? singleEmail(item.myThat, item) : null;
+  item.myFocus ? singleEmail(item.myFocus, item) : null;
+  item.myBad ? singleEmail(item.myBad, item) : null;
+  item.myGood ? singleEmail(item.myGood, item) : null;
+  item.myValue ? singleEmail(item.myValue, item) : null;
+  item.physical ? pieEmail(item) : null;
+  item.initial ? selfEmail(item) : null;
 };
 
 export { emailEntries, checkEmail, bugEmail, featureEmail, emailStyle };

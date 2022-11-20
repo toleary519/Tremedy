@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import * as MailComposer from "expo-mail-composer";
+import * as Print from "expo-print";
 import { CheckVal, Entries } from "./reportFunctions";
+import { checkEmail, emailEntries, emailStyle } from "./htmlEmails";
 
 const Report = () => {
   let [showFull, setShowFull] = useState(true);
@@ -35,7 +38,6 @@ const Report = () => {
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
       let thatData = selfTalkValue ? JSON.parse(thatValue) : [];
       setToken(savedTokData);
-      console.log("token data", savedTokData);
       setReportStorage([
         ...copeData,
         ...checkData,
@@ -53,7 +55,6 @@ const Report = () => {
   };
 
   let dayCount = token.rLength ? token.rLength * 7 : 7;
-  console.log("DC", dayCount);
   let currentDate = new Date().getTime();
   let weekAgo = currentDate - dayCount * 24 * 60 * 60 * 1000;
 
@@ -62,7 +63,6 @@ const Report = () => {
     .sort((a, b) => {
       return b.id - a.id;
     });
-
   let fullChecks = fullReport
     .filter((x) => !x.flag && x.check)
     .sort((a, b) => {
@@ -75,6 +75,46 @@ const Report = () => {
     .sort((a, b) => {
       return b.id - a.id;
     });
+
+  const sendReportMail = async () => {
+    let currentDate = new Date();
+    let currentDay = currentDate.getDate();
+    let currentMonth = currentDate.getMonth() + 1;
+
+    const { uri } = await Print.printToFileAsync({
+      html: `
+      <html>
+      <head>
+      ${emailStyle()}
+      </head>
+      <div class="bg">
+      ${
+        showFull
+          ? fullReport.map((item, i) => (
+              <div key={i}>
+                {item.check ? `${checkEmail(item)}` : `${emailEntries(item)}`}
+              </div>
+            ))
+          : null
+      }
+      </div>
+      </html>
+      `,
+    });
+
+    MailComposer.composeAsync({
+      subject: `Ourtre Report : ${token.name}`,
+      body: `Find the PDF of your Ourtre report attached below.\n
+      This report contains entries from *oldDate* to ${currentMonth}/${currentDay}. 
+      \n\n
+      Please select who you send your report to carefully. If you would like to shorten your report into a more concise document please review your flags and see if you have double counted things you would like to review with your therapist.\n
+      We recommend trying to keep your report to one or two pages as to have a direct focus in your sessions.\n\n 
+      Thanks, \n 
+      Ourtre Team`,
+      recipients: "t.oleary@me.com",
+      attachments: [uri],
+    });
+  };
 
   React.useEffect(() => {
     getData();
@@ -147,7 +187,9 @@ const Report = () => {
           <View style={[look.header, look.border]}>
             <TouchableOpacity
               style={{ marginBottom: "5%" }}
-              onPress={() => {}}
+              onPress={() => {
+                sendReportMail();
+              }}
               delayPressIn={150}
             >
               <Text style={look.reportButton}>Email Report</Text>

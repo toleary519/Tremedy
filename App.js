@@ -43,7 +43,7 @@ import { Scream } from "./screens/Scream";
 import { NewFeature } from "./screens/NewFeature";
 import { That } from "./screens/That";
 import { Craving } from "./screens/Craving";
-
+import { color } from "./assets/colors";
 import MyStack from "./routes/homeStack";
 import { StatusBar } from "expo-status-bar";
 
@@ -58,9 +58,9 @@ function App() {
             initialRouteName="Home"
             screenOptions={{
               headerStyle: {
-                backgroundColor: "#1B2A41",
+                backgroundColor: color.bg,
               },
-              headerTintColor: "#D7D9D7",
+              headerTintColor: color.font,
               headerTitleStyle: {
                 fontWeight: "bold",
                 fontSize: 20,

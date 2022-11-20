@@ -95,9 +95,11 @@ const CheckVal = (item) => {
         <Text style={look.add}>{item.feelTwo}</Text>
         <Text style={look.add}>{item.feelThree}</Text>
       </View>
-      <View style={look.element}>
-        {item.myCheckin ? <Text style={look.add}>{item.myCheckin}</Text> : null}
-      </View>
+      {item.myCheckin ? (
+        <View style={look.element}>
+          <Text style={look.add}>{item.myCheckin}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };

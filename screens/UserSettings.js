@@ -681,7 +681,7 @@ const UserSettings = () => {
         "If you are struggling with these issues there are additional tools here.",
       dropdown: "Need help? You're not alone.",
 
-      onText: `You will now see an option called "We can be better" on the first menu. In it are some unique features and specialized tools to use as well as lists of meetings. Both online and in person.`,
+      onText: `You will now see an option called "We can be better" on the first menu. In it are some unique features and specialized tools to use as well as lists of meetings. Both online and in-person.`,
     },
     {
       id: 2,
@@ -697,7 +697,7 @@ const UserSettings = () => {
       title: "Manage Flags",
       subtitle: "Select when and how you would like to use flags.",
       dropdown:
-        "Turning flags off here will turn off the prompt. You can click the flag icon to add items to your report.",
+        "Turning flags off here will turn off the prompt. You can still click the flag icon to add items to your report.",
     },
     {
       id: 4,
