@@ -24,29 +24,62 @@ const emailStyle = () => {
     }
     .reportBg {
         display: flex;
-        flex-wrap: wrap;
+        height: 100%;
         flex-direction: column;
         justify-content: flex-start;
-        height: ${windowHeight};
+        wrap: wrap;
         background-color: ${color.bg};
         font-family: roboto, arial, sans-serif;
     }
-    .topBox {
-        justify-content: flex-start;
-
+    .reportTop {
+      display: flex;
+      flex-direction: row;
+      // border: 1px solid yellow;
+    }
+    .reportNameDate {
+      width: 33%;
+      // border: 1px solid blue;
+    }
+    reportVitals {
+      width: 66%;
+      // border: 1px solid red;
+    }
+    reportItemsBox {
+      // border: 1px solid green;
+    }
+    .reportBox {
+      position: absolute;
+      justify-content: flex-start;
+      padding-top: 20px;
+      border-bottom: 1px solid ${color.border};
     }
     .add {
-
       font-size: 12;
         font-weight: bold;
         color: ${color.font};
     }
+    .sub {
+        opacity: 0.7;
+        font-size: 10;
+        font-weight: bold;
+        color: ${color.font};
+    }
+    .elementHeader {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    .left {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+    .right {
+    flex-direction: row;
+      justify-content: flex-end;
+    }
     .title {
-        padding-top: ${windowHeight * 0.05};
         font-size: 25;
         font-weight: bold;
         color: ${color.font};
-        margin-left: ${windowWidth * 0.1};
         bottom-border: 3px solid ${color.border};
     }
     .subTitle {
@@ -56,36 +89,9 @@ const emailStyle = () => {
         margin-left: ${windowWidth * 0.1};
         bottom-border: 3px solid ${color.border};
     }
-    .sub {
-        opacity: 0.6;
-        font-size: 10;
-        font-weight: bold;
-        color: ${color.font};
-    }
-    .left {
-      flex-direction: row;
-      justify-content: flex-start;
-    }
-    .right {
-      flex-direction: row;
-      justify-content: flex-end;
-    }
-    .elementHeader {
-      flex-direction: row;
-      justify-content: space-around;
-    }
     .QAbox {
         padding-top: 3%;
         bottom-border: 1% solid ${color.border}
-    }
-    .reportBox {
-      justify-content: flex-start;
-      padding-top: 20px;
-
-      width: 180px;
-      border-bottom: 1px solid ${color.border};
-
-      background-color: ${color.bg};
     }
     </style>
     `;
@@ -157,18 +163,17 @@ const bugEmail = (issue, token) => {
     `;
 };
 
-const singleEmail = (x, item, i) => {
+const singleEmail = (x, item) => {
   return `
-    <div key={${i}} class="reportBox">
             <span class="sub">${item.title}</span>
             <span class="sub">${item.date}</span>
             <div class="add">${x}</div>
-    </div>`;
+          `;
 };
 
-const pieEmail = (item, i) => {
+const pieEmail = (item) => {
   return ` 
-    <div key={${i}} class="reportBox">
+
         <div class="elementHeader">
             <div class="sub">${item.title}</div>
             <div class="sub">${item.date}</div>
@@ -197,14 +202,12 @@ const pieEmail = (item, i) => {
                 <div class="add">${item.spiritual}</div>
             </div>
         </div>
-    </div>
+
     `;
 };
 
-const selfEmail = (item, i) => {
+const selfEmail = (item) => {
   return ` 
-  
-    <div key={${i}} class="reportBox">
         <div class="elementHeader">
             <div class="sub">${item.title}</div>
             <div class="sub">${item.date}</div>
@@ -221,14 +224,11 @@ const selfEmail = (item, i) => {
                 <div class="add">${item.rational}</div>
             </div>
         </div>
-    </div>
-  
     `;
 };
 
 const checkEmail = (item) => {
   return `   
-    <div class="reportBox">
         <div id="elementHeader">
             <span class="sub">${item.title}</span>  
             <span class="sub">${item.time} - ${item.date}</span>
@@ -252,50 +252,21 @@ const checkEmail = (item) => {
                 : `</>`
             }
         </span>
-    </div>`;
+      `;
 };
 
 const emailEntries = (item) => {
-  switch (item.title) {
-    case (item.title === "Check-In"):
-      checkEmail(item);
-      break;
-    case item.myCoping:
-      singleEmail(item.myCoping, item);
-      break;
-    case item.myThat:
-      singleEmail(item.myThat, item);
-      break;
-    case item.myFocus:
-      singleEmail(item.myFocus, item);
-      break;
-    case item.myBad:
-      singleEmail(item.myBad, item);
-      break;
-    case item.myGood:
-      singleEmail(item.myGood, item);
-      break;
-    case item.myValue:
-      singleEmail(item.myValue, item);
-      break;
-    case item.physical:
-      pieEmail(item.myValue, item);
-      break;
-    case item.initial:
-      selfEmail(item.myValue, item);
-      break;
-    default:
-      return;
-  }
-  // item.check ? return checkEmail(item) : `</>`
-  // ${item.myCoping ? `${singleEmail(item.myCoping, item, i)}` : `</>`}
-  // ${item.myThat ? singleEmail(item.myThat, item) : `</>`}
-  // ${item.myFocus ? singleEmail(item.myFocus, item) : `</>`}
-  // ${item.myBad ? singleEmail(item.myBad, item) : `</>`}
-  // ${item.myGood ? singleEmail(item.myGood, item) : `</>`}
-  // ${item.myValue ? singleEmail(item.myValue, item) : `</>`}
-  // ${item.physical ? pieEmail(item) : `</>`}
-  // ${item.initial ? selfEmail(item) : `</>`}
-};;
+  return `
+    ${item.check ? `oh hello ${checkEmail(item)}` : `</>`}
+    ${item.myCoping ? `${singleEmail(item.myCoping, item)}` : `</>`}
+    ${item.myThat ? singleEmail(item.myThat, item) : `</>`}
+    ${item.myFocus ? singleEmail(item.myFocus, item) : `</>`}
+    ${item.myBad ? singleEmail(item.myBad, item) : `</>`}
+    ${item.myGood ? singleEmail(item.myGood, item) : `</>`}
+    ${item.myValue ? singleEmail(item.myValue, item) : `</>`}
+    ${item.physical ? pieEmail(item) : `</>`}
+    ${item.initial ? selfEmail(item) : `</>`}
+    `;
+};
 
 export { emailEntries, checkEmail, bugEmail, featureEmail, emailStyle };
