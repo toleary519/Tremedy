@@ -76,7 +76,7 @@ const SelfVal = (item) => {
 };
 
 const CheckVal = (item) => {
-  console.log(item);
+
   return (
     <View style={look.border}>
       <View style={look.elementHeader}>

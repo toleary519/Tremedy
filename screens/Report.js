@@ -36,7 +36,7 @@ const Report = () => {
       let badData = badValue ? JSON.parse(badValue) : [];
       let valueData = valueValue ? JSON.parse(valueValue) : [];
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
-      let thatData = selfTalkValue ? JSON.parse(thatValue) : [];
+      let thatData = thatValue ? JSON.parse(thatValue) : [];
       setToken(savedTokData);
       setReportStorage([
         ...copeData,
@@ -87,14 +87,10 @@ const Report = () => {
       <head>
       ${emailStyle()}
       </head>
-      <div class="bg">
+      <div class="reportBg">
       ${
         showFull
-          ? fullReport.map((item, i) => (
-              <div key={i}>
-                {item.check ? `${checkEmail(item)}` : `${emailEntries(item)}`}
-              </div>
-            ))
+          ? fullReport.map((item, i) => `<div>${emailEntries(item, i)}</div>`)
           : null
       }
       </div>
@@ -106,13 +102,13 @@ const Report = () => {
       subject: `Ourtre Report : ${token.name}`,
       body: `Find the PDF of your Ourtre report attached below.\n
       This report contains entries from *oldDate* to ${currentMonth}/${currentDay}. 
-      \n\n
+      \n
       Please select who you send your report to carefully. If you would like to shorten your report into a more concise document please review your flags and see if you have double counted things you would like to review with your therapist.\n
-      We recommend trying to keep your report to one or two pages as to have a direct focus in your sessions.\n\n 
-      Thanks, \n 
+      We recommend trying to keep your report to one or two pages as to have a direct focus in your sessions.\n 
+      Thanks,
       Ourtre Team`,
       recipients: "t.oleary@me.com",
-      attachments: [uri],
+      attachments: uri,
     });
   };
 
