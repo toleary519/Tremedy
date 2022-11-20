@@ -119,4 +119,4 @@ const Entries = (item) => {
 };
 
 
-export { SingleVal, PieVal, SelfVal, CheckVal, Entries };
+export { CheckVal, Entries };
