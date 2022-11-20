@@ -84,31 +84,31 @@ const Report = () => {
     const { uri } = await Print.printToFileAsync({
       html: `
       <html>
-      <head>
-      ${emailStyle()}
-      </head>
-      <div class="reportBg">
-      <div class="reportTop">
-      <div class="reportNameDate">
-      <p class="add">Ourtre One Sheet:</p>
-      <p class="add">Name of the person</p>
-      <p class="add">Date of the report</p>
-      </div>
-      <div class="reportVitals">
-      <p class="add">SOME VITALS THING #1</p>
-      <p class="add">SOME VITALS THING #2</p>
-      <p class="add">SOME VITALS THING #3</p>
-      </div>
-      </div>
-      <div class="reportItemsBox">
-      ${
-        showFull
-        ? fullReport.map((item, i) => `<div key={${i}}>${emailEntries(item, i)}</div>`)
-        :``}
-      </div>
-      </div>
+        <head>
+        ${emailStyle()}
+        </head>
+        <div class="reportBg">
+          <div class="reportTop">
+            <div class="reportNameDate">
+              <p class="add">Ourtre One Sheet:</p>
+              <p class="add">Name of the person</p>
+              <p class="add">Date of the report</p>
+            </div>
+            <div class="reportVitals">
+              <p class="add">SOME VITALS THING #1</p>
+              <p class="add">SOME VITALS THING #2</p>
+              <p class="add">SOME VITALS THING #3</p>
+            </div>
+          </div>
+          <div class="reportItemsBox">
+          ${
+            showFull
+            ? fullReport.map((item, i) => `<div  class="reportBox" key={${i}}>${emailEntries(item)}</div>`)
+            : null}
+          </div>
+        </div>
       </html>
-      `,
+      `
     });
 
     MailComposer.composeAsync({

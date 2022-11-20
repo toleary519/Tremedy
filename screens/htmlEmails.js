@@ -26,31 +26,27 @@ const emailStyle = () => {
         display: flex;
         height: 100%;
         flex-direction: column;
-        justify-content: flex-start;
-        wrap: wrap;
         background-color: ${color.bg};
         font-family: roboto, arial, sans-serif;
     }
     .reportTop {
-      display: flex;
       flex-direction: row;
-      // border: 1px solid yellow;
     }
     .reportNameDate {
+      flex-direction: column;
       width: 33%;
-      // border: 1px solid blue;
     }
-    reportVitals {
+    .reportVitals {
+      flex-direction: column;
       width: 66%;
-      // border: 1px solid red;
     }
-    reportItemsBox {
-      // border: 1px solid green;
+    .reportItemsBox {
+      flex-direction: column;
+      justify-content: flex-start;
+      flex-wrap: wrap;
     }
     .reportBox {
-      position: absolute;
-      justify-content: flex-start;
-      padding-top: 20px;
+      width: 25%;
       border-bottom: 1px solid ${color.border};
     }
     .add {
@@ -64,8 +60,8 @@ const emailStyle = () => {
         font-weight: bold;
         color: ${color.font};
     }
-    .elementHeader {
-      flex-direction: row;
+    #elementHeader {
+      flex-direction: "row";
       justify-content: space-around;
     }
     .left {
@@ -164,11 +160,14 @@ const bugEmail = (issue, token) => {
 };
 
 const singleEmail = (x, item) => {
-  return `
+  let obj = {
+    html: `
             <span class="sub">${item.title}</span>
             <span class="sub">${item.date}</span>
             <div class="add">${x}</div>
-          `;
+          `,
+  };
+  return obj;
 };
 
 const pieEmail = (item) => {
@@ -230,43 +229,61 @@ const selfEmail = (item) => {
 const checkEmail = (item) => {
   return `   
         <div id="elementHeader">
-            <span class="sub">${item.title}</span>  
-            <span class="sub">${item.time} - ${item.date}</span>
+            <p class="sub">${item.title}</p>  
+            <p class="sub">${item.time} - ${item.date}</p>
         </div>
         <div>
-        <div class="left">
-        <span class="sub">Physical: ${item.phys}</span>
-        <span class="sub">Emotional: ${item.mental}</span>
-        <span class="sub">Outlook: ${item.outlook}</span>
+        <div>
+        <p class="sub">Physical: ${item.phys}</p>
+        <p class="sub">Emotional: ${item.mental}</p>
+        <p class="sub">Outlook: ${item.outlook}</p>
         </div>
-        <div class="right">
-        <span class="add">${item.feelOne}</span>
-        <span class="add">${item.feelTwo}</span>
-        <span class="add">${item.feelThree}</span>
+        <div>
+        <p class="add">${item.feelOne}</p>
+        <p class="add">${item.feelTwo}</p>
+        <p class="add">${item.feelThree}</p>
         </div>
         </div>
-        <span class="elementHeader">
-            ${
-              item.myCheckin
-                ? `<span class="add">${item.myCheckin}</span>`
-                : `</>`
-            }
-        </span>
+        <p class="elementHeader">
+            ${item.myCheckin ? `<p class="add">${item.myCheckin}</p>` : `</>`}
+        </p>
       `;
 };
 
+const textHtml = (item) => {
+  return `${item.myCoping ? singleEmail(item.myCoping, item) : `</>`}`;
+};
 const emailEntries = (item) => {
   return `
-    ${item.check ? `oh hello ${checkEmail(item)}` : `</>`}
-    ${item.myCoping ? `${singleEmail(item.myCoping, item)}` : `</>`}
-    ${item.myThat ? singleEmail(item.myThat, item) : `</>`}
-    ${item.myFocus ? singleEmail(item.myFocus, item) : `</>`}
-    ${item.myBad ? singleEmail(item.myBad, item) : `</>`}
-    ${item.myGood ? singleEmail(item.myGood, item) : `</>`}
-    ${item.myValue ? singleEmail(item.myValue, item) : `</>`}
-    ${item.physical ? pieEmail(item) : `</>`}
-    ${item.initial ? selfEmail(item) : `</>`}
+    ${
+      item.check
+        ? checkEmail(item)
+        : item.myCoping
+        ? singleEmail(item.myCoping, item)
+        : item.myThat
+        ? singleEmail(item.myThat, item)
+        : item.myFocus
+        ? singleEmail(item.myFocus, item)
+        : item.myBad
+        ? singleEmail(item.myBad, item)
+        : item.myGood
+        ? singleEmail(item.myGood, item)
+        : item.myValue
+        ? singleEmail(item.myValue, item)
+        : item.physical
+        ? pieEmail(item)
+        : item.initial
+        ? selfEmail(item)
+        : `</>`
+    }
     `;
 };
 
-export { emailEntries, checkEmail, bugEmail, featureEmail, emailStyle };
+export {
+  emailEntries,
+  checkEmail,
+  bugEmail,
+  textHtml,
+  featureEmail,
+  emailStyle,
+};
