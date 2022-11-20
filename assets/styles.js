@@ -1,11 +1,13 @@
+import { color } from "./colors";
+
 export const look = {
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: "#1B2A41",
+    backgroundColor: color.bg,
   },
   border: {
-    borderBottomColor: "#3C5E90",
+    borderBottomColor: color.border,
     borderBottomWidth: 1,
   },
   topBox: {
@@ -20,7 +22,7 @@ export const look = {
     marginBottom: 2,
     fontSize: 20,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: color.font,
   },
   checkWordHeader: {
     flexDirection: "row",
@@ -29,35 +31,35 @@ export const look = {
     marginBottom: "2%",
     fontSize: 20,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: color.font,
   },
   subHeader: {
     marginTop: 5,
     marginBottom: 2,
     fontSize: 15,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: color.font,
   },
   input: {
     borderWidth: 3,
-    borderColor: "#3C5E90",
+    borderColor: color.border,
     borderRadius: 8,
     marginTop: 21,
     padding: 10,
     fontSize: 20,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: color.inputText,
     backgroundColor: "#D3EAEE",
   },
   userInput: {
     borderWidth: 3,
-    borderColor: "#3C5E90",
+    borderColor: color.border,
     borderRadius: 8,
     marginTop: 10,
     padding: 10,
     fontSize: 20,
     fontWeight: "bold",
-    color: "#2f8587",
+    color: color.inputText,
     backgroundColor: "#D3EAEE",
   },
   // _________________________elements for menus
@@ -65,23 +67,73 @@ export const look = {
     flexDirection: "row",
     marginTop: 10,
     marginBottom: 10,
-    // borderBottomColor: "#3C5E90",
+    // borderBottomColor: color.border,
     justifyContent: "flex-start",
   },
   elementHeader: {
     // borderWidth: 4,
-    // borderColor: "green",
+    // borderColor: color.iconRed,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  // ___________________________first menu items
+  fElement: {
+    marginTop: 5,
+    marginBottom: 10,
+    borderBottomColor: color.border,
+    borderBottomWidth: 1,
+    width: "90%",
+    left: "5%",
+  },
+  fAdd: {
+    marginTop: 10,
+    textAlign: "flex-start",
+    marginBottom: 2,
+    fontWeight: "bold",
+    color: "#D7D9D7",
+    fontSize: 35,
+    fontWeight: "bold",
+    color: color.font,
+  },
+  fEmergency: {
+    marginTop: 10,
+    textAlign: "flex-start",
+    marginBottom: 2,
+    fontWeight: "bold",
+    color: color.font,
+    fontSize: 35,
+    fontWeight: "bold",
+    color: color.iconRed,
+  },
+  fSub: {
+    marginTop: 5,
+
+    textAlign: "flex-start",
+    alignItems: "center",
+    opacity: 0.7,
+    marginBottom: 10,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: color.font,
+  },
+  fEsub: {
+    marginTop: 5,
+    textAlign: "flex-start",
+    alignItems: "center",
+    opacity: 0.8,
+    marginBottom: 10,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: color.iconRed,
   },
   // ___________________________elements for render pages
   renderElementBody: {
     flexDirection: "row",
     marginTop: 10,
     marginBottom: 10,
-    color: "#D7D9D7",
-    borderBottomColor: "#3C5E90",
+    color: color.font,
+    borderBottomColor: color.border,
     textAlign: "center",
     justifyContent: "flex-start",
     fontSize: 18,
@@ -93,7 +145,7 @@ export const look = {
     padding: 10,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: color.font,
   },
   pieBox: {
     flexDirection: "row",
@@ -111,14 +163,14 @@ export const look = {
     marginBottom: 2,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: color.font,
   },
   contactAdd: {
     marginTop: 5,
     marginBottom: 2,
     fontSize: 14,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: color.font,
   },
   sub: {
     marginTop: 5,
@@ -128,64 +180,64 @@ export const look = {
     marginBottom: 5,
     fontSize: 15,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: color.font,
   },
   inRoutine: {
-    color: "green",
+    color: color.iconGreen,
     fontSize: 20,
   },
   outRoutine: {
-    color: "brown",
+    color: color.iconRed,
     fontSize: 20,
   },
   fIcon: {
     marginRight: 10,
     paddingTop: 10,
     fontSize: 18,
-    color: "#D7D9D7",
+    color: color.font,
     textAlign: "center",
   },
   canIcon: {
     fontSize: 24,
   },
   selected: {
-    color: "#D84C36",
+    color: color.iconRed,
   },
   icon: {
     paddingTop: 20,
     paddingBottom: 20,
     fontSize: 30,
-    color: "#D7D9D7",
+    color: color.font,
   },
   calendarIcon: {
     fontSize: 40,
     paddingRight: "1.5%",
     paddingLeft: "1.5%",
-    color: "#D7D9D7",
+    color: color.font,
   },
   selectedCalIcon: {
     fontSize: 40,
     paddingRight: "1.5%",
     paddingLeft: "1.5%",
-    color: "green",
+    color: color.iconGreen,
   },
   headerIcon: {
     paddingTop: 20,
     paddingBottom: 20,
     fontSize: 30,
-    color: "#D7D9D7",
+    color: color.font,
   },
   centerIcon: {
     paddingTop: 15,
     paddingBottom: 0,
     fontSize: 30,
-    color: "#D7D9D7",
+    color: color.font,
     textAlign: "center",
   },
   right: {
     width: "47.5%",
     // borderWidth: 2,
-    // borderColor: "green",
+    // borderColor: color.iconGreen,
   },
   left: {
     width: "47.5%",
@@ -193,7 +245,7 @@ export const look = {
   pContainer: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "#1B2A41",
+    backgroundColor: color.bg,
   },
   reportButton: {
     // marginTop: 10,
@@ -201,10 +253,10 @@ export const look = {
     padding: 4,
     fontSize: 30,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: color.font,
   },
   reportSelected: {
-    color: "green",
+    color: color.iconGreen,
   },
   slider: {
     width: "70%",
@@ -217,7 +269,7 @@ export const look = {
     justifyContent: "space-between",
     marginBottom: "3%",
     // borderWidth: 2,
-    // borderColor: "red",
+    // borderColor: color.iconR,
   },
   checkMarginTop: {
     marginTop: "5%",
@@ -234,12 +286,12 @@ export const look = {
     // marginTop: 10,
     // textAlign: "center",
     fontSize: 70,
-    color: "#D7D9D7",
+    color: color.font,
     opacity: 0.9,
   },
   screamIconSelected: {
     fontWeight: "bold",
-    color: "red",
+    color: color.iconRed,
   },
   clock: {
     marginTop: "25%",
@@ -255,7 +307,7 @@ export const look = {
     alignItems: "center",
     alignContent: "center",
     fontSize: 30,
-    color: "#D7D9D7",
+    color: color.font,
   },
   userHeader: {
     flexDirection: "row",
@@ -263,15 +315,15 @@ export const look = {
   },
   toggleOff: {
     fontSize: 60,
-    // backgroundColor: "red",
-    color: "red",
-    opacity: 0.6,
+    // backgroundColor: color.iconR,
+    color: color.iconRed,
+    opacity: 0.8,
     // overflow: "hidden",
   },
   toggleOn: {
     fontSize: 60,
-    // backgroundColor: "green",
-    color: "green",
+    // backgroundColor: color.iconGreen,
+    color: color.iconGreen,
     opacity: 0.8,
     // overflow: "hidden",
   },
@@ -289,34 +341,46 @@ export const look = {
     marginRight: "3%",
     width: "5%",
     alignItems: "flex-end",
-    color: "#3C5E90",
+    color: color.border,
   },
   pieText: {
     marginTop: 5,
     marginBottom: 2,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#D7D9D7",
+    color: color.font,
     width: "85%",
   },
-};  
-// ______________________template for entry pages 
+  left: {
+    flex: 8,
+  },
+  right: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  text: {
+    color: color.iconGreen,
+    fontSize: 20,
+    left: "10%",
+  },
+};
+// ______________________template for entry pages
 // return (
-  // <View style={look.container}>
-  //  <KeyboardAwareScrollView extraHeight={200}>
-  //   <View style={look.topBox}>
-  //   <View style={look.header}></View>
-  //   <View style={look.subHeader}></View>
-  //     {/* input */}
-  //     {/* add icon style={[look.icon, look.centerIcon]} */}
-  //     {/* map  */}
-  //   <View style={look.border}></View>
-  //   <View style={look.elementHeader></View>
-  //   style={[look.icon, look.canIcon]}
-  //   <View style={look.element}></View>
-  // </View>
-  // </KeyboardAwareScrollView>
-  // </View> 
+// <View style={look.container}>
+//  <KeyboardAwareScrollView extraHeight={200}>
+//   <View style={look.topBox}>
+//   <View style={look.header}></View>
+//   <View style={look.subHeader}></View>
+//     {/* input */}
+//     {/* add icon style={[look.icon, look.centerIcon]} */}
+//     {/* map  */}
+//   <View style={look.border}></View>
+//   <View style={look.elementHeader></View>
+//   style={[look.icon, look.canIcon]}
+//   <View style={look.element}></View>
+// </View>
+// </KeyboardAwareScrollView>
+// </View>
 // )
 // };
 
@@ -341,7 +405,7 @@ export const look = {
 //           placeholder={"what do you want to see?"}
 //           multiline
 //           keyboardType="default"
-//           color="#D7D9D7"
+//           color=color.font
 //           placeholderTextColor={"#F1F7EE"}
 //         />
 //         <View style={look.drawBox}>{/* draw feature */}</View>

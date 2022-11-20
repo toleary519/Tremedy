@@ -3,8 +3,6 @@ import {
   Text,
   StyleSheet,
   View,
-  Alert,
-  TextInput,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
@@ -91,7 +89,7 @@ const PepTalkMenu = ({ navigation }) => {
           {pageOptions.map((item, i) => (
             <View key={item.id} style={look.border}>
               <View value={item} style={look.element}>
-                <View style={styles.left}>
+                <View style={look.left}>
                   <TouchableOpacity
                     onPress={() => navigation.navigate(item.pageName)}
                     delayPressIn={150}
@@ -100,7 +98,7 @@ const PepTalkMenu = ({ navigation }) => {
                     <Text style={look.sub}>{item.sub}</Text>
                   </TouchableOpacity>
                 </View>
-                <View style={styles.right}>
+                <View style={look.right}>
                   {verify({ item }) ? (
                     <TouchableOpacity
                       onPress={() => handleDelete({ item })}
@@ -109,7 +107,7 @@ const PepTalkMenu = ({ navigation }) => {
                       <Feather name="check-circle" style={look.inRoutine} />
                     </TouchableOpacity>
                   ) : item.pageName === "Routine" ? (
-                    <Text style={styles.text}>{count}</Text>
+                    <Text style={look.text}>{count}</Text>
                   ) : (
                     <TouchableOpacity
                       onPress={() => handleAdd({ item })}
