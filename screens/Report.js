@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
 import { CheckVal, Entries } from "./reportFunctions";
@@ -83,31 +84,79 @@ const Report = () => {
 
     const { uri } = await Print.printToFileAsync({
       html: `
-      <html>
-        <head>
-        ${emailStyle()}
-        </head>
-        <div class="reportBg">
-          <div class="reportTop">
-            <div class="reportNameDate">
-              <p class="add">Ourtre One Sheet:</p>
-              <p class="add">Name of the person</p>
-              <p class="add">Date of the report</p>
-            </div>
-            <div class="reportVitals">
-              <p class="add">SOME VITALS THING #1</p>
-              <p class="add">SOME VITALS THING #2</p>
-              <p class="add">SOME VITALS THING #3</p>
-            </div>
-          </div>
-          <div class="reportItemsBox">
-          ${
-            showFull
-            ? fullReport.map((item, i) => `<div  class="reportBox" key={${i}}>${emailEntries(item)}</div>`)
-            : null}
-          </div>
-        </div>
-      </html>
+            <html>
+            <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+                <style>
+                @page {
+
+                  size: A4;
+                  
+                  }
+                .container {
+                  display: flex;
+                  height: 100%;
+                  flex-direction: column;
+                  background-color: ${color.bg};
+                  font-family: roboto, arial, sans-serif;
+                }
+                .column {
+                  display: flex;
+                  flex-direction: column;
+                }
+                .row {
+                  display: flex;
+                  flex-direction: row;
+                }
+                .columnWrap {
+                  display: flex;
+                  flex-direction: row;
+                  flex-wrap: wrap;
+                  margin-bottom: 1%;
+                }
+                .add {
+                  font-size: 10;
+                  font-weight: bold;
+                  color: ${color.font};
+                }
+                .sub {
+                  opacity: 0.7;
+                  font-size: 8;
+                  font-weight: bold;
+                  color: ${color.font};
+                }
+                .itemBox {
+                  display: flex;
+                  flex-direction: column;
+                  width: 20%;
+                  padding: 1%;
+                  border-bottom: 3% solid yellow;
+                }
+                </style>
+            </head>
+              <body class="container">
+                <section class="column">
+                    <div class="row">
+                      <header class="column">
+                          <h2 class="add">Ourtre Report for ${token.name}</h2>
+                          <h2 class="add">**LAST ItemDate** - ${currentMonth}/${currentDay}</h2>
+                      </header>
+                      <h2 class="add">Your average scores from daily checkins</h2>
+                      <h2 class="add">Your most selected words from the checkin</h2>
+                    </div>
+                      <h5>One sheets are designed to be just that, one sheet. Use it to focus in on the things that need the
+                      most attention. Pehaps un-flag some items to narrow your focus. All of your entries are still
+                      availble in the Ourtre app.</h5>
+                </section>
+                <section class="columnWrap">
+                
+                ${
+                  showFull
+                  ? emailEntries(fullReport)
+                  : null}                    
+                  </section>
+              </body>
+            </html>
       `
     });
 
