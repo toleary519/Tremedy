@@ -70,7 +70,11 @@ const SupportContacts = () => {
               onPress={() => setImageWindow(!imageWindow ? true : false)}
             >
               <FontAwesome
-                style={[look.icon, look.centerIcon, { paddingBottom: "4%" }]}
+                style={[
+                  look.icon,
+                  look.centerIcon,
+                  { paddingBottom: "4%", fontSize: 25 },
+                ]}
                 name="question-circle"
               />
               {imageWindow ? (

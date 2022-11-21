@@ -84,15 +84,15 @@ const Routine = ({ navigation }) => {
                   key={item.id}
                   style={[look.userHeader, look.border, { marginBottom: "3%" }]}
                 >
-                  <View style={{ width: "80%" }}>
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate(item.pageName)}
-                      delayPressIn={150}
-                    >
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate(item.pageName)}
+                    delayPressIn={150}
+                  >
+                    <View style={{ width: "80%" }}>
                       <Text style={look.add}>{item.title}</Text>
                       <Text style={look.sub}>{item.sub}</Text>
-                    </TouchableOpacity>
-                  </View>
+                    </View>
+                  </TouchableOpacity>
                   <View style={look.element}>
                     <TouchableOpacity
                       onPress={i === end ? () => endCheck() : () => swapDown(i)}

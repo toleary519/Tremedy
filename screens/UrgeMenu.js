@@ -84,7 +84,7 @@ const UrgeMenu = ({ navigation }) => (
         </View>
         <View style={look.border}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Values")}
+            onPress={() => navigation.navigate("MyValues")}
             delayPressIn={150}
           >
             <View style={look.element}>

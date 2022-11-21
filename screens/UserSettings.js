@@ -13,8 +13,18 @@ import { Feather } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
+import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+
+// enables alerts in the forground
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldShowAlert: true,
+    };
+  },
+});
 
 const UserSettings = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -31,6 +41,7 @@ const UserSettings = () => {
           city: "",
           country: "",
           flags: true,
+          notify: false,
           name: "",
           email: "",
         }
@@ -95,6 +106,17 @@ const UserSettings = () => {
         },
       },
     ]);
+  };
+
+  const triggerNotify = async () => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: `Ourtre Check-In.`,
+        body: `Check-In with Ourtre, takes 30 seconds.`,
+        data: { data: { X: `Hello` } },
+      },
+      trigger: { seconds: 10 },
+    });
   };
 
   useEffect(() => {
@@ -229,6 +251,7 @@ const UserSettings = () => {
       <View>
         {item.id === 0 ? infoRender(item) : null}
         {item.id === 1 ? substanceRender(item) : null}
+        {item.id === 2 ? notifyRender(item) : null}
         {item.id === 3 ? flagRender(item) : null}
         {item.id === 4 ? deleteRender(item) : null}
         {item.id === 5 ? reportRender(item) : null}
@@ -513,12 +536,12 @@ const UserSettings = () => {
             <Text style={[look.add, { width: "80%" }]}>{item.dropdown}</Text>
             <TouchableOpacity
               onPress={
-                token.flags
-                  ? () => setToken({ ...token, flags: false })
-                  : () => setToken({ ...token, flags: true })
+                token.notify
+                  ? () => setToken({ ...token, notify: false })
+                  : () => setToken({ ...token, notify: true })
               }
             >
-              {token.flags ? (
+              {token.notify ? (
                 <MaterialIcons
                   name="toggle-on"
                   style={[look.toggleOn, { paddingTop: "2%" }]}
@@ -533,9 +556,16 @@ const UserSettings = () => {
           </View>
         </View>
         <View>
-          {token.flags && item.onText ? (
-            <View style={look.element}>
-              <Text style={look.sub}>{item.onText}</Text>
+          {token.notify && item.onText ? (
+            <View>
+              <View style={look.element}>
+                <Text style={look.sub}>{item.onText}</Text>
+              </View>
+              <View style={look.element}>
+                <TouchableOpacity onPress={() => triggerNotify()}>
+                  <Text style={look.sub}>TEN SECONDS</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           ) : null}
         </View>
@@ -688,9 +718,9 @@ const UserSettings = () => {
       title: "My Notifications",
       subtitle: "How often do you want to check-in?",
       dropdown:
-        "Ourtre will send you a quiet notification to remind you to Check-In for your report. Check-Ins can be done in roughly 30 seconds.",
+        "Ourtre will send you a quiet notification to remind you to Check-In. Check-Ins can be done in roughly 30 seconds.",
       onText:
-        "You can check-in whenever you want in the tool box. Ideally, check-in once in the morning and again at night.",
+        "You can check-in whenever you want in the tool box. Ideally, do a check-in once a day.",
     },
     {
       id: 3,
