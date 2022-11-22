@@ -16,6 +16,7 @@ import * as Print from "expo-print";
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 // enables alerts in the forground
 Notifications.setNotificationHandler({
@@ -29,6 +30,9 @@ Notifications.setNotificationHandler({
 const UserSettings = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [editInfo, setEditInfo] = useState(true);
+  const [hrs, setHrs] = useState(0);
+  const [mins, setMins] = useState(0);
+  const [AMPM, setAMPM] = useState(false);
   const [token, setToken] = useState(
     token
       ? token
@@ -42,6 +46,8 @@ const UserSettings = () => {
           country: "",
           flags: true,
           notify: false,
+          notifyTime: null,
+          notifySaved: false,
           name: "",
           email: "",
         }
@@ -108,15 +114,35 @@ const UserSettings = () => {
     ]);
   };
 
-  const triggerNotify = async () => {
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: `Ourtre Check-In.`,
-        body: `Check-In with Ourtre, takes 30 seconds.`,
-        data: { data: { X: `Hello` } },
+  const setNotfityTime = () => {
+    console.log(`${hrs}:${mins}`);
+    let intialHr = AMPM ? hrs : hrs + 12;
+    let hrNotify = intialHr * 3600;
+    let minNotify = mins * 60;
+    let time = hrNotify + minNotify;
+
+    setToken({ ...token, notifyTime: time });
+    triggerNotify(time);
+    console.log(token);
+  };
+
+  const triggerNotify = async (time) => {
+    console.log("inside trigger");
+    await Notifications.scheduleNotificationAsync(
+      {
+        content: {
+          title: `Ourtre Check-In.`,
+          body: `Check-In with Ourtre, it takes 30 seconds.`,
+          data: { data: { X: `Hello` } },
+        },
+        trigger: {
+          // should hours be midnight + notify hours ?
+          second: token.notifyTime ? token.notifyTime : time,
+          repeats: true,
+        },
       },
-      trigger: { seconds: 10 },
-    });
+      console.log("went through the notification function.")
+    );
   };
 
   useEffect(() => {
@@ -491,6 +517,7 @@ const UserSettings = () => {
       </View>
     );
   };
+
   const flagRender = (item) => {
     return (
       <View>
@@ -528,6 +555,7 @@ const UserSettings = () => {
       </View>
     );
   };
+
   const notifyRender = (item) => {
     return (
       <View>
@@ -561,10 +589,87 @@ const UserSettings = () => {
               <View style={look.element}>
                 <Text style={look.sub}>{item.onText}</Text>
               </View>
-              <View style={look.element}>
-                <TouchableOpacity onPress={() => triggerNotify()}>
-                  <Text style={look.sub}>TEN SECONDS</Text>
-                </TouchableOpacity>
+              <Text style={look.add}>What time do you want to check in?</Text>
+              <View
+                style={[
+                  look.elementHeader,
+                  { justifyContent: "center", marginBottom: "4%" },
+                ]}
+              >
+                <TextInput
+                  style={[
+                    look.userInput,
+                    { paddingLeft: "4%", paddingRight: "4%" },
+                  ]}
+                  onChangeText={(text) => setHrs(text)}
+                  value={hrs}
+                  placeholder={hrs ? hrs : "hr"}
+                  maxLength={2}
+                  keyboardType="number-pad"
+                />
+                <Text style={[look.add, { fontSize: 30, padding: "1.5%" }]}>
+                  :
+                </Text>
+                <TextInput
+                  style={look.userInput}
+                  onChangeText={(text) => setMins(text)}
+                  value={mins}
+                  placeholder={mins ? mins : "min"}
+                  maxLength={2}
+                  keyboardType="number-pad"
+                />
+                <View style={{ paddingLeft: "3%", paddingTop: "1%" }}>
+                  {AMPM ? (
+                    <TouchableOpacity
+                      style={{ marginLeft: "1%" }}
+                      onPress={() => setAMPM(false)}
+                    >
+                      <Text style={[look.add, { fontSize: 22 }]}>PM</Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <TouchableOpacity onPress={() => setAMPM(true)}>
+                      <Text style={[look.add, { fontSize: 22 }]}>AM</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+                {token.notifySaved ? (
+                  <TouchableOpacity
+                    style={{ paddingLeft: "6%" }}
+                    onPress={() => {
+                      setToken({
+                        ...token,
+                        notifySaved: false,
+                        notifyTime: null,
+                      });
+                      setHrs(null);
+                      setMins(null);
+                    }}
+                  >
+                    <MaterialCommunityIcons
+                      name="content-save"
+                      style={[
+                        look.toggleOn,
+                        { fontSize: 35, paddingTop: "2%" },
+                      ]}
+                    />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setNotfityTime();
+                      setToken({ ...token, notifySaved: true });
+                    }}
+                    style={{ paddingLeft: "6%" }}
+                  >
+                    <MaterialCommunityIcons
+                      name="content-save-alert"
+                      style={[
+                        look.toggleOff,
+                        { fontSize: 35, paddingTop: "2%" },
+                      ]}
+                    />
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
           ) : null}
