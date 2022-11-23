@@ -14,6 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
 import * as Notifications from "expo-notifications";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
@@ -30,9 +31,9 @@ Notifications.setNotificationHandler({
 const UserSettings = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [editInfo, setEditInfo] = useState(true);
-  const [hrs, setHrs] = useState(0);
-  const [mins, setMins] = useState(0);
-  const [AMPM, setAMPM] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(false);
+  const [timePicker, setTimePicker] = useState(false);
+  const [time, setTime] = useState(new Date(Date.now()));
   const [token, setToken] = useState(
     token
       ? token
@@ -59,8 +60,10 @@ const UserSettings = () => {
     bugNotes: "",
   });
 
-  const [isAvailable, setIsAvailable] = useState(false);
-
+  const onTimeSelected = (event, value) => {
+    setTime(value);
+    console.log("This is the time selected : ", time);
+  };
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedUser");
@@ -596,80 +599,22 @@ const UserSettings = () => {
                   { justifyContent: "center", marginBottom: "4%" },
                 ]}
               >
-                <TextInput
+                <DateTimePicker
                   style={[
-                    look.userInput,
-                    { paddingLeft: "4%", paddingRight: "4%" },
+                    look.add,
+                    {
+                      height: 100,
+                      width: 100,
+                      fontSize: 40,
+                    },
                   ]}
-                  onChangeText={(text) => setHrs(text)}
-                  value={hrs}
-                  placeholder={hrs ? hrs : "hr"}
-                  maxLength={2}
-                  keyboardType="number-pad"
+                  value={time}
+                  display="inline"
+                  onChange={onTimeSelected}
+                  minuteInterval={5}
+                  positiveButton={{ label: "Set Time", textColor: "green" }}
+                  mode="time"
                 />
-                <Text style={[look.add, { fontSize: 30, padding: "1.5%" }]}>
-                  :
-                </Text>
-                <TextInput
-                  style={look.userInput}
-                  onChangeText={(text) => setMins(text)}
-                  value={mins}
-                  placeholder={mins ? mins : "min"}
-                  maxLength={2}
-                  keyboardType="number-pad"
-                />
-                <View style={{ paddingLeft: "3%", paddingTop: "1%" }}>
-                  {AMPM ? (
-                    <TouchableOpacity
-                      style={{ marginLeft: "1%" }}
-                      onPress={() => setAMPM(false)}
-                    >
-                      <Text style={[look.add, { fontSize: 22 }]}>PM</Text>
-                    </TouchableOpacity>
-                  ) : (
-                    <TouchableOpacity onPress={() => setAMPM(true)}>
-                      <Text style={[look.add, { fontSize: 22 }]}>AM</Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
-                {token.notifySaved ? (
-                  <TouchableOpacity
-                    style={{ paddingLeft: "6%" }}
-                    onPress={() => {
-                      setToken({
-                        ...token,
-                        notifySaved: false,
-                        notifyTime: null,
-                      });
-                      setHrs(null);
-                      setMins(null);
-                    }}
-                  >
-                    <MaterialCommunityIcons
-                      name="content-save"
-                      style={[
-                        look.toggleOn,
-                        { fontSize: 35, paddingTop: "2%" },
-                      ]}
-                    />
-                  </TouchableOpacity>
-                ) : (
-                  <TouchableOpacity
-                    onPress={() => {
-                      setNotfityTime();
-                      setToken({ ...token, notifySaved: true });
-                    }}
-                    style={{ paddingLeft: "6%" }}
-                  >
-                    <MaterialCommunityIcons
-                      name="content-save-alert"
-                      style={[
-                        look.toggleOff,
-                        { fontSize: 35, paddingTop: "2%" },
-                      ]}
-                    />
-                  </TouchableOpacity>
-                )}
               </View>
             </View>
           ) : null}
