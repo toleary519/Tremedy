@@ -127,12 +127,10 @@ const UserSettings = () => {
 
   console.log("oh hello from the alarm: ", selectedNewDate);
 
-  const triggerNotify = async () => {
+  const triggerKillNotify = async () => {
     let alarmArr = selectedNewDate.split(":");
     let hours = parseInt(alarmArr[0], 10);
     let minutes = parseInt(alarmArr[1], 10);
-    setToken({ ...token, timeSaved: true, timeHrs: hours, timeMins: minutes });
-
     await Notifications.scheduleNotificationAsync({
       content: {
         title: `Ourtre Check-In.`,
@@ -145,6 +143,18 @@ const UserSettings = () => {
         repeats: true,
       },
     });
+
+    if (token.timeSaved) {
+      await Notifications.cancelAllScheduledNotificationsAsync();
+      setToken({ ...token, timeSaved: false, timeHrs: null, timeMins: null });
+    } else {
+      setToken({
+        ...token,
+        timeSaved: true,
+        timeHrs: hours,
+        timeMins: minutes,
+      });
+    }
   };
 
   const cancelAlarm = () => {
@@ -155,7 +165,7 @@ const UserSettings = () => {
         {
           text: "Okay",
           onPress: async () => {
-            // await Notifications.cancelAllScheduledNotificationsAsync();
+            await Notifications.cancelAllScheduledNotificationsAsync();
           },
         }
       );
@@ -165,7 +175,7 @@ const UserSettings = () => {
       {
         text: "Yes",
         onPress: () => {
-          // secondAlarmAlert();
+          secondAlarmAlert();
         },
       },
       {
@@ -642,7 +652,7 @@ const UserSettings = () => {
                   {token.timeSaved ? (
                     <TouchableOpacity
                       onPress={() => {
-                        cancelAlarm();
+                        triggerKillNotify();
                         console.log("false token: ", token);
                       }}
                     >
@@ -651,11 +661,10 @@ const UserSettings = () => {
                         style={[look.inRoutine, { fontSize: 25 }]}
                       />
                     </TouchableOpacity>
-                  ) : null}
-                  {!token.timeSaved ? (
+                  ) : (
                     <TouchableOpacity
                       onPress={() => {
-                        triggerNotify();
+                        triggerKillNotify();
                         console.log("true token: ", token);
                       }}
                     >
@@ -664,7 +673,7 @@ const UserSettings = () => {
                         style={[look.outRoutine, { fontSize: 25 }]}
                       />
                     </TouchableOpacity>
-                  ) : null}
+                  )}
                 </View>
               </View>
             </View>
