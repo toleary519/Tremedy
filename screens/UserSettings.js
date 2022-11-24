@@ -33,8 +33,6 @@ const UserSettings = () => {
   const [editInfo, setEditInfo] = useState(true);
   const [isAvailable, setIsAvailable] = useState(false);
   const [time, setTime] = useState(new Date(Date.now()));
-  const [secondsToAlarm, setSecondsToAlarm] = useState(0);
-  const [timeSaved, setTimeSaved] = useState(false);
   const [token, setToken] = useState(
     token
       ? token
@@ -47,9 +45,9 @@ const UserSettings = () => {
           city: "",
           country: "",
           flags: true,
-          notify: false,
-          notifyTime: null,
-          notifySaved: false,
+          timeSaved: false,
+          timeHrs: null,
+          timeMins: null,
           name: "",
           email: "",
         }
@@ -119,24 +117,21 @@ const UserSettings = () => {
     ]);
   };
 
-  // const currentDateTime = new Date(Date.now()).toLocaleTimeString([], {
-  //   hour: "2-digit",
-  //   minute: "2-digit",
-  //   hour12: false,
-  // });
   const selectedNewDate = time.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
   });
+
+  const timeForDisplay = time.toLocaleString("en-US");
+
   console.log("oh hello from the alarm: ", selectedNewDate);
 
   const triggerNotify = async () => {
     let alarmArr = selectedNewDate.split(":");
     let hours = parseInt(alarmArr[0], 10);
-    console.log("hrs: ", hours);
     let minutes = parseInt(alarmArr[1], 10);
-    console.log("mins: ", minutes);
+    setToken({ ...token, timeHrs: hours, timeMins: minutes });
 
     await Notifications.scheduleNotificationAsync({
       content: {
@@ -153,28 +148,36 @@ const UserSettings = () => {
     });
   };
 
-  // compares the hours and minutes from above, finds if alarm is for tomorrow or later.
-  // if tomorrow, finds the time remaining in the day and add on tomorrow time, if later finds difference in two.
+  const cancelAlarm = async () => {
+    const secondAlarmAlert = () => {
+      Alert.alert(
+        "Reminder Deleted",
+        `You can set a new alarm whenever you want.`,
+        [
+          {
+            text: "Okay",
+            onPress: () => Notifications.cancelAllScheduledNotificationsAsync(),
+          },
+        ]
+      );
+    };
 
-  // const compareAndNotifyTime = () => {
-  //   const midnight = 86400;
-  //   let selectArr = selectedNewDate.split(":");
-  //   let selectSeconds =
-  //     parseInt(selectArr[0], 10) * 60 * 60 + parseInt(selectArr[1], 10) * 60;
-  //   let nowArr = currentDateTime.split(":");
-  //   let nowSeconds =
-  //     parseInt(nowArr[0], 10) * 60 * 60 + parseInt(nowArr[1], 10) * 60;
-
-  //   if (currentDateTime >= selectedNewDate) {
-  //     setSecondsToAlarm(midnight - nowSeconds + selectSeconds);
-  //     console.log("Alarm for Tomorrow set in ", secondsToAlarm + "seconds.");
-  //     triggerNotify(secondsToAlarm);
-  //   } else {
-  //     setSecondsToAlarm(selectSeconds - nowSeconds);
-  //     console.log("Alarm for Today set in ", secondsToAlarm + "seconds.");
-  //     triggerNotify(secondsToAlarm);
-  //   }
-  // };
+    Alert.alert("Turn Off Reminder?", [
+      {
+        text: "Yes",
+        onPress: () => {
+          secondAlarmAlert();
+          Notifications.cancelAllScheduledNotificationsAsync();
+        },
+      },
+      {
+        text: "Keep it.",
+        onPress: () => {
+          return;
+        },
+      },
+    ]);
+  };
 
   useEffect(() => {
     async function checkAvailability() {
@@ -620,41 +623,54 @@ const UserSettings = () => {
               <View style={look.element}>
                 <Text style={look.sub}>{item.onText}</Text>
               </View>
-              <Text style={look.add}>What time do you want to check in?</Text>
+              <View style={look.element}>
+                <Text style={look.add}>What time do you want to check in?</Text>
+                {token.timeSaved ? (
+                  <Text style={look.inRoutine}>Saved : {timeForDisplay}</Text>
+                ) : null}
+              </View>
               <View style={{ width: 300 }}>
-                <DateTimePicker
-                  style={[
-                    look.add,
-                    {
-                      height: 100,
-                      width: 300,
-                    },
-                  ]}
-                  value={time}
-                  display="inline"
-                  onChange={onTimeSelected}
-                  mode="time"
-                />
-                {timeSaved ? (
-                  <TouchableOpacity onPress={() => setTimeSaved(false)}>
-                    <Feather
-                      name="save"
-                      style={[look.toggleOn, { paddingTop: "2%" }]}
-                    />
-                  </TouchableOpacity>
-                ) : (
+                <View style={look.elementHeader}>
+                  <DateTimePicker
+                    style={{ width: 200, height: 100 }}
+                    value={time}
+                    display="compact"
+                    themeVariant="dark"
+                    textColor={color.font}
+                    onChange={onTimeSelected}
+                    mode="time"
+                  />
                   <TouchableOpacity
-                    onPress={() => {
-                      setTimeSaved(true);
-                      triggerNotify();
-                    }}
+                    onPress={
+                      token.timeSaved
+                        ? () => {
+                            setToken({ ...token, timeSaved: false });
+                            cancelAlarm();
+                            console.log("false token: ", token);
+                          }
+                        : () => {
+                            setToken({ ...token, timeSaved: true });
+                            triggerNotify();
+                            console.log("true token: ", token);
+                          }
+                    }
                   >
-                    <Feather
-                      name="save"
-                      style={[look.toggleOff, { paddingTop: "2%" }]}
-                    />
+                    {token.timeSaved ? (
+                      <Feather
+                        name="check-circle"
+                        style={[look.inRoutine, { fontSize: 25 }]}
+                      />
+                    ) : (
+                      <Feather
+                        name="plus"
+                        style={[
+                          look.outRoutine,
+                          { color: "yellow", fontSize: 25 },
+                        ]}
+                      />
+                    )}
                   </TouchableOpacity>
-                )}
+                </View>
               </View>
             </View>
           ) : null}
