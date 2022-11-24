@@ -17,6 +17,25 @@ const FirstMenu = ({ navigation }) => {
     }
   };
 
+  const profileCheck = () => {
+    Alert.alert(
+      "User Profile Not Found",
+      `Quickly sign up in User Settings for access.`,
+      [
+        {
+          text: "Create Profile",
+          onPress: () => navigation.navigate("UserSettings"),
+        },
+        {
+          text: "Close",
+          onPress: () => {
+            return;
+          },
+        },
+      ]
+    );
+  };
+
   useEffect(() => {
     getData();
   }, [token]);
@@ -27,7 +46,11 @@ const FirstMenu = ({ navigation }) => {
         <View style={look.topBox}>
           <View style={look.border}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("PepTalk")}
+              onPress={
+                token.profile
+                  ? () => navigation.navigate("PepTalk")
+                  : () => profileCheck()
+              }
               delayPressIn={150}
             >
               <View style={look.element}>

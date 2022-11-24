@@ -1,11 +1,5 @@
 import React, { useState, useEffect} from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Linking,
-} from "react-native";
+import { Text, Alert, View, TouchableOpacity, Linking } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { A } from "@expo/html-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -30,6 +24,25 @@ const Emergency = ({ navigation }) => {
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const emergCheck = () => {
+    Alert.alert(
+      "User Profile Not Found",
+      `These services require profile information.`,
+      [
+        {
+          text: "Create Profile",
+          onPress: () => navigation.navigate("UserSettings"),
+        },
+        {
+          text: "Close",
+          onPress: () => {
+            return;
+          },
+        },
+      ]
+    );
   };
 
   useEffect(() => {
@@ -77,7 +90,10 @@ const Emergency = ({ navigation }) => {
       <View style={[look.topBox, { marginTop: "5%" }]}>
         <View style={look.border}>
           <View style={look.element}>
-            <TouchableOpacity onPress={() => crisis()} delayPressIn={150}>
+            <TouchableOpacity
+              onPress={token.profile ? () => crisis() : () => emergCheck()}
+              delayPressIn={150}
+            >
               <Text style={look.add}>Crisis Lines</Text>
               <Text style={look.sub}>
                 Give them a call. There are people available 24/7. You deserve
@@ -88,7 +104,10 @@ const Emergency = ({ navigation }) => {
         </View>
         <View style={look.border}>
           <View style={look.element}>
-            <TouchableOpacity onPress={() => hospitals()} delayPressIn={150}>
+            <TouchableOpacity
+              onPress={token.profile ? () => hospitals() : () => emergCheck()}
+              delayPressIn={150}
+            >
               <Text style={look.add}>Hospitals + Clinics</Text>
               <Text style={look.sub}>
                 A list of the hospitals, clinics and medical resources near you.
@@ -103,6 +122,9 @@ const Emergency = ({ navigation }) => {
                 <Text style={look.add}>For a medical emergency</Text>
                 <Text style={[look.add, { color: "red" }]}> call 911</Text>
               </View>
+              <Text style={[look.add, { color: "red" }]}>
+                DISABLED FOR TESTING VERSION
+              </Text>
               <Text style={look.sub}>
                 Pressing this button will start a call with 911
               </Text>

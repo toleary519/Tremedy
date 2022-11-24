@@ -61,7 +61,6 @@ const UserSettings = () => {
 
   const onTimeSelected = (event, value) => {
     setTime(value);
-    console.log("This is the time selected : ", time);
   };
 
   const getData = async () => {
@@ -79,7 +78,7 @@ const UserSettings = () => {
       const jsonValue = JSON.stringify(token);
       await AsyncStorage.setItem("storedUser", jsonValue);
     } catch (e) {
-      console.log("1", e);
+      console.log(e);
     }
   };
 
@@ -125,12 +124,11 @@ const UserSettings = () => {
 
   const timeForDisplay = time.toLocaleString("en-US");
 
-  console.log("oh hello from the alarm: ", selectedNewDate);
-
   const triggerKillNotify = async () => {
     let alarmArr = selectedNewDate.split(":");
     let hours = parseInt(alarmArr[0], 10);
     let minutes = parseInt(alarmArr[1], 10);
+
     await Notifications.scheduleNotificationAsync({
       content: {
         title: `Ourtre Check-In.`,
@@ -368,7 +366,7 @@ const UserSettings = () => {
               ) : (
                 <View>
                   <View style={look.header}>
-                    <Text style={look.add}>Your name.</Text>
+                    <Text style={look.add}>Name*</Text>
                     <Text style={look.sub}>Any of the following,</Text>
                     <TextInput
                       style={look.userInput}
@@ -381,7 +379,7 @@ const UserSettings = () => {
                     />
                   </View>
                   <View style={look.header}>
-                    <Text style={look.add}>Enter your contact email.</Text>
+                    <Text style={look.add}>Email*</Text>
                     <TextInput
                       style={look.userInput}
                       onChangeText={(text) =>
@@ -394,7 +392,7 @@ const UserSettings = () => {
                   </View>
                   <View style={look.header}>
                     <Text style={look.add}>
-                      City and country where you live.
+                      City* and country where you live.
                     </Text>
                     <Text style={look.sub}>
                       Why? There are location elements in Ourtre. To protect
@@ -421,14 +419,13 @@ const UserSettings = () => {
                     />
                   </View>
                   <View style={look.header}>
-                    <Text style={look.add}>Verify your age.</Text>
-                    <Text style={look.sub}>Enter your birthday, MMDDYY</Text>
+                    <Text style={look.add}>Age, 18+*</Text>
                     <TextInput
                       style={look.userInput}
                       onChangeText={(text) => setToken({ ...token, DOB: text })}
                       value={token.DOB}
-                      maxLength={6}
-                      placeholder={"Birthday"}
+                      maxLength={2}
+                      placeholder={"Age"}
                       keyboardType="number-pad"
                     />
                   </View>
@@ -809,7 +806,7 @@ const UserSettings = () => {
   let settingsOptions = [
     {
       id: 0,
-      title: "My Info",
+      title: "My Profile",
       subtitle: "All about you",
       dropdown:
         "Enter your information here for report sharing and profile recovery.",
