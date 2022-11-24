@@ -364,16 +364,19 @@ const CheckIn = () => {
                   </Text>
                 </View>
                 <View style={look.elementHeader}>
-                  <Text style={look.sub}>Physical : {item.phys}</Text>
-                  <Text style={look.sub}>Emotional : {item.mental}</Text>
-                  <Text style={look.sub}>Outlook : {item.outlook}</Text>
+                  <View>
+                    <Text style={look.sub}>Physical : {item.phys}</Text>
+                    <Text style={look.add}>{item.feelOne}</Text>
+                  </View>
+                  <View style={{ alignItems: "center" }}>
+                    <Text style={look.sub}>Emotional : {item.mental}</Text>
+                    <Text style={look.add}>{item.feelTwo}</Text>
+                  </View>
+                  <View style={{ alignItems: "flex-end" }}>
+                    <Text style={look.sub}>Outlook : {item.outlook}</Text>
+                    <Text style={look.add}>{item.feelThree}</Text>
+                  </View>
                 </View>
-                <View style={look.elementHeader}>
-                  <Text style={look.add}>{item.feelOne}</Text>
-                  <Text style={look.add}>{item.feelThree}</Text>
-                  <Text style={look.add}>{item.feelTwo}</Text>
-                </View>
-
                 <View style={look.element}>
                   {item.myCheckin ? (
                     <Text style={look.add}>{item.myCheckin}</Text>

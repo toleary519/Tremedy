@@ -85,15 +85,19 @@ const CheckVal = (item) => {
           {item.time} - {item.date}
         </Text>
       </View>
-      <View style={look.elementHeader}>
-        <Text style={look.sub}>Physical : {item.phys}</Text>
-        <Text style={look.sub}>Emotional : {item.mental}</Text>
-        <Text style={look.sub}>Outlook : {item.outlook}</Text>
-      </View>
-      <View style={look.elementHeader}>
-        <Text style={look.add}>{item.feelOne}</Text>
-        <Text style={look.add}>{item.feelTwo}</Text>
-        <Text style={look.add}>{item.feelThree}</Text>
+      <View style={look.element}>
+        <View>
+          <Text style={look.sub}>Physical : {item.phys}</Text>
+          <Text style={look.add}>{item.feelOne}</Text>
+        </View>
+        <View style={{ textAlign: "center", justifyContent: "center" }}>
+          <Text style={look.sub}>Emotional : {item.mental}</Text>
+          <Text style={look.add}>{item.feelTwo}</Text>
+        </View>
+        <View>
+          <Text style={look.sub}>Outlook : {item.outlook}</Text>
+          <Text style={look.add}>{item.feelThree}</Text>
+        </View>
       </View>
       {item.myCheckin ? (
         <View style={look.element}>
