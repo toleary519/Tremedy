@@ -32,8 +32,9 @@ const UserSettings = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [editInfo, setEditInfo] = useState(true);
   const [isAvailable, setIsAvailable] = useState(false);
-  const [timePicker, setTimePicker] = useState(false);
   const [time, setTime] = useState(new Date(Date.now()));
+  const [secondsToAlarm, setSecondsToAlarm] = useState(0);
+  const [timeSaved, setTimeSaved] = useState(false);
   const [token, setToken] = useState(
     token
       ? token
@@ -64,6 +65,7 @@ const UserSettings = () => {
     setTime(value);
     console.log("This is the time selected : ", time);
   };
+
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedUser");
@@ -117,36 +119,62 @@ const UserSettings = () => {
     ]);
   };
 
-  const setNotfityTime = () => {
-    console.log(`${hrs}:${mins}`);
-    let intialHr = AMPM ? hrs : hrs + 12;
-    let hrNotify = intialHr * 3600;
-    let minNotify = mins * 60;
-    let time = hrNotify + minNotify;
+  // const currentDateTime = new Date(Date.now()).toLocaleTimeString([], {
+  //   hour: "2-digit",
+  //   minute: "2-digit",
+  //   hour12: false,
+  // });
+  const selectedNewDate = time.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+  console.log("oh hello from the alarm: ", selectedNewDate);
 
-    setToken({ ...token, notifyTime: time });
-    triggerNotify(time);
-    console.log(token);
-  };
+  const triggerNotify = async () => {
+    let alarmArr = selectedNewDate.split(":");
+    let hours = parseInt(alarmArr[0], 10);
+    console.log("hrs: ", hours);
+    let minutes = parseInt(alarmArr[1], 10);
+    console.log("mins: ", minutes);
 
-  const triggerNotify = async (time) => {
-    console.log("inside trigger");
-    await Notifications.scheduleNotificationAsync(
-      {
-        content: {
-          title: `Ourtre Check-In.`,
-          body: `Check-In with Ourtre, it takes 30 seconds.`,
-          data: { data: { X: `Hello` } },
-        },
-        trigger: {
-          // should hours be midnight + notify hours ?
-          second: token.notifyTime ? token.notifyTime : time,
-          repeats: true,
-        },
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: `Ourtre Check-In.`,
+        body: `Check-In with Ourtre, it takes 30 seconds.`,
+        data: { data: { X: `Hello from the data object` } },
       },
-      console.log("went through the notification function.")
-    );
+      trigger: {
+        // should hours be midnight + notify hours ?
+        hour: hours,
+        minute: minutes,
+        repeats: true,
+      },
+    });
   };
+
+  // compares the hours and minutes from above, finds if alarm is for tomorrow or later.
+  // if tomorrow, finds the time remaining in the day and add on tomorrow time, if later finds difference in two.
+
+  // const compareAndNotifyTime = () => {
+  //   const midnight = 86400;
+  //   let selectArr = selectedNewDate.split(":");
+  //   let selectSeconds =
+  //     parseInt(selectArr[0], 10) * 60 * 60 + parseInt(selectArr[1], 10) * 60;
+  //   let nowArr = currentDateTime.split(":");
+  //   let nowSeconds =
+  //     parseInt(nowArr[0], 10) * 60 * 60 + parseInt(nowArr[1], 10) * 60;
+
+  //   if (currentDateTime >= selectedNewDate) {
+  //     setSecondsToAlarm(midnight - nowSeconds + selectSeconds);
+  //     console.log("Alarm for Tomorrow set in ", secondsToAlarm + "seconds.");
+  //     triggerNotify(secondsToAlarm);
+  //   } else {
+  //     setSecondsToAlarm(selectSeconds - nowSeconds);
+  //     console.log("Alarm for Today set in ", secondsToAlarm + "seconds.");
+  //     triggerNotify(secondsToAlarm);
+  //   }
+  // };
 
   useEffect(() => {
     async function checkAvailability() {
@@ -593,28 +621,40 @@ const UserSettings = () => {
                 <Text style={look.sub}>{item.onText}</Text>
               </View>
               <Text style={look.add}>What time do you want to check in?</Text>
-              <View
-                style={[
-                  look.elementHeader,
-                  { justifyContent: "center", marginBottom: "4%" },
-                ]}
-              >
+              <View style={{ width: 300 }}>
                 <DateTimePicker
                   style={[
                     look.add,
                     {
                       height: 100,
-                      width: 100,
-                      fontSize: 40,
+                      width: 300,
                     },
                   ]}
                   value={time}
                   display="inline"
                   onChange={onTimeSelected}
-                  minuteInterval={5}
-                  positiveButton={{ label: "Set Time", textColor: "green" }}
                   mode="time"
                 />
+                {timeSaved ? (
+                  <TouchableOpacity onPress={() => setTimeSaved(false)}>
+                    <Feather
+                      name="save"
+                      style={[look.toggleOn, { paddingTop: "2%" }]}
+                    />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setTimeSaved(true);
+                      triggerNotify();
+                    }}
+                  >
+                    <Feather
+                      name="save"
+                      style={[look.toggleOff, { paddingTop: "2%" }]}
+                    />
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
           ) : null}
