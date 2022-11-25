@@ -108,6 +108,41 @@ const CheckVal = (item) => {
   );
 };
 
+const CravingVal = (item) => {
+  return (
+    <View style={look.border}>
+      <View style={look.elementHeader}>
+        <Text style={look.sub}>{item.title}</Text>
+        <Text style={[look.sub, { opacity: 0.9 }]}>
+          Severity: {item.severity}
+        </Text>
+        <Text style={look.sub}>
+          {item.time} - {item.date}
+        </Text>
+      </View>
+      <View style={look.element}>
+        <View>
+          <Text style={look.sub}>Trigger</Text>
+          <Text style={look.add}>{item.trigger}</Text>
+        </View>
+      </View>
+
+      <View style={look.element}>
+        <View>
+          <Text style={look.sub}>Who / Where</Text>
+          <Text style={look.add}>{item.whereWho}</Text>
+        </View>
+      </View>
+      <View style={look.element}>
+        <View>
+          <Text style={look.sub}>Action</Text>
+          <Text style={look.add}>{item.action}</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
 const Entries = (item) => {
   return (
     <View>
@@ -120,6 +155,7 @@ const Entries = (item) => {
       {item.myValue ? SingleVal(item.myValue, item) : null}
       {item.physical ? PieVal(item) : null}
       {item.initial ? SelfVal(item) : null}
+      {item.severity ? CravingVal(item) : null}
     </View>
   );
 };

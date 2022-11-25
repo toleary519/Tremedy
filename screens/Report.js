@@ -5,7 +5,7 @@ import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
-import { CheckVal, Entries } from "./reportFunctions";
+import { CheckVal, Entries } from "../helpers/reportFunctions";
 import { emailEntries } from "../helpers/htmlEmails";
 
 const Report = () => {
@@ -28,6 +28,7 @@ const Report = () => {
       const valueValue = await AsyncStorage.getItem("storedValues");
       const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
       const thatValue = await AsyncStorage.getItem("storedThat");
+      const cravingValue = await AsyncStorage.getItem("storedCraving");
       let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       let copeData = copeValue ? JSON.parse(copeValue) : [];
       let checkData = checkValue ? JSON.parse(checkValue) : [];
@@ -38,6 +39,7 @@ const Report = () => {
       let valueData = valueValue ? JSON.parse(valueValue) : [];
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
       let thatData = thatValue ? JSON.parse(thatValue) : [];
+      let craveData = cravingValue ? JSON.parse(cravingValue) : [];
       setToken(savedTokData);
       setReportStorage([
         ...copeData,
@@ -49,6 +51,7 @@ const Report = () => {
         ...selfData,
         ...valueData,
         ...thatData,
+        ...craveData
       ]);
     } catch (e) {
       console.log(e);

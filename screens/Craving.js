@@ -217,9 +217,9 @@ const Craving = () => {
                       name="delete-forever"
                     />
                   </TouchableOpacity>
-                  <Text style={look.date}>Severity: {item.severity}</Text>
-                  <Text style={look.date}>{item.time}</Text>
-                  <Text style={look.date}>{item.date}</Text>
+                  <Text style={look.sub}>Severity: {item.severity}</Text>
+                  <Text style={look.sub}>{item.time}</Text>
+                  <Text style={look.sub}>{item.date}</Text>
                   <TouchableOpacity
                     onPress={() => {
                       handleFlag(i);
@@ -234,51 +234,23 @@ const Craving = () => {
                   </TouchableOpacity>
                 </View>
                 <View>
-                  <View
-                    style={[look.element, { justifyContent: "space-between" }]}
-                  >
-                    <View
-                      style={{
-                        marginRight: "2%",
-                        width: "18%",
-                      }}
-                    >
-                      <Text style={[look.add]}>Trigger</Text>
+                  <View style={look.element}>
+                    <View>
+                      <Text style={look.sub}>Trigger</Text>
+                      <Text style={look.add}>{item.trigger}</Text>
                     </View>
-                    <Text style={[look.add, { width: "80%" }]}>
-                      {item.trigger}
-                    </Text>
                   </View>
-                  <View
-                    style={[look.element, { justifyContent: "space-between" }]}
-                  >
-                    <View
-                      style={{
-                        marginRight: "2%",
-                        width: "18%",
-                      }}
-                    >
-                      <Text style={look.add}>Who/</Text>
-                      <Text style={look.add}>Where</Text>
+                  <View style={look.element}>
+                    <View>
+                      <Text style={look.sub}>Who / Where</Text>
+                      <Text style={look.add}>{item.whereWho}</Text>
                     </View>
-                    <Text style={[look.add, { width: "80%" }]}>
-                      {item.whereWho}
-                    </Text>
                   </View>
-                  <View
-                    style={[look.element, { justifyContent: "space-between" }]}
-                  >
-                    <View
-                      style={{
-                        marginRight: "2%",
-                        width: "18%",
-                      }}
-                    >
-                      <Text style={look.add}>Action</Text>
+                  <View style={look.element}>
+                    <View>
+                      <Text style={look.sub}>Action</Text>
+                      <Text style={look.add}>{item.action}</Text>
                     </View>
-                    <Text style={[look.add, { width: "80%" }]}>
-                      {item.action}
-                    </Text>
                   </View>
                 </View>
               </View>

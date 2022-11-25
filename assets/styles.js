@@ -108,7 +108,6 @@ export const look = {
   },
   fSub: {
     marginTop: 5,
-
     textAlign: "flex-start",
     alignItems: "center",
     opacity: 0.7,
@@ -140,10 +139,11 @@ export const look = {
   },
   date: {
     marginTop: 5,
-    textAlign: "center",
-    justifyContent: "flex-end",
-    padding: 10,
-    fontSize: 18,
+    textAlign: "flex-start",
+    alignItems: "center",
+    opacity: 0.6,
+    marginBottom: 5,
+    fontSize: 12,
     fontWeight: "bold",
     color: color.font,
   },
