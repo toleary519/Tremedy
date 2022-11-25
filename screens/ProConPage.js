@@ -120,57 +120,57 @@ const ProCon = () => {
   }, []);
 
   return (
-    <View style={look.pContainer}>
-      <ScrollView contentContainerStyle={[look.left]}>
-        <View style={look.topBox}>
-          <View style={look.header}>
-            <Text style={[look.add, { fontSize: 22, textAlign: "center" }]}>
-              PROs
-            </Text>
-          </View>
-          <TextInput
-            style={look.input}
-            onChangeText={(text) => setPro(text)}
-            value={pro}
-            placeholder={"add new..."}
-            multiline
-            keyboardType="default"
-          />
-          <View>
-            <TouchableOpacity onPress={() => handleAddPro()}>
-              <Ionicons
-                style={[look.icon, look.centerIcon, { fontSize: 35 }]}
-                name="add-circle"
-              />
-            </TouchableOpacity>
-          </View>
-          {proStorage.map((item) => (
-            <View key={item.id} style={look.border}>
-              <View style={look.elementHeader}>
-                <TouchableOpacity onPress={() => handleProDelete({ item })}>
-                  <MaterialIcons
-                    style={[look.icon, look.canIcon]}
-                    name="delete-forever"
-                  />
-                </TouchableOpacity>
-              </View>
-              <View style={look.element}>
-                <Text style={look.add}>{item.message}</Text>
-              </View>
+    <View style={look.container}>
+      <View style={look.proTopBox}>
+        <ScrollView>
+          <View style={[look.proLeft, { minWidth: "100%" }]}>
+            <View style={look.header}>
+              <Text style={[look.add, { fontSize: 22, textAlign: "center" }]}>
+                PROs
+              </Text>
             </View>
-          ))}
-        </View>
-      </ScrollView>
-      <ScrollView>
-        <View style={look.right}>
-          <View style={look.topBox}>
+            <TextInput
+              style={[look.proInput]}
+              onChangeText={(text) => setPro(text)}
+              value={pro}
+              placeholder={"add new..."}
+              multiline
+              keyboardType="default"
+            />
+            <View>
+              <TouchableOpacity onPress={() => handleAddPro()}>
+                <Ionicons
+                  style={[look.icon, look.centerIcon]}
+                  name="add-circle"
+                />
+              </TouchableOpacity>
+            </View>
+            {proStorage.map((item) => (
+              <View key={item.id} style={look.proBorder}>
+                <View style={look.elementHeader}>
+                  <TouchableOpacity onPress={() => handleProDelete({ item })}>
+                    <MaterialIcons
+                      style={[look.icon, look.canIcon]}
+                      name="delete-forever"
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View style={look.element}>
+                  <Text style={look.add}>{item.message}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+        <ScrollView>
+          <View style={[look.proRight, { minWidth: "100%" }]}>
             <View style={look.header}>
               <Text style={[look.add, { fontSize: 22, textAlign: "center" }]}>
                 CONs
               </Text>
             </View>
             <TextInput
-              style={look.input}
+              style={[look.proInput]}
               onChangeText={(text) => setCon(text)}
               value={con}
               placeholder={"add new..."}
@@ -180,13 +180,13 @@ const ProCon = () => {
             <View>
               <TouchableOpacity onPress={() => handleAddCon()}>
                 <Ionicons
-                  style={[look.icon, look.centerIcon, { fontSize: 35 }]}
+                  style={[look.icon, look.centerIcon]}
                   name="add-circle"
                 />
               </TouchableOpacity>
             </View>
             {conStorage.map((item) => (
-              <View key={item.id} style={look.border}>
+              <View key={item.id} style={[look.proBorder]}>
                 <View style={look.elementHeader}>
                   <TouchableOpacity onPress={() => handleConDelete({ item })}>
                     <MaterialIcons
@@ -201,8 +201,8 @@ const ProCon = () => {
               </View>
             ))}
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </View>
   );
 };

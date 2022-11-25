@@ -10,11 +10,24 @@ export const look = {
     borderBottomColor: color.border,
     borderBottomWidth: 1,
   },
+  proBorder: {
+    borderBottomColor: color.border,
+    borderBottomWidth: 1,
+    paddingRight: "4%",
+    paddingLeft: "4%",
+  },
   topBox: {
     flexDirection: "column",
     justifyContent: "flex-start",
     width: "90%",
     left: "5%",
+  },
+  proTopBox: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "90%",
+    left: "2.5%",
   },
   // ___________________Top of the pages
   header: {
@@ -45,6 +58,18 @@ export const look = {
     borderColor: color.border,
     borderRadius: 8,
     marginTop: 21,
+    padding: 10,
+    fontSize: 15,
+    fontWeight: "bold",
+    color: color.inputText,
+    backgroundColor: "#D3EAEE",
+  },
+  proInput: {
+    borderWidth: 3,
+    borderColor: color.border,
+    borderRadius: 8,
+    marginTop: 14,
+    margin: 3,
     padding: 10,
     fontSize: 15,
     fontWeight: "bold",
@@ -230,15 +255,16 @@ export const look = {
   centerIcon: {
     paddingTop: 15,
     paddingBottom: 0,
-    fontSize: 40,
+    fontSize: 30,
     color: color.font,
     textAlign: "center",
   },
-  right: {
-    width: "47.5%",
+  proRight: {
+    flex: 1,
+    marginRight: "2.5%",
   },
-  left: {
-    width: "47.5%",
+  proLeft: {
+    flex: 1,
   },
   pContainer: {
     flex: 1,
