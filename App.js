@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, StatusBar, View, SafeAreaView } from "react-native";
 import { FirstMenu } from "./screens/FirstMenu";
 import { Emergency } from "./screens/Emergency";
 import { PepTalkMenu } from "./screens/PepTalkMenu";
@@ -43,227 +43,230 @@ import { That } from "./screens/That";
 import { Craving } from "./screens/Craving";
 import { color } from "./assets/colors";
 import MyStack from "./routes/homeStack";
-import { StatusBar } from "expo-status-bar";
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Home"
-            screenOptions={{
-              headerStyle: {
-                backgroundColor: color.bg,
-              },
-              headerTintColor: color.font,
-              headerTitleStyle: {
-                fontWeight: "bold",
-                fontSize: 20,
-              },
-            }}
-          >
-            <Stack.Screen
-              name="Home"
-              component={FirstMenu}
-              options={{ title: "Home" }}
-            />
-            <Stack.Screen
-              name="PepTalk"
-              component={PepTalkMenu}
-              options={{ title: "Tool Box" }}
-            />
-            <Stack.Screen
-              name="NotesMenu"
-              component={NotesMenu}
-              options={{ title: "Experiences" }}
-            />
-            <Stack.Screen
-              name="GoodTimes"
-              component={GoodTimes}
-              options={{ title: "The Good" }}
-            />
-            <Stack.Screen
-              name="BadTimes"
-              component={BadTimes}
-              options={{ title: "The Bad" }}
-            />
-            <Stack.Screen
-              name="Emergency"
-              component={Emergency}
-              options={{ title: "Emergency" }}
-            />
-            <Stack.Screen
-              name="UrgeMenu"
-              component={UrgeMenu}
-              options={{ title: "It's Okay" }}
-            />
-            <Stack.Screen
-              name="PlanningMenu"
-              component={PlanningMenu}
-              options={{ title: "I'm Planning" }}
-            />
-            <Stack.Screen
-              name="Meetings"
-              component={Meetings}
-              options={{ title: "Find A Meeting" }}
-            />
-            <Stack.Screen
-              name="SupportContacts"
-              component={SupportContacts}
-              options={{ title: "Support Contacts" }}
-            />
-            <Stack.Screen
-              name="OutsideMenu"
-              component={OutsideMenu}
-              options={{ title: "Don't Do It" }}
-            />
-            <Stack.Screen
-              name="Breathe"
-              component={Breathe}
-              options={{ title: "Breathe" }}
-            />
-            <Stack.Screen
-              name="PercievedThreatMenu"
-              component={PercievedThreatMenu}
-              options={{ title: "Elevated State" }}
-            />
-            <Stack.Screen
-              name="EyeInstruct"
-              component={EyeInstruct}
-              options={{ title: "Eye Exercise" }}
-            />
-            <Stack.Screen
-              name="KneadInstruct"
-              component={KneadInstruct}
-              options={{ title: "Toes Curls" }}
-            />
-            <Stack.Screen
-              name="Activities"
-              component={Activities}
-              options={{ title: "Activities" }}
-            />
-            <Stack.Screen
-              name="Pies"
-              component={Pies}
-              options={{ title: "PIES Check-In" }}
-            />
-            <Stack.Screen
-              name="AnkleInstruct"
-              component={AnkleInstruct}
-              options={{ title: "Ankle Exercise" }}
-            />
-            <Stack.Screen
-              name="SelfTalk"
-              component={SelfTalk}
-              options={{ title: "Thought Challenging" }}
-            />
-            <Stack.Screen
-              name="UserSettings"
-              component={UserSettings}
-              options={{ title: "User Settings" }}
-            />
-            <Stack.Screen
-              name="MyValues"
-              component={MyValues}
-              options={{ title: "My Values" }}
-            />
-            <Stack.Screen
-              name="PMRInstruct"
-              component={PMRInstruct}
-              options={{ title: "PMR" }}
-            />
-            <Stack.Screen
-              name="Using"
-              component={Using}
-              options={{ title: "We Can Do This" }}
-            />
-            <Stack.Screen
-              name="FocusStatement"
-              component={FocusStatement}
-              options={{ title: "Focus Statement" }}
-            />
-            <Stack.Screen
-              name="CopingStatement"
-              component={CopingStatement}
-              options={{ title: "Coping Statement" }}
-            />
-            <Stack.Screen
-              name="CheckIn"
-              component={CheckIn}
-              options={{ title: "Check-In" }}
-            />
-            <Stack.Screen
-              name="JustOne"
-              component={JustOne}
-              options={{ title: "Bullshit" }}
-            />
-            <Stack.Screen
-              name="Report"
-              component={Report}
-              options={{ title: "The One Sheet" }}
-            />
-            <Stack.Screen
-              name="Routine"
-              component={Routine}
-              options={{ title: "My Routine" }}
-            />
-            <Stack.Screen
-              name="One"
-              component={One}
-              options={{ title: "One" }}
-            />
-            <Stack.Screen
-              name="Two"
-              component={Two}
-              options={{ title: "Two" }}
-            />
-            <Stack.Screen
-              name="Three"
-              component={Three}
-              options={{ title: "Three" }}
-            />
-            <Stack.Screen
-              name="Five"
-              component={Five}
-              options={{ title: "Five" }}
-            />
-            <Stack.Screen
-              name="Four"
-              component={Four}
-              options={{ title: "Four" }}
-            />
-            <Stack.Screen
-              name="ProCon"
-              component={ProCon}
-              options={{ title: "PROs & CONs" }}
-            />
-            <Stack.Screen
-              name="Scream"
-              component={Scream}
-              options={{ title: "Scream" }}
-            />
-            <Stack.Screen
-              name="NewFeature"
-              component={NewFeature}
-              options={{ title: "What should we build?" }}
-            />
-            <Stack.Screen
-              name="That"
-              component={That}
-              options={{ title: "Quick Thought" }}
-            />
-            <Stack.Screen
-              name="Craving"
-              component={Craving}
-              options={{ title: "Craving Log" }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+    <>
+      <SafeAreaView style={{ flex: 0, backgroundColor: color.bg }} />
+      <SafeAreaView style={{ flex: 1, backgroundColor: color.bg }}>
+        <StatusBar barStyle={"light-content"} />
+        <View style={styles.container}>
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="Home"
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: color.bg,
+                },
+                headerTintColor: color.font,
+                headerTitleStyle: {
+                  fontWeight: "bold",
+                  fontSize: 20,
+                },
+              }}
+            >
+              <Stack.Screen
+                name="Home"
+                component={FirstMenu}
+                options={{ title: "Home" }}
+              />
+              <Stack.Screen
+                name="PepTalk"
+                component={PepTalkMenu}
+                options={{ title: "Tool Box" }}
+              />
+              <Stack.Screen
+                name="NotesMenu"
+                component={NotesMenu}
+                options={{ title: "Experiences" }}
+              />
+              <Stack.Screen
+                name="GoodTimes"
+                component={GoodTimes}
+                options={{ title: "The Good" }}
+              />
+              <Stack.Screen
+                name="BadTimes"
+                component={BadTimes}
+                options={{ title: "The Bad" }}
+              />
+              <Stack.Screen
+                name="Emergency"
+                component={Emergency}
+                options={{ title: "Emergency" }}
+              />
+              <Stack.Screen
+                name="UrgeMenu"
+                component={UrgeMenu}
+                options={{ title: "It's Okay" }}
+              />
+              <Stack.Screen
+                name="PlanningMenu"
+                component={PlanningMenu}
+                options={{ title: "I'm Planning" }}
+              />
+              <Stack.Screen
+                name="Meetings"
+                component={Meetings}
+                options={{ title: "Find A Meeting" }}
+              />
+              <Stack.Screen
+                name="SupportContacts"
+                component={SupportContacts}
+                options={{ title: "Support Contacts" }}
+              />
+              <Stack.Screen
+                name="OutsideMenu"
+                component={OutsideMenu}
+                options={{ title: "Don't Do It" }}
+              />
+              <Stack.Screen
+                name="Breathe"
+                component={Breathe}
+                options={{ title: "Breathe" }}
+              />
+              <Stack.Screen
+                name="PercievedThreatMenu"
+                component={PercievedThreatMenu}
+                options={{ title: "Elevated State" }}
+              />
+              <Stack.Screen
+                name="EyeInstruct"
+                component={EyeInstruct}
+                options={{ title: "Eye Exercise" }}
+              />
+              <Stack.Screen
+                name="KneadInstruct"
+                component={KneadInstruct}
+                options={{ title: "Toes Curls" }}
+              />
+              <Stack.Screen
+                name="Activities"
+                component={Activities}
+                options={{ title: "Activities" }}
+              />
+              <Stack.Screen
+                name="Pies"
+                component={Pies}
+                options={{ title: "PIES Check-In" }}
+              />
+              <Stack.Screen
+                name="AnkleInstruct"
+                component={AnkleInstruct}
+                options={{ title: "Ankle Exercise" }}
+              />
+              <Stack.Screen
+                name="SelfTalk"
+                component={SelfTalk}
+                options={{ title: "Thought Challenging" }}
+              />
+              <Stack.Screen
+                name="UserSettings"
+                component={UserSettings}
+                options={{ title: "User Settings" }}
+              />
+              <Stack.Screen
+                name="MyValues"
+                component={MyValues}
+                options={{ title: "My Values" }}
+              />
+              <Stack.Screen
+                name="PMRInstruct"
+                component={PMRInstruct}
+                options={{ title: "PMR" }}
+              />
+              <Stack.Screen
+                name="Using"
+                component={Using}
+                options={{ title: "We Can Do This" }}
+              />
+              <Stack.Screen
+                name="FocusStatement"
+                component={FocusStatement}
+                options={{ title: "Focus Statement" }}
+              />
+              <Stack.Screen
+                name="CopingStatement"
+                component={CopingStatement}
+                options={{ title: "Coping Statement" }}
+              />
+              <Stack.Screen
+                name="CheckIn"
+                component={CheckIn}
+                options={{ title: "Check-In" }}
+              />
+              <Stack.Screen
+                name="JustOne"
+                component={JustOne}
+                options={{ title: "Bullshit" }}
+              />
+              <Stack.Screen
+                name="Report"
+                component={Report}
+                options={{ title: "The One Sheet" }}
+              />
+              <Stack.Screen
+                name="Routine"
+                component={Routine}
+                options={{ title: "My Routine" }}
+              />
+              <Stack.Screen
+                name="One"
+                component={One}
+                options={{ title: "One" }}
+              />
+              <Stack.Screen
+                name="Two"
+                component={Two}
+                options={{ title: "Two" }}
+              />
+              <Stack.Screen
+                name="Three"
+                component={Three}
+                options={{ title: "Three" }}
+              />
+              <Stack.Screen
+                name="Five"
+                component={Five}
+                options={{ title: "Five" }}
+              />
+              <Stack.Screen
+                name="Four"
+                component={Four}
+                options={{ title: "Four" }}
+              />
+              <Stack.Screen
+                name="ProCon"
+                component={ProCon}
+                options={{ title: "PROs & CONs" }}
+              />
+              <Stack.Screen
+                name="Scream"
+                component={Scream}
+                options={{ title: "Scream" }}
+              />
+              <Stack.Screen
+                name="NewFeature"
+                component={NewFeature}
+                options={{ title: "What should we build?" }}
+              />
+              <Stack.Screen
+                name="That"
+                component={That}
+                options={{ title: "Quick Thought" }}
+              />
+              <Stack.Screen
+                name="Craving"
+                component={Craving}
+                options={{ title: "Craving Log" }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
       </SafeAreaView>
-    </View>
+    </>
   );
 }
 
