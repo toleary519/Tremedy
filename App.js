@@ -70,7 +70,7 @@ function App() {
               <Stack.Screen
                 name="Home"
                 component={FirstMenu}
-                options={{ title: "Home" }}
+                options={{ title: "Ourtre" }}
               />
               <Stack.Screen
                 name="PepTalk"
