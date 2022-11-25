@@ -5,7 +5,10 @@ import { look } from "../assets/styles";
 
 const Using = ({ navigation }) => (
   <View style={look.container}>
-    <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingBottom: "15%" }}
+    >
       <View style={look.topBox}>
         <View style={look.border}>
           <View style={look.element}>

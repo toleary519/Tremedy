@@ -42,7 +42,10 @@ const FirstMenu = ({ navigation }) => {
 
   return (
     <View style={look.container}>
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: "20%" }}
+      >
         <View style={look.topBox}>
           <View style={look.border}>
             <TouchableOpacity

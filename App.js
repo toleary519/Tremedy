@@ -26,12 +26,10 @@ import { KneadInstruct } from "./screens/KneadInstruct";
 import { AnkleInstruct } from "./screens/AnkleInstruct";
 import { Activities } from "./screens/Activities";
 import { Pies } from "./screens/Pies";
-import { ProgressiveMuscle } from "./screens/ProgressiveMuscle";
 import { SelfTalk } from "./screens/SelfTalk";
 import { MyValues } from "./screens/MyValues";
 import { Using } from "./screens/Using";
 import { PMRInstruct } from "./screens/PMRInstruct";
-import { Stoic } from "./screens/Stoic";
 import { FocusStatement } from "./screens/FocusStatement";
 import { CopingStatement } from "./screens/CopingStatement";
 import { CheckIn } from "./screens/CheckIn";
@@ -153,11 +151,6 @@ function App() {
               options={{ title: "PIES Check-In" }}
             />
             <Stack.Screen
-              name="ProgressiveMuscle"
-              component={ProgressiveMuscle}
-              options={{ title: "PMR" }}
-            />
-            <Stack.Screen
               name="AnkleInstruct"
               component={AnkleInstruct}
               options={{ title: "Ankle Exercise" }}
@@ -186,11 +179,6 @@ function App() {
               name="Using"
               component={Using}
               options={{ title: "We Can Do This" }}
-            />
-            <Stack.Screen
-              name="Stoic"
-              component={Stoic}
-              options={{ title: "Stoic Principles" }}
             />
             <Stack.Screen
               name="FocusStatement"

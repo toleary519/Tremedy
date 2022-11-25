@@ -142,7 +142,10 @@ const SelfTalk = () => {
 
   return (
     <View style={look.container}>
-      <KeyboardAwareScrollView extraHeight={200}>
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: "15%" }}
+      >
         <View style={look.topBox}>
           <View style={look.header}>
             <Text style={look.add}>

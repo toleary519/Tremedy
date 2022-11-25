@@ -877,7 +877,10 @@ const UserSettings = () => {
   return (
     <View style={look.container}>
       <View style={look.topBox}>
-        <KeyboardAwareScrollView extraHeight={175}>
+        <KeyboardAwareScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: "15%" }}
+        >
           {settingsOptions.map((item, i) => (
             <View
               key={i}

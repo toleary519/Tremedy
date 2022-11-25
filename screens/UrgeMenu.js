@@ -11,7 +11,10 @@ import { look } from "../assets/styles";
 
 const UrgeMenu = ({ navigation }) => (
   <View style={look.container}>
-    <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingBottom: "15%" }}
+    >
       <View style={look.topBox}>
         <View style={look.border}>
           <TouchableOpacity

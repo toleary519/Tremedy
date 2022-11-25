@@ -121,23 +121,25 @@ const ProCon = () => {
 
   return (
     <View style={look.pContainer}>
-      <ScrollView style={look.left}>
+      <ScrollView contentContainerStyle={[look.left]}>
         <View style={look.topBox}>
           <View style={look.header}>
-            <Text style={[look.add, { fontSize: 30 }]}>PROs</Text>
+            <Text style={[look.add, { fontSize: 22, textAlign: "center" }]}>
+              PROs
+            </Text>
           </View>
           <TextInput
             style={look.input}
             onChangeText={(text) => setPro(text)}
             value={pro}
-            placeholder={"add new Pro"}
+            placeholder={"add new..."}
             multiline
             keyboardType="default"
           />
           <View>
             <TouchableOpacity onPress={() => handleAddPro()}>
               <Ionicons
-                style={[look.icon, look.centerIcon]}
+                style={[look.icon, look.centerIcon, { fontSize: 35 }]}
                 name="add-circle"
               />
             </TouchableOpacity>
@@ -159,42 +161,46 @@ const ProCon = () => {
           ))}
         </View>
       </ScrollView>
-      <ScrollView style={look.right}>
-        <View style={look.topBox}>
-          <View style={look.header}>
-            <Text style={[look.add, { fontSize: 30 }]}>CONs</Text>
-          </View>
-          <TextInput
-            style={look.input}
-            onChangeText={(text) => setCon(text)}
-            value={con}
-            placeholder={"add new Con"}
-            multiline
-            keyboardType="default"
-          />
-          <View>
-            <TouchableOpacity onPress={() => handleAddCon()}>
-              <Ionicons
-                style={[look.icon, look.centerIcon]}
-                name="add-circle"
-              />
-            </TouchableOpacity>
-          </View>
-          {conStorage.map((item) => (
-            <View key={item.id} style={look.border}>
-              <View style={look.elementHeader}>
-                <TouchableOpacity onPress={() => handleConDelete({ item })}>
-                  <MaterialIcons
-                    style={[look.icon, look.canIcon]}
-                    name="delete-forever"
-                  />
-                </TouchableOpacity>
-              </View>
-              <View style={look.element}>
-                <Text style={look.add}>{item.message}</Text>
-              </View>
+      <ScrollView>
+        <View style={look.right}>
+          <View style={look.topBox}>
+            <View style={look.header}>
+              <Text style={[look.add, { fontSize: 22, textAlign: "center" }]}>
+                CONs
+              </Text>
             </View>
-          ))}
+            <TextInput
+              style={look.input}
+              onChangeText={(text) => setCon(text)}
+              value={con}
+              placeholder={"add new..."}
+              multiline
+              keyboardType="default"
+            />
+            <View>
+              <TouchableOpacity onPress={() => handleAddCon()}>
+                <Ionicons
+                  style={[look.icon, look.centerIcon, { fontSize: 35 }]}
+                  name="add-circle"
+                />
+              </TouchableOpacity>
+            </View>
+            {conStorage.map((item) => (
+              <View key={item.id} style={look.border}>
+                <View style={look.elementHeader}>
+                  <TouchableOpacity onPress={() => handleConDelete({ item })}>
+                    <MaterialIcons
+                      style={[look.icon, look.canIcon]}
+                      name="delete-forever"
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View style={look.element}>
+                  <Text style={look.add}>{item.message}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
         </View>
       </ScrollView>
     </View>

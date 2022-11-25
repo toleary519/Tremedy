@@ -11,7 +11,10 @@ import { look } from "../assets/styles";
 
 const PlanningMenu = ({ navigation }) => (
   <View style={look.container}>
-    <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingBottom: 30 }}
+    >
       <View style={look.topBox}>
         <View style={look.header}>
           <Text style={[look.add, { fontSize: 22 }]}>

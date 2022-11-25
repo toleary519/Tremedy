@@ -53,7 +53,7 @@ const SupportContacts = () => {
 
   return (
     <View style={look.container}>
-      <ScrollView extraHeight={175}>
+      <ScrollView showsVerticalScrollIndicator={false} extraHeight={175}>
         <View style={look.topBox}>
           <View style={look.border}>
             <Text style={look.add}>

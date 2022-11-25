@@ -84,7 +84,10 @@ const PepTalkMenu = ({ navigation }) => {
 
   return (
     <View style={look.container}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: "15%" }}
+      >
         <View style={look.topBox}>
           {pageOptions.map((item, i) => (
             <View key={item.id} style={look.border}>

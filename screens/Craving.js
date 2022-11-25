@@ -155,7 +155,10 @@ const Craving = () => {
 
   return (
     <View style={look.container}>
-      <KeyboardAwareScrollView extraHeight={175}>
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        extraHeight={200}
+      >
         <View style={look.topBox}>
           <View style={look.header}>
             <Text style={look.add}>Fill out the fields below.</Text>

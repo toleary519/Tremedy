@@ -180,7 +180,8 @@ const Report = () => {
 
   return (
     <View style={look.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: "15%" }}>
         <View style={look.topBox}>
           <View style={look.header}>
             <TouchableOpacity

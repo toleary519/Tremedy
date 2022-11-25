@@ -182,7 +182,10 @@ const CheckIn = () => {
 
   return (
     <View style={look.container}>
-      <KeyboardAwareScrollView extraHeight={250}>
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        extraHeight={200}
+      >
         <View style={look.topBox}>
           <View style={look.border}>
             <View style={look.header}>

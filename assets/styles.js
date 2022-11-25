@@ -236,8 +236,6 @@ export const look = {
   },
   right: {
     width: "47.5%",
-    // borderWidth: 2,
-    // borderColor: color.iconGreen,
   },
   left: {
     width: "47.5%",
