@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { look } from "../assets/styles";
 
 const NotesMenu = ({ navigation }) => (

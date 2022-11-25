@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, Image, View } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Text, Image, View } from "react-native";
 import { look } from "../assets/styles";
 
 const KneadInstruct = () => {

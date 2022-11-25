@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, Image, View } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Text, Image, View } from "react-native";
 import { look } from "../assets/styles";
 
 const EyeInstruct = () => (
@@ -18,33 +17,5 @@ const EyeInstruct = () => (
     </View>
   </View>
 );
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     backgroundColor: "#1B2A41"
-//   },
-//   add: {
-//     textAlign: "center",
-//     justifyContent: "flex-end",
-//     padding: 15,
-//     fontSize: 30,
-//     fontWeight: "bold",
-//     color: "#D7D9D7",
-//   },
-
-  // style={{ height: '80%', width: '100%' }}
-  // icon: {
-  //   borderRadius: "3px",
-  //   borderColor: "red",    
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   fontSize: "60", 
-  //   padding: 60,
-  //   color: "#1B2A41"
-  // }
-// });
 
 export { EyeInstruct };

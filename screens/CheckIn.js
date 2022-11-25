@@ -7,9 +7,8 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { feelingWheel } from "./feelingwheelOptions";
+import { feelingWheel } from "../helpers/feelingwheelOptions";
 import Slider from "@react-native-community/slider";
-// import WheelPicker from "react-native-wheely";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import { FontAwesome } from "@expo/vector-icons";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, View , TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { A } from '@expo/html-elements';
 import * as Location from 'expo-location';
 import { look } from "../assets/styles";

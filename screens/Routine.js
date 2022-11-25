@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { Text, View, Alert, TouchableOpacity, ScrollView } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";

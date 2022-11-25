@@ -1,15 +1,9 @@
 import React, { useState, useEffect} from "react";
 import { Text, Alert, View, TouchableOpacity, Linking } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { A } from "@expo/html-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Location from "expo-location";
 import { look } from "../assets/styles";
 
 const Emergency = ({ navigation }) => {
-  const [location, setLocation] = useState();
-  const [errorMsg, setErrorMsg] = useState();
-  const [address, setAddress] = useState();
   const [token, setToken] = useState(token ? token : {});
 
   const makeCall = () => {
@@ -48,34 +42,6 @@ const Emergency = ({ navigation }) => {
   useEffect(() => {
     getData();
   }, []);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== "granted") {
-  //       setErrorMsg("Permission to access location was denied");
-  //       return;
-  //     }
-
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLocation(location);
-  //     // console.log("location object: ****", location)
-
-  //     let address = await Location.reverseGeocodeAsync({
-  //       latitude: location.coords.latitude,
-  //       longitude: location.coords.longitude,
-  //     });
-  //     setAddress(address[0].city);
-  //     // console.log("address object: ****", address[0].city);
-  //   };)();
-  // }, []);
-
-  // let text = "Waiting..";
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (location) {
-  //   text = JSON.stringify(location);
-  // }
 
   let crisis = () => {
     Linking.openURL(`https://www.google.com/search?q=crisis+line+my+area`);

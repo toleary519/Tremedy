@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { look } from "../assets/styles";
 
 const UrgeMenu = ({ navigation }) => (

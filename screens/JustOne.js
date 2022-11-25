@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Text, View, TouchableOpacity } from "react-native";
 import { look } from "../assets/styles";
 
 const JustOne = ({ navigation }) => {
@@ -48,6 +47,5 @@ const JustOne = ({ navigation }) => {
     </View>
   );
 };
-
 
 export { JustOne };

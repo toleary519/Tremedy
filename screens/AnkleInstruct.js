@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Image, View } from "react-native";
+import { Text, View } from "react-native";
 import { look } from "../assets/styles";
 
 const AnkleInstruct = () => {
@@ -12,10 +12,6 @@ const AnkleInstruct = () => {
             onto the sides of your feet.
           </Text>
         </View>
-        {/* <Image
-          style={{ height: "80%", width: "100%" }}
-          source={require("../assets/Toe_Curls.gif")}
-        /> */}
       </View>
     </View>
   );

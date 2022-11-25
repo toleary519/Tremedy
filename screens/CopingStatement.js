@@ -34,9 +34,8 @@ const CopingStatement = () => {
     try {
       const jsonValue = JSON.stringify(copingStorage);
       await AsyncStorage.setItem("storedCoping", jsonValue);
-      console.log(copingStorage);
     } catch (e) {
-      // console.log("1", e);
+      console.log("1", e);
     }
   };
 

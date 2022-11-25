@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, TouchableOpacity, View, Alert } from "react-native";
+import { Text, TouchableOpacity, View, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import { look } from "../assets/styles";

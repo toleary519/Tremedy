@@ -5,9 +5,8 @@ import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
-import { emailStyle, featureEmail } from "./htmlEmails";
+import { emailStyle, featureEmail } from "../helpers/htmlEmails";
 
 // width: ${windowWidth};
 

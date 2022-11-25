@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { pageOptions } from "./optionsList";
+import { pageOptions } from "../helpers/optionsList";
 import { look } from "../assets/styles";
 
 const PepTalkMenu = ({ navigation }) => {

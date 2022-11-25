@@ -6,7 +6,7 @@ import { color } from "../assets/colors";
 import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
 import { CheckVal, Entries } from "./reportFunctions";
-import { checkEmail, emailEntries, emailStyle } from "./htmlEmails";
+import { emailEntries } from "../helpers/htmlEmails";
 
 const Report = () => {
   let [showFull, setShowFull] = useState(true);

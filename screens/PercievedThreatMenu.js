@@ -6,10 +6,7 @@ import {
   View,
   ScrollView,
 } from "react-native";
-import { elevatedOptions } from "./optionsList";
-import { FontAwesome } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
+import { elevatedOptions } from "../helpers/optionsList";
 import { look } from "../assets/styles";
 
 const PercievedThreatMenu = ({ navigation }) => {

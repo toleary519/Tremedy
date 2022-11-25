@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
-import { breathAnimation } from "../assets/breathAnimation.gif";
+import { View, Image, StyleSheet } from "react-native";
 
 const Breathe = () => {
 
@@ -17,30 +16,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#DADADA"
+    backgroundColor: "#DADADA",
   },
-  // add: {
-  //   borderRadius: 10,
-  //   borderWidth: 4,
-  //   borderColor: "#D7D9D7",
-  //   marginTop: 21,
-  //   textAlign: "center",
-  //   justifyContent: "flex-end",
-  //   padding: 10,
-  //   fontSize: 45,
-  //   fontWeight: "bold",
-  //   color: "#D7D9D7",
-  // },
-
-  // icon: {
-  //   borderRadius: "3px",
-  //   borderColor: "red",    
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   fontSize: "60", 
-  //   padding: 60,
-  //   color: "#1B2A41"
-  // }
 });
 
 export { Breathe }

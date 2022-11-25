@@ -165,7 +165,6 @@ const GoodTimes = () => {
             multiline
             keyboardType="default"
           />
-
           <View>
             <TouchableOpacity onPress={() => errorCheck()}>
               <MaterialIcons
@@ -174,7 +173,6 @@ const GoodTimes = () => {
               />
             </TouchableOpacity>
           </View>
-
           {sortedEntries.map((item, i) => (
             <View key={item.id} style={look.border}>
               <View style={look.elementHeader}>
@@ -205,7 +203,5 @@ const GoodTimes = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export { GoodTimes };

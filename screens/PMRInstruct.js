@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, Image, StyleSheet, View } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Image, StyleSheet, View } from "react-native";
 
 const PMRInstruct = () => {
 

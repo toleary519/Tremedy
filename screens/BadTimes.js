@@ -203,6 +203,4 @@ const BadTimes = () => {
   );
 };
 
-const styles = StyleSheet.create({});
-
 export { BadTimes }

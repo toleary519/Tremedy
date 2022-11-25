@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
 
 const OutsideMenu = ({ navigation }) => (
   <View style={styles.container}>

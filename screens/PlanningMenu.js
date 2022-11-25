@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  View,
-} from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Text, TouchableOpacity, ScrollView, View } from "react-native";
 import { look } from "../assets/styles";
 
 const PlanningMenu = ({ navigation }) => (
