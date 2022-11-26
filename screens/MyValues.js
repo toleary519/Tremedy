@@ -51,6 +51,7 @@ const MyValues = () => {
       title: "Values List",
       flag: flag,
       myValue: myValue,
+      myThree: false,
       date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 

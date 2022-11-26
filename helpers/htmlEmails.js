@@ -1,117 +1,6 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
-import { color } from "../assets/colors";
-
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-
-const emailStyle = () => {
-  return `
-    <style>
-    .bg {
-        display: flex;
-        flex-direction: column;
-        background-color: ${color.bg};
-        font-family: roboto, arial, sans-serif;
-    }
-    .title {
-        font-size: 25;
-        font-weight: bold;
-        color: ${color.font};
-        bottom-border: 3px solid ${color.border};
-    }
-    .subTitle {
-        font-size: 20;
-        font-weight: bold;
-        color: ${color.font};
-        margin-left: ${windowWidth * 0.1};
-        bottom-border: 3px solid ${color.border};
-    }
-    .QAbox {
-        padding-top: 3%;
-        bottom-border: 1% solid ${color.border}
-    }
-    </style>
-    `;
-};
-
-const featureEmail = (feature, token) => {
-  return `
-      <div class="bg">
-        <p class="title">Ourtre Team,</p>
-        <div class="border">
-          <p class="subTitle">I think there should be a feature called: ${feature.name}</p>
-        </div>
-        <div class="topBox">
-          <div class="QAbox">
-            <div class="sub">This is what I think it should do:</div>
-            <div class="add">${feature.whatsItDo}</div>
-          </div>
-          <div class="QAbox">
-            <div class="sub">This is how I think it should work:</div>
-            <div class="add">${feature.howsItWork}</div>
-          </div>
-          <div class="QAbox">
-            <div class="sub">This sort of thing is/would be helpful to me because:</div>
-            <div class="add">${feature.howsItHelp}</div>
-          </div>
-          <div class="QAbox">
-            <div class="sub"> In my mind this is how I think it should look:</div>
-            <div class="add">${feature.howsItLook}</div>
-          </div>
-          <div class="QAbox">
-            <div class="sub">More notes:</div>
-            <div class="add">${feature.notes}</div>
-          </div>
-          <div class="QAbox">
-            <div class="sub">Thanks, </div>
-            <div class="add">${token.name}</div>
-          </div>
-        </div>
-      </div>
-      `;
-};
-
-const bugEmail = (issue, token) => {
-  return `
-
-    <div class="bg">
-      <p class="title">Ourtre Team,</p>
-      <p class="subTitle">I have found a bug in: ${issue.where}</p>
-      <div class="topBox">
-        <div class="QAbox">
-          <div class="sub">This is what happened:</div>
-          <div class="add">${issue.what}</div>
-        </div>
-        <div class="QAbox">
-          <div class="sub">This is what I was expecting:</div>
-          <div class="add">${issue.expecting}</div>
-        </div>
-        <div class="QAbox">
-          <div class="sub">Additional notes or ideas:</div>
-          <div class="add">${issue.bugNotes}</div>
-        </div>
-        <div class="QAbox">
-          <div class="sub">Thanks, </div>
-          <div class="add">${token.name}</div>
-        </div>
-      </div>
-    </div>
-
-    `;
-};
-
 const singleEmail = (x, item) => {
   return `
-          <div class="itemBox">
+          <div class="QAbox">
             <div class="row">
                 <p class="sub">${item.title}</p>
                 <p class="sub">${item.date}</p>
@@ -123,7 +12,7 @@ const singleEmail = (x, item) => {
 
 const pieEmail = (item) => {
   return `   
-      <div class="itemBox">
+      <div class="QAbox">
           <div class="row">
               <p class="sub">${item.title}</p>  
               <p class="sub">${item.date}</p>
@@ -150,7 +39,7 @@ const pieEmail = (item) => {
 
 const selfEmail = (item) => {
   return ` 
-      <div class="itemBox">
+      <div class="QAbox">
         <div class="row">
             <p class="sub">${item.title}</p>  
             <p class="sub">${item.date}</p>
@@ -169,7 +58,7 @@ const selfEmail = (item) => {
 
 const checkEmail = (item) => {
   return `   
-    <div class="itemBox">
+    <div class="QAbox">
       <div class="row">
           <p class="sub">${item.title}</p>  
           <p class="sub">${item.time} - ${item.date}</p>
@@ -207,4 +96,4 @@ const emailEntries = (fullReport) => {
   return htmlBlock.join("");
 };
 
-export { emailEntries, checkEmail, bugEmail, featureEmail, emailStyle };
+export { emailEntries, checkEmail };

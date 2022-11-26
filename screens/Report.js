@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Feather } from "@expo/vector-icons";
 import { look } from "../assets/styles";
-import { color } from "../assets/colors";
 import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
 import { CheckVal, Entries } from "../helpers/reportFunctions";
@@ -13,6 +13,7 @@ const Report = () => {
   let [showChecks, setShowChecks] = useState(false);
   let [showFlags, setShowFlags] = useState(false);
   const [token, setToken] = useState(token ? token : {});
+  const [myThree, setMyThree] = useState([]);
   let [reportStorage, setReportStorage] = useState(
     reportStorage ? reportStorage : []
   );
@@ -51,12 +52,41 @@ const Report = () => {
         ...selfData,
         ...valueData,
         ...thatData,
-        ...craveData
+        ...craveData,
       ]);
     } catch (e) {
       console.log(e);
     }
   };
+
+  const handleAdd = ({ item }) => {
+    let newList = [...myThree, { ...item, myThree: true }];
+    setMyThree(newList);
+  };
+
+  const handleRemove = ({ item }) => {
+    setMyThree(myThree.filter((x) => x.id !== item.id));
+  };
+
+  const verify = ({ item }) => {
+    for (let x of myThree) {
+      if (x.id === item.id) {
+        return x.myThree;
+      }
+    }
+    return false;
+  };
+  // const threeCheck = (i) => {
+  //     for (let entry of myThree) {
+  //       if (entry.index === i) {
+  //         return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+  // };
+
+  console.log("myThree : ", myThree);
 
   let dayCount = token.rLength ? token.rLength * 7 : 7;
   let currentDate = new Date().getTime();
@@ -87,80 +117,93 @@ const Report = () => {
 
     const { uri } = await Print.printToFileAsync({
       html: `
-            <html>
-            <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-                <style>
-                @page {
-
-                  size: A4;
-                  
-                  }
-                .container {
-                  display: flex;
-                  height: 100%;
-                  flex-direction: column;
-                  background-color: ${color.bg};
-                  font-family: roboto, arial, sans-serif;
-                }
-                .column {
-                  display: flex;
-                  flex-direction: column;
-                }
-                .row {
-                  display: flex;
-                  flex-direction: row;
-                }
-                .columnWrap {
-                  display: flex;
-                  flex-direction: row;
-                  flex-wrap: wrap;
-                  margin-bottom: 1%;
-                }
-                .add {
-                  font-size: 10;
-                  font-weight: bold;
-                  color: ${color.font};
-                }
-                .sub {
-                  opacity: 0.7;
-                  font-size: 8;
-                  font-weight: bold;
-                  color: ${color.font};
-                }
-                .itemBox {
-                  display: flex;
-                  flex-direction: column;
-                  width: 20%;
-                  padding: 1%;
-                  border-bottom: 3% solid yellow;
-                }
-                </style>
-            </head>
-              <body class="container">
-                <section class="column">
-                    <div class="row">
-                      <header class="column">
-                          <h2 class="add">Ourtre Report for ${token.name}</h2>
-                          <h2 class="add">**LAST ItemDate** - ${currentMonth}/${currentDay}</h2>
-                      </header>
-                      <h2 class="add">Your average scores from daily checkins</h2>
-                      <h2 class="add">Your most selected words from the checkin</h2>
-                    </div>
-                      <h5>One sheets are designed to be just that, one sheet. Use it to focus in on the things that need the
-                      most attention. Pehaps un-flag some items to narrow your focus. All of your entries are still
-                      availble in the Ourtre app.</h5>
-                </section>
-                <section class="columnWrap">
-                
-                ${
-                  showFull
-                  ? emailEntries(fullReport)
-                  : null}                    
-                  </section>
-              </body>
-            </html>
-      `
+      <html>
+      <head>
+      <style>
+      .bg {
+        display: flex;
+        justify-content: flex-start;
+        height: 100%;
+        width: 100%;
+        flex-direction: column;
+        background-color: #1B2A41;
+        font-family: roboto, arial, sans-serif;
+      }
+      .topBox {
+        justify-content: flex-start;
+        margin-left: 5%;
+      }
+      .add {
+        margin-right: 5%;
+        font-size: 18;
+        font-weight: bold;
+        color: #D7D9D7;
+      }
+      .title {
+        padding-top: 10%;
+        font-size: 25;
+        font-weight: bold;
+        color: #D7D9D7;
+        margin-left: 5%;
+        bottom-border: 3px solid #3C5E90;
+      }
+      .subTitle {
+        padding-top: 10%;
+        font-size: 20;
+        opacity: 0.7;
+        font-weight: bold;
+        color: #D7D9D7;
+        margin-left: 5%;
+        
+      }
+      .sub {
+        margin-right: 5%;
+        margin-bottom: 1%;
+        text-align: flex-start;
+        align-items: center;
+        opacity: 0.6;
+        font-size: 15px;
+        font-weight: bold;
+        color: #D7D9D7;
+      }
+      .QAbox {
+        width: 75%;
+        height: 20%;
+        padding-top: 4%;
+        border-bottom: 3px solid #3C5E90
+      }
+      .statBox {
+        display: flex;
+        flex-direction: row;
+        padding-top: 4%;
+        border-bottom: 3px solid #3C5E90
+      }
+      .row {
+        display: flex;
+        flex-direction: row;
+      }
+      .column {
+        display: flex;
+        flex-direction: column;
+      }
+      </style>
+      </head>
+      <div class="bg">
+        <div class="title">"My Three" from ${token.name}</div>
+        <div class="subTitle">Compiled on ${currentMonth}/${currentDay}.</div>
+        <div class="topBox">
+          <div class="statBox">
+            <div class="add">STSTSTTSTSTSTS</div>
+            <div class="add">STATSTSTSTTSSTSTS</div>
+          </div>
+          <div class="column">
+          ${emailEntries(myThree)}
+          </div>
+        </div>
+      </div>
+      </container>
+      </html>
+      `,
     });
 
     MailComposer.composeAsync({
@@ -183,8 +226,10 @@ const Report = () => {
 
   return (
     <View style={look.container}>
-      <ScrollView showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: "15%" }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: "15%" }}
+      >
         <View style={look.topBox}>
           <View style={look.header}>
             <TouchableOpacity
@@ -274,7 +319,23 @@ const Report = () => {
                   : null}
                 {showFlags
                   ? fullFlags.map((item, i) => (
-                      <View key={i}>{Entries(item)}</View>
+                      <View key={i}>
+                        {Entries(item)}
+                        {verify({ item }) ? (
+                          <TouchableOpacity
+                            onPress={() => handleRemove({ item })}
+                          >
+                            <Feather
+                              name="check-circle"
+                              style={look.inRoutine}
+                            />
+                          </TouchableOpacity>
+                        ) : (
+                          <TouchableOpacity onPress={() => handleAdd({ item })}>
+                            <Feather name="plus" style={look.outRoutine} />
+                          </TouchableOpacity>
+                        )}
+                      </View>
                     ))
                   : null}
               </View>

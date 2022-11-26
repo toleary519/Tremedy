@@ -51,6 +51,7 @@ const Pies = () => {
       id: orderId,
       flag: flag,
       title: "PIES Check-In",
+      myThree: false,
       physical: physical,
       insights: insights,
       emotions: emotions,
