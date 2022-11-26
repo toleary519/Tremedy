@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { Text, View, TouchableOpacity, Alert, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Feather } from "@expo/vector-icons";
 import { look } from "../assets/styles";
@@ -63,6 +63,7 @@ const Report = () => {
     let newList = [...myThree, { ...item, myThree: true }];
     setMyThree(newList);
   };
+  let count = myThree.length;
 
   const handleRemove = ({ item }) => {
     setMyThree(myThree.filter((x) => x.id !== item.id));
@@ -292,7 +293,14 @@ const Report = () => {
               }}
               delayPressIn={150}
             >
-              <Text style={look.reportButton}>Email Focused Report</Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={look.reportButton}>Email Focused Report</Text>
+                {count > 0 ? (
+                  <Text style={[look.inRoutine, look.focusReportCount]}>
+                    {count}
+                  </Text>
+                ) : null}
+              </View>
             </TouchableOpacity>
           </View>
           <View>
@@ -301,48 +309,52 @@ const Report = () => {
                 {showFull
                   ? fullReport.map((item, i) => (
                       <View key={i}>
+                        <View style={look.myThreeButton}>
+                          {verify({ item }) ? (
+                            <TouchableOpacity
+                              onPress={() => handleRemove({ item })}
+                            >
+                              <Feather name="check" style={look.inRoutine} />
+                            </TouchableOpacity>
+                          ) : (
+                            <TouchableOpacity
+                              onPress={
+                                myThree.length < 3
+                                  ? () => handleAdd({ item })
+                                  : () => threeAlert()
+                              }
+                            >
+                              <Feather name="plus" style={look.outRoutine} />
+                            </TouchableOpacity>
+                          )}
+                        </View>
                         {Entries(item)}
-                        {verify({ item }) ? (
-                          <TouchableOpacity
-                            onPress={() => handleRemove({ item })}
-                          >
-                            <Feather
-                              name="check-circle"
-                              style={look.inRoutine}
-                            />
-                          </TouchableOpacity>
-                        ) : (
-                          <TouchableOpacity
-                            onPress={
-                              myThree.length < 3
-                                ? () => handleAdd({ item })
-                                : () => threeAlert()
-                            }
-                          >
-                            <Feather name="plus" style={look.outRoutine} />
-                          </TouchableOpacity>
-                        )}
                       </View>
                     ))
                   : null}
                 {showChecks
                   ? fullChecks.map((item, i) => (
                       <View key={i}>
+                        <View style={look.myThreeButton}>
+                          {verify({ item }) ? (
+                            <TouchableOpacity
+                              onPress={() => handleRemove({ item })}
+                            >
+                              <Feather name="check" style={look.inRoutine} />
+                            </TouchableOpacity>
+                          ) : (
+                            <TouchableOpacity
+                              onPress={
+                                myThree.length < 3
+                                  ? () => handleAdd({ item })
+                                  : () => threeAlert()
+                              }
+                            >
+                              <Feather name="plus" style={look.outRoutine} />
+                            </TouchableOpacity>
+                          )}
+                        </View>
                         {CheckVal(item)}
-                        {verify({ item }) ? (
-                          <TouchableOpacity
-                            onPress={() => handleRemove({ item })}
-                          >
-                            <Feather
-                              name="check-circle"
-                              style={look.inRoutine}
-                            />
-                          </TouchableOpacity>
-                        ) : (
-                          <TouchableOpacity onPress={() => handleAdd({ item })}>
-                            <Feather name="plus" style={look.outRoutine} />
-                          </TouchableOpacity>
-                        )}
                       </View>
                     ))
                   : null}
@@ -354,14 +366,15 @@ const Report = () => {
                             <TouchableOpacity
                               onPress={() => handleRemove({ item })}
                             >
-                              <Feather
-                                name="check-circle"
-                                style={look.inRoutine}
-                              />
+                              <Feather name="check" style={look.inRoutine} />
                             </TouchableOpacity>
                           ) : (
                             <TouchableOpacity
-                              onPress={() => handleAdd({ item })}
+                              onPress={
+                                myThree.length < 3
+                                  ? () => handleAdd({ item })
+                                  : () => threeAlert()
+                              }
                             >
                               <Feather name="plus" style={look.outRoutine} />
                             </TouchableOpacity>

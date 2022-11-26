@@ -389,8 +389,12 @@ export const look = {
   },
   myThreeButton: {
     flexDirection: "row",
-    left: "48%",
-    paddingBottom: "1%",
-    paddingTop: "1%",
+    paddingBottom: "0%",
+    paddingTop: "2%",
+  },
+  focusReportCount: {
+    paddingTop: "1.2%",
+    paddingLeft: "3%",
+    opacity: 0.6,
   },
 };
