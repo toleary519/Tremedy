@@ -85,7 +85,9 @@ const Routine = ({ navigation }) => {
                       <Text style={look.sub}>{item.sub}</Text>
                     </View>
                   </TouchableOpacity>
-                  <View style={look.element}>
+                  <View
+                    style={[look.element, { justifyContent: "space-between" }]}
+                  >
                     <TouchableOpacity
                       onPress={i === end ? () => endCheck() : () => swapDown(i)}
                       style={[look.outRoutine]}
@@ -95,7 +97,7 @@ const Routine = ({ navigation }) => {
                         name="chevron-down"
                         style={[
                           look.outRoutine,
-                          { fontSize: 35, marginRight: 20, opacity: 0.7 },
+                          { fontSize: 35, opacity: 0.7 },
                         ]}
                       />
                     </TouchableOpacity>
