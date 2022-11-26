@@ -82,6 +82,7 @@ const CheckIn = () => {
       }`,
       check: "check",
       title: "Check-In",
+      myThree: false,
       phys: phys,
       mental: mental,
       outlook: outlook,

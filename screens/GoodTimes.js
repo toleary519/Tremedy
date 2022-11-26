@@ -57,6 +57,7 @@ const GoodTimes = () => {
     let newNote = {
       id: orderId,
       title: "Good Experiences",
+      myThree: false,
       flag: flag,
       myGood: note,
       date: `${currentMonth}/${currentDay}/${currentYear}`,

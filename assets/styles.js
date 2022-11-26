@@ -275,12 +275,12 @@ export const look = {
     // marginTop: 10,
     // textAlign: "center",
     padding: 4,
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "bold",
     color: color.font,
   },
   reportSelected: {
-    color: color.iconGreen,
+    color: color.iconOrange,
   },
   slider: {
     width: "70%",
@@ -387,90 +387,10 @@ export const look = {
     fontSize: 20,
     left: "10%",
   },
+  myThreeButton: {
+    flexDirection: "row",
+    left: "48%",
+    paddingBottom: "1%",
+    paddingTop: "1%",
+  },
 };
-// ______________________template for entry pages
-// return (
-// <View style={look.container}>
-//  <KeyboardAwareScrollView extraHeight={200}>
-//   <View style={look.topBox}>
-//   <View style={look.header}></View>
-//   <View style={look.subHeader}></View>
-//     {/* input */}
-//     {/* add icon style={[look.icon, look.centerIcon]} */}
-//     {/* map  */}
-//   <View style={look.border}></View>
-//   <View style={look.elementHeader></View>
-//   style={[look.icon, look.canIcon]}
-//   <View style={look.element}></View>
-// </View>
-// </KeyboardAwareScrollView>
-// </View>
-// )
-// };
-
-// return (
-//   <View style={look.container}>
-//     <KeyboardAwareScrollView extraHeight={175}>
-//       <View style={look.topBox}>
-//         <View style={look.header}>
-//           <Text style={look.add}>
-//             Header
-//           </Text>
-//         </View>
-//         <View style={look.subHeader}>
-//           <Text style={look.sub}>
-//             Sub Header
-//           </Text>
-//         </View>
-//         <TextInput
-//           style={look.input}
-//           onChangeText={(text) => setEnt(text)}
-//           value={entry}
-//           placeholder={"what do you want to see?"}
-//           multiline
-//           keyboardType="default"
-//           color=color.font
-//           placeholderTextColor={"#F1F7EE"}
-//         />
-//         <View style={look.drawBox}>{/* draw feature */}</View>
-//         <TouchableOpacity onPress={() => errorCheck()}>
-//           <MaterialIcons
-//             style={[look.icon, look.centerIcon]}
-//             name="add-circle"
-//           />
-//         </TouchableOpacity>
-//         <View>
-//           {sortedEntries.map((item, i) => (
-//             <View key={item.id} style={look.border}>
-//               <View style={look.elementHeader}>
-//                 <TouchableOpacity onPress={() => handleDelete({ item })}>
-//                   <MaterialIcons
-//                     style={[look.icon, look.canIcon]}
-//                     name="delete-forever"
-//                   />
-//                 </TouchableOpacity>
-//                 <Text style={look.date}>{item.date}</Text>
-//                 <TouchableOpacity
-//                   onPress={() => {
-//                     handleFlag(i);
-//                   }}
-//                 >
-//                   <SimpleLineIcons
-//                     style={
-//                       item.flag ? [look.fIcon, look.selected] : look.fIcon
-//                     }
-//                     name="flag"
-//                   />
-//                 </TouchableOpacity>
-//               </View>
-//               <View style={look.element}>
-//                 <Text style={look.add}>{item.entry}</Text>
-//               </View>
-//             </View>
-//           ))}
-//         </View>
-//       </View>
-//     </KeyboardAwareScrollView>
-//   </View>
-// );
-// };

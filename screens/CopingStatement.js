@@ -74,6 +74,7 @@ const CopingStatement = () => {
     let newCoping = {
       id: orderId,
       title: "Coping Statement",
+      myThree: false,
       myCoping: myCoping,
       flag: flag,
       date: `${currentMonth}/${currentDay}/${currentYear}`,

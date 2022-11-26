@@ -24,25 +24,25 @@ const PieVal = (item) => {
       </View>
       <View style={look.element}>
         <View>
-          <Text style={look.sub}>Physically</Text>
+          <Text style={[look.sub, { marginTop: 2 }]}>Physically</Text>
           <Text style={look.add}>{item.physical}</Text>
         </View>
       </View>
       <View style={look.element}>
         <View>
-          <Text style={look.sub}>Insights & Thoughts</Text>
+          <Text style={[look.sub, { marginTop: 2 }]}>Insights & Thoughts</Text>
           <Text style={look.add}>{item.insights}</Text>
         </View>
       </View>
       <View style={look.element}>
         <View>
-          <Text style={look.sub}>Emotions & Feelings</Text>
+          <Text style={[look.sub, { marginTop: 2 }]}>Emotions & Feelings</Text>
           <Text style={look.add}>{item.emotions}</Text>
         </View>
       </View>
       <View style={look.element}>
         <View>
-          <Text style={look.sub}>
+          <Text style={[look.sub, { marginTop: 2 }]}>
             Spiritual connection to self, others or higher power
           </Text>
           <Text style={look.add}>{item.spiritual}</Text>
@@ -76,7 +76,6 @@ const SelfVal = (item) => {
 };
 
 const CheckVal = (item) => {
-
   return (
     <View style={look.border}>
       <View style={look.elementHeader}>
@@ -85,9 +84,14 @@ const CheckVal = (item) => {
           {item.time} - {item.date}
         </Text>
       </View>
-      <View style={look.element}>
+      <View
+        style={[
+          look.userHeader,
+          { justifyContent: "space-between", color: "yellow" },
+        ]}
+      >
         <View>
-          <Text style={look.sub}>Physical : {item.phys}</Text>
+          <Text style={[look.sub]}>Physical : {item.phys}</Text>
           <Text style={look.add}>{item.feelOne}</Text>
         </View>
         <View style={{ textAlign: "center", justifyContent: "center" }}>
@@ -122,20 +126,20 @@ const CravingVal = (item) => {
       </View>
       <View style={look.element}>
         <View>
-          <Text style={look.sub}>Trigger</Text>
+          <Text style={[look.sub, { marginTop: 2 }]}>Trigger</Text>
           <Text style={look.add}>{item.trigger}</Text>
         </View>
       </View>
 
       <View style={look.element}>
         <View>
-          <Text style={look.sub}>Who / Where</Text>
+          <Text style={[look.sub, { marginTop: 2 }]}>Who / Where</Text>
           <Text style={look.add}>{item.whereWho}</Text>
         </View>
       </View>
       <View style={look.element}>
         <View>
-          <Text style={look.sub}>Action</Text>
+          <Text style={[look.sub, { marginTop: 2 }]}>Action</Text>
           <Text style={look.add}>{item.action}</Text>
         </View>
       </View>

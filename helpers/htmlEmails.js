@@ -18,19 +18,16 @@ const pieEmail = (item) => {
               <p class="sub">${item.date}</p>
           </div>
           <div class="column">
-              <p class="sub">Physically</p>
+              <p class="sub">How I feel physically</p>
               <p class="add">${item.physical}</p>
-          </div>
-          <div class="column">
-              <p class="sub">Insights & Thoughts</p>
+
+              <p class="sub">Insights & thoughts</p>
               <p class="add">${item.insights}</p>
-          </div>
-          <div class="column">
-              <p class="sub">Emotionally</p>
+              
+              <p class="sub">How I feel emotionally</p>
               <p class="add">${item.emotions}</p>
-          </div>
-          <div class="column">
-              <p class="sub">Spiritually</p>
+              
+              <p class="sub">How I feel spiritually</p>
               <p class="add">${item.spiritual}</p>
           </div>
       </div>

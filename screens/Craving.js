@@ -88,6 +88,7 @@ const Craving = () => {
         minutes < 10 ? `0${minutes}` : minutes
       }`,
       title: "Craving",
+      myThree: false,
       trigger: craving.trigger,
       severity: craving.severity,
       whereWho: craving.whereWho,

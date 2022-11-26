@@ -55,6 +55,7 @@ const BadTimes = () => {
     let newNote = {
       id: orderId,
       title: "Bad Experiences",
+      myThree: false,
       flag: flag,
       myBad: note,
       date: `${currentMonth}/${currentDay}/${currentYear}`,

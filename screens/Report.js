@@ -76,17 +76,22 @@ const Report = () => {
     }
     return false;
   };
-  // const threeCheck = (i) => {
-  //     for (let entry of myThree) {
-  //       if (entry.index === i) {
-  //         return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   }
-  // };
 
-  console.log("myThree : ", myThree);
+  let threeAlert = () => {
+    Alert.alert(
+      `Focus Report Full`,
+      `You can remove selected items to add others.`,
+      [
+        {
+          text: "OK",
+          style: "cancel",
+          onPress: () => {
+            return;
+          },
+        },
+      ]
+    );
+  };
 
   let dayCount = token.rLength ? token.rLength * 7 : 7;
   let currentDate = new Date().getTime();
@@ -117,104 +122,92 @@ const Report = () => {
 
     const { uri } = await Print.printToFileAsync({
       html: `
-      <html>
-      <head>
       <style>
       .bg {
-        display: flex;
-        justify-content: flex-start;
-        height: 100%;
-        width: 100%;
-        flex-direction: column;
-        background-color: #1B2A41;
+        box-sizing: border-box;
         font-family: roboto, arial, sans-serif;
       }
       .topBox {
-        justify-content: flex-start;
+        box-sizing: border-box;
+        flex-direction: column;
         margin-left: 5%;
+        margin-right: 5%;
       }
       .add {
         margin-right: 5%;
-        font-size: 18;
+        font-size: 14;
         font-weight: bold;
-        color: #D7D9D7;
+        color: #161c20;
       }
       .title {
-        padding-top: 10%;
-        font-size: 25;
+        padding-top: 5%;
+        font-size: 16;
         font-weight: bold;
-        color: #D7D9D7;
-        margin-left: 5%;
-        bottom-border: 3px solid #3C5E90;
+        color: #161c20;
       }
       .subTitle {
-        padding-top: 10%;
-        font-size: 20;
+        font-size: 14;
         opacity: 0.7;
         font-weight: bold;
-        color: #D7D9D7;
-        margin-left: 5%;
-        
+        color: #161c20;
+        padding-bottom: 5px;  
+        border-bottom: 3px solid #3C5E90
       }
       .sub {
         margin-right: 5%;
-        margin-bottom: 1%;
         text-align: flex-start;
         align-items: center;
         opacity: 0.6;
-        font-size: 15px;
+        font-size: 12px;
         font-weight: bold;
-        color: #D7D9D7;
+        color: #161c20;
       }
       .QAbox {
-        width: 75%;
-        height: 20%;
-        padding-top: 4%;
+        display: block;
         border-bottom: 3px solid #3C5E90
       }
       .statBox {
         display: flex;
         flex-direction: row;
-        padding-top: 4%;
         border-bottom: 3px solid #3C5E90
       }
       .row {
         display: flex;
         flex-direction: row;
+        justify-content: space-around;
       }
       .column {
         display: flex;
+        padding: 0;
         flex-direction: column;
       }
       </style>
-      </head>
-      <div class="bg">
-        <div class="title">"My Three" from ${token.name}</div>
-        <div class="subTitle">Compiled on ${currentMonth}/${currentDay}.</div>
-        <div class="topBox">
-          <div class="statBox">
-            <div class="add">STSTSTTSTSTSTS</div>
-            <div class="add">STATSTSTSTTSSTSTS</div>
-          </div>
-          <div class="column">
+
+      <container class="bg">
+        <head style="height: 5%;">
+          <p class="title">Focused Report from ${token.name} and Ourtre</p>
+          <p class="subTitle">Compiled on ${currentMonth}/${currentDay}.</p>
+        </head>
+        <body class="topBox">
           ${emailEntries(myThree)}
-          </div>
-        </div>
-      </div>
+        </body>
+
       </container>
-      </html>
+
       `,
     });
 
     MailComposer.composeAsync({
-      subject: `Ourtre Report : ${token.name}`,
-      body: `Find the PDF of your Ourtre report attached below.\n
-      This report contains entries from *oldDate* to ${currentMonth}/${currentDay}. 
-      \n
-      Please select who you send your report to carefully. If you would like to shorten your report into a more concise document please review your flags and see if you have double counted things you would like to review with your therapist.\n
-      We recommend trying to keep your report to one or two pages as to have a direct focus in your sessions.\n 
-      Thanks,
-      Ourtre Team`,
+      subject: `Focused Report from Ourtre: ${token.name}`,
+      body: `Find the PDF Focused Report from Ourtre attached below.\n
+      It is your decision who you would like to share this with.\n
+      We recommend sending the report to yourself so that you have a copy for future use.\n
+      You can also choose to bring a printed copy with you to your sessions.\n
+      
+      With this document we hope you have chosen three key and concise elements to discuss and examine. All of your information will still be available within the Ourtre app.
+      
+      Take care of yourself,
+      The Ourtre Team`,
       recipients: "t.oleary@me.com",
       attachments: uri,
     });
@@ -267,7 +260,7 @@ const Report = () => {
                     : look.reportButton
                 }
               >
-                Check-Ins
+                Only Check-Ins
               </Text>
             </TouchableOpacity>
           </View>
@@ -287,7 +280,7 @@ const Report = () => {
                     : look.reportButton
                 }
               >
-                Flags
+                Only Flagged Entries
               </Text>
             </TouchableOpacity>
           </View>
@@ -299,7 +292,7 @@ const Report = () => {
               }}
               delayPressIn={150}
             >
-              <Text style={look.reportButton}>Email Report</Text>
+              <Text style={look.reportButton}>Email Focused Report</Text>
             </TouchableOpacity>
           </View>
           <View>
@@ -308,19 +301,34 @@ const Report = () => {
                 {showFull
                   ? fullReport.map((item, i) => (
                       <View key={i}>
-                        {item.check ? CheckVal(item) : Entries(item)}
+                        {Entries(item)}
+                        {verify({ item }) ? (
+                          <TouchableOpacity
+                            onPress={() => handleRemove({ item })}
+                          >
+                            <Feather
+                              name="check-circle"
+                              style={look.inRoutine}
+                            />
+                          </TouchableOpacity>
+                        ) : (
+                          <TouchableOpacity
+                            onPress={
+                              myThree.length < 3
+                                ? () => handleAdd({ item })
+                                : () => threeAlert()
+                            }
+                          >
+                            <Feather name="plus" style={look.outRoutine} />
+                          </TouchableOpacity>
+                        )}
                       </View>
                     ))
                   : null}
                 {showChecks
                   ? fullChecks.map((item, i) => (
-                      <View key={i}>{CheckVal(item)}</View>
-                    ))
-                  : null}
-                {showFlags
-                  ? fullFlags.map((item, i) => (
                       <View key={i}>
-                        {Entries(item)}
+                        {CheckVal(item)}
                         {verify({ item }) ? (
                           <TouchableOpacity
                             onPress={() => handleRemove({ item })}
@@ -335,6 +343,31 @@ const Report = () => {
                             <Feather name="plus" style={look.outRoutine} />
                           </TouchableOpacity>
                         )}
+                      </View>
+                    ))
+                  : null}
+                {showFlags
+                  ? fullFlags.map((item, i) => (
+                      <View key={i}>
+                        <View style={look.myThreeButton}>
+                          {verify({ item }) ? (
+                            <TouchableOpacity
+                              onPress={() => handleRemove({ item })}
+                            >
+                              <Feather
+                                name="check-circle"
+                                style={look.inRoutine}
+                              />
+                            </TouchableOpacity>
+                          ) : (
+                            <TouchableOpacity
+                              onPress={() => handleAdd({ item })}
+                            >
+                              <Feather name="plus" style={look.outRoutine} />
+                            </TouchableOpacity>
+                          )}
+                        </View>
+                        {Entries(item)}
                       </View>
                     ))
                   : null}

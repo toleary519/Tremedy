@@ -50,6 +50,7 @@ const That = () => {
     let newthat = {
       id: orderId,
       title: "that!",
+      myThree: false,
       flag: flag,
       myThat: that,
       date: `${currentMonth}/${currentDay}/${currentYear}`,

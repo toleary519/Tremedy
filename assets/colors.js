@@ -7,6 +7,7 @@ export const color = {
   inputText: "#2f8587",
   iconRed: "#D84C36",
   iconGreen: "#02BD40",
+  iconOrange: "#EFC094",
 
   //   darkish brownish
   //   bg: "#38342E",

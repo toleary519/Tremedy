@@ -76,6 +76,7 @@ const FocusStatement = () => {
     let newFocus = {
       id: orderId,
       title: "Focus Statement",
+      myThree: false,
       myFocus: myFocus,
       flag: flag,
       date: `${currentMonth}/${currentDay}/${currentYear}`,
