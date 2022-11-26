@@ -205,7 +205,7 @@ const Report = () => {
       We recommend sending the report to yourself so that you have a copy for future use.\n
       You can also choose to bring a printed copy with you to your sessions.\n
       
-      With this document we hope you have chosen three key and concise elements to discuss and examine. All of your information will still be available within the Ourtre app.
+      With the Focused Reports try to choose three key and concise elements to discuss and examine. All of your information will still be available within the Ourtre app.
       
       Take care of yourself,
       The Ourtre Team`,
