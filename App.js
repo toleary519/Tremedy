@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, StatusBar, View, SafeAreaView } from "react-native";
 import { FirstMenu } from "./screens/FirstMenu";
 import { Emergency } from "./screens/Emergency";
-import { PepTalkMenu } from "./screens/PepTalkMenu";
+import { PepTalkMenu } from "./screens/PeptalkMenu";
 import { UrgeMenu } from "./screens/UrgeMenu";
 import { PlanningMenu } from "./screens/PlanningMenu";
 import { NotesMenu } from "./screens/NotesMenu";
