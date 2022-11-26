@@ -99,7 +99,6 @@ const CheckIn = () => {
     checkinReset();
     storeData(newList);
     getData();
-    console.log("in handle add: ", newCheckin);
   };
 
   const handleDelete = ({ item }) => {
