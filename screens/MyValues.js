@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  Alert,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { A } from "@expo/html-elements";
+import { FontAwesome } from "@expo/vector-icons";
+import coreV from "../assets/coreV.jpeg";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
@@ -11,6 +19,7 @@ const MyValues = () => {
   const [storage, setStorage] = useState(storage ? storage : []);
   const [token, setToken] = useState(token ? token : {});
   const [myValue, setMyValue] = useState("");
+  const [imageWindow, setImageWindow] = useState(false);
 
   let sortedEntries = storage.sort((a, b) => {
     return b.id - a.id;
@@ -151,6 +160,25 @@ const MyValues = () => {
               time to choose a few that truly resonate with you.
             </Text>
           </View>
+
+          <TouchableOpacity
+            onPress={() => setImageWindow(!imageWindow ? true : false)}
+          >
+            <FontAwesome
+              style={[
+                look.icon,
+                look.centerIcon,
+                { paddingBottom: "4%", fontSize: 25, opacity: 0.7 },
+              ]}
+              name="question-circle"
+            />
+            {imageWindow ? (
+              <View style={[look.imageBox]}>
+                <Image style={look.image} source={coreV} />
+              </View>
+            ) : null}
+          </TouchableOpacity>
+
           <TextInput
             style={look.input}
             onChangeText={(text) => setMyValue(text)}
