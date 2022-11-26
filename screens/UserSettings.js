@@ -282,6 +282,14 @@ const UserSettings = () => {
   };
 
   const errorCheck = () => {
+    if (token.DOB < 18) {
+      Alert.alert(
+        "Age Restriction",
+        `We're sorry,\nOurtre is only for users 18 and above.`,
+        [{ text: "Got It" }]
+      );
+      return;
+    }
     if (
       !token.name.replace(/\s+/g, "") ||
       !token.email.replace(/\s+/g, "") ||
@@ -290,7 +298,7 @@ const UserSettings = () => {
     ) {
       Alert.alert(
         "Entry Error",
-        `Name, Email, City and DOB are required fields.`,
+        `Name, Email, City and Age are required fields.`,
         [{ text: "Got It" }]
       );
       return;

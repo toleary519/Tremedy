@@ -81,7 +81,7 @@ const Report = () => {
   let threeAlert = () => {
     Alert.alert(
       `Focus Report Full`,
-      `You can remove selected items to add others.`,
+      `To be concise the report limit is three entries.\n\nYou can remove selected items to add others.`,
       [
         {
           text: "OK",
@@ -92,6 +92,19 @@ const Report = () => {
         },
       ]
     );
+  };
+
+  const emailErrorCheck = () => {
+    if (myThree.length === 0) {
+      Alert.alert(
+        "Focused Report Empty",
+        `Add entries for review with the "+" button.`,
+        [{ text: "Got It" }]
+      );
+      return;
+    } else {
+      sendReportMail();
+    }
   };
 
   let dayCount = token.rLength ? token.rLength * 7 : 7;
@@ -289,7 +302,7 @@ const Report = () => {
             <TouchableOpacity
               style={{ marginBottom: "5%" }}
               onPress={() => {
-                sendReportMail();
+                emailErrorCheck();
               }}
               delayPressIn={150}
             >

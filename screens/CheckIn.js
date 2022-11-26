@@ -120,31 +120,22 @@ const CheckIn = () => {
     storeData(checkinStorage);
   };
 
-  // const errorCheck = () => {
-  //   let wordCount = checkin.split(/\S+/).length - 1;
-  //   let wordsLeft = 3 - wordCount;
-
-  //   if (!checkin.replace(/\s+/g, "")) {
-  //     Alert.alert("Entry Error", `Fill out all fields to submit.`, [
-  //       { text: "Got It" },
-  //     ]);
-  //     return;
-  //   }
-  //   // if (wordCount < 3) {
-  //   //   Alert.alert(
-  //   //     "Entry Error",
-  //   //     `${
-  //   //       wordsLeft === 1
-  //   //         ? `One more word. You can do it.`
-  //   //         : `Two more words. You can do it`
-  //   //     }`,
-  //   //     [{ text: "Got It" }]
-  //   //   );
-  //   //   return;
-  //   // } else {
-  //     handleAdd();
-  //   }
-  // };
+  const errorCheck = () => {
+    if (
+      !feelOne.replace(/\s+/g, "") ||
+      !feelTwo.replace(/\s+/g, "") ||
+      !feelThree.replace(/\s+/g, "")
+    ) {
+      Alert.alert(
+        "Entry Error",
+        `Three words, and all fields except notes required.`,
+        [{ text: "Got It" }]
+      );
+      return;
+    } else {
+      handleAdd();
+    }
+  };
 
   const setFeeling = (temp) => {
     !feelOne ? setFeelOne(temp) : null;
@@ -335,7 +326,8 @@ const CheckIn = () => {
           </View>
           <View style={[look.header, { marginBottom: 5 }]}>
             <Text style={look.add}>
-              Is there anything else you want to say about how you are feeling?
+              Is there anything else you want to say about how you're feeling
+              right now?
             </Text>
           </View>
           <TextInput
@@ -346,7 +338,7 @@ const CheckIn = () => {
             multiline
             keyboardType="default"
           />
-          <TouchableOpacity style={look.border} onPress={() => handleAdd()}>
+          <TouchableOpacity style={look.border} onPress={() => errorCheck()}>
             <MaterialIcons
               style={[look.icon, look.centerIcon, { paddingBottom: 15 }]}
               name="add-circle"
