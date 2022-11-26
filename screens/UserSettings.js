@@ -665,7 +665,6 @@ const UserSettings = () => {
                     <TouchableOpacity
                       onPress={() => {
                         triggerKillNotify();
-                        console.log("false token: ", token);
                       }}
                     >
                       <Feather
@@ -677,7 +676,6 @@ const UserSettings = () => {
                     <TouchableOpacity
                       onPress={() => {
                         triggerKillNotify();
-                        console.log("true token: ", token);
                       }}
                     >
                       <Feather

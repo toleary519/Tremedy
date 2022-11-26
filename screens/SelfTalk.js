@@ -24,7 +24,6 @@ const SelfTalk = () => {
       let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setSelfTalk(savedData);
       setToken(savedTokData);
-      console.log("get token data", token);
     } catch (e) {
       console.log(e);
     }

@@ -54,7 +54,6 @@ const Scream = () => {
     if (parseInt(a, 10) + parseInt(b, 10) * 100 + parseInt(c, 10) > bestTotal) {
       let newBest = [a, b, c];
       setBest(newBest);
-      console.log("best after set : ", best);
       storeData(newBest);
       getData();
     }
