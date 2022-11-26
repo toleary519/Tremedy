@@ -195,9 +195,6 @@ const UserSettings = () => {
   }, []);
 
   const sendBugMail = async () => {
-    const windowWidth = Dimensions.get("screen").width;
-    const windowHeight = Dimensions.get("screen").height;
-
     const { uri } = await Print.printToFileAsync({
       html: `
       <html>
@@ -205,39 +202,35 @@ const UserSettings = () => {
       <style>
       .bg {
         display: flex;
-        height: ${windowHeight};
+        justify-content: flex-start;
+        height: 100%;
+        width: 100%;
         flex-direction: column;
         background-color: #1B2A41;
         font-family: roboto, arial, sans-serif;
       }
       .topBox {
         justify-content: flex-start;
-        margin-left: ${windowWidth * 0.1};
+        margin-left: 5%;
       }
       .add {
-        margin-right: ${windowWidth * 0.1};
+        margin-right: 5%;
         font-size: 18;
         font-weight: bold;
         color: #D7D9D7;
       }
       .title {
-        padding-top: ${windowHeight * 0.05};
+        padding-top: 10%;
         font-size: 25;
         font-weight: bold;
         color: #D7D9D7;
-        margin-left: ${windowWidth * 0.1};
-        bottom-border: 3px solid ##3C5E90;
-      }
-      .subTitle {
-        font-size: 20;
-        font-weight: bold;
-        color: #D7D9D7;
-        margin-left: ${windowWidth * 0.1};
+        margin-left: 5%;
         bottom-border: 3px solid ##3C5E90;
       }
       .sub {
-        margin-right: ${windowWidth * 0.1};
+        margin-right: 5%;
         text-align: flex-start;
+        margin-bottom: 1%;
         align-items: center;
         opacity: 0.6;
         font-size: 15px;
@@ -245,15 +238,18 @@ const UserSettings = () => {
         color: #D7D9D7;
       }
       .QAbox {
-        padding-top: 3%;
-        bottom-border: 1% solid #3C5E90
+        padding-top: 4%;
+        bottom-border: 2% solid #3C5E90
       }
       </style>
       </head>
       <div class="bg">
-        <p class="title">Ourtre Team,</p>
-        <p class="subTitle">I have found a bug in: ${issue.where}</p>
+        <div class="title">Ourtre Team,</div>
         <div class="topBox">
+          <div class="QAbox">
+            <div class="sub">I found a bug in: </div>
+            <div class="subTitle">${issue.where}</div>
+          </div>
           <div class="QAbox">
             <div class="sub">This is what happened:</div>
             <div class="add">${issue.what}</div>
@@ -300,6 +296,17 @@ const UserSettings = () => {
       return;
     } else {
       setToken({ ...token, profile: true });
+    }
+  };
+
+  const emailErrorCheck = () => {
+    if (!issue.where.replace(/\s+/g, "") || !issue.what.replace(/\s+/g, "")) {
+      Alert.alert("Entry Error", `Where, and What it is required.`, [
+        { text: "Got It" },
+      ]);
+      return;
+    } else {
+      sendBugMail();
     }
   };
 
@@ -506,7 +513,7 @@ const UserSettings = () => {
               />
             </View>
             <View>
-              <TouchableOpacity onPress={() => sendBugMail()}>
+              <TouchableOpacity onPress={() => emailErrorCheck()}>
                 <MaterialIcons
                   style={[look.icon, look.centerIcon, { paddingBottom: "3%" }]}
                   name="add-circle"

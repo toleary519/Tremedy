@@ -6,9 +6,6 @@ import * as Print from "expo-print";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
-import { emailStyle, featureEmail } from "../helpers/htmlEmails";
-
-// width: ${windowWidth};
 
 const NewFeature = () => {
   const [isAvailable, setIsAvailable] = useState(false);
@@ -50,11 +47,84 @@ const NewFeature = () => {
       html: `
       <html>
       <head>
-      ${emailStyle()}
+      <style>
+      .bg {
+        display: flex;
+        justify-content: flex-start;
+        height: 100%;
+        width: 100%;
+        flex-direction: column;
+        background-color: #1B2A41;
+        font-family: roboto, arial, sans-serif;
+      }
+      .topBox {
+        justify-content: flex-start;
+        margin-left: 5%;
+      }
+      .add {
+        margin-right: 5%;
+        font-size: 18;
+        font-weight: bold;
+        color: #D7D9D7;
+      }
+      .title {
+        padding-top: 10%;
+        font-size: 25;
+        font-weight: bold;
+        color: #D7D9D7;
+        margin-left: 5%;
+        bottom-border: 3px solid ##3C5E90;
+      }
+      .sub {
+        margin-right: 5%;
+        margin-bottom: 1%;
+        text-align: flex-start;
+        align-items: center;
+        opacity: 0.6;
+        font-size: 15px;
+        font-weight: bold;
+        color: #D7D9D7;
+      }
+      .QAbox {
+        padding-top: 4%;
+        border-bottom: 2% solid #3C5E90
+      }
+      </style>
       </head>
       <div class="bg">
-      ${featureEmail(feature, token)}
+        <div class="title">Ourtre Team,</div>
+        <div class="topBox">
+          <div class="QAbox">
+            <div class="sub">I think there should be a feature called: </div>
+            <div class="add">${feature.name}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">This is what I think it should do:</div>
+            <div class="add">${feature.whatsItDo}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">This is how I think it should work:</div>
+            <div class="add">${feature.howsItWork}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">This sort of thing is/would be helpful to me because:</div>
+            <div class="add">${feature.howsItHelp}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub"> In my mind this is how I think it should look:</div>
+            <div class="add">${feature.howsItLook}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">Notes & Thoughts:</div>
+            <div class="add">${feature.notes}</div>
+          </div>
+          <div class="QAbox">
+            <div class="sub">Thanks, </div>
+            <div class="add">${token.name}</div>
+          </div>
+        </div>
       </div>
+      </container>
       </html>
       `,
     });
@@ -96,13 +166,20 @@ const NewFeature = () => {
   };
 
   const errorCheck = () => {
-    if (!feature.replace(/\s+/g, "")) {
-      Alert.alert("Entry Error", `Fill out all fields to submit.`, [
-        { text: "Got It" },
-      ]);
+    if (
+      !feature.name.replace(/\s+/g, "") ||
+      !feature.whatsItDo.replace(/\s+/g, "") ||
+      !feature.howsItWork.replace(/\s+/g, "") ||
+      !feature.howsItHelp.replace(/\s+/g, "")
+    ) {
+      Alert.alert(
+        "Entry Error",
+        `Name, what it does, and how it helps required.`,
+        [{ text: "Got It" }]
+      );
       return;
     } else {
-      flagAlert();
+      sendFeatureMail();
     }
   };
 
@@ -192,7 +269,7 @@ const NewFeature = () => {
             />
           </View>
           <View>
-            <TouchableOpacity onPress={() => sendFeatureMail()}>
+            <TouchableOpacity onPress={() => errorCheck()}>
               <MaterialIcons
                 style={[look.icon, look.centerIcon, { paddingBottom: "3%" }]}
                 name="add-circle"
@@ -203,47 +280,7 @@ const NewFeature = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};;;
+};
 
 export { NewFeature };
 
-
-// `Ourtre Team,
-// \n\n My idea is called: ${feature.name}\n\n This is what it does: ${
-//   feature.whatsItDo
-// } \n\n How it works: ${feature.howsItWork} \n\n  How I find it helpful: ${
-//   feature.howsItHelp
-// } \n\n How I think it should look: ${feature.howsItLook} \n\n${
-//   feature.notes ? `Notes: ${feature.notes}` : "No further notes."
-// }`,
-
-  // const featureEmail = () => {
-    //   return (
-    //     <View>
-    //       <Text style={[look.add, { fontSize: 20 }]}>Ourtre Team,</Text>
-    //       <Text style={look.add}>My idea is called {feature.name}</Text>
-    //       <Text />
-    //       <Text style={look.add}>This is what I think it should do:</Text>
-    //       <Text style={look.sub}>{feature.whatsItDo}</Text>
-    //       <Text />
-    //       <Text style={look.add}>This is how I think it should work:</Text>
-    //       <Text style={look.sub}>{feature.howsItWork}</Text>
-    //       <Text />
-    //       <Text style={look.add}>
-    //         This sort of thing is/would be helpful to me because:
-    //       </Text>
-    //       <Text style={look.sub}>{feature.howsItHelp}</Text>
-    //       <Text />
-    //       <Text style={look.add}>
-    //         In my mind this is how I think it should look
-    //       </Text>
-    //       <Text style={look.sub}>{feature.howsItLook}</Text>
-    //       {feature.notes ? (
-    //         <View>
-    //           <Text style={look.add}>More notes:</Text>
-    //           <Text style={look.sub}>{feature.notes}</Text>
-    //         </View>
-    //       ) : null}
-    //     </View>
-    //   );
-    // };
