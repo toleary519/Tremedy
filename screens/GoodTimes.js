@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState } from "react";
+import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";

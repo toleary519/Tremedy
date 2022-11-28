@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -16,12 +16,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 
 const MyValues = () => {
-  const [storage, setStorage] = useState(storage ? storage : []);
+  const [valueStorage, setValueStorage] = useState(
+    valueStorage ? valueStorage : []
+  );
   const [token, setToken] = useState(token ? token : {});
   const [myValue, setMyValue] = useState("");
   const [imageWindow, setImageWindow] = useState(false);
 
-  let sortedEntries = storage.sort((a, b) => {
+  let sortedEntries = valueStorage.sort((a, b) => {
     return b.id - a.id;
   });
 
@@ -31,16 +33,16 @@ const MyValues = () => {
       const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
       let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-      setStorage(savedData);
+      setValueStorage(savedData);
       setToken(savedTokData);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const storeData = async (storage) => {
+  const storeData = async (valueStorage) => {
     try {
-      const jsonValue = JSON.stringify(storage);
+      const jsonValue = JSON.stringify(valueStorage);
       await AsyncStorage.setItem("storedValues", jsonValue);
     } catch (e) {
       console.log(e);
@@ -63,9 +65,9 @@ const MyValues = () => {
       date: `${currentMonth}/${currentDay}/${currentYear}`,
     };
 
-    const newList = [...storage, newValue];
+    const newList = [...valueStorage, newValue];
 
-    setStorage(newList);
+    setValueStorage(newList);
     setMyValue("");
     storeData(newList);
     getData();
@@ -99,7 +101,7 @@ const MyValues = () => {
   const handleDelete = ({ item }) => {
     let index = 0;
     // find the index of item to delete
-    for (let obj of storage) {
+    for (let obj of valueStorage) {
       if (obj.id !== item.id) {
         index++;
       } else {
@@ -107,11 +109,11 @@ const MyValues = () => {
       }
     }
     // filter array for display
-    setStorage(storage.filter((val) => val.id !== item.id));
+    setValueStorage(valueStorage.filter((val) => val.id !== item.id));
     // make permanent delete
-    storage.splice(index, 1);
+    valueStorage.splice(index, 1);
     // save deletion of item
-    storeData(storage);
+    storeData(valueStorage);
   };
 
   const errorCheck = () => {
@@ -132,7 +134,7 @@ const MyValues = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
-    storeData(storage);
+    storeData(valueStorage);
     getData();
   };
 
@@ -227,19 +229,3 @@ const MyValues = () => {
 };
 
 export { MyValues };
-
-// {/* <View style={look.container}>
-//   {/* {keyboardandscrolling} */}
-//   <View style={look.topBox}>
-//     <View style={look.header}>
-//       <View style={look.subHeader}>
-//         {/* input */}
-//         {/* center */}
-//         {/* map */}
-//         <View style={look.element}>
-//           <View style={look.elementHeader}>
-//         </View>
-//       </View>
-//     </View>
-//   </View>
-// </View> */}

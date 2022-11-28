@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Text, View, TouchableOpacity, Linking } from "react-native";
 import { A } from "@expo/html-elements";
 import * as Location from "expo-location";
 import { look } from "../assets/styles";
 
 const Meetings = ({ navigation }) => {
-  const [location, setLocation] = useState();
-  const [errorMsg, setErrorMsg] = useState();
+  // token should come in so that we can get the city.
+
   const [address, setAddress] = useState();
 
   let smart = () => {
@@ -75,4 +75,4 @@ const Meetings = ({ navigation }) => {
   );
 };
 
-export { Meetings }
+export { Meetings };

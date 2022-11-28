@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -255,6 +255,5 @@ const Pies = () => {
     </View>
   );
 };
-
 
 export { Pies };

@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import React, { useState } from "react";
+import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
 import { feelingWheel } from "../helpers/feelingwheelOptions";
 import Slider from "@react-native-community/slider";
 import { MaterialIcons } from "@expo/vector-icons";
