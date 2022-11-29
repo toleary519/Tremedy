@@ -42,13 +42,13 @@ import { NewFeature } from "./screens/NewFeature";
 import { That } from "./screens/That";
 import { Craving } from "./screens/Craving";
 import { color } from "./assets/colors";
-import MyStack from "./routes/homeStack";
+import { StateProvider } from "./Context";
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <>
+    <StateProvider>
       <SafeAreaView style={{ flex: 0, backgroundColor: color.bg }} />
       <SafeAreaView style={{ flex: 1, backgroundColor: color.bg }}>
         <StatusBar barStyle={"light-content"} />
@@ -266,7 +266,7 @@ function App() {
           </NavigationContainer>
         </View>
       </SafeAreaView>
-    </>
+    </StateProvider>
   );
 }
 

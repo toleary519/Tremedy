@@ -1,34 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const CopingStatement = () => {
-  const [copingStorage, setCopingStorage] = useState(
-    copingStorage ? copingStorage : []
-  );
-  const [token, setToken] = useState(token ? token : {});
+  const [copingStorage, setCopingStorage] = useContext(StateContext);
+  const [token, setToken] = useContext(StateContext);
   const [myCoping, setMyCoping] = useState("");
 
   let sortedEntries = copingStorage.sort((a, b) => {
     return b.id - a.id;
   });
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedCoping");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-      setCopingStorage(savedData);
-      setToken(savedTokData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("storedCoping");
+  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
+  //     setCopingStorage(savedData);
+  //     setToken(savedTokData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const storeData = async (copingStorage) => {
     try {
@@ -85,11 +84,7 @@ const CopingStatement = () => {
     setCopingStorage(newList);
     setMyCoping("");
     storeData(newList);
-    // {
-    //   console.log("copeStorgae: ", copingStorage);
-    //   console.log("New List: ", newList);
-    // }
-    getData();
+    // getData();
   };
 
   const handleDelete = ({ item }) => {
@@ -110,9 +105,9 @@ const CopingStatement = () => {
     storeData(copingStorage);
   };
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   getData();
+  // }, []);
 
   const errorCheck = () => {
     if (!myCoping.replace(/\s+/g, "")) {
@@ -133,7 +128,7 @@ const CopingStatement = () => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
     storeData(copingStorage);
-    getData();
+    // getData();
   };
 
   return (
@@ -201,6 +196,6 @@ const CopingStatement = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};
+};;
 
 export { CopingStatement };

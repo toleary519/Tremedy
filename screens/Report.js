@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, TouchableOpacity, Alert, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Feather } from "@expo/vector-icons";
@@ -7,57 +7,57 @@ import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
 import { CheckVal, Entries } from "../helpers/reportFunctions";
 import { emailEntries } from "../helpers/htmlEmails";
+import { StateContext } from "../Context";
 
 const Report = () => {
   let [showFull, setShowFull] = useState(true);
   let [showChecks, setShowChecks] = useState(false);
   let [showFlags, setShowFlags] = useState(false);
   const [token, setToken] = useState(token ? token : {});
-  const [myThree, setMyThree] = useState([]);
-  let [reportStorage, setReportStorage] = useState(
-    reportStorage ? reportStorage : []
-  );
-  const getData = async () => {
-    try {
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
-      const copeValue = await AsyncStorage.getItem("storedCoping");
-      const checkValue = await AsyncStorage.getItem("storedCheckin");
-      const focusValue = await AsyncStorage.getItem("storedFocus");
-      const piesValue = await AsyncStorage.getItem("storedPie");
-      const goodValue = await AsyncStorage.getItem("storedGood");
-      const badValue = await AsyncStorage.getItem("storedBad");
-      const valueValue = await AsyncStorage.getItem("storedValues");
-      const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
-      const thatValue = await AsyncStorage.getItem("storedThat");
-      const cravingValue = await AsyncStorage.getItem("storedCraving");
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-      let copeData = copeValue ? JSON.parse(copeValue) : [];
-      let checkData = checkValue ? JSON.parse(checkValue) : [];
-      let focusData = focusValue ? JSON.parse(focusValue) : [];
-      let piesData = piesValue ? JSON.parse(piesValue) : [];
-      let goodData = goodValue ? JSON.parse(goodValue) : [];
-      let badData = badValue ? JSON.parse(badValue) : [];
-      let valueData = valueValue ? JSON.parse(valueValue) : [];
-      let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
-      let thatData = thatValue ? JSON.parse(thatValue) : [];
-      let craveData = cravingValue ? JSON.parse(cravingValue) : [];
-      setToken(savedTokData);
-      setReportStorage([
-        ...copeData,
-        ...checkData,
-        ...focusData,
-        ...piesData,
-        ...goodData,
-        ...badData,
-        ...selfData,
-        ...valueData,
-        ...thatData,
-        ...craveData,
-      ]);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const [myThree, setMyThree] = useContext(StateContext);
+  let [reportStorage, setReportStorage] = useContext(StateContext);
+
+  // const getData = async () => {
+  //   try {
+  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
+  //     const copeValue = await AsyncStorage.getItem("storedCoping");
+  //     const checkValue = await AsyncStorage.getItem("storedCheckin");
+  //     const focusValue = await AsyncStorage.getItem("storedFocus");
+  //     const piesValue = await AsyncStorage.getItem("storedPie");
+  //     const goodValue = await AsyncStorage.getItem("storedGood");
+  //     const badValue = await AsyncStorage.getItem("storedBad");
+  //     const valueValue = await AsyncStorage.getItem("storedValues");
+  //     const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
+  //     const thatValue = await AsyncStorage.getItem("storedThat");
+  //     const cravingValue = await AsyncStorage.getItem("storedCraving");
+  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
+  //     let copeData = copeValue ? JSON.parse(copeValue) : [];
+  //     let checkData = checkValue ? JSON.parse(checkValue) : [];
+  //     let focusData = focusValue ? JSON.parse(focusValue) : [];
+  //     let piesData = piesValue ? JSON.parse(piesValue) : [];
+  //     let goodData = goodValue ? JSON.parse(goodValue) : [];
+  //     let badData = badValue ? JSON.parse(badValue) : [];
+  //     let valueData = valueValue ? JSON.parse(valueValue) : [];
+  //     let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
+  //     let thatData = thatValue ? JSON.parse(thatValue) : [];
+  //     let craveData = cravingValue ? JSON.parse(cravingValue) : [];
+  //     setToken(savedTokData);
+  //     setReportStorage([
+  //       ...copeData,
+  //       ...checkData,
+  //       ...focusData,
+  //       ...piesData,
+  //       ...goodData,
+  //       ...badData,
+  //       ...selfData,
+  //       ...valueData,
+  //       ...thatData,
+  //       ...craveData,
+  //     ]);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const handleAdd = ({ item }) => {
     let newList = [...myThree, { ...item, myThree: true }];
@@ -227,9 +227,9 @@ const Report = () => {
     });
   };
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <View style={look.container}>

@@ -1,26 +1,27 @@
-import React,{ useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, ScrollView, TextInput } from "react-native";
-import { Ionicons } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const ProCon = () => {
-  const [proStorage, setProStorage] = useState(proStorage ? proStorage : []);
+  const [proStorage, setProStorage] = useContext(StateContext);
   const [pro, setPro] = useState();
-  const [conStorage, setConStorage] = useState(conStorage ? conStorage : []);
+  const [conStorage, setConStorage] = useContext(StateContext);
   const [con, setCon] = useState();
 
-  const getProData = async () => {
-    try {
-      const jsonProValue = await AsyncStorage.getItem("storedPro");
-      let savedProData = jsonProValue ? JSON.parse(jsonProValue) : [];
-      setProStorage(savedProData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getProData = async () => {
+  //   try {
+  //     const jsonProValue = await AsyncStorage.getItem("storedPro");
+  //     let savedProData = jsonProValue ? JSON.parse(jsonProValue) : [];
+  //     setProStorage(savedProData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const storeProData = async (proStorage) => {
     try {
@@ -31,15 +32,15 @@ const ProCon = () => {
     }
   };
 
-  const getConData = async () => {
-    try {
-      const jsonConValue = await AsyncStorage.getItem("storedCon");
-      let savedConData = jsonConValue ? JSON.parse(jsonConValue) : [];
-      setConStorage(savedConData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getConData = async () => {
+  //   try {
+  //     const jsonConValue = await AsyncStorage.getItem("storedCon");
+  //     let savedConData = jsonConValue ? JSON.parse(jsonConValue) : [];
+  //     setConStorage(savedConData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const storeConData = async (conStorage) => {
     try {
@@ -61,7 +62,7 @@ const ProCon = () => {
     setProStorage(newProsList);
     setPro("");
     storeProData(newProsList);
-    getProData();
+    // getProData();
   };
 
   const handleAddCon = () => {
@@ -75,7 +76,7 @@ const ProCon = () => {
     setConStorage(newConsList);
     setCon("");
     storeConData(newConsList);
-    getConData();
+    // getConData();
   };
 
   const handleProDelete = ({ item }) => {
@@ -112,12 +113,12 @@ const ProCon = () => {
     conStorage.splice(index, 1);
     // save deletion of item
     storeConData(conStorage);
-  };;
+  };
 
-  React.useEffect(() => {
-    getProData();
-    getConData();
-  }, []);
+  // React.useEffect(() => {
+  //   getProData();
+  //   getConData();
+  // }, []);
 
   return (
     <View style={look.container}>

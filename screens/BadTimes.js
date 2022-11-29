@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
   StyleSheet,
@@ -12,29 +12,30 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const BadTimes = () => {
-  const [badStorage, setBadStorage] = useState(badStorage ? badStorage : []);
-  const [token, setToken] = useState(token ? token : {});
+  const [badStorage, setBadStorage] = useContext(StateContext);
+  const [token, setToken] = useContext(StateContext);
   const [note, setNote] = useState("");
 
   let sortedEntries = badStorage.sort((a, b) => {
     return b.id - a.id;
   });
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedBad");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-      setBadStorage(savedData);
-      setToken(savedTokData);
-      console.log("token : ", token);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("storedBad");
+  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
+  //     setBadStorage(savedData);
+  //     setToken(savedTokData);
+  //     console.log("token : ", token);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const storeData = async (badStorage) => {
     try {
@@ -66,7 +67,7 @@ const BadTimes = () => {
     setBadStorage(newList);
     setNote("");
     storeData(newList);
-    getData();
+    // getData();
   };
 
   const flagAlert = () => {
@@ -130,13 +131,14 @@ const BadTimes = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    setBadStorage(badStorage);
     storeData(badStorage);
-    getData();
-  };
+    // getData();
+  };;
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   // getData();
+  // }, []);
 
   return (
     <View style={look.container}>
@@ -204,4 +206,4 @@ const BadTimes = () => {
   );
 };
 
-export { BadTimes }
+export { BadTimes };

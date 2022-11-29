@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const Craving = () => {
-  const [cravingStorage, setCravingStorage] = useState(
-    cravingStorage ? cravingStorage : []
-  );
+  const [cravingStorage, setCravingStorage] = useContext(StateContext);
+  const [token, setToken] = useContext(StateContext);
   const [craving, setCraving] = useState(
     craving
       ? craving
@@ -20,24 +20,23 @@ const Craving = () => {
           action: "",
         }
   );
-  const [token, setToken] = useState(token ? token : {});
 
   let sortedEntries = cravingStorage.sort((a, b) => {
     return b.id - a.id;
   });
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedCraving");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-      setCravingStorage(savedData);
-      setToken(savedTokData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("storedCraving");
+  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
+  //     setCravingStorage(savedData);
+  //     setToken(savedTokData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const storeData = async (cravingStorage) => {
     try {
@@ -102,7 +101,7 @@ const Craving = () => {
     setCravingStorage(newList);
     setCraving("");
     storeData(newList);
-    getData();
+    // getData();
   };
 
   const handleDelete = ({ item }) => {
@@ -123,9 +122,9 @@ const Craving = () => {
     storeData(cravingStorage);
   };
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   // getData();
+  // }, []);
 
   const errorCheck = () => {
     if (
@@ -151,7 +150,7 @@ const Craving = () => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
     storeData(cravingStorage);
-    getData();
+    // getData();
   };
 
   return (

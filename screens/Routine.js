@@ -1,30 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, Alert, TouchableOpacity, ScrollView } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const Routine = ({ navigation }) => {
-  let [selectedRoutine, setSelectedRoutine] = useState(
-    selectedRoutine ? selectedRoutine : []
-  );
+  let [selectedRoutine, setSelectedRoutine] = useContext(StateContext);
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("savedRoutine");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      setSelectedRoutine(savedData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("savedRoutine");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     setSelectedRoutine(savedData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
-  const storeData = async (XY) => {
+  const storeData = async (selectedRoutine) => {
     try {
-      const jsonValue = JSON.stringify(XY);
+      const jsonValue = JSON.stringify(selectedRoutine);
       await AsyncStorage.setItem("savedRoutine", jsonValue);
     } catch (e) {
-      console.log("1", e);
+      console.log(e);
     }
   };
 
@@ -46,8 +45,9 @@ const Routine = ({ navigation }) => {
     selectedRoutine[i] = selectedRoutine[i - 1];
     selectedRoutine[i - 1] = temp;
 
+    setSelectedRoutine(selectedRoutine);
     storeData(selectedRoutine);
-    getData();
+    // getData();
   };
 
   const swapDown = (i) => {
@@ -56,15 +56,16 @@ const Routine = ({ navigation }) => {
     selectedRoutine[i] = selectedRoutine[i + 1];
     selectedRoutine[i + 1] = temp;
 
+    setSelectedRoutine(selectedRoutine);
     storeData(selectedRoutine);
-    getData();
+    // getData();
   };
 
   const end = selectedRoutine.length - 1;
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <View style={look.container}>

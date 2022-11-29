@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const Scream = () => {
-  const [best, setBest] = useState(best ? best : []);
+  const [best, setBest] = useContext(StateContext);
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   let a = ("0" + Math.floor((time / 60000) % 60)).slice(-2);
@@ -24,15 +25,15 @@ const Scream = () => {
     return () => clearInterval(interval);
   }, [running]);
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("screamBest");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      setBest(savedData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("screamBest");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     setBest(savedData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
   // console.log("best : ", best);
   const storeData = async (best) => {
     try {
@@ -55,15 +56,15 @@ const Scream = () => {
       let newBest = [a, b, c];
       setBest(newBest);
       storeData(newBest);
-      getData();
+      // getData();
     }
     setTime(0);
     return;
   };
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <View style={look.container}>
@@ -135,6 +136,6 @@ const Scream = () => {
       </View>
     </View>
   );
-};;;;;
+};
 
 export { Scream };

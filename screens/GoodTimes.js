@@ -1,34 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const GoodTimes = () => {
-  const [goodStorage, setGoodStorage] = useState(
-    goodStorage ? goodStorage : []
-  );
-  const [token, setToken] = useState(token ? token : {});
+  const [goodStorage, setGoodStorage] = useContext(StateContext);
+  const [token, setToken] = useContext(StateContext);
   const [note, setNote] = useState("");
 
   let sortedEntries = goodStorage.sort((a, b) => {
     return b.id - a.id;
   });
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedGood");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-      setGoodStorage(savedData);
-      setToken(savedTokData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("storedGood");
+  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
+  //     setGoodStorage(savedData);
+  //     setToken(savedTokData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const storeData = async (goodStorage) => {
     try {
@@ -60,7 +59,7 @@ const GoodTimes = () => {
     setGoodStorage(newList);
     setNote("");
     storeData(newList);
-    getData();
+    // getData();
   };
 
   const flagAlert = () => {
@@ -124,13 +123,14 @@ const GoodTimes = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    // setGoodStorage?
     storeData(goodStorage);
-    getData();
+    // getData();
   };
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <View style={look.container}>
@@ -195,6 +195,6 @@ const GoodTimes = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};
+};;
 
 export { GoodTimes };

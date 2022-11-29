@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Text,
   View,
@@ -14,12 +14,12 @@ import coreV from "../assets/coreV.jpeg";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
+import { State } from "react-native-gesture-handler";
 
 const MyValues = () => {
-  const [valueStorage, setValueStorage] = useState(
-    valueStorage ? valueStorage : []
-  );
-  const [token, setToken] = useState(token ? token : {});
+  const [valueStorage, setValueStorage] = useContext(StateContext);
+  const [token, setToken] = useContext(StateContext);
   const [myValue, setMyValue] = useState("");
   const [imageWindow, setImageWindow] = useState(false);
 
@@ -27,18 +27,18 @@ const MyValues = () => {
     return b.id - a.id;
   });
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedValues");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-      setValueStorage(savedData);
-      setToken(savedTokData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("storedValues");
+  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
+  //     setValueStorage(savedData);
+  //     setToken(savedTokData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const storeData = async (valueStorage) => {
     try {
@@ -70,7 +70,7 @@ const MyValues = () => {
     setValueStorage(newList);
     setMyValue("");
     storeData(newList);
-    getData();
+    // getData();
   };
 
   const flagAlert = () => {
@@ -134,13 +134,13 @@ const MyValues = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    setValueStorage(valueStorage);
     storeData(valueStorage);
-    getData();
   };
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <View style={look.container}>
@@ -226,6 +226,6 @@ const MyValues = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};
+};;
 
 export { MyValues };

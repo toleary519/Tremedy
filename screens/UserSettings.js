@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -18,6 +11,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
+import { StateContext } from "../Context";
 
 // enables alerts in the forground
 Notifications.setNotificationHandler({
@@ -33,25 +27,7 @@ const UserSettings = () => {
   const [editInfo, setEditInfo] = useState(true);
   const [isAvailable, setIsAvailable] = useState(false);
   const [time, setTime] = useState(new Date(Date.now()));
-  const [token, setToken] = useState(
-    token
-      ? token
-      : {
-          subscribed: false,
-          rLength: 1,
-          profile: false,
-          substance: false,
-          DOB: "",
-          city: "",
-          country: "",
-          flags: true,
-          timeSaved: false,
-          timeHrs: null,
-          timeMins: null,
-          name: "",
-          email: "",
-        }
-  );
+  const [token, setToken] = useContext(StateContext);
   const [issue, setIssue] = useState({
     where: "",
     what: "",
@@ -63,15 +39,15 @@ const UserSettings = () => {
     setTime(value);
   };
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
-      setToken({ ...savedData });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("storedUser");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : {};
+  //     setToken({ ...savedData });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const storeData = async (token) => {
     try {
@@ -190,7 +166,7 @@ const UserSettings = () => {
       const isMailAvailable = await MailComposer.isAvailableAsync();
       setIsAvailable(isMailAvailable);
     }
-    getData();
+    // getData();
     checkAvailability();
   }, []);
 
@@ -324,7 +300,7 @@ const UserSettings = () => {
 
   const handleChange = () => {
     storeData(token);
-    getData();
+    // getData();
   };
 
   const dropDownRender = (item) => {
@@ -930,6 +906,6 @@ const UserSettings = () => {
       </View>
     </View>
   );
-};
+};;
 
 export { UserSettings };

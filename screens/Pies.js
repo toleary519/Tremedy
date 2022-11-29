@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const Pies = () => {
-  const [pieStorage, setPieStorage] = useState(pieStorage ? pieStorage : []);
-  const [token, setToken] = useState(token ? token : {});
+  const [pieStorage, setPieStorage] = useContext(StateContext);
+  const [token, setToken] = useContext(StateContext);
   const [physical, setPhysical] = useState("");
   const [insights, setInsights] = useState("");
   const [emotions, setEmotions] = useState("");
@@ -18,18 +19,18 @@ const Pies = () => {
     return b.id - a.id;
   });
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedPie");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-      setPieStorage(savedData);
-      setToken(savedTokData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("storedPie");
+  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
+  //     setPieStorage(savedData);
+  //     setToken(savedTokData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
   //  this is wrong it should be pieVVVVV
   const storeData = async (focusStorage) => {
     try {
@@ -67,7 +68,7 @@ const Pies = () => {
     setEmotions("");
     setSpiritual("");
     storeData(newList);
-    getData();
+    // getData();
   };
 
   const handleDelete = ({ item }) => {
@@ -136,13 +137,14 @@ const Pies = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    setPieStorage(sortedEntries);
     storeData(pieStorage);
-    getData();
+    // getData();
   };
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <View style={look.container}>
@@ -254,6 +256,6 @@ const Pies = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};
+};;
 
 export { Pies };

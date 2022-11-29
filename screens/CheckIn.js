@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
 import { feelingWheel } from "../helpers/feelingwheelOptions";
 import Slider from "@react-native-community/slider";
@@ -8,11 +8,10 @@ import { FontAwesome } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const CheckIn = () => {
-  let [checkinStorage, setCheckinStorage] = useState(
-    checkinStorage ? checkinStorage : []
-  );
+  let [checkinStorage, setCheckinStorage] = useContext(StateContext);
 
   let [phys, setPhys] = useState(1);
   let [mental, setMental] = useState(1);
@@ -38,17 +37,17 @@ const CheckIn = () => {
     return b.id - a.id;
   });
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedCheckin");
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("storedCheckin");
 
-      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
 
-      setCheckinStorage(savedData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  //     setCheckinStorage(savedData);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const storeData = async (checkinStorage) => {
     try {
@@ -91,7 +90,7 @@ const CheckIn = () => {
     setCheckinStorage(newList);
     checkinReset();
     storeData(newList);
-    getData();
+    // getData();
   };
 
   const handleDelete = ({ item }) => {
@@ -159,9 +158,9 @@ const CheckIn = () => {
   const setTwo = feelOne ? Object.keys(feelingWheel[0][feelOne]) : null;
   const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
 
-  React.useEffect(() => {
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <View style={look.container}>
@@ -376,6 +375,6 @@ const CheckIn = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};
+};;
 
 export { CheckIn };
