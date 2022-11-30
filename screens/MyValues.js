@@ -15,30 +15,19 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { StateContext } from "../Context";
-import { State } from "react-native-gesture-handler";
 
 const MyValues = () => {
-  const [valueStorage, setValueStorage] = useContext(StateContext);
-  const [token, setToken] = useContext(StateContext);
+  const { state } = useContext(StateContext);
+  const [valueStorage, setValueStorage] = useState(
+    state.valueStorage ? state.valueStorage : []
+  );
+  const [token, setToken] = useState(state.token ? state.token : {});
   const [myValue, setMyValue] = useState("");
   const [imageWindow, setImageWindow] = useState(false);
 
   let sortedEntries = valueStorage.sort((a, b) => {
     return b.id - a.id;
   });
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedValues");
-  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-  //     setValueStorage(savedData);
-  //     setToken(savedTokData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const storeData = async (valueStorage) => {
     try {
@@ -70,7 +59,6 @@ const MyValues = () => {
     setValueStorage(newList);
     setMyValue("");
     storeData(newList);
-    // getData();
   };
 
   const flagAlert = () => {
@@ -134,13 +122,9 @@ const MyValues = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
-    setValueStorage(valueStorage);
+    setValueStorage(sortedEntries);
     storeData(valueStorage);
   };
-
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
 
   return (
     <View style={look.container}>

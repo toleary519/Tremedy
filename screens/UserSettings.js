@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { StateContext } from "../Context";
+import { S } from "@expo/html-elements";
 
 // enables alerts in the forground
 Notifications.setNotificationHandler({
@@ -23,11 +24,12 @@ Notifications.setNotificationHandler({
 });
 
 const UserSettings = () => {
+  const { state } = useContext(StateContext);
   const [selectedOption, setSelectedOption] = useState(null);
   const [editInfo, setEditInfo] = useState(true);
   const [isAvailable, setIsAvailable] = useState(false);
   const [time, setTime] = useState(new Date(Date.now()));
-  const [token, setToken] = useContext(StateContext);
+  const [token, setToken] = useState(state.token ? state.token : {});
   const [issue, setIssue] = useState({
     where: "",
     what: "",
@@ -38,16 +40,6 @@ const UserSettings = () => {
   const onTimeSelected = (event, value) => {
     setTime(value);
   };
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : {};
-  //     setToken({ ...savedData });
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const storeData = async (token) => {
     try {

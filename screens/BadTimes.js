@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -15,27 +8,16 @@ import { look } from "../assets/styles";
 import { StateContext } from "../Context";
 
 const BadTimes = () => {
-  const [badStorage, setBadStorage] = useContext(StateContext);
-  const [token, setToken] = useContext(StateContext);
+  const { state } = useContext(StateContext);
+  const [badStorage, setBadStorage] = useState(
+    state.badStorage ? state.badStorage : []
+  );
+  const [token, setToken] = useState(state.token ? state.token : []);
   const [note, setNote] = useState("");
 
   let sortedEntries = badStorage.sort((a, b) => {
     return b.id - a.id;
   });
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedBad");
-  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-  //     setBadStorage(savedData);
-  //     setToken(savedTokData);
-  //     console.log("token : ", token);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const storeData = async (badStorage) => {
     try {
@@ -67,7 +49,6 @@ const BadTimes = () => {
     setBadStorage(newList);
     setNote("");
     storeData(newList);
-    // getData();
   };
 
   const flagAlert = () => {
@@ -131,14 +112,9 @@ const BadTimes = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
-    setBadStorage(badStorage);
+    setBadStorage(sortedEntries);
     storeData(badStorage);
-    // getData();
-  };;
-
-  // React.useEffect(() => {
-  //   // getData();
-  // }, []);
+  };
 
   return (
     <View style={look.container}>

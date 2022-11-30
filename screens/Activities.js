@@ -1,28 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
-import { StateContext } from "../Context";
 
 const Activities = () => {
-  const [activeStorage, setActiveStorage] = useContext(StateContext);
+  const [activeStorage, setActiveStorage] = useState(
+    activeStorage ? activeStorage : []
+  );
   const [activity, setActivity] = useState("");
 
   let sortedEntries = activeStorage.sort((a, b) => {
     return b.id - a.id;
   });
 
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedAct");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     setActiveStorage(savedData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("storedAct");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setActiveStorage(savedData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const storeData = async (activeStorage) => {
     try {

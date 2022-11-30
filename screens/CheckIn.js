@@ -11,7 +11,10 @@ import { look } from "../assets/styles";
 import { StateContext } from "../Context";
 
 const CheckIn = () => {
-  let [checkinStorage, setCheckinStorage] = useContext(StateContext);
+  const { state } = useContext(StateContext);
+  let [checkinStorage, setCheckinStorage] = useState(
+    state.checkinStorage ? state.checkinStorage : []
+  );
 
   let [phys, setPhys] = useState(1);
   let [mental, setMental] = useState(1);
@@ -36,18 +39,6 @@ const CheckIn = () => {
   let sortedEntries = checkinStorage.sort((a, b) => {
     return b.id - a.id;
   });
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedCheckin");
-
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-
-  //     setCheckinStorage(savedData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const storeData = async (checkinStorage) => {
     try {
@@ -90,7 +81,6 @@ const CheckIn = () => {
     setCheckinStorage(newList);
     checkinReset();
     storeData(newList);
-    // getData();
   };
 
   const handleDelete = ({ item }) => {
@@ -157,10 +147,6 @@ const CheckIn = () => {
   const setOne = Object.keys(feelingWheel[0]);
   const setTwo = feelOne ? Object.keys(feelingWheel[0][feelOne]) : null;
   const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
-
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
 
   return (
     <View style={look.container}>

@@ -1,22 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Text, View, Alert, TouchableOpacity, ScrollView } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
-import { StateContext } from "../Context";
 
 const Routine = ({ navigation }) => {
-  let [selectedRoutine, setSelectedRoutine] = useContext(StateContext);
+  let [selectedRoutine, setSelectedRoutine] = useState(
+    selectedRoutine ? selectedRoutine : []
+  );
 
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("savedRoutine");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     setSelectedRoutine(savedData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("savedRoutine");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setSelectedRoutine(savedData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const storeData = async (selectedRoutine) => {
     try {
@@ -47,7 +48,7 @@ const Routine = ({ navigation }) => {
 
     setSelectedRoutine(selectedRoutine);
     storeData(selectedRoutine);
-    // getData();
+    getData();
   };
 
   const swapDown = (i) => {
@@ -58,14 +59,14 @@ const Routine = ({ navigation }) => {
 
     setSelectedRoutine(selectedRoutine);
     storeData(selectedRoutine);
-    // getData();
+    getData();
   };
 
   const end = selectedRoutine.length - 1;
 
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <View style={look.container}>

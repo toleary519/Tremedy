@@ -8,33 +8,23 @@ import { look } from "../assets/styles";
 import { StateContext } from "../Context";
 
 const CopingStatement = () => {
-  const [copingStorage, setCopingStorage] = useContext(StateContext);
-  const [token, setToken] = useContext(StateContext);
+  const { state } = useContext(StateContext);
+  const [copingStorage, setCopingStorage] = useState(
+    state.copingStorage ? state.copingStorage : []
+  );
+  const [token, setToken] = useState(token ? token : {});
   const [myCoping, setMyCoping] = useState("");
 
   let sortedEntries = copingStorage.sort((a, b) => {
     return b.id - a.id;
   });
 
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedCoping");
-  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-  //     setCopingStorage(savedData);
-  //     setToken(savedTokData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   const storeData = async (copingStorage) => {
     try {
       const jsonValue = JSON.stringify(copingStorage);
       await AsyncStorage.setItem("storedCoping", jsonValue);
     } catch (e) {
-      console.log("1", e);
+      console.log(e);
     }
   };
 
@@ -84,7 +74,6 @@ const CopingStatement = () => {
     setCopingStorage(newList);
     setMyCoping("");
     storeData(newList);
-    // getData();
   };
 
   const handleDelete = ({ item }) => {
@@ -105,10 +94,6 @@ const CopingStatement = () => {
     storeData(copingStorage);
   };
 
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
-
   const errorCheck = () => {
     if (!myCoping.replace(/\s+/g, "")) {
       Alert.alert("Entry Error", `Fill out all fields to submit.`, [
@@ -127,8 +112,8 @@ const CopingStatement = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
+    setCopingStorage(sortedEntries);
     storeData(copingStorage);
-    // getData();
   };
 
   return (

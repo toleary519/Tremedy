@@ -8,27 +8,17 @@ import { look } from "../assets/styles";
 import { StateContext } from "../Context";
 
 const SelfTalk = () => {
-  const [selfTalk, setSelfTalk] = useContext(StateContext);
-  const [token, setToken] = useContext(StateContext);
+  const { state } = useContext(StateContext);
+  const [selfTalk, setSelfTalk] = useState(
+    state.selfTalk ? state.selfTalk : []
+  );
+  const [token, setToken] = useState(state.token ? state.token : {});
   const [initial, setInitial] = useState("");
   const [rational, setRational] = useState("");
 
   let sortedEntries = selfTalk.sort((a, b) => {
     return b.id - a.id;
   });
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedSelfTalk");
-  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-  //     setSelfTalk(savedData);
-  //     setToken(savedTokData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const storeData = async (selfTalk) => {
     try {
@@ -128,12 +118,7 @@ const SelfTalk = () => {
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
     setSelfTalk(sortedEntries);
     storeData(selfTalk);
-    // getData();
   };
-
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
 
   return (
     <View style={look.container}>

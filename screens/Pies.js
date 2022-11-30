@@ -8,8 +8,11 @@ import { look } from "../assets/styles";
 import { StateContext } from "../Context";
 
 const Pies = () => {
-  const [pieStorage, setPieStorage] = useContext(StateContext);
-  const [token, setToken] = useContext(StateContext);
+  const { state } = useContext(StateContext);
+  const [pieStorage, setPieStorage] = useState(
+    state.pieStorage ? state.pieStorage : []
+  );
+  const [token, setToken] = useState(state.token ? state.token : {});
   const [physical, setPhysical] = useState("");
   const [insights, setInsights] = useState("");
   const [emotions, setEmotions] = useState("");
@@ -19,22 +22,9 @@ const Pies = () => {
     return b.id - a.id;
   });
 
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedPie");
-  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-  //     setPieStorage(savedData);
-  //     setToken(savedTokData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-  //  this is wrong it should be pieVVVVV
-  const storeData = async (focusStorage) => {
+  const storeData = async (pieStorage) => {
     try {
-      const jsonValue = JSON.stringify(focusStorage);
+      const jsonValue = JSON.stringify(pieStorage);
       await AsyncStorage.setItem("storedPie", jsonValue);
     } catch (e) {
       console.log(e);
@@ -68,7 +58,6 @@ const Pies = () => {
     setEmotions("");
     setSpiritual("");
     storeData(newList);
-    // getData();
   };
 
   const handleDelete = ({ item }) => {
@@ -139,12 +128,7 @@ const Pies = () => {
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
     setPieStorage(sortedEntries);
     storeData(pieStorage);
-    // getData();
   };
-
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
 
   return (
     <View style={look.container}>

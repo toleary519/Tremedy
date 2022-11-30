@@ -5,31 +5,18 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
-import { State } from "react-native-gesture-handler";
 import { StateContext } from "../Context";
 
 const FocusStatement = () => {
-  const [focusStorage, setFocusStorage] = useContext(StateContext);
-  const [token, setToken] = useContext(StateContext);
+  const { state } = useContext(StateContext);
+  const [focusStorage, setFocusStorage] = useState(
+    state.focusStorage ? state.focusStorage : []
+  );
+  const [token, setToken] = useState(state.token ? state.token : {});
   const [myFocus, setMyFocus] = useState("");
-  console.log("state context : ", StateContext);
-  console.log("focus storage : ", focusStorage);
   let sortedEntries = focusStorage.sort((a, b) => {
     return b.id - a.id;
   });
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedFocus");
-  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-  //     setFocusStorage(savedData);
-  //     setToken(savedTokData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const storeData = async (focusStorage) => {
     try {
@@ -87,7 +74,6 @@ const FocusStatement = () => {
     setFocusStorage(newList);
     setMyFocus("");
     storeData(newList);
-    // getData();
   };
 
   const handleDelete = ({ item }) => {
@@ -128,12 +114,7 @@ const FocusStatement = () => {
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
     // setFocusStorage?
     storeData(focusStorage);
-    // getData();
   };
-
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
 
   return (
     <View style={look.container}>
@@ -201,6 +182,6 @@ const FocusStatement = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};
+};;;;;;;;;;;;
 
 export { FocusStatement };

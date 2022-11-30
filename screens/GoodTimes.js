@@ -8,26 +8,16 @@ import { look } from "../assets/styles";
 import { StateContext } from "../Context";
 
 const GoodTimes = () => {
-  const [goodStorage, setGoodStorage] = useContext(StateContext);
-  const [token, setToken] = useContext(StateContext);
+  const { state } = useContext(StateContext);
+  const [goodStorage, setGoodStorage] = useState(
+    state.goodStorage ? state.goodStorage : []
+  );
+  const [token, setToken] = useState(state.token ? state.token : []);
   const [note, setNote] = useState("");
 
   let sortedEntries = goodStorage.sort((a, b) => {
     return b.id - a.id;
   });
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedGood");
-  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-  //     setGoodStorage(savedData);
-  //     setToken(savedTokData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const storeData = async (goodStorage) => {
     try {
@@ -59,7 +49,6 @@ const GoodTimes = () => {
     setGoodStorage(newList);
     setNote("");
     storeData(newList);
-    // getData();
   };
 
   const flagAlert = () => {
@@ -123,14 +112,9 @@ const GoodTimes = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
-    // setGoodStorage?
+    setGoodStorage(sortedEntries);
     storeData(goodStorage);
-    // getData();
   };
-
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
 
   return (
     <View style={look.container}>
