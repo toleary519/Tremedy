@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const Craving = () => {
   const [cravingStorage, setCravingStorage] = useState(
@@ -20,7 +21,26 @@ const Craving = () => {
           action: "",
         }
   );
-  const [token, setToken] = useState(token ? token : {});
+  const { state } = useContext(StateContext);
+  const [token, setToken] = useState(
+    state.token
+      ? state.token
+      : {
+          subscribed: false,
+          rLength: 1,
+          profile: false,
+          substance: false,
+          DOB: "",
+          city: "",
+          country: "",
+          flags: true,
+          timeSaved: false,
+          timeHrs: null,
+          timeMins: null,
+          name: "",
+          email: "",
+        }
+  );
 
   let sortedEntries = cravingStorage.sort((a, b) => {
     return b.id - a.id;

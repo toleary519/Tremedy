@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Text,
   View,
@@ -14,14 +14,34 @@ import coreV from "../assets/coreV.jpeg";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const MyValues = () => {
   const [valueStorage, setValueStorage] = useState(
     valueStorage ? valueStorage : []
   );
-  const [token, setToken] = useState(token ? token : {});
   const [myValue, setMyValue] = useState("");
   const [imageWindow, setImageWindow] = useState(false);
+  const { state } = useContext(StateContext);
+  const [token, setToken] = useState(
+    state.token
+      ? state.token
+      : {
+          subscribed: false,
+          rLength: 1,
+          profile: false,
+          substance: false,
+          DOB: "",
+          city: "",
+          country: "",
+          flags: true,
+          timeSaved: false,
+          timeHrs: null,
+          timeMins: null,
+          name: "",
+          email: "",
+        }
+  );
 
   let sortedEntries = valueStorage.sort((a, b) => {
     return b.id - a.id;

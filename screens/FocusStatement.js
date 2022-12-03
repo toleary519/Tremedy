@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const FocusStatement = () => {
   const [focusStorage, setFocusStorage] = useState(
     focusStorage ? focusStorage : []
   );
-  const [token, setToken] = useState(token ? token : {});
   const [myFocus, setMyFocus] = useState("");
+  const { state } = useContext(StateContext);
+  const [token, setToken] = useState(
+    state.token
+      ? state.token
+      : {
+          subscribed: false,
+          rLength: 1,
+          profile: false,
+          substance: false,
+          DOB: "",
+          city: "",
+          country: "",
+          flags: true,
+          timeSaved: false,
+          timeHrs: null,
+          timeMins: null,
+          name: "",
+          email: "",
+        }
+  );
 
   let sortedEntries = focusStorage.sort((a, b) => {
     return b.id - a.id;

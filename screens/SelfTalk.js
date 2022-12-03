@@ -1,16 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { StateContext } from "../Context";
 
 const SelfTalk = () => {
   const [selfTalk, setSelfTalk] = useState(selfTalk ? selfTalk : []);
-  const [token, setToken] = useState(token ? token : {});
   const [initial, setInitial] = useState("");
   const [rational, setRational] = useState("");
+  const { state } = useContext(StateContext);
+  const [token, setToken] = useState(
+    state.token
+      ? state.token
+      : {
+          subscribed: false,
+          rLength: 1,
+          profile: false,
+          substance: false,
+          DOB: "",
+          city: "",
+          country: "",
+          flags: true,
+          timeSaved: false,
+          timeHrs: null,
+          timeMins: null,
+          name: "",
+          email: "",
+        }
+  );
 
   let sortedEntries = selfTalk.sort((a, b) => {
     return b.id - a.id;

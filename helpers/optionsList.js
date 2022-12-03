@@ -107,9 +107,9 @@ export const pageOptions = [
   {
     id: 15,
     selected: false,
-    pageName: "Scream",
-    title: "Scream",
-    sub: "Just let it out.",
+    pageName: "Breathe",
+    title: "Breathe",
+    sub: "A an exercize for when standing in line.",
   },
   {
     id: 16,
@@ -132,13 +132,13 @@ export const pageOptions = [
     title: "Knead your feet",
     sub: "A grounding exercize.",
   },
-  // {
-  //   id: 19,
-  //   selected: false,
-  //   pageName: "AnkleInstruct",
-  //   title: "Rock the ankles",
-  //   sub: "A an exercize for when standing in line.",
-  // },
+  {
+    id: 19,
+    selected: false,
+    pageName: "Scream",
+    title: "Scream",
+    sub: "Just let it out.",
+  },
   {
     id: 20,
     selected: false,
@@ -157,24 +157,30 @@ export const elevatedOptions = [
   },
   {
     id: 2,
+    pageName: "Breathe",
+    title: "Breathe",
+    sub: "A an exercize for when standing in line.",
+  },
+  {
+    id: 3,
     pageName: "PMRInstruct",
     sub: "Calm from the head down.",
     title: "Progressive Muscle Relaxation",
   },
   {
-    id: 3,
+    id: 4,
     pageName: "EyeInstruct",
     title: "Left & Right",
     sub: "Lateral Eye Movements",
   },
   {
-    id: 4,
+    id: 5,
     pageName: "KneadInstruct",
     title: "Toe curls",
     sub: "A grounding exercize.",
   },
   {
-    id: 5,
+    id: 6,
     pageName: "Scream",
     title: "Scream",
     sub: "Just let it out.",
