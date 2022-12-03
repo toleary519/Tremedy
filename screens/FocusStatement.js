@@ -34,7 +34,6 @@ const FocusStatement = () => {
     try {
       const jsonValue = JSON.stringify(focusStorage);
       await AsyncStorage.setItem("storedFocus", jsonValue);
-      console.log("Store Focus:", focusStorage);
     } catch (e) {
       console.log(e);
     }

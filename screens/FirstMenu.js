@@ -3,9 +3,18 @@ import { Text, TouchableOpacity, View, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import { look } from "../assets/styles";
+import { Auth } from "aws-amplify";
 
 const FirstMenu = ({ navigation }) => {
   const [token, setToken] = useState({});
+
+  const signOut = async () => {
+    try {
+      await Auth.signOut({ global: true });
+    } catch (error) {
+      console.log("error signing out: ", error);
+    }
+  };
 
   const getData = async () => {
     try {
@@ -118,6 +127,16 @@ const FirstMenu = ({ navigation }) => {
                 <View>
                   <Text style={look.fEmergency}>Emergency</Text>
                   <Text style={look.fEsub}>If you need it, call now.</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={look.border}>
+            <TouchableOpacity onPress={() => signOut()} delayPressIn={150}>
+              <View style={look.element}>
+                <View>
+                  <Text style={look.fAdd}>Sign Out</Text>
+                  <Text style={look.fSub}>Log out securely.</Text>
                 </View>
               </View>
             </TouchableOpacity>

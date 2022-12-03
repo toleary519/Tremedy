@@ -42,7 +42,10 @@ import { NewFeature } from "./screens/NewFeature";
 import { That } from "./screens/That";
 import { Craving } from "./screens/Craving";
 import { color } from "./assets/colors";
-import MyStack from "./routes/homeStack";
+import Amplify from "aws-amplify";
+import config from "./amplify/.config/project-config.json";
+Amplify.configure(config);
+import { withAuthenticator } from "aws-amplify-react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -275,8 +278,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   status: {
-    backgroundColor:"#1B2A41"
-  }
+    backgroundColor: "#1B2A41",
+  },
 });
 
-export default App;
+export default withAuthenticator(App);
