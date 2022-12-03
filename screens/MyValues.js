@@ -137,7 +137,7 @@ const MyValues = () => {
     storeData(valueStorage);
     getData();
   };
-
+  console.log("value run");
   React.useEffect(() => {
     getData();
   }, []);

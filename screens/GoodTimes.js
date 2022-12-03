@@ -127,7 +127,7 @@ const GoodTimes = () => {
     storeData(goodStorage);
     getData();
   };
-
+  console.log("good run");
   React.useEffect(() => {
     getData();
   }, []);

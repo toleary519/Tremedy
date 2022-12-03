@@ -135,7 +135,7 @@ const CopingStatement = () => {
     storeData(copingStorage);
     getData();
   };
-
+  console.log("coping run");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

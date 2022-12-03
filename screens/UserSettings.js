@@ -886,7 +886,7 @@ const UserSettings = () => {
         "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
     },
   ];
-
+  console.log("user run");
   return (
     <View style={look.container}>
       <View style={look.topBox}>

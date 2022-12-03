@@ -128,7 +128,7 @@ const SelfTalk = () => {
     storeData(selfTalk);
     getData();
   };
-
+  console.log("self run");
   React.useEffect(() => {
     getData();
   }, []);

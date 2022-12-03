@@ -139,7 +139,7 @@ const Pies = () => {
     storeData(pieStorage);
     getData();
   };
-
+  console.log("pie run");
   React.useEffect(() => {
     getData();
   }, []);

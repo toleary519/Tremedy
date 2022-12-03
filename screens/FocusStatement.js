@@ -132,7 +132,7 @@ const FocusStatement = () => {
   React.useEffect(() => {
     getData();
   }, []);
-
+  console.log("focus run");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

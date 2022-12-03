@@ -131,7 +131,7 @@ const That = () => {
     React.useEffect(() => {
       getData();
     }, []);
-
+    console.log("that run");
     return (
       <View style={look.container}>
         <KeyboardAwareScrollView

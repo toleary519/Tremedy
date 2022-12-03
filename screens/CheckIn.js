@@ -162,7 +162,7 @@ const CheckIn = () => {
   React.useEffect(() => {
     getData();
   }, []);
-
+  console.log("checkin run");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

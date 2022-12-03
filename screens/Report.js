@@ -226,7 +226,7 @@ const Report = () => {
       attachments: uri,
     });
   };
-
+  console.log("report run");
   React.useEffect(() => {
     getData();
   }, []);

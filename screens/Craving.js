@@ -153,7 +153,7 @@ const Craving = () => {
     storeData(cravingStorage);
     getData();
   };
-
+  console.log("craving run");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

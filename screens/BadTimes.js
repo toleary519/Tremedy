@@ -133,7 +133,7 @@ const BadTimes = () => {
     storeData(badStorage);
     getData();
   };
-
+  console.log("bad run");
   React.useEffect(() => {
     getData();
   }, []);
