@@ -12,7 +12,7 @@ const Craving = () => {
   const [cravingStorage, setCravingStorage] = useState(
     state.cravingStorage ? state.cravingStorage : []
   );
-  const [token, setToken] = useState(state.token ? state.token : {});
+  const token = state.token ? state.token : {};
   const [craving, setCraving] = useState(
     craving
       ? craving
@@ -89,8 +89,8 @@ const Craving = () => {
     const newList = [...cravingStorage, newItem];
 
     setCravingStorage(newList);
-    setCraving("");
     storeData(newList);
+    setCraving("");
   };
 
   const handleDelete = ({ item }) => {
@@ -136,7 +136,7 @@ const Craving = () => {
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
     storeData(cravingStorage);
   };
-
+  console.log("craving ran");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

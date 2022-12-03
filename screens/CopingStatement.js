@@ -12,7 +12,7 @@ const CopingStatement = () => {
   const [copingStorage, setCopingStorage] = useState(
     state.copingStorage ? state.copingStorage : []
   );
-  const [token, setToken] = useState(token ? token : {});
+  const token = token ? token : {};
   const [myCoping, setMyCoping] = useState("");
 
   let sortedEntries = copingStorage.sort((a, b) => {
@@ -72,8 +72,8 @@ const CopingStatement = () => {
     const newList = [...copingStorage, newCoping];
 
     setCopingStorage(newList);
-    setMyCoping("");
     storeData(newList);
+    setMyCoping("");
   };
 
   const handleDelete = ({ item }) => {
@@ -115,7 +115,7 @@ const CopingStatement = () => {
     setCopingStorage(sortedEntries);
     storeData(copingStorage);
   };
-
+  console.log("coping ran");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

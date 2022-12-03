@@ -12,7 +12,7 @@ const BadTimes = () => {
   const [badStorage, setBadStorage] = useState(
     state.badStorage ? state.badStorage : []
   );
-  const [token, setToken] = useState(state.token ? state.token : []);
+  const token = state.token ? state.token : [];
   const [note, setNote] = useState("");
 
   let sortedEntries = badStorage.sort((a, b) => {
@@ -108,7 +108,7 @@ const BadTimes = () => {
       handleAdd(flag);
     }
   };
-
+  console.log("bad times ran");
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);

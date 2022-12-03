@@ -12,7 +12,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { StateContext } from "../Context";
-import { S } from "@expo/html-elements";
 
 // enables alerts in the forground
 Notifications.setNotificationHandler({
@@ -29,7 +28,25 @@ const UserSettings = () => {
   const [editInfo, setEditInfo] = useState(true);
   const [isAvailable, setIsAvailable] = useState(false);
   const [time, setTime] = useState(new Date(Date.now()));
-  const [token, setToken] = useState(state.token ? state.token : {});
+  const [token, setToken] = useState(
+    state.token
+      ? state.token
+      : {
+          subscribed: false,
+          rLength: 1,
+          profile: false,
+          substance: false,
+          DOB: "",
+          city: "",
+          country: "",
+          flags: true,
+          timeSaved: false,
+          timeHrs: null,
+          timeMins: null,
+          name: "",
+          email: "",
+        }
+  );
   const [issue, setIssue] = useState({
     where: "",
     what: "",
@@ -854,7 +871,7 @@ const UserSettings = () => {
         "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
     },
   ];
-
+  console.log("user ran");
   return (
     <View style={look.container}>
       <View style={look.topBox}>

@@ -12,7 +12,7 @@ const GoodTimes = () => {
   const [goodStorage, setGoodStorage] = useState(
     state.goodStorage ? state.goodStorage : []
   );
-  const [token, setToken] = useState(state.token ? state.token : []);
+  const token = state.token ? state.token : [];
   const [note, setNote] = useState("");
 
   let sortedEntries = goodStorage.sort((a, b) => {
@@ -115,7 +115,7 @@ const GoodTimes = () => {
     setGoodStorage(sortedEntries);
     storeData(goodStorage);
   };
-
+  console.log("good time ran");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

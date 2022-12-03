@@ -49,19 +49,9 @@ export const StateProvider = (props) => {
           email: "",
         }
   );
-
-  const reportStorage = [
-    ...badStorage,
-    ...checkinStorage,
-    ...copingStorage,
-    ...cravingStorage,
-    ...focusStorage,
-    ...goodStorage,
-    ...pieStorage,
-    ...valueStorage,
-    ...selfTalk,
-    ...thatStorage,
-  ];
+  const [reportStorage, setReportStorage] = useState(
+    reportStorage ? reportStorage : []
+  );
 
   const dataItems = [
     "storedBad",
@@ -80,19 +70,31 @@ export const StateProvider = (props) => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.multiGet(dataItems);
-      setBadStorage(jsonValue[0][1]);
-      setCheckinStorage(jsonValue[1][1]);
-      setCopingStorage(jsonValue[2][1]);
-      setCravingStorage(jsonValue[3][1]);
-      setFocusStorage(jsonValue[4][1]);
-      setGoodStorage(jsonValue[5][1]);
-      setPieStorage(jsonValue[6][1]);
-      setValueStorage(jsonValue[7][1]);
-      setSelfTalk(jsonValue[8][1]);
-      setThatStorage(jsonValue[9][1]);
-      setToken(jsonValue[10][1]);
+      setBadStorage(jsonValue[0][1] ? JSON.parse(jsonValue[0][1]) : []);
+      setCheckinStorage(jsonValue[1][1] ? JSON.parse(jsonValue[1][1]) : []);
+      setCopingStorage(jsonValue[2][1] ? JSON.parse(jsonValue[2][1]) : []);
+      setCravingStorage(jsonValue[3][1] ? JSON.parse(jsonValue[3][1]) : []);
+      setFocusStorage(jsonValue[4][1] ? JSON.parse(jsonValue[4][1]) : []);
+      setGoodStorage(jsonValue[5][1] ? JSON.parse(jsonValue[5][1]) : []);
+      setPieStorage(jsonValue[6][1] ? JSON.parse(jsonValue[6][1]) : []);
+      setValueStorage(jsonValue[7][1] ? JSON.parse(jsonValue[7][1]) : []);
+      setSelfTalk(jsonValue[8][1] ? JSON.parse(jsonValue[8][1]) : []);
+      setThatStorage(jsonValue[9][1] ? JSON.parse(jsonValue[9][1]) : []);
+      setToken(jsonValue[10][1] ? JSON.parse(jsonValue[10][1]) : []);
+      setReportStorage([
+        ...badStorage,
+        ...checkinStorage,
+        ...copingStorage,
+        ...cravingStorage,
+        ...focusStorage,
+        ...goodStorage,
+        ...pieStorage,
+        ...valueStorage,
+        ...selfTalk,
+        ...thatStorage,
+      ]);
     } catch (e) {
-      console.log("here?", e);
+      console.log("context call error : ", e);
     }
   };
 
@@ -110,13 +112,13 @@ export const StateProvider = (props) => {
     token: token,
     reportStorage: reportStorage,
   };
-
+  console.log("context ran");
   React.useEffect(() => {
     getData();
   }, []);
 
   return (
-    <StateContext.Provider value={{ state: state }}>
+    <StateContext.Provider value={{ state }}>
       {props.children}
     </StateContext.Provider>
   );

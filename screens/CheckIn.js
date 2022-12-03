@@ -79,8 +79,8 @@ const CheckIn = () => {
     const newList = [...checkinStorage, newCheckin];
 
     setCheckinStorage(newList);
-    checkinReset();
     storeData(newList);
+    checkinReset();
   };
 
   const handleDelete = ({ item }) => {
@@ -147,7 +147,7 @@ const CheckIn = () => {
   const setOne = Object.keys(feelingWheel[0]);
   const setTwo = feelOne ? Object.keys(feelingWheel[0][feelOne]) : null;
   const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
-
+  console.log("checkin ran");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView
@@ -361,6 +361,6 @@ const CheckIn = () => {
       </KeyboardAwareScrollView>
     </View>
   );
-};;
+};;;;;;;;;
 
 export { CheckIn };

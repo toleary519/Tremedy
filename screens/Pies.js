@@ -12,7 +12,7 @@ const Pies = () => {
   const [pieStorage, setPieStorage] = useState(
     state.pieStorage ? state.pieStorage : []
   );
-  const [token, setToken] = useState(state.token ? state.token : {});
+  const token = state.token ? state.token : {};
   const [physical, setPhysical] = useState("");
   const [insights, setInsights] = useState("");
   const [emotions, setEmotions] = useState("");
@@ -129,7 +129,7 @@ const Pies = () => {
     setPieStorage(sortedEntries);
     storeData(pieStorage);
   };
-
+  console.log("pies ran");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

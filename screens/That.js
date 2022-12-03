@@ -9,26 +9,16 @@ import { StateContext } from "../Context";
 import { State } from "react-native-gesture-handler";
 
 const That = () => {
-  const [thatStorage, setThatStorage] = useContext(StateContext);
-  const [token, setToken] = useContext(StateContext);
+  const { state } = useContext(StateContext);
+  const [thatStorage, setThatStorage] = useState(
+    state.thatStorage ? state.thatStorage : []
+  );
+  const token = state.token ? state.token : {};
   const [that, setThat] = useState("");
 
   let sortedEntries = thatStorage.sort((a, b) => {
     return b.id - a.id;
   });
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedThat");
-  //     const jsonTokValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-  //     setThatStorage(savedData);
-  //     setToken(savedTokData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const storeData = async (thatStorage) => {
     try {
@@ -60,7 +50,6 @@ const That = () => {
     setThatStorage(newList);
     setThat("");
     storeData(newList);
-    // getData();
   };
 
   const flagAlert = () => {
@@ -126,13 +115,8 @@ const That = () => {
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
     setThatStorage(sortedEntries);
     storeData(thatStorage);
-    // getData();
   };
-
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
-
+  console.log("that! ran");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

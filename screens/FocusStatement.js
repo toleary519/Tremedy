@@ -12,7 +12,7 @@ const FocusStatement = () => {
   const [focusStorage, setFocusStorage] = useState(
     state.focusStorage ? state.focusStorage : []
   );
-  const [token, setToken] = useState(state.token ? state.token : {});
+  const token = state.token ? state.token : {};
   const [myFocus, setMyFocus] = useState("");
   let sortedEntries = focusStorage.sort((a, b) => {
     return b.id - a.id;
@@ -112,10 +112,10 @@ const FocusStatement = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
-    // setFocusStorage?
+    setFocusStorage(sortedEntries);
     storeData(focusStorage);
   };
-
+  console.log("focus ran");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

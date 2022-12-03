@@ -21,7 +21,7 @@ const MyValues = () => {
   const [valueStorage, setValueStorage] = useState(
     state.valueStorage ? state.valueStorage : []
   );
-  const [token, setToken] = useState(state.token ? state.token : {});
+  const token = state.token ? state.token : {};
   const [myValue, setMyValue] = useState("");
   const [imageWindow, setImageWindow] = useState(false);
 
@@ -57,8 +57,8 @@ const MyValues = () => {
     const newList = [...valueStorage, newValue];
 
     setValueStorage(newList);
-    setMyValue("");
     storeData(newList);
+    setMyValue("");
   };
 
   const flagAlert = () => {
@@ -122,10 +122,10 @@ const MyValues = () => {
   const handleFlag = (i) => {
     let currentItem = sortedEntries[i];
     currentItem.flag ? (currentItem.flag = false) : (currentItem.flag = true);
-    setValueStorage(sortedEntries);
+    setValueStorage(valueStorage);
     storeData(valueStorage);
   };
-
+  console.log("values ran");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView
