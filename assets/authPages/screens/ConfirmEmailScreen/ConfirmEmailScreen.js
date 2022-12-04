@@ -46,6 +46,10 @@ const ConfirmEmailScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={look.topBox}>
           <Text style={look.add}>Confirm your email</Text>
+          <Text style={look.sub}>
+            If you do not recieve the email verification code please your junk
+            folder or resend.
+          </Text>
 
           <CustomInput
             name="username"

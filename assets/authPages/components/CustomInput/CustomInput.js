@@ -6,6 +6,7 @@ import { look } from "../../../styles";
 const CustomInput = ({
   control,
   name,
+  capital,
   rules = {},
   placeholder,
   secureTextEntry,
@@ -30,6 +31,7 @@ const CustomInput = ({
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
+              autoCapitalize={capital ? true : false}
               placeholder={placeholder}
               style={look.input}
               secureTextEntry={secureTextEntry}

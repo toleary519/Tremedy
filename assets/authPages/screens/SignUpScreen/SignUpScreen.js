@@ -38,6 +38,22 @@ const SignUpScreen = () => {
     }
   };
 
+  let authAlert = () => {
+    Alert.alert(
+      `3rd Party Pending`,
+      `These sign-ins are being verified by their respective companies. For testing purposes enter your information above.`,
+      [
+        {
+          text: "OK",
+          style: "cancel",
+          onPress: () => {
+            return;
+          },
+        },
+      ]
+    );
+  };
+
   const onSignInPress = () => {
     navigation.navigate("SignIn");
   };
@@ -59,6 +75,7 @@ const SignUpScreen = () => {
           <CustomInput
             name="name"
             control={control}
+            capital={true}
             placeholder="Name"
             rules={{
               required: "Name is required",
@@ -75,6 +92,7 @@ const SignUpScreen = () => {
           <CustomInput
             name="email"
             control={control}
+            capital={false}
             placeholder="Email"
             rules={{
               required: "Email is required",
@@ -84,6 +102,7 @@ const SignUpScreen = () => {
           <CustomInput
             name="password"
             control={control}
+            capital={false}
             placeholder="Password"
             secureTextEntry
             rules={{
@@ -97,6 +116,7 @@ const SignUpScreen = () => {
           <CustomInput
             name="password-repeat"
             control={control}
+            capital={false}
             placeholder="Repeat Password"
             secureTextEntry
             rules={{
@@ -112,12 +132,13 @@ const SignUpScreen = () => {
 
           <Text style={styles.text}>
             By registering, you confirm that you accept our{" "}
-            {/* <Text style={styles.link}> */}
-            <Text style={styles.link} onPress={onTermsOfUsePressed}>
+            <Text style={styles.link}>
+              {/* <Text style={styles.link} onPress={onTermsOfUsePressed}> */}
               Terms of Use
             </Text>{" "}
-            and {/* <Text style={styles.link}> */}
-            <Text style={styles.link} onPress={onPrivacyPressed}>
+            and{" "}
+            <Text style={styles.link}>
+              {/* <Text style={styles.link} onPress={onPrivacyPressed}> */}
               Privacy Policy
             </Text>
           </Text>
@@ -125,12 +146,12 @@ const SignUpScreen = () => {
           <View style={{ alignItems: "center", flex: 1 }}>
             <GoogleSocialButton
               style={{ alignSelf: "strech" }}
-              onPress={() => onSignInGoogle()}
+              onPress={() => authAlert()}
             />
 
-            <AppleSocialButton onPress={() => onSignInApple()} />
-            <AmazonSocialButton onPress={() => onSignInAmazon()} />
-            <FacebookSocialButton onPress={() => onSignInFacebook()} />
+            <AppleSocialButton onPress={() => authAlert()} />
+            <AmazonSocialButton onPress={() => authAlert()} />
+            <FacebookSocialButton onPress={() => authAlert()} />
           </View>
 
           <CustomButton

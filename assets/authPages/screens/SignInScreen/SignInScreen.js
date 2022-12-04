@@ -34,6 +34,22 @@ const SignInScreen = () => {
     formState: { errors },
   } = useForm();
 
+  let authAlert = () => {
+    Alert.alert(
+      `3rd Party Pending`,
+      `These sign-ins are being verified by their respective companies. For testing purposes enter your information above.`,
+      [
+        {
+          text: "OK",
+          style: "cancel",
+          onPress: () => {
+            return;
+          },
+        },
+      ]
+    );
+  };
+
   const onSignInPressed = async (data) => {
     if (loading) {
       return;
@@ -78,9 +94,10 @@ const SignInScreen = () => {
         <View style={look.topBox}>
           <CustomInput
             name="email"
+            capital={false}
             placeholder="Email Address"
             control={control}
-            rules={{ required: "Username is required" }}
+            rules={{ required: "Email is required" }}
           />
 
           <CustomInput
@@ -88,17 +105,19 @@ const SignInScreen = () => {
             placeholder="Password"
             secureTextEntry
             control={control}
+            capital={false}
             rules={{
               required: "Password is required",
               minLength: {
-                value: 3,
-                message: "Password should be minimum 3 characters long",
+                value: 6,
+                message: "Password should be minimum 6 characters long",
               },
             }}
           />
 
           <CustomButton
             text={loading ? "Loading..." : "Sign In"}
+            border={loading ? false : true}
             onPress={handleSubmit(onSignInPressed)}
           />
 
@@ -110,12 +129,12 @@ const SignInScreen = () => {
           <View style={{ alignItems: "center", flex: 1 }}>
             <GoogleSocialButton
               style={{ alignSelf: "strech" }}
-              onPress={() => onSignInGoogle()}
+              onPress={() => authAlert()}
             />
 
-            <AppleSocialButton onPress={() => onSignInApple()} />
-            <AmazonSocialButton onPress={() => onSignInAmazon()} />
-            <FacebookSocialButton onPress={() => onSignInFacebook()} />
+            <AppleSocialButton onPress={() => authAlert()} />
+            <AmazonSocialButton onPress={() => authAlert()} />
+            <FacebookSocialButton onPress={() => authAlert()} />
           </View>
 
           <CustomButton
