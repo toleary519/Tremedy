@@ -8,6 +8,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const CheckIn = () => {
   let [checkinStorage, setCheckinStorage] = useState(
@@ -327,6 +328,7 @@ const CheckIn = () => {
             onChangeText={(t) => setCheckin(t)}
             value={checkin}
             placeholder={"..."}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />

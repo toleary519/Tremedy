@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const Craving = () => {
   const [cravingStorage, setCravingStorage] = useState(
@@ -60,8 +61,8 @@ const Craving = () => {
     };
 
     Alert.alert(
-      `Flag this in "My Past Week?"`,
-      `Manage flags in User Settings.`,
+      `Flag this to your "One Sheet?"`,
+      `The One Sheet is in the Tool Box. Manage alerts in User Settings.`,
       [
         {
           text: "Yes",
@@ -174,6 +175,7 @@ const Craving = () => {
             onChangeText={(text) => setCraving({ ...craving, trigger: text })}
             value={craving.trigger}
             placeholder={"trigger..."}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />
@@ -182,6 +184,7 @@ const Craving = () => {
             onChangeText={(text) => setCraving({ ...craving, severity: text })}
             value={craving.severity}
             placeholder={"severity, 1-10"}
+            placeholderTextColor={color.placeholderText}
             maxLength={2}
             multiline
             keyboardType="number-pad"
@@ -191,6 +194,7 @@ const Craving = () => {
             onChangeText={(text) => setCraving({ ...craving, whereWho: text })}
             value={craving.whereWho}
             placeholder={"who with, where?"}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />
@@ -199,6 +203,7 @@ const Craving = () => {
             onChangeText={(text) => setCraving({ ...craving, action: text })}
             value={craving.action}
             placeholder={"what did you do?"}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />

@@ -430,6 +430,7 @@ const UserSettings = () => {
                       }
                       value={token.city}
                       placeholder={"City"}
+                      placeholderTextColor={color.placeholderText}
                       keyboardType="default"
                     />
 
@@ -440,6 +441,7 @@ const UserSettings = () => {
                       }
                       value={token.country}
                       placeholder={"Country"}
+                      placeholderTextColor={color.placeholderText}
                       keyboardType="default"
                     />
                   </View>
@@ -488,7 +490,8 @@ const UserSettings = () => {
                 style={look.userInput}
                 onChangeText={(text) => setIssue({ ...issue, where: text })}
                 value={issue.where}
-                placeholder={"Where?"}
+                placeholder={"Where? ..."}
+                placeholderTextColor={color.placeholderText}
                 multiline
                 keyboardType="default"
               />
@@ -501,7 +504,8 @@ const UserSettings = () => {
                 style={look.userInput}
                 onChangeText={(text) => setIssue({ ...issue, what: text })}
                 value={issue.what}
-                placeholder={"What"}
+                placeholder={"What?"}
+                placeholderTextColor={color.placeholderText}
                 multiline
                 keyboardType="default"
               />
@@ -513,6 +517,7 @@ const UserSettings = () => {
                 onChangeText={(text) => setIssue({ ...issue, expecting: text })}
                 value={issue.expecting}
                 placeholder={"What did you want to see?"}
+                placeholderTextColor={color.placeholderText}
                 multiline
                 keyboardType="default"
               />
@@ -526,6 +531,7 @@ const UserSettings = () => {
                 onChangeText={(text) => setIssue({ ...issue, bugNotes: text })}
                 value={issue.bugNotes}
                 placeholder={"optional notes"}
+                placeholderTextColor={color.placeholderText}
                 multiline
                 keyboardType="default"
               />

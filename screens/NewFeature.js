@@ -6,6 +6,7 @@ import * as Print from "expo-print";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const NewFeature = () => {
   const [isAvailable, setIsAvailable] = useState(false);
@@ -196,7 +197,8 @@ const NewFeature = () => {
               style={look.userInput}
               onChangeText={(text) => setFeature({ ...feature, name: text })}
               value={feature.name}
-              placeholder={"What's it called?"}
+              placeholder={"What's it called? ..."}
+              placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />
@@ -210,6 +212,7 @@ const NewFeature = () => {
               }
               value={feature.whatsItDo}
               placeholder={"What does it do?"}
+              placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />
@@ -223,6 +226,7 @@ const NewFeature = () => {
               }
               value={feature.howsItWork}
               placeholder={"How's it work?"}
+              placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />
@@ -238,6 +242,7 @@ const NewFeature = () => {
               }
               value={feature.howsItHelp}
               placeholder={"What makes it helpful to you?"}
+              placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />
@@ -251,6 +256,7 @@ const NewFeature = () => {
               }
               value={feature.howsItLook}
               placeholder={"What does it look like?"}
+              placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />
@@ -264,6 +270,7 @@ const NewFeature = () => {
               onChangeText={(text) => setFeature({ ...feature, notes: text })}
               value={feature.notes}
               placeholder={"Notes"}
+              placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />

@@ -133,7 +133,7 @@ const SignInScreen = () => {
             />
 
             <AppleSocialButton onPress={() => authAlert()} />
-            <AmazonSocialButton onPress={() => authAlert()} />
+
             <FacebookSocialButton onPress={() => authAlert()} />
           </View>
 

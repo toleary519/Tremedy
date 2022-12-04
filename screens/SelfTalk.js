@@ -5,6 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const SelfTalk = () => {
   const [selfTalk, setSelfTalk] = useState(selfTalk ? selfTalk : []);
@@ -76,8 +77,8 @@ const SelfTalk = () => {
     };
 
     Alert.alert(
-      `Flag this in "My Past Week?"`,
-      `Manage your flags in User Settings.`,
+      `Flag this to your "One Sheet?"`,
+      `The One Sheet is in the Tool Box. Manage alerts in User Settings.`,
       [
         {
           text: "Yes",
@@ -149,7 +150,8 @@ const SelfTalk = () => {
             style={look.input}
             onChangeText={(text) => setInitial(text)}
             value={initial}
-            placeholder={"new entry"}
+            placeholder={"initial thought ..."}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />
@@ -166,7 +168,8 @@ const SelfTalk = () => {
               style={look.input}
               onChangeText={(text) => setRational(text)}
               value={rational}
-              placeholder={"new entry"}
+              placeholder={"reframed ..."}
+              placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />

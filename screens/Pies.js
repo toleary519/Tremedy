@@ -5,6 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const Pies = () => {
   const [pieStorage, setPieStorage] = useState(pieStorage ? pieStorage : []);
@@ -100,8 +101,8 @@ const Pies = () => {
     };
 
     Alert.alert(
-      `Flag this in "My Past Week?"`,
-      `Manage your flags in User Settings.`,
+      `Flag this to your "One Sheet?"`,
+      `The One Sheet is in the Tool Box. Manage alerts in User Settings.`,
       [
         {
           text: "Yes",
@@ -160,7 +161,8 @@ const Pies = () => {
             style={look.input}
             onChangeText={(text) => setPhysical(text)}
             value={physical}
-            placeholder={"Physically"}
+            placeholder={"Physically ..."}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />
@@ -169,6 +171,7 @@ const Pies = () => {
             onChangeText={(text) => setInsights(text)}
             value={insights}
             placeholder={"Insights & Thoughts"}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />
@@ -176,6 +179,7 @@ const Pies = () => {
             style={look.input}
             onChangeText={(text) => setEmotions(text)}
             placeholder={"Emotions & Feelings"}
+            placeholderTextColor={color.placeholderText}
             value={emotions}
             multiline
             keyboardType="default"
@@ -183,7 +187,8 @@ const Pies = () => {
           <TextInput
             style={look.input}
             onChangeText={(text) => setSpiritual(text)}
-            placeholder={"Spiritual Connection to Self, Others or Higher Power"}
+            placeholder={"Connection to Self, Others or Higher Power"}
+            placeholderTextColor={color.placeholderText}
             value={spiritual}
             multiline
             keyboardType="default"

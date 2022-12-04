@@ -5,6 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const GoodTimes = () => {
   const [goodStorage, setGoodStorage] = useState(
@@ -75,8 +76,8 @@ const GoodTimes = () => {
     };
 
     Alert.alert(
-      `Flag this in "My Past Week?"`,
-      `Manage your flags in User Settings.`,
+      `Flag this to your "One Sheet?"`,
+      `The One Sheet is in the Tool Box. Manage alerts in User Settings.`,
       [
         {
           text: "Yes",
@@ -154,7 +155,8 @@ const GoodTimes = () => {
             style={look.input}
             onChangeText={(text) => setNote(text)}
             value={note}
-            placeholder={"New note"}
+            placeholder={"New memory ..."}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />

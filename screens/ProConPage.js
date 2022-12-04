@@ -5,6 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const ProCon = () => {
   const [proStorage, setProStorage] = useState(proStorage ? proStorage : []);
@@ -112,7 +113,7 @@ const ProCon = () => {
     conStorage.splice(index, 1);
     // save deletion of item
     storeConData(conStorage);
-  };;
+  };
 
   React.useEffect(() => {
     getProData();
@@ -133,7 +134,8 @@ const ProCon = () => {
               style={[look.proInput]}
               onChangeText={(text) => setPro(text)}
               value={pro}
-              placeholder={"add new..."}
+              placeholder={"add pro ..."}
+              placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />
@@ -173,7 +175,8 @@ const ProCon = () => {
               style={[look.proInput]}
               onChangeText={(text) => setCon(text)}
               value={con}
-              placeholder={"add new..."}
+              placeholder={"add con ..."}
+              placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { Controller } from "react-hook-form";
 import { look } from "../../../styles";
+import { color } from "../../../colors";
 
 const CustomInput = ({
   control,
@@ -33,6 +34,7 @@ const CustomInput = ({
               onBlur={onBlur}
               autoCapitalize={capital ? true : false}
               placeholder={placeholder}
+              placeholderTextColor={color.placeholderText}
               style={look.input}
               secureTextEntry={secureTextEntry}
             />

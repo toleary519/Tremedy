@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const CopingStatement = () => {
   const [copingStorage, setCopingStorage] = useState(
@@ -51,8 +52,8 @@ const CopingStatement = () => {
     };
 
     Alert.alert(
-      `Flag this in "My Past Week?"`,
-      `Manage your flags in User Settings.`,
+      `Flag this to your "One Sheet?"`,
+      `The One Sheet is in the Tool Box. Manage alerts in User Settings.`,
       [
         {
           text: "Yes",
@@ -159,7 +160,8 @@ const CopingStatement = () => {
             style={look.input}
             onChangeText={(text) => setMyCoping(text)}
             value={myCoping}
-            placeholder={"coping statement"}
+            placeholder={"coping statement ..."}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />

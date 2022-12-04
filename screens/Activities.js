@@ -4,6 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const Activities = () => {
   const [activeStorage, setActiveStorage] = useState(
@@ -106,7 +107,8 @@ const Activities = () => {
             style={look.input}
             onChangeText={(text) => setActivity(text)}
             value={activity}
-            placeholder={"new activity"}
+            placeholder={"new activity ..."}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />
@@ -139,48 +141,5 @@ const Activities = () => {
     </View>
   );
 };
-
-
-//   return (
-//     <View style={styles.container}>
-//       <KeyboardAwareScrollView extraHeight={200}>
-//         <Text style={styles.header}>
-//           Make a list below of activities you enjoy and could do at the drop of
-//           the hat.
-//         </Text>
-//         <Text style={styles.headerTwo}>
-//           Or use it as a To-Do list. Something for unanticipated bordom.
-//         </Text>
-//         <TextInput
-//           style={styles.input}
-//           onChangeText={(text) => setActivity(text)}
-//           value={activity}
-//           placeholder={"new activity"}
-//           multiline
-//           keyboardType="default"
-//           color="#D7D9D7"
-//           placeholderTextColor={"#F1F7EE"}
-//         />
-//         <TouchableOpacity onPress={() => errorCheck()}>
-//           <MaterialIcons style={styles.icon} name="add-circle" />
-//         </TouchableOpacity>
-//         <View>
-//           {sortedEntries.map((item) => (
-//             <View key={item.id} style={styles.pieContainer}>
-//               <Text style={styles.add}>{item.activity}</Text>
-//               <TouchableOpacity onPress={() => handleDelete({ item })}>
-//                 <MaterialIcons
-//                   style={styles.deleteIcon}
-//                   name="delete-forever"
-//                 />
-//               </TouchableOpacity>
-//             </View>
-//           ))}
-//         </View>
-//       </KeyboardAwareScrollView>
-//     </View>
-//   );
-// };
-
 
 export { Activities };

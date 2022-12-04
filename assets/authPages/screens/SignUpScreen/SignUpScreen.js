@@ -150,7 +150,6 @@ const SignUpScreen = () => {
             />
 
             <AppleSocialButton onPress={() => authAlert()} />
-            <AmazonSocialButton onPress={() => authAlert()} />
             <FacebookSocialButton onPress={() => authAlert()} />
           </View>
 

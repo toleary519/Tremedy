@@ -14,6 +14,7 @@ import coreV from "../assets/coreV.jpeg";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const MyValues = () => {
   const [valueStorage, setValueStorage] = useState(
@@ -85,8 +86,8 @@ const MyValues = () => {
     };
 
     Alert.alert(
-      `Flag this in "My Past Week?"`,
-      `Manage your flags in User Settings.`,
+      `Flag this to your "One Sheet?"`,
+      `The One Sheet is in the Tool Box. Manage alerts in User Settings.`,
       [
         {
           text: "Yes",
@@ -184,7 +185,8 @@ const MyValues = () => {
             style={look.input}
             onChangeText={(text) => setMyValue(text)}
             value={myValue}
-            placeholder={"New value"}
+            placeholder={"New value ..."}
+            placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
           />
