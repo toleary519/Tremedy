@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { color } from "../../../colors";
 import { look } from "../../../styles";
 
-const CustomButton = ({ onPress, text, type = "PRIMARY", fgColor }) => {
+const CustomButton = ({ onPress, text, border, type = "PRIMARY", fgColor }) => {
   return (
     <Pressable onPress={onPress}>
       <View
@@ -18,6 +18,12 @@ const CustomButton = ({ onPress, text, type = "PRIMARY", fgColor }) => {
             look.fAdd,
             styles[`text_${type}`],
             fgColor ? { color: fgColor } : {},
+            border
+              ? {
+                  textDecorationLine: "underline",
+                  textDecorationColor: color.border,
+                }
+              : {},
           ]}
         >
           {text}
