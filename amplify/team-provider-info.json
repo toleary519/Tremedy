@@ -10,6 +10,15 @@
       "StackName": "amplify-ourtre-dev-34303",
       "StackId": "arn:aws:cloudformation:ca-central-1:015593080608:stack/amplify-ourtre-dev-34303/450f90d0-72f7-11ed-8f7b-02bf08cb8aac",
       "AmplifyAppId": "doqubgabhf55z"
+    },
+    "categories": {
+      "auth": {
+        "ourtre5086522a": {},
+        "Ourtre": {}
+      },
+      "storage": {
+        "ourtreDynamo": {}
+      }
     }
   }
 }

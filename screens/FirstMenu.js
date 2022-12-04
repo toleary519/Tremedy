@@ -131,13 +131,11 @@ const FirstMenu = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </View>
-          <View style={look.border}>
+
+          <View style={look.element}>
             <TouchableOpacity onPress={() => signOut()} delayPressIn={150}>
-              <View style={look.element}>
-                <View>
-                  <Text style={look.fAdd}>Sign Out</Text>
-                  <Text style={look.fSub}>Log out securely.</Text>
-                </View>
+              <View>
+                <Text style={[look.fSub, { opacity: 0.5 }]}>Sign out</Text>
               </View>
             </TouchableOpacity>
           </View>

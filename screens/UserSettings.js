@@ -18,7 +18,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
-
+import { Auth } from "aws-amplify";
 // enables alerts in the forground
 Notifications.setNotificationHandler({
   handleNotification: async () => {
@@ -58,6 +58,16 @@ const UserSettings = () => {
     expecting: "",
     bugNotes: "",
   });
+
+  useEffect(() => {
+    Auth.currentSession()
+      .then((data) =>
+        setToken({ ...token, email: data.getIdToken().payload.email })
+      )
+      .catch((err) => console.error("current session error : ", err));
+  }, [token.email]);
+
+  console.log("token email : ", token.email);
 
   const onTimeSelected = (event, value) => {
     setTime(value);

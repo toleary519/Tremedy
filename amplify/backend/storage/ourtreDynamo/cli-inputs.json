@@ -1,0 +1,10 @@
+{
+  "resourceName": "ourtreDynamo",
+  "tableName": "ourtreDynamo",
+  "partitionKey": {
+    "fieldName": "users",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
