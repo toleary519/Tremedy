@@ -48,9 +48,9 @@ const ConfirmEmailScreen = () => {
         <CustomInput
           name="username"
           control={control}
-          placeholder="Username"
+          placeholder="Email Address"
           rules={{
-            required: 'Username code is required',
+            required: "Email is required",
           }}
         />
 
@@ -59,7 +59,7 @@ const ConfirmEmailScreen = () => {
           control={control}
           placeholder="Enter your confirmation code"
           rules={{
-            required: 'Confirmation code is required',
+            required: "Confirmation code is required",
           }}
         />
 

@@ -41,7 +41,7 @@ const SignInScreen = () => {
 
     setLoading(true);
     try {
-      const response = await Auth.signIn(data.username, data.password);
+      const response = await Auth.signIn(data.email, data.password);
       console.log(response);
     } catch (e) {
       Alert.alert("Oops", e.message);

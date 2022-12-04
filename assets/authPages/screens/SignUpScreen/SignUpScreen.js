@@ -6,6 +6,7 @@ import SocialSignInButtons from "../../components/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/core";
 import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";
+import { look } from "../../../styles";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -16,15 +17,15 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
 
   const onRegisterPressed = async (data) => {
-    const { username, password, email, name } = data;
+    const { name, email, password } = data;
     try {
       await Auth.signUp({
-        username,
+        username: email,
         password,
-        attributes: { email, name, preferred_username: username },
+        attributes: { email, name },
       });
 
-      navigation.navigate("ConfirmEmail", { username });
+      navigation.navigate("ConfirmEmail", { email });
     } catch (e) {
       Alert.alert("Oops", e.message);
     }
@@ -70,22 +71,6 @@ const SignUpScreen = () => {
           rules={{
             required: "Email is required",
             pattern: { value: EMAIL_REGEX, message: "Email is invalid" },
-          }}
-        />
-        <CustomInput
-          name="birthdate"
-          control={control}
-          placeholder="Birthday MM/DD/YY"
-          rules={{
-            required: "Username is required",
-            minLength: {
-              value: 8,
-              message: "Full Birthday Required",
-            },
-            maxLength: {
-              value: 8,
-              message: "MM/DD/YY",
-            },
           }}
         />
         <CustomInput
