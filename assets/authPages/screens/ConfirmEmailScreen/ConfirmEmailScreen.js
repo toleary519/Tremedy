@@ -47,8 +47,8 @@ const ConfirmEmailScreen = () => {
         <View style={look.topBox}>
           <Text style={look.add}>Confirm your email</Text>
           <Text style={look.sub}>
-            If you do not recieve the email verification code please your junk
-            folder or resend.
+            If you do not recieve the email verification code please check your
+            junk folder or resend.
           </Text>
 
           <CustomInput

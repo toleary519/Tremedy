@@ -10,7 +10,7 @@ const Using = ({ navigation }) => (
       contentContainerStyle={{ paddingBottom: "15%" }}
     >
       <View style={look.topBox}>
-        <View style={look.border}>
+        {/* <View style={look.border}>
           <View style={look.element}>
             <View>
               <Text style={[look.add]}>Letter From Yourself</Text>
@@ -19,7 +19,7 @@ const Using = ({ navigation }) => (
               </Text>
             </View>
           </View>
-        </View>
+        </View> */}
         <View style={look.element}>
           <View>
             <Text style={look.add}>Game Plan</Text>

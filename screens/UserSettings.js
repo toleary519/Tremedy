@@ -37,9 +37,9 @@ const UserSettings = () => {
     token
       ? token
       : {
-          subscribed: false,
+          subscribed: true,
           rLength: 1,
-          profile: false,
+          profile: true,
           substance: false,
           DOB: "",
           city: "",
@@ -62,12 +62,16 @@ const UserSettings = () => {
   useEffect(() => {
     Auth.currentSession()
       .then((data) =>
-        setToken({ ...token, email: data.getIdToken().payload.email })
+        setToken({
+          ...token,
+          email: data.getIdToken().payload.email,
+          name: data.getIdToken().payload.name,
+        })
       )
       .catch((err) => console.error("current session error : ", err));
   }, [token.email]);
 
-  console.log("token email : ", token.email);
+  console.log("token email : ", token.email, token.name);
 
   const onTimeSelected = (event, value) => {
     setTime(value);
@@ -286,35 +290,18 @@ const UserSettings = () => {
     MailComposer.composeAsync({
       subject: `OURTRE BUG FLAG : ${issue.where}`,
       body: "Thanks for letting us know! The pdf below will be sent to our development team.\n\n Thanks, \n Ourtre Bug Team",
-      recipients: "t.oleary@me.com",
+      recipients: "contact@ourtre.com",
       attachments: [uri],
     });
   };
 
-  const errorCheck = () => {
-    if (token.DOB < 18) {
-      Alert.alert(
-        "Age Restriction",
-        `We're sorry,\nOurtre is only for users 18 and above.`,
-        [{ text: "Got It" }]
-      );
-      return;
-    }
-    if (
-      !token.name.replace(/\s+/g, "") ||
-      !token.email.replace(/\s+/g, "") ||
-      !token.DOB.replace(/\s+/g, "") ||
-      !token.city.replace(/\s+/g, "")
-    ) {
-      Alert.alert(
-        "Entry Error",
-        `Name, Email, City and Age are required fields.`,
-        [{ text: "Got It" }]
-      );
-      return;
-    } else {
-      setToken({ ...token, profile: true });
-    }
+  const sendContactEmail = () => {
+    MailComposer.composeAsync({
+      subject: `Notice : Ourtre Team`,
+      body: "The floor is yours.",
+      recipients: "contact@ourtre.com",
+      attachments: [],
+    });
   };
 
   const emailErrorCheck = () => {
@@ -347,11 +334,15 @@ const UserSettings = () => {
         {item.id === 4 ? deleteRender(item) : null}
         {item.id === 5 ? reportRender(item) : null}
         {item.id === 6 ? bugRender(item) : null}
-        {item.id === 7 ? billingRender(item) : null}
+        {item.id === 7 ? contactRender(item) : null}
+        {/* {item.id === 7 ? billingRender(item) : null} */}
       </View>
     );
   };
 
+  const contactRender = (item) => {
+    return <View style={look.element}>{item.onText}</View>;
+  };
   const infoRender = (item) => {
     return (
       <View>
@@ -395,9 +386,6 @@ const UserSettings = () => {
                     <Text style={look.sub}>Any of the following,</Text>
                     <TextInput
                       style={look.userInput}
-                      onChangeText={(text) =>
-                        setToken({ ...token, name: text })
-                      }
                       value={token.name}
                       placeholder={"First, Last, Full or Nickname"}
                       keyboardType="default"
@@ -445,7 +433,7 @@ const UserSettings = () => {
                       keyboardType="default"
                     />
                   </View>
-                  <View style={look.header}>
+                  {/* <View style={look.header}>
                     <Text style={look.add}>Age, 18+*</Text>
                     <TextInput
                       style={look.userInput}
@@ -455,9 +443,9 @@ const UserSettings = () => {
                       placeholder={"Age"}
                       keyboardType="number-pad"
                     />
-                  </View>
-                  <View>
-                    <TouchableOpacity onPress={() => errorCheck()}>
+                  </View> */}
+                  {/* <View> */}
+                  {/* <TouchableOpacity onPress={() => errorCheck()}>
                       <MaterialIcons
                         style={[
                           look.icon,
@@ -466,8 +454,8 @@ const UserSettings = () => {
                         ]}
                         name="add-circle"
                       />
-                    </TouchableOpacity>
-                  </View>
+                    </TouchableOpacity> */}
+                  {/* </View> */}
                 </View>
               )}
             </View>
@@ -894,15 +882,28 @@ const UserSettings = () => {
     },
     {
       id: 7,
-      title: "Billing Information",
-      subtitle: "Change cards or subsciption.",
-      dropdown:
-        "For testing purposes this is just a toggle but will be a credit card billing section.",
-      onText:
-        "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
+      title: "Contact Us",
+      subtitle: "Tell us what's on your mind.",
+      dropdown: "Send us an email.",
+      onText: (
+        <TouchableOpacity onPress={() => sendContactEmail()}>
+          <Text style={[look.outRoutine, { color: color.inputText }]}>
+            Send us an email.
+          </Text>
+        </TouchableOpacity>
+      ),
     },
+    // {
+    //   id: 8,
+    //   title: "Billing Information",
+    //   subtitle: "Change cards or subsciption.",
+    //   dropdown:
+    //     "For testing purposes this is just a toggle but will be a credit card billing section.",
+    //   onText:
+    //     "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
+    // },
   ];
-  console.log("user run");
+  console.log("user run : token", token);
   return (
     <View style={look.container}>
       <View style={look.topBox}>

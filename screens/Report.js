@@ -12,6 +12,7 @@ const Report = () => {
   let [showFull, setShowFull] = useState(true);
   let [showChecks, setShowChecks] = useState(false);
   let [showFlags, setShowFlags] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(false);
   const [token, setToken] = useState(token ? token : {});
   const [myThree, setMyThree] = useState([]);
   let [reportStorage, setReportStorage] = useState(
@@ -222,13 +223,18 @@ const Report = () => {
       
       Take care of yourself,
       The Ourtre Team`,
-      recipients: "t.oleary@me.com",
+      recipients: token.email,
       attachments: uri,
     });
   };
-  console.log("report run");
+  console.log("report run, token : ", token);
   React.useEffect(() => {
+    async function checkAvailability() {
+      const isMailAvailable = await MailComposer.isAvailableAsync();
+      setIsAvailable(isMailAvailable);
+    }
     getData();
+    checkAvailability();
   }, []);
 
   return (

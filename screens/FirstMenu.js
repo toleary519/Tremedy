@@ -6,7 +6,20 @@ import { look } from "../assets/styles";
 import { Auth } from "aws-amplify";
 
 const FirstMenu = ({ navigation }) => {
-  const [token, setToken] = useState({});
+  const [token, setToken] = useState({
+    subscribed: true,
+    rLength: 1,
+    profile: true,
+    substance: false,
+    city: "",
+    country: "",
+    flags: true,
+    timeSaved: false,
+    timeHrs: null,
+    timeMins: null,
+    name: "",
+    email: "",
+  });
 
   const signOut = async () => {
     try {
@@ -21,10 +34,33 @@ const FirstMenu = ({ navigation }) => {
       const jsonValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : {};
       setToken(savedData);
+
+      console.log("token after get: ", token);
     } catch (e) {
       console.log(e);
     }
   };
+
+  const storeData = async (token) => {
+    try {
+      const jsonValue = JSON.stringify(token);
+      await AsyncStorage.setItem("storedUser", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    Auth.currentSession()
+      .then((data) =>
+        setToken({
+          ...token,
+          email: data.getIdToken().payload.email,
+          name: data.getIdToken().payload.name,
+        })
+      )
+      .catch((err) => console.error("current session error : ", err));
+  }, [token.email]);
 
   const profileCheck = () => {
     Alert.alert(
@@ -45,9 +81,11 @@ const FirstMenu = ({ navigation }) => {
     );
   };
 
+  console.log("first run : ", token);
   useEffect(() => {
+    storeData(token);
     getData();
-  }, [token]);
+  }, []);
 
   return (
     <View style={look.container}>
@@ -58,11 +96,7 @@ const FirstMenu = ({ navigation }) => {
         <View style={look.topBox}>
           <View style={look.border}>
             <TouchableOpacity
-              onPress={
-                token.profile
-                  ? () => navigation.navigate("PepTalk")
-                  : () => profileCheck()
-              }
+              onPress={() => navigation.navigate("PepTalk")}
               delayPressIn={150}
             >
               <View style={look.element}>

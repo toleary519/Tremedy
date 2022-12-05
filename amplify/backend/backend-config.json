@@ -34,5 +34,10 @@
       "providerPlugin": "awscloudformation"
     }
   },
-  "analytics": {}
+  "analytics": {
+    "ourtre": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
+  }
 }

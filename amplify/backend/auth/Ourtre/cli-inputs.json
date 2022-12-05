@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "ourtre7f129e35",
     "userPoolName": "Ourtre",
     "autoVerifiedAttributes": [
@@ -15,7 +15,7 @@
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Ourtre Code: {####}",
-    "emailVerificationMessage": "Thank you for joining and welcome to Ourtre! \n\nYour verification code is: {####}\n\nPlease send any questions or comments to contact@ourtre.com\n\nTake care of yourself, \nThe Ourtre Team",
+    "emailVerificationMessage": "<h2>Thank you for joining and welcome to Ourtre!</h2>\n<div>\n<h4>\nYour verification code is: {####}\n</h4>\n</div> \n<div>\n<h4>\nPlease send any questions or comments to contact@ourtre.com\n</h4>\n</div>\n\n\n</div>\n\n\nTake care of yourself, \nThe Ourtre Team",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
@@ -44,6 +44,21 @@
     "thirdPartyAuth": false,
     "authProviders": [],
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true
+    "useEnabledMfas": true,
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": true,
+    "dependsOn": [],
+    "hostedUI": false
   }
-} 
+}

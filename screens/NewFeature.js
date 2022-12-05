@@ -136,7 +136,7 @@ const NewFeature = () => {
       If your happy with it send it our way and if you like to add more cancel the draft and you will be taken back to the app to continue.\n\n 
       Thanks, \n 
       Ourtre Contact Team`,
-      recipients: "t.oleary@me.com",
+      recipients: "contact@ourtre.com",
       attachments: [uri],
     });
   };
@@ -170,7 +170,6 @@ const NewFeature = () => {
     if (
       !feature.name.replace(/\s+/g, "") ||
       !feature.whatsItDo.replace(/\s+/g, "") ||
-      !feature.howsItWork.replace(/\s+/g, "") ||
       !feature.howsItHelp.replace(/\s+/g, "")
     ) {
       Alert.alert(
@@ -192,19 +191,17 @@ const NewFeature = () => {
       >
         <View style={look.topBox}>
           <View style={look.header}>
-            <Text style={look.add}>What would you call it?</Text>
             <TextInput
               style={look.userInput}
               onChangeText={(text) => setFeature({ ...feature, name: text })}
               value={feature.name}
-              placeholder={"What's it called? ..."}
+              placeholder={"What's this feature called? ..."}
               placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />
           </View>
           <View style={look.header}>
-            <Text style={look.add}>What does it do?</Text>
             <TextInput
               style={look.userInput}
               onChangeText={(text) =>
@@ -218,23 +215,19 @@ const NewFeature = () => {
             />
           </View>
           <View style={look.header}>
-            <Text style={look.add}>In your mind how does it work?</Text>
             <TextInput
               style={look.userInput}
               onChangeText={(text) =>
                 setFeature({ ...feature, howsItWork: text })
               }
               value={feature.howsItWork}
-              placeholder={"How's it work?"}
+              placeholder={"How does this tool work?"}
               placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
             />
           </View>
           <View style={look.header}>
-            <Text style={look.add}>
-              How do you find this type of thing helpful?
-            </Text>
             <TextInput
               style={look.userInput}
               onChangeText={(text) =>
@@ -248,7 +241,6 @@ const NewFeature = () => {
             />
           </View>
           <View style={look.header}>
-            <Text style={look.add}>How do you think it should look?</Text>
             <TextInput
               style={look.userInput}
               onChangeText={(text) =>
@@ -262,14 +254,11 @@ const NewFeature = () => {
             />
           </View>
           <View style={look.header}>
-            <Text style={look.add}>
-              Is there anything else you'd like to add?
-            </Text>
             <TextInput
               style={look.userInput}
               onChangeText={(text) => setFeature({ ...feature, notes: text })}
               value={feature.notes}
-              placeholder={"Notes"}
+              placeholder={"Anything else you'd like to add?"}
               placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"

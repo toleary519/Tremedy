@@ -19,5 +19,12 @@ export type AmplifyDependentResourcesAttributes = {
             "PartitionKeyType": "string",
             "Region": "string"
         }
+    },
+    "analytics": {
+        "ourtre": {
+            "Region": "string",
+            "Id": "string",
+            "appName": "string"
+        }
     }
 }
