@@ -48,7 +48,8 @@ import { NewFeature } from "./screens/NewFeature";
 import { That } from "./screens/That";
 import { Craving } from "./screens/Craving";
 import { color } from "./assets/colors";
-import { StateProvider } from "./Context";
+import { Context } from "./Context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Amplify, Auth, Hub } from "aws-amplify";
 import awsmobile from "./src/aws-exports";
 Amplify.configure(awsmobile);
@@ -61,7 +62,51 @@ import NewPasswordScreen from "./assets/authPages/screens/NewPasswordScreen";
 const Stack = createNativeStackNavigator();
 
 function App() {
+  // count to trigger the saving of data
+  let count = 0;
   const [user, setUser] = useState(undefined);
+  const [token, setToken] = useState(
+    token
+      ? token
+      : {
+          name: "",
+          email: "",
+          subscribed: true,
+          profile: true,
+          substance: false,
+          flags: true,
+          rLength: 1,
+          timeSaved: false,
+          timeHrs: null,
+          timeMins: null,
+          city: "",
+          country: "",
+        }
+  );
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("storedUser");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
+      setToken(savedData);
+      count++;
+      console.log("get data fired : count : ", savedData, count);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const storeData = async (token) => {
+    if (count > 0) {
+      try {
+        const jsonValue = JSON.stringify(token);
+        await AsyncStorage.setItem("storedUser", jsonValue);
+        console.log("this data has just been stored all the way up: ", token);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
 
   const checkUser = async () => {
     try {
@@ -69,12 +114,23 @@ function App() {
         bypassCache: true,
       });
       setUser(authUser);
+      setToken({
+        ...token,
+        email: authUser.attributes.email,
+        name: authUser.attributes.name,
+      });
+      count++;
     } catch (e) {
       setUser(null);
     }
   };
 
   useEffect(() => {
+    storeData(token);
+  }, [token]);
+
+  useEffect(() => {
+    getData();
     checkUser();
   }, []);
 
@@ -98,7 +154,7 @@ function App() {
   }
 
   return (
-    <>
+    <Context.Provider value={[token, setToken]}>
       <SafeAreaView style={{ flex: 0, backgroundColor: color.bg }} />
       <SafeAreaView style={{ flex: 1, backgroundColor: color.bg }}>
         <StatusBar barStyle={"light-content"} />
@@ -348,7 +404,7 @@ function App() {
           </NavigationContainer>
         </View>
       </SafeAreaView>
-    </>
+    </Context.Provider>
   );
 }
 

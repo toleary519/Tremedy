@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
   View,
@@ -19,6 +19,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Auth } from "aws-amplify";
+import { Context } from "../Context";
 // enables alerts in the forground
 Notifications.setNotificationHandler({
   handleNotification: async () => {
@@ -33,25 +34,7 @@ const UserSettings = () => {
   const [editInfo, setEditInfo] = useState(true);
   const [isAvailable, setIsAvailable] = useState(false);
   const [time, setTime] = useState(new Date(Date.now()));
-  const [token, setToken] = useState(
-    token
-      ? token
-      : {
-          subscribed: true,
-          rLength: 1,
-          profile: true,
-          substance: false,
-          DOB: "",
-          city: "",
-          country: "",
-          flags: true,
-          timeSaved: false,
-          timeHrs: null,
-          timeMins: null,
-          name: "",
-          email: "",
-        }
-  );
+  const [token, setToken] = useContext(Context);
   const [issue, setIssue] = useState({
     where: "",
     what: "",
@@ -59,30 +42,16 @@ const UserSettings = () => {
     bugNotes: "",
   });
 
-  console.log("token in USER : ", token);
-
   const onTimeSelected = (event, value) => {
     setTime(value);
   };
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
-      setToken(savedData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const storeData = async (token) => {
-    try {
-      const jsonValue = JSON.stringify(token);
-      await AsyncStorage.setItem("storedUser", jsonValue);
-      console.log("saved in user: ", token.substance);
-    } catch (e) {
-      console.log(e);
-    }
+  const allKeysGone = async () => {
+    const keys = await AsyncStorage.getAllKeys();
+    console.log(keys);
+    await AsyncStorage.multiRemove(keys);
+    const keysTwo = await AsyncStorage.getAllKeys();
+    console.log("keys two ------", keysTwo);
   };
 
   const deleteData = () => {
@@ -93,7 +62,7 @@ const UserSettings = () => {
         [
           {
             text: "Yes",
-            onPress: () => AsyncStorage.clear(),
+            onPress: () => allKeysGone(),
           },
           {
             text: "Save Them",
@@ -158,42 +127,42 @@ const UserSettings = () => {
     }
   };
 
-  const cancelAlarm = () => {
-    const secondAlarmAlert = () => {
-      Alert.alert(
-        "Delete Reminder",
-        `You can set a new alarm whenever you want.`,
-        {
-          text: "Okay",
-          onPress: async () => {
-            await Notifications.cancelAllScheduledNotificationsAsync();
-          },
-        }
-      );
-    };
+  // const cancelAlarm = () => {
+  //   const secondAlarmAlert = () => {
+  //     Alert.alert(
+  //       "Delete Reminder",
+  //       `You can set a new alarm whenever you want.`,
+  //       {
+  //         text: "Okay",
+  //         onPress: async () => {
+  //           await Notifications.cancelAllScheduledNotificationsAsync();
+  //         },
+  //       }
+  //     );
+  //   };
 
-    Alert.alert("Turn Off Reminder?", [
-      {
-        text: "Yes",
-        onPress: () => {
-          secondAlarmAlert();
-        },
-      },
-      {
-        text: "Keep it.",
-        onPress: () => {
-          return;
-        },
-      },
-    ]);
-  };
+  //   Alert.alert("Turn Off Reminder?", [
+  //     {
+  //       text: "Yes",
+  //       onPress: () => {
+  //         secondAlarmAlert();
+  //       },
+  //     },
+  //     {
+  //       text: "Keep it.",
+  //       onPress: () => {
+  //         return;
+  //       },
+  //     },
+  //   ]);
+  // };
 
   useEffect(() => {
     async function checkAvailability() {
       const isMailAvailable = await MailComposer.isAvailableAsync();
       setIsAvailable(isMailAvailable);
     }
-    getData();
+    // getData();
     checkAvailability();
   }, []);
 
@@ -304,15 +273,6 @@ const UserSettings = () => {
     }
   };
 
-  const creditCardInformation = () => {
-    // Sign Up.
-  };
-
-  const handleChange = () => {
-    storeData(token);
-    getData();
-  };
-
   const dropDownRender = (item) => {
     return (
       <View>
@@ -336,117 +296,19 @@ const UserSettings = () => {
     return (
       <View>
         <View style={look.element}>
-          <View style={{ width: "100%" }}>
-            <Text style={[look.add]}>{item.dropdown}</Text>
-            <View style={look.userInfoElement}>
-              {!editInfo || token.profile ? (
-                <View style={look.userHeader}>
-                  <View>
-                    <Text
-                      style={[
-                        look.add,
-                        { borderTopWidth: 3, borderTopColor: "#3C5E90" },
-                      ]}
-                    >
-                      {token.name}
-                    </Text>
-                    <Text style={[look.add]}>{token.email}</Text>
-                    {!token.city && !token.country ? null : (
-                      <Text style={[look.add]}>
-                        {token.city ? token.city : null}
-                        {token.city && token.country ? ", " : ""}
-                        {token.country ? token.country : null}
-                      </Text>
-                    )}
-                  </View>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setEditInfo(true);
-                      setToken({ ...token, profile: false });
-                    }}
-                  >
-                    <Feather name="edit" style={look.icon} />
-                  </TouchableOpacity>
-                </View>
-              ) : (
-                <View>
-                  <View style={look.header}>
-                    <Text style={look.add}>Name*</Text>
-                    <Text style={look.sub}>Any of the following,</Text>
-                    <TextInput
-                      style={look.userInput}
-                      value={token.name}
-                      placeholder={"First, Last, Full or Nickname"}
-                      keyboardType="default"
-                    />
-                  </View>
-                  <View style={look.header}>
-                    <Text style={look.add}>Email*</Text>
-                    <TextInput
-                      style={look.userInput}
-                      onChangeText={(text) =>
-                        setToken({ ...token, email: text })
-                      }
-                      value={token.email}
-                      placeholder={"Email"}
-                      keyboardType="default"
-                    />
-                  </View>
-                  <View style={look.header}>
-                    <Text style={look.add}>
-                      City* and country where you live.
-                    </Text>
-                    <Text style={look.sub}>
-                      Why? There are location elements in Ourtre. To protect
-                      your privacy we do not collect GPS data.
-                    </Text>
-                    <TextInput
-                      style={look.userInput}
-                      onChangeText={(text) =>
-                        setToken({ ...token, city: text })
-                      }
-                      value={token.city}
-                      placeholder={"City"}
-                      placeholderTextColor={color.placeholderText}
-                      keyboardType="default"
-                    />
-
-                    <TextInput
-                      style={look.userInput}
-                      onChangeText={(text) =>
-                        setToken({ ...token, country: text })
-                      }
-                      value={token.country}
-                      placeholder={"Country"}
-                      placeholderTextColor={color.placeholderText}
-                      keyboardType="default"
-                    />
-                  </View>
-                  {/* <View style={look.header}>
-                    <Text style={look.add}>Age, 18+*</Text>
-                    <TextInput
-                      style={look.userInput}
-                      onChangeText={(text) => setToken({ ...token, DOB: text })}
-                      value={token.DOB}
-                      maxLength={2}
-                      placeholder={"Age"}
-                      keyboardType="number-pad"
-                    />
-                  </View> */}
-                  {/* <View> */}
-                  {/* <TouchableOpacity onPress={() => errorCheck()}>
-                      <MaterialIcons
-                        style={[
-                          look.icon,
-                          look.centerIcon,
-                          { paddingBottom: "2%" },
-                        ]}
-                        name="add-circle"
-                      />
-                    </TouchableOpacity> */}
-                  {/* </View> */}
-                </View>
-              )}
+          <View style={look.userInfoElement}>
+            <View style={look.userHeader}>
+              <View>
+                <Text
+                  style={[
+                    look.add,
+                    { borderTopWidth: 3, borderTopColor: "#3C5E90" },
+                  ]}
+                >
+                  {token.name}
+                </Text>
+                <Text style={[look.add]}>{token.email}</Text>
+              </View>
             </View>
           </View>
         </View>
@@ -769,51 +631,51 @@ const UserSettings = () => {
       </View>
     );
   };
-  const billingRender = (item) => {
-    return (
-      <View>
-        <View style={look.header}>
-          <View style={look.userHeader}>
-            <Text style={[look.add, { marginBottom: 10, width: "80%" }]}>
-              {item.dropdown}
-            </Text>
-            <TouchableOpacity
-              onPress={
-                token.subscribed
-                  ? () => setToken({ ...token, subscribed: false })
-                  : () => setToken({ ...token, subscribed: true })
-              }
-            >
-              {token.subscribed ? (
-                <MaterialIcons
-                  name="toggle-on"
-                  style={[look.toggleOn, { paddingTop: "2%" }]}
-                />
-              ) : (
-                <MaterialIcons
-                  name="toggle-off"
-                  style={[look.toggleOff, { paddingTop: "2%" }]}
-                />
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View>
-          {token.subscribed ? (
-            <View style={[look.element, { marginBottom: 10 }]}>
-              <Text style={look.sub}>{item.onText}</Text>
-            </View>
-          ) : null}
-        </View>
-      </View>
-    );
-  };
+  // const billingRender = (item) => {
+  //   return (
+  //     <View>
+  //       <View style={look.header}>
+  //         <View style={look.userHeader}>
+  //           <Text style={[look.add, { marginBottom: 10, width: "80%" }]}>
+  //             {item.dropdown}
+  //           </Text>
+  //           <TouchableOpacity
+  //             onPress={
+  //               token.subscribed
+  //                 ? () => setToken({ ...token, subscribed: false })
+  //                 : () => setToken({ ...token, subscribed: true })
+  //             }
+  //           >
+  //             {token.subscribed ? (
+  //               <MaterialIcons
+  //                 name="toggle-on"
+  //                 style={[look.toggleOn, { paddingTop: "2%" }]}
+  //               />
+  //             ) : (
+  //               <MaterialIcons
+  //                 name="toggle-off"
+  //                 style={[look.toggleOff, { paddingTop: "2%" }]}
+  //               />
+  //             )}
+  //           </TouchableOpacity>
+  //         </View>
+  //       </View>
+  //       <View>
+  //         {token.subscribed ? (
+  //           <View style={[look.element, { marginBottom: 10 }]}>
+  //             <Text style={look.sub}>{item.onText}</Text>
+  //           </View>
+  //         ) : null}
+  //       </View>
+  //     </View>
+  //   );
+  // };
 
   let settingsOptions = [
     {
       id: 0,
       title: "My Profile",
-      subtitle: "All about you",
+      subtitle: "Email and Name",
       dropdown:
         "Enter your information here for report sharing and profile recovery.",
     },
@@ -913,7 +775,6 @@ const UserSettings = () => {
                       <TouchableOpacity
                         onPress={() => {
                           setSelectedOption(null);
-                          handleChange();
                         }}
                       >
                         <Feather

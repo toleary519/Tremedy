@@ -1,43 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, TouchableOpacity, View, Alert } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import { look } from "../assets/styles";
 import { Auth } from "aws-amplify";
+import { Context } from "../Context";
 
 const FirstMenu = ({ navigation }) => {
-  const isFocused = useIsFocused();
-
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
-      setToken(savedData);
-      console.log("saved token data", savedData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const [token, setToken] = useState(
-    token
-      ? token
-      : {
-          subscribed: true,
-          rLength: 1,
-          profile: true,
-          city: "",
-          country: "",
-          flags: true,
-          substance: false,
-          timeSaved: false,
-          timeHrs: null,
-          timeMins: null,
-          name: "",
-          email: "",
-        }
-  );
+  // const isFocused = useIsFocused();
+  const [token, setToken] = useContext(Context);
 
   const signOut = async () => {
     try {
@@ -47,29 +19,20 @@ const FirstMenu = ({ navigation }) => {
     }
   };
 
-  const storeData = async (token) => {
-    try {
-      const jsonValue = JSON.stringify(token);
-      await AsyncStorage.setItem("storedUser", jsonValue);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // useEffect(() => {
+  //   const setUser = async () => {
+  //     let user = await Auth.currentSession();
+  //     let name = await user.getIdToken().payload.name;
+  //     let email = await user.getIdToken().payload.email;
+  //     token.email = email;
+  //     token.name = name;
+  //     await storeData(token);
+  //     await getData();
+  //   };
+  //   setUser();
+  // }, [isFocused]);
 
-  useEffect(() => {
-    const setUser = async () => {
-      let user = await Auth.currentSession();
-      let name = await user.getIdToken().payload.name;
-      let email = await user.getIdToken().payload.email;
-      token.email = email;
-      token.name = name;
-      await storeData(token);
-      await getData();
-    };
-    setUser();
-  }, [isFocused]);
-
-  console.log("first run ", token);
+  // console.log("first run ", token);
 
   return (
     <View style={look.container}>
