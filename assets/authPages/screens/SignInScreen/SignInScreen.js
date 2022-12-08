@@ -19,6 +19,7 @@ import {
   TwitterSocialButton,
 } from "react-native-social-buttons";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
 import { Auth } from "aws-amplify";
 import { look } from "../../../styles";
@@ -58,7 +59,6 @@ const SignInScreen = () => {
     setLoading(true);
     try {
       const response = await Auth.signIn(data.email, data.password);
-      console.log(response);
     } catch (e) {
       Alert.alert("Oops", e.message);
     }
@@ -116,7 +116,7 @@ const SignInScreen = () => {
           />
 
           <CustomButton
-            text={loading ? "Loading..." : "Sign In"}
+            text={loading ? "signing in..." : "Sign In"}
             border={loading ? false : true}
             onPress={handleSubmit(onSignInPressed)}
           />

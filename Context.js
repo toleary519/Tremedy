@@ -1,34 +1,39 @@
-// import { setAutoServerRegistrationEnabledAsync } from "expo-notifications";
-// import React, { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
-// // invoke and export the context
-// export const StateContext = createContext();
+// invoke and export the context
+export const UserContext = createContext();
 
-// // prettier-ignore
-// export const StateProvider = (props) => {
-//     const [user, setUser] = useState({email: "", name: ""});
+// prettier-ignore
+export const StateProvider = (props) => {
+  const [token, setToken] = useState(
+    token
+      ? token
+      : {
+          name: "",
+          email: "",
+          subscribed: true,
+          profile: true,
+          substance: false,
+          flags: true,
+          rLength: 1,
+          timeSaved: false,
+          timeHrs: null,
+          timeMins: null,
+          city: "",
+          country: "",
+        }
+  );
 
-//     async function getUserInfo() {
-//         const user = await Auth.currentAuthenticatedUser();
-//         setAutoServerRegistrationEnabledAsync()
-//         console.log("attributes:", user.attributes);
-//     }
+  console.log("context ran");
+  console.log("this is the state object in context : ", state);
 
-//   let state = {
-//     email: user.email,
-//     name: user.name,
-//   };
+  React.useEffect(() => {
+    getUserInfo();
+  }, []);
 
-//   console.log("context ran");
-//   console.log("this is the state object in context : ", state);
-
-//   React.useEffect(() => {
-//     getUserInfo();
-//   }, []);
-
-//   return (
-//     <StateContext.Provider value={{ state }}>
-//       {props.children}
-//     </StateContext.Provider>
-//   );
-// };
+  return (
+    <StateContext.Provider value={state}>
+      {props.children}
+    </StateContext.Provider>
+  );
+};

@@ -59,19 +59,7 @@ const UserSettings = () => {
     bugNotes: "",
   });
 
-  useEffect(() => {
-    Auth.currentSession()
-      .then((data) =>
-        setToken({
-          ...token,
-          email: data.getIdToken().payload.email,
-          name: data.getIdToken().payload.name,
-        })
-      )
-      .catch((err) => console.error("current session error : ", err));
-  }, [token.email]);
-
-  console.log("token email : ", token.email, token.name);
+  console.log("token in USER : ", token);
 
   const onTimeSelected = (event, value) => {
     setTime(value);
@@ -81,7 +69,7 @@ const UserSettings = () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : {};
-      setToken({ ...savedData });
+      setToken(savedData);
     } catch (e) {
       console.log(e);
     }
@@ -91,6 +79,7 @@ const UserSettings = () => {
     try {
       const jsonValue = JSON.stringify(token);
       await AsyncStorage.setItem("storedUser", jsonValue);
+      console.log("saved in user: ", token.substance);
     } catch (e) {
       console.log(e);
     }

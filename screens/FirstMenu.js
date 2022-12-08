@@ -1,43 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View, Alert } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import { look } from "../assets/styles";
 import { Auth } from "aws-amplify";
 
 const FirstMenu = ({ navigation }) => {
-  const [token, setToken] = useState({
-    subscribed: true,
-    rLength: 1,
-    profile: true,
-    substance: false,
-    city: "",
-    country: "",
-    flags: true,
-    timeSaved: false,
-    timeHrs: null,
-    timeMins: null,
-    name: "",
-    email: "",
-  });
-
-  const signOut = async () => {
-    try {
-      await Auth.signOut({ global: true });
-    } catch (error) {
-      console.log("error signing out: ", error);
-    }
-  };
+  const isFocused = useIsFocused();
 
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : {};
       setToken(savedData);
-
-      console.log("token after get: ", token);
+      console.log("saved token data", savedData);
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const [token, setToken] = useState(
+    token
+      ? token
+      : {
+          subscribed: true,
+          rLength: 1,
+          profile: true,
+          city: "",
+          country: "",
+          flags: true,
+          substance: false,
+          timeSaved: false,
+          timeHrs: null,
+          timeMins: null,
+          name: "",
+          email: "",
+        }
+  );
+
+  const signOut = async () => {
+    try {
+      await Auth.signOut({ global: true });
+    } catch (error) {
+      console.log("error signing out: ", error);
     }
   };
 
@@ -51,41 +57,19 @@ const FirstMenu = ({ navigation }) => {
   };
 
   useEffect(() => {
-    Auth.currentSession()
-      .then((data) =>
-        setToken({
-          ...token,
-          email: data.getIdToken().payload.email,
-          name: data.getIdToken().payload.name,
-        })
-      )
-      .catch((err) => console.error("current session error : ", err));
-  }, [token.email]);
+    const setUser = async () => {
+      let user = await Auth.currentSession();
+      let name = await user.getIdToken().payload.name;
+      let email = await user.getIdToken().payload.email;
+      token.email = email;
+      token.name = name;
+      await storeData(token);
+      await getData();
+    };
+    setUser();
+  }, [isFocused]);
 
-  const profileCheck = () => {
-    Alert.alert(
-      "User Profile Not Found",
-      `Quickly sign up in User Settings for access.`,
-      [
-        {
-          text: "Create Profile",
-          onPress: () => navigation.navigate("UserSettings"),
-        },
-        {
-          text: "Close",
-          onPress: () => {
-            return;
-          },
-        },
-      ]
-    );
-  };
-
-  console.log("first run : ", token);
-  useEffect(() => {
-    storeData(token);
-    getData();
-  }, []);
+  console.log("first run ", token);
 
   return (
     <View style={look.container}>
