@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
@@ -6,12 +6,13 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
+import { Context } from "../Context";
 
 const FocusStatement = () => {
   const [focusStorage, setFocusStorage] = useState(
     focusStorage ? focusStorage : []
   );
-  const [token, setToken] = useState(token ? token : {});
+  const [token, setToken] = useContext(Context);
   const [myFocus, setMyFocus] = useState("");
 
   let sortedEntries = focusStorage.sort((a, b) => {
@@ -21,11 +22,8 @@ const FocusStatement = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedFocus");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setFocusStorage(savedData);
-      setToken(savedTokData);
     } catch (e) {
       console.log(e);
     }

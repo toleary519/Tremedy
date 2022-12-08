@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
+import { Context } from "../Context";
 
 const Craving = () => {
   const [cravingStorage, setCravingStorage] = useState(
@@ -21,7 +22,7 @@ const Craving = () => {
           action: "",
         }
   );
-  const [token, setToken] = useState(token ? token : {});
+  const [token, setToken] = useContext(Context);
 
   let sortedEntries = cravingStorage.sort((a, b) => {
     return b.id - a.id;
@@ -30,11 +31,8 @@ const Craving = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedCraving");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setCravingStorage(savedData);
-      setToken(savedTokData);
     } catch (e) {
       console.log(e);
     }

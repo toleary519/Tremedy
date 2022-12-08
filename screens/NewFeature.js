@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as MailComposer from "expo-mail-composer";
@@ -7,10 +7,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
+import { Context } from "../Context";
 
 const NewFeature = () => {
   const [isAvailable, setIsAvailable] = useState(false);
-  const [token, setToken] = useState({});
+  const [token, setToken] = useContext(Context);
   const [feature, setFeature] = useState({
     name: "",
     whatsItDo: "",
@@ -19,20 +20,6 @@ const NewFeature = () => {
     howsItHelp: "",
     notes: "",
   });
-
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
-      setToken(savedData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, [token]);
 
   useEffect(() => {
     async function checkAvailability() {
@@ -139,31 +126,6 @@ const NewFeature = () => {
       recipients: "contact@ourtre.com",
       attachments: [uri],
     });
-  };
-
-  const flagAlert = () => {
-    const pressTrue = () => {
-      let flag = true;
-      handleAdd(flag);
-    };
-
-    const pressFalse = () => {
-      let flag = false;
-      handleAdd(flag);
-    };
-
-    Alert.alert(
-      `Flag this in "My Past Week?"`,
-      `Manage flags in User Settings.`,
-      [
-        {
-          text: "Yes",
-          onPress: () => pressTrue(),
-        },
-
-        { text: "Nope", onPress: () => pressFalse() },
-      ]
-    );
   };
 
   const errorCheck = () => {
@@ -279,4 +241,3 @@ const NewFeature = () => {
 };
 
 export { NewFeature };
-

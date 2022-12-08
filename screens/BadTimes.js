@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
   StyleSheet,
@@ -13,10 +13,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
+import { Context } from "../Context";
 
 const BadTimes = () => {
   const [badStorage, setBadStorage] = useState(badStorage ? badStorage : []);
-  const [token, setToken] = useState(token ? token : {});
+  const [token, setToken] = useContext(Context);
   const [note, setNote] = useState("");
 
   let sortedEntries = badStorage.sort((a, b) => {
@@ -26,12 +27,8 @@ const BadTimes = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedBad");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setBadStorage(savedData);
-      setToken(savedTokData);
-      console.log("token : ", token);
     } catch (e) {
       console.log(e);
     }
@@ -206,4 +203,4 @@ const BadTimes = () => {
   );
 };
 
-export { BadTimes }
+export { BadTimes };

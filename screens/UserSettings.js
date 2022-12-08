@@ -42,6 +42,22 @@ const UserSettings = () => {
     bugNotes: "",
   });
 
+  const storeData = async (token) => {
+    try {
+      console.log("inside storeData");
+      const jsonValue = JSON.stringify(token);
+      await AsyncStorage.setItem("storedUser", jsonValue);
+      console.log("this data has just been stored: ", token);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    storeData(token);
+    console.log("stored user", token);
+  }, [token]);
+  
   const onTimeSelected = (event, value) => {
     setTime(value);
   };
@@ -754,7 +770,8 @@ const UserSettings = () => {
     //     "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
     // },
   ];
-  console.log("user run : token", token);
+
+  console.log("user run");
   return (
     <View style={look.container}>
       <View style={look.topBox}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -6,12 +6,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
+import { Context } from "../Context";
 
 const CopingStatement = () => {
   const [copingStorage, setCopingStorage] = useState(
     copingStorage ? copingStorage : []
   );
-  const [token, setToken] = useState(token ? token : {});
+  const [token, setToken] = useContext(Context);
   const [myCoping, setMyCoping] = useState("");
 
   let sortedEntries = copingStorage.sort((a, b) => {
@@ -21,11 +22,8 @@ const CopingStatement = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedCoping");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setCopingStorage(savedData);
-      setToken(savedTokData);
     } catch (e) {
       console.log(e);
     }

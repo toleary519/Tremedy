@@ -62,8 +62,6 @@ import NewPasswordScreen from "./assets/authPages/screens/NewPasswordScreen";
 const Stack = createNativeStackNavigator();
 
 function App() {
-  // count to trigger the saving of data
-  let count = 0;
   const [user, setUser] = useState(undefined);
   const [token, setToken] = useState(
     token
@@ -84,53 +82,28 @@ function App() {
         }
   );
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
-      setToken(savedData);
-      count++;
-      console.log("get data fired : count : ", savedData, count);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const storeData = async (token) => {
-    if (count > 0) {
-      try {
-        const jsonValue = JSON.stringify(token);
-        await AsyncStorage.setItem("storedUser", jsonValue);
-        console.log("this data has just been stored all the way up: ", token);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
-
   const checkUser = async () => {
     try {
       const authUser = await Auth.currentAuthenticatedUser({
         bypassCache: true,
       });
+      const jsonValue = await AsyncStorage.getItem("storedUser");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
+      console.log("saved data", savedData);
+      setToken({ savedData });
+      console.log("token after set", token);
       setUser(authUser);
       setToken({
         ...token,
         email: authUser.attributes.email,
         name: authUser.attributes.name,
       });
-      count++;
     } catch (e) {
       setUser(null);
     }
   };
 
   useEffect(() => {
-    storeData(token);
-  }, [token]);
-
-  useEffect(() => {
-    getData();
     checkUser();
   }, []);
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -6,12 +6,13 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
+import { Context } from "../Context";
 
 const That = () => {
   const [thatStorage, setThatStorage] = useState(
     thatStorage ? thatStorage : []
   );
-  const [token, setToken] = useState(token ? token : {});
+  const [token, setToken] = useContext(Context);
   const [that, setThat] = useState("");
 
   let sortedEntries = thatStorage.sort((a, b) => {
@@ -21,11 +22,8 @@ const That = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedThat");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setThatStorage(savedData);
-      setToken(savedTokData);
     } catch (e) {
       console.log(e);
     }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Text,
   View,
@@ -15,12 +15,13 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
+import { Context } from "../Context";
 
 const MyValues = () => {
   const [valueStorage, setValueStorage] = useState(
     valueStorage ? valueStorage : []
   );
-  const [token, setToken] = useState(token ? token : {});
+  const [token, setToken] = useContext(Context);
   const [myValue, setMyValue] = useState("");
   const [imageWindow, setImageWindow] = useState(false);
 
@@ -31,11 +32,8 @@ const MyValues = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("storedValues");
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       setValueStorage(savedData);
-      setToken(savedTokData);
     } catch (e) {
       console.log(e);
     }

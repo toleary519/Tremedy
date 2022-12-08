@@ -8,31 +8,16 @@ import { Auth } from "aws-amplify";
 import { Context } from "../Context";
 
 const FirstMenu = ({ navigation }) => {
-  // const isFocused = useIsFocused();
   const [token, setToken] = useContext(Context);
 
   const signOut = async () => {
     try {
       await Auth.signOut({ global: true });
+      console.log("Sign out");
     } catch (error) {
       console.log("error signing out: ", error);
     }
   };
-
-  // useEffect(() => {
-  //   const setUser = async () => {
-  //     let user = await Auth.currentSession();
-  //     let name = await user.getIdToken().payload.name;
-  //     let email = await user.getIdToken().payload.email;
-  //     token.email = email;
-  //     token.name = name;
-  //     await storeData(token);
-  //     await getData();
-  //   };
-  //   setUser();
-  // }, [isFocused]);
-
-  // console.log("first run ", token);
 
   return (
     <View style={look.container}>

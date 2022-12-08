@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, TouchableOpacity, Alert, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Feather } from "@expo/vector-icons";
@@ -7,20 +7,20 @@ import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
 import { CheckVal, Entries } from "../helpers/reportFunctions";
 import { emailEntries } from "../helpers/htmlEmails";
+import { Context } from "../Context";
 
 const Report = () => {
   let [showFull, setShowFull] = useState(true);
   let [showChecks, setShowChecks] = useState(false);
   let [showFlags, setShowFlags] = useState(false);
   const [isAvailable, setIsAvailable] = useState(false);
-  const [token, setToken] = useState(token ? token : {});
+  const [token, setToken] = useContext(Context);
   const [myThree, setMyThree] = useState([]);
   let [reportStorage, setReportStorage] = useState(
     reportStorage ? reportStorage : []
   );
   const getData = async () => {
     try {
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
       const copeValue = await AsyncStorage.getItem("storedCoping");
       const checkValue = await AsyncStorage.getItem("storedCheckin");
       const focusValue = await AsyncStorage.getItem("storedFocus");
@@ -31,7 +31,6 @@ const Report = () => {
       const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
       const thatValue = await AsyncStorage.getItem("storedThat");
       const cravingValue = await AsyncStorage.getItem("storedCraving");
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
       let copeData = copeValue ? JSON.parse(copeValue) : [];
       let checkData = checkValue ? JSON.parse(checkValue) : [];
       let focusData = focusValue ? JSON.parse(focusValue) : [];
@@ -42,7 +41,6 @@ const Report = () => {
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
       let thatData = thatValue ? JSON.parse(thatValue) : [];
       let craveData = cravingValue ? JSON.parse(cravingValue) : [];
-      setToken(savedTokData);
       setReportStorage([
         ...copeData,
         ...checkData,

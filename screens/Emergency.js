@@ -1,23 +1,14 @@
-import React, { useState, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import { Text, Alert, View, TouchableOpacity, Linking } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
+import { Context } from "../Context";
 
 const Emergency = ({ navigation }) => {
-  const [token, setToken] = useState(token ? token : {});
+  const [token, setToken] = useContext(Context);
 
   const makeCall = () => {
     // make a call to 911
-  };
-
-  const getData = async () => {
-    try {
-      const jsonTokValue = await AsyncStorage.getItem("storedUser");
-      let savedTokData = jsonTokValue ? JSON.parse(jsonTokValue) : {};
-      setToken(savedTokData);
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   const emergCheck = () => {
@@ -38,10 +29,6 @@ const Emergency = ({ navigation }) => {
       ]
     );
   };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   let crisis = () => {
     Linking.openURL(`https://www.google.com/search?q=crisis+line+my+area`);
@@ -102,4 +89,4 @@ const Emergency = ({ navigation }) => {
   );
 };
 
-export { Emergency }
+export { Emergency };

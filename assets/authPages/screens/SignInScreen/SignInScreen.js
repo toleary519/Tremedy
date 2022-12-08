@@ -116,7 +116,7 @@ const SignInScreen = () => {
           />
 
           <CustomButton
-            text={loading ? "signing in..." : "Sign In"}
+            text={loading ? "" : "Sign In"}
             border={loading ? false : true}
             onPress={handleSubmit(onSignInPressed)}
           />
