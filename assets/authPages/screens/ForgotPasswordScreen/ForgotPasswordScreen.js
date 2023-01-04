@@ -17,7 +17,7 @@ const ForgotPasswordScreen = () => {
       await Auth.forgotPassword(data.username);
       navigation.navigate("NewPassword");
     } catch (e) {
-      Alert.alert("Oops", e.message);
+      Alert.alert("Something went wrong.", e.message);
     }
   };
 

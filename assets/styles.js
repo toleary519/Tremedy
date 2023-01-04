@@ -397,4 +397,7 @@ export const look = {
     paddingLeft: "3%",
     opacity: 0.6,
   },
+  socials: {
+    width: "85%",
+  },
 };

@@ -60,7 +60,7 @@ const SignInScreen = () => {
     try {
       const response = await Auth.signIn(data.email, data.password);
     } catch (e) {
-      Alert.alert("Oops", e.message);
+      Alert.alert("Something went wrong.", e.message);
     }
     setLoading(false);
   };
@@ -128,13 +128,19 @@ const SignInScreen = () => {
           />
           <View style={{ alignItems: "center", flex: 1 }}>
             <GoogleSocialButton
-              style={{ alignSelf: "strech" }}
+              buttonViewStyle={look.socials}
               onPress={() => authAlert()}
             />
 
-            <AppleSocialButton onPress={() => authAlert()} />
+            <AppleSocialButton
+              buttonViewStyle={look.socials}
+              onPress={() => authAlert()}
+            />
 
-            <FacebookSocialButton onPress={() => authAlert()} />
+            <FacebookSocialButton
+              buttonViewStyle={look.socials}
+              onPress={() => authAlert()}
+            />
           </View>
 
           <CustomButton

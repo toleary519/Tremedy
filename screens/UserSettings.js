@@ -31,7 +31,6 @@ Notifications.setNotificationHandler({
 
 const UserSettings = () => {
   const [selectedOption, setSelectedOption] = useState(null);
-  const [editInfo, setEditInfo] = useState(true);
   const [isAvailable, setIsAvailable] = useState(false);
   const [time, setTime] = useState(new Date(Date.now()));
   const [token, setToken] = useContext(Context);
@@ -53,11 +52,23 @@ const UserSettings = () => {
     }
   };
 
-  useEffect(() => {
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("storedUser");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : [];
+      setToken(savedData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // This needs to work and we will be done VV
+  const changingToken = () => {
     storeData(token);
-    console.log("stored user", token);
-  }, [token]);
-  
+    getData();
+    console.log("changed run", token.substance, token.rLength);
+  };
+
   const onTimeSelected = (event, value) => {
     setTime(value);
   };
@@ -792,6 +803,7 @@ const UserSettings = () => {
                       <TouchableOpacity
                         onPress={() => {
                           setSelectedOption(null);
+                          changingToken();
                         }}
                       >
                         <Feather

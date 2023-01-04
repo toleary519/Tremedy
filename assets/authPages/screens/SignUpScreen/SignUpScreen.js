@@ -34,7 +34,7 @@ const SignUpScreen = () => {
 
       navigation.navigate("ConfirmEmail", { email });
     } catch (e) {
-      Alert.alert("Oops", e.message);
+      Alert.alert("Something went wrong.", e.message);
     }
   };
 
@@ -130,7 +130,7 @@ const SignUpScreen = () => {
             onPress={handleSubmit(onRegisterPressed)}
           />
 
-          <Text style={styles.text}>
+          <Text style={[styles.text, { justifyContent: "center" }]}>
             By registering, you confirm that you accept our{" "}
             <Text style={styles.link}>
               {/* <Text style={styles.link} onPress={onTermsOfUsePressed}> */}
@@ -145,12 +145,18 @@ const SignUpScreen = () => {
 
           <View style={{ alignItems: "center", flex: 1 }}>
             <GoogleSocialButton
-              style={{ alignSelf: "strech" }}
+              buttonViewStyle={look.socials}
               onPress={() => authAlert()}
             />
 
-            <AppleSocialButton onPress={() => authAlert()} />
-            <FacebookSocialButton onPress={() => authAlert()} />
+            <AppleSocialButton
+              buttonViewStyle={look.socials}
+              onPress={() => authAlert()}
+            />
+            <FacebookSocialButton
+              buttonViewStyle={look.socials}
+              onPress={() => authAlert()}
+            />
           </View>
 
           <CustomButton

@@ -24,7 +24,7 @@ const ConfirmEmailScreen = () => {
       await Auth.confirmSignUp(data.username, data.code);
       navigation.navigate("SignIn");
     } catch (e) {
-      Alert.alert("Oops", e.message);
+      Alert.alert("Something went wrong.", e.message);
     }
   };
 
@@ -37,7 +37,7 @@ const ConfirmEmailScreen = () => {
       await Auth.resendSignUp(username);
       Alert.alert("Success", "Code was resent to your email");
     } catch (e) {
-      Alert.alert("Oops", e.message);
+      Alert.alert("Something went wrong.", e.message);
     }
   };
 
