@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
 import { feelingWheel } from "../helpers/feelingwheelOptions";
 import Slider from "@react-native-community/slider";
@@ -7,6 +7,7 @@ import { Picker } from "@react-native-picker/picker";
 import { FontAwesome } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 
@@ -160,10 +161,16 @@ const CheckIn = () => {
   const setTwo = feelOne ? Object.keys(feelingWheel[0][feelOne]) : null;
   const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
 
+  useEffect(() => {
+    Analytics.record({ name: "Checkin Page Visit" });
+  }, []);
+
   React.useEffect(() => {
     getData();
   }, []);
+
   console.log("checkin run");
+
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView
