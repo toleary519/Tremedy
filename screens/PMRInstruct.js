@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, StyleSheet, View } from "react-native";
+import { Analytics } from "aws-amplify";
 
 const PMRInstruct = () => {
+  useEffect(() => {
+    Analytics.record({ name: "PMR Page Visit" });
+  }, []);
 
   return (
     <View style={styles.container}>
-        <Image style={{ height: '80%', width: '100%' }} source={require("../assets/PMR.png")}/>
-      </View>
-  )
+      <Image
+        style={{ height: "80%", width: "100%" }}
+        source={require("../assets/PMR.png")}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -15,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFFEFE"
+    backgroundColor: "#FFFEFE",
   },
   add: {
     textAlign: "center",

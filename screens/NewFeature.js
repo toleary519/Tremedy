@@ -4,7 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import * as MailComposer from "expo-mail-composer";
 import * as Print from "expo-print";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Context } from "../Context";
@@ -144,6 +144,10 @@ const NewFeature = () => {
       sendFeatureMail();
     }
   };
+
+  useEffect(() => {
+    Analytics.record({ name: "NewFeature Page Visit" });
+  }, []);
 
   return (
     <View style={look.container}>

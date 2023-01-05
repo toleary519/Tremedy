@@ -1,39 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
+import { Analytics } from "aws-amplify";
 
-const OutsideMenu = ({ navigation }) => (
-  <View style={styles.container}>
-    <Text style={styles.summary}>
-      Explain to the version of yourself when you were at SCHC this decision.
-    </Text>
-    <Text style={styles.summaryTwo}>
-      Say it OUT LOUD how this is the right move.
-    </Text>
-    <TouchableOpacity
-      onPress={() => navigation.navigate("SupportContacts")}
-      delayPressIn={150}
-    >
-      <Text style={styles.add}>Support Contacts</Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      onPress={() => navigation.navigate("NotesMenu")}
-      delayPressIn={150}
-    >
-      <Text style={styles.add}>Your Experiences</Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      onPress={() => navigation.navigate("Meetings")}
-      delayPressIn={150}
-    >
-      <Text style={styles.add}>Meetings</Text>
-    </TouchableOpacity>
-  </View>
-);
+const OutsideMenu = ({ navigation }) => {
+  useEffect(() => {
+    Analytics.record({ name: "Outside Page Visit" });
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.summary}>
+        Explain to the version of yourself when you were at SCHC this decision.
+      </Text>
+      <Text style={styles.summaryTwo}>
+        Say it OUT LOUD how this is the right move.
+      </Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("SupportContacts")}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>Support Contacts</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("NotesMenu")}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>Your Experiences</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Meetings")}
+        delayPressIn={150}
+      >
+        <Text style={styles.add}>Meetings</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#1B2A41"
+    backgroundColor: "#1B2A41",
   },
   add: {
     borderRadius: 10,
@@ -75,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { OutsideMenu }
+export { OutsideMenu };

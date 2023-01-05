@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Context } from "../Context";
+import { Analytics } from "aws-amplify";
 
 const SelfTalk = () => {
   const [selfTalk, setSelfTalk] = useState(selfTalk ? selfTalk : []);
@@ -127,6 +128,10 @@ const SelfTalk = () => {
     storeData(selfTalk);
     getData();
   };
+
+  useEffect(() => {
+    Analytics.record({ name: "SelfTalk Page Visit" });
+  }, []);
 
   console.log("self run");
   React.useEffect(() => {

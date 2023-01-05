@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -13,6 +13,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import coreV from "../assets/coreV.jpeg";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Context } from "../Context";
@@ -136,6 +137,11 @@ const MyValues = () => {
     storeData(valueStorage);
     getData();
   };
+
+  useEffect(() => {
+    Analytics.record({ name: "Values Page Visit" });
+  }, []);
+
   console.log("value run");
   React.useEffect(() => {
     getData();

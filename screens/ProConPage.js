@@ -1,9 +1,10 @@
-import React,{ useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, ScrollView, TextInput } from "react-native";
-import { Ionicons } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 
@@ -114,6 +115,10 @@ const ProCon = () => {
     // save deletion of item
     storeConData(conStorage);
   };
+
+  useEffect(() => {
+    Analytics.record({ name: "ProCon Page Visit" });
+  }, []);
 
   React.useEffect(() => {
     getProData();

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, Linking } from "react-native";
 import { A } from "@expo/html-elements";
 import * as Location from "expo-location";
 import { look } from "../assets/styles";
+import { Analytics } from "aws-amplify";
 
 const Meetings = ({ navigation }) => {
   // token should come in so that we can get the city.
@@ -26,6 +27,10 @@ const Meetings = ({ navigation }) => {
   let lucky = () => {
     Linking.openURL(`https://www.theluckiestclub.com/`);
   };
+
+  useEffect(() => {
+    Analytics.record({ name: "Meetings Page Visit" });
+  }, []);
 
   return (
     <View style={look.container}>

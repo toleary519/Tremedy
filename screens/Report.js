@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Text, View, TouchableOpacity, Alert, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Feather } from "@expo/vector-icons";
@@ -8,6 +8,7 @@ import * as Print from "expo-print";
 import { CheckVal, Entries } from "../helpers/reportFunctions";
 import { emailEntries } from "../helpers/htmlEmails";
 import { Context } from "../Context";
+import { Analytics } from "aws-amplify";
 
 const Report = () => {
   let [showFull, setShowFull] = useState(true);
@@ -225,7 +226,12 @@ const Report = () => {
       attachments: uri,
     });
   };
-  console.log("report run, token : ", token);
+
+  useEffect(() => {
+    Analytics.record({ name: "Report Page Visit" });
+  }, []);
+
+  console.log("report run");
   React.useEffect(() => {
     async function checkAvailability() {
       const isMailAvailable = await MailComposer.isAvailableAsync();

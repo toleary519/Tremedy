@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 
 const Scream = () => {
@@ -60,6 +61,10 @@ const Scream = () => {
     setTime(0);
     return;
   };
+
+  useEffect(() => {
+    Analytics.record({ name: "Scream Page Visit" });
+  }, []);
 
   React.useEffect(() => {
     getData();

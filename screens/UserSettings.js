@@ -20,6 +20,7 @@ import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Auth } from "aws-amplify";
 import { Context } from "../Context";
+import { Analytics } from "aws-amplify";
 // enables alerts in the forground
 Notifications.setNotificationHandler({
   handleNotification: async () => {
@@ -781,6 +782,10 @@ const UserSettings = () => {
     //     "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
     // },
   ];
+
+  useEffect(() => {
+    Analytics.record({ name: "UserSettings Page Visit" });
+  }, []);
 
   console.log("user run");
   return (
