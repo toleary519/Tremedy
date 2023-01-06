@@ -123,7 +123,7 @@ const NewFeature = () => {
       If your happy with it send it our way and if you like to add more cancel the draft and you will be taken back to the app to continue.\n\n 
       Thanks, \n 
       Tremedy Contact Team`,
-      recipients: "contact@ourtre.com",
+      recipients: "contact@diffit.io",
       attachments: [uri],
     });
   };

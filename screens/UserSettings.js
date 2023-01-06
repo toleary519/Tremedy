@@ -276,7 +276,7 @@ const UserSettings = () => {
     MailComposer.composeAsync({
       subject: `Tremedy BUG FLAG : ${issue.where}`,
       body: "Thanks for letting us know! The pdf below will be sent to our development team.\n\n Thanks, \n Tremedy Bug Team",
-      recipients: "contact@ourtre.com",
+      recipients: "contact@diffit.io",
       attachments: [uri],
     });
   };
@@ -285,7 +285,7 @@ const UserSettings = () => {
     MailComposer.composeAsync({
       subject: `Notice : Tremedy Team`,
       body: "The floor is yours.",
-      recipients: "contact@ourtre.com",
+      recipients: "contact@diffit.io",
       attachments: [],
     });
   };

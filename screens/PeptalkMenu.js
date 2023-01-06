@@ -73,7 +73,7 @@ const PepTalkMenu = ({ navigation }) => {
     MailComposer.composeAsync({
       subject: `Notice : Tremedy Team`,
       body: "The floor is yours.",
-      recipients: "contact@ourtre.com",
+      recipients: "contact@diffit.io",
       attachments: [],
     });
   };
