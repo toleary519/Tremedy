@@ -5,7 +5,7 @@ import { Analytics } from "aws-amplify";
 
 const JustOne = ({ navigation }) => {
   useEffect(() => {
-    Analytics.record({ name: "JustOne Page Visit" });
+    // Analytics.record({ name: "JustOne Page Visit" });
   }, []);
 
   return (

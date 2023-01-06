@@ -5,7 +5,7 @@ import { Analytics } from "aws-amplify";
 
 const EyeInstruct = () => {
   useEffect(() => {
-    Analytics.record({ name: "Eye Page Visit" });
+    // Analytics.record({ name: "Eye Page Visit" });
   }, []);
 
   return (

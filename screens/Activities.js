@@ -83,7 +83,7 @@ const Activities = () => {
   };
 
   useEffect(() => {
-    Analytics.record({ name: "Activities Page Visit" });
+    // Analytics.record({ name: "Activities Page Visit" });
   }, []);
 
   React.useEffect(() => {

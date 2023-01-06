@@ -117,7 +117,7 @@ const ProCon = () => {
   };
 
   useEffect(() => {
-    Analytics.record({ name: "ProCon Page Visit" });
+    // Analytics.record({ name: "ProCon Page Visit" });
   }, []);
 
   React.useEffect(() => {

@@ -29,7 +29,7 @@ const Meetings = ({ navigation }) => {
   };
 
   useEffect(() => {
-    Analytics.record({ name: "Meetings Page Visit" });
+    // Analytics.record({ name: "Meetings Page Visit" });
   }, []);
 
   return (

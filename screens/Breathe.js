@@ -4,7 +4,7 @@ import { Analytics } from "aws-amplify";
 
 const Breathe = () => {
   useEffect(() => {
-    Analytics.record({ name: "Breathe Page Visit" });
+    // Analytics.record({ name: "Breathe Page Visit" });
   }, []);
 
   return (

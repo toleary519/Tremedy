@@ -4,7 +4,7 @@ import { look } from "../assets/styles";
 
 const AnkleInstruct = () => {
   useEffect(() => {
-    Analytics.record({ name: "Ankle Page Visit" });
+    // Analytics.record({ name: "Ankle Page Visit" });
   }, []);
 
   return (

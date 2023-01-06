@@ -5,7 +5,7 @@ import { Analytics } from "aws-amplify";
 
 const Five = ({ navigation }) => {
   useEffect(() => {
-    Analytics.record({ name: "Five Page Visit" });
+    // Analytics.record({ name: "Five Page Visit" });
   }, []);
 
   return (

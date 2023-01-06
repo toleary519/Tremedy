@@ -40,7 +40,7 @@ const Emergency = ({ navigation }) => {
   };
 
   useEffect(() => {
-    Analytics.record({ name: "Emergency Page Visit" });
+    // Analytics.record({ name: "Emergency Page Visit" });
   }, []);
 
   return (

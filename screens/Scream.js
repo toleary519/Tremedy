@@ -63,7 +63,7 @@ const Scream = () => {
   };
 
   useEffect(() => {
-    Analytics.record({ name: "Scream Page Visit" });
+    // Analytics.record({ name: "Scream Page Visit" });
   }, []);
 
   React.useEffect(() => {

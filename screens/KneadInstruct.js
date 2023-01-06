@@ -5,7 +5,7 @@ import { Analytics } from "aws-amplify";
 
 const KneadInstruct = () => {
   useEffect(() => {
-    Analytics.record({ name: "Knead Page Visit" });
+    // Analytics.record({ name: "Knead Page Visit" });
   }, []);
   return (
     <View style={look.container}>

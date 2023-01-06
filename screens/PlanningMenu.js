@@ -5,7 +5,7 @@ import { Analytics } from "aws-amplify";
 
 const PlanningMenu = ({ navigation }) => {
   useEffect(() => {
-    Analytics.record({ name: "Planning Page Visit" });
+    // Analytics.record({ name: "Planning Page Visit" });
   }, []);
 
   return (

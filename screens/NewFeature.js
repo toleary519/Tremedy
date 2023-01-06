@@ -146,7 +146,7 @@ const NewFeature = () => {
   };
 
   useEffect(() => {
-    Analytics.record({ name: "NewFeature Page Visit" });
+    // Analytics.record({ name: "NewFeature Page Visit" });
   }, []);
 
   return (

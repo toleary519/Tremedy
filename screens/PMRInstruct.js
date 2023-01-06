@@ -4,7 +4,7 @@ import { Analytics } from "aws-amplify";
 
 const PMRInstruct = () => {
   useEffect(() => {
-    Analytics.record({ name: "PMR Page Visit" });
+    // Analytics.record({ name: "PMR Page Visit" });
   }, []);
 
   return (

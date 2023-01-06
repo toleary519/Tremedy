@@ -64,7 +64,7 @@ const Routine = ({ navigation }) => {
   const end = selectedRoutine.length - 1;
 
   useEffect(() => {
-    Analytics.record({ name: "Routine Page Visit" });
+    // Analytics.record({ name: "Routine Page Visit" });
   }, []);
 
   React.useEffect(() => {

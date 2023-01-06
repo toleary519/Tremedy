@@ -141,7 +141,7 @@ const Pies = () => {
   };
 
   useEffect(() => {
-    Analytics.record({ name: "Pies Page Visit" });
+    // Analytics.record({ name: "Pies Page Visit" });
   }, []);
 
   console.log("pie run");

@@ -130,7 +130,7 @@ const SelfTalk = () => {
   };
 
   useEffect(() => {
-    Analytics.record({ name: "SelfTalk Page Visit" });
+    // Analytics.record({ name: "SelfTalk Page Visit" });
   }, []);
 
   console.log("self run");

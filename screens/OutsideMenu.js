@@ -4,7 +4,7 @@ import { Analytics } from "aws-amplify";
 
 const OutsideMenu = ({ navigation }) => {
   useEffect(() => {
-    Analytics.record({ name: "Outside Page Visit" });
+    // Analytics.record({ name: "Outside Page Visit" });
   }, []);
 
   return (

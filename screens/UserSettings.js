@@ -784,7 +784,7 @@ const UserSettings = () => {
   ];
 
   useEffect(() => {
-    Analytics.record({ name: "UserSettings Page Visit" });
+    // Analytics.record({ name: "UserSettings Page Visit" });
   }, []);
 
   console.log("user run");
