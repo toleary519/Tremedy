@@ -1,5 +1,5 @@
 export const signUpConfig = {
-  header: "Ourtre Sign Up",
+  header: "Tremedy Sign Up",
   hideAllDefaults: true,
   signUpFields: [
     {

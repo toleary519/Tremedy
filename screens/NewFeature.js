@@ -80,7 +80,7 @@ const NewFeature = () => {
       </style>
       </head>
       <div class="bg">
-        <div class="title">Ourtre Team,</div>
+        <div class="title">Tremedy Team,</div>
         <div class="topBox">
           <div class="QAbox">
             <div class="sub">I think there should be a feature called: </div>
@@ -122,7 +122,7 @@ const NewFeature = () => {
       body: `We're pumped for the input, the pdf below will be sent to our development team.\n 
       If your happy with it send it our way and if you like to add more cancel the draft and you will be taken back to the app to continue.\n\n 
       Thanks, \n 
-      Ourtre Contact Team`,
+      Tremedy Contact Team`,
       recipients: "contact@ourtre.com",
       attachments: [uri],
     });

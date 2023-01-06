@@ -60,12 +60,12 @@ const Navigation = () => {
             <Stack.Screen
               name="SignIn"
               component={SignInScreen}
-              options={{ title: "Ourtre Sign In" }}
+              options={{ title: "Tremedy Sign In" }}
             />
             <Stack.Screen
               name="SignUp"
               component={SignUpScreen}
-              options={{ title: "Sign Up for Ourtre" }}
+              options={{ title: "Sign Up for Tremedy" }}
             />
             <Stack.Screen
               name="ConfirmEmail"

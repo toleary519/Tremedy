@@ -131,8 +131,8 @@ const UserSettings = () => {
 
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: `Ourtre Check-In.`,
-        body: `Check-In with Ourtre, it takes 30 seconds.`,
+        title: `Tremedy Check-In.`,
+        body: `Check-In with Tremedy, it takes 30 seconds.`,
         data: { data: { X: `Hello from the data object` } },
       },
       trigger: {
@@ -244,7 +244,7 @@ const UserSettings = () => {
       </style>
       </head>
       <div class="bg">
-        <div class="title">Ourtre Team,</div>
+        <div class="title">Tremedy Team,</div>
         <div class="topBox">
           <div class="QAbox">
             <div class="sub">I found a bug in: </div>
@@ -274,8 +274,8 @@ const UserSettings = () => {
     });
 
     MailComposer.composeAsync({
-      subject: `OURTRE BUG FLAG : ${issue.where}`,
-      body: "Thanks for letting us know! The pdf below will be sent to our development team.\n\n Thanks, \n Ourtre Bug Team",
+      subject: `Tremedy BUG FLAG : ${issue.where}`,
+      body: "Thanks for letting us know! The pdf below will be sent to our development team.\n\n Thanks, \n Tremedy Bug Team",
       recipients: "contact@ourtre.com",
       attachments: [uri],
     });
@@ -283,7 +283,7 @@ const UserSettings = () => {
 
   const sendContactEmail = () => {
     MailComposer.composeAsync({
-      subject: `Notice : Ourtre Team`,
+      subject: `Notice : Tremedy Team`,
       body: "The floor is yours.",
       recipients: "contact@ourtre.com",
       attachments: [],
@@ -721,7 +721,7 @@ const UserSettings = () => {
       title: "My Notifications",
       subtitle: "How often do you want to check-in?",
       dropdown:
-        "Ourtre will send you a quiet notification to remind you to Check-In. Check-Ins can be done in roughly 30 seconds.",
+        "Tremedy will send you a quiet notification to remind you to Check-In. Check-Ins can be done in roughly 30 seconds.",
       onText:
         "You can check-in whenever you want in the tool box. Ideally, do a check-in once a day.",
     },

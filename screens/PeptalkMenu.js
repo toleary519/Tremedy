@@ -71,7 +71,7 @@ const PepTalkMenu = ({ navigation }) => {
 
   const sendContactEmail = () => {
     MailComposer.composeAsync({
-      subject: `Notice : Ourtre Team`,
+      subject: `Notice : Tremedy Team`,
       body: "The floor is yours.",
       recipients: "contact@ourtre.com",
       attachments: [],

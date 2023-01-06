@@ -1,43 +1,43 @@
 {
+  "analytics": {
+    "ourtre": {
+      "providerPlugin": "awscloudformation",
+      "service": "Pinpoint"
+    }
+  },
   "auth": {
     "Ourtre": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL",
-          "NAME"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL",
+          "NAME"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
     }
   },
   "storage": {
     "ourtreDynamo": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
-    }
-  },
-  "analytics": {
-    "ourtre": {
-      "service": "Pinpoint",
-      "providerPlugin": "awscloudformation"
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }
