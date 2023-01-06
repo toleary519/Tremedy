@@ -9,6 +9,7 @@ import { CheckVal, Entries } from "../helpers/reportFunctions";
 import { emailEntries } from "../helpers/htmlEmails";
 import { Context } from "../Context";
 import { Analytics } from "aws-amplify";
+import { MailComposerStatus } from "expo-mail-composer";
 
 const Report = () => {
   let [showFull, setShowFull] = useState(true);
@@ -20,6 +21,12 @@ const Report = () => {
   let [reportStorage, setReportStorage] = useState(
     reportStorage ? reportStorage : []
   );
+  const [allowed, setAllowed] = useState(null);
+  const [emailToken, setEmailToken] = useState(
+    emailToken ? emailToken : { allowed: true, emailTime: 0 }
+  );
+  const [emailResult, setEmailResult] = useState("x");
+
   const getData = async () => {
     try {
       const copeValue = await AsyncStorage.getItem("storedCoping");
@@ -32,6 +39,7 @@ const Report = () => {
       const selfTalkValue = await AsyncStorage.getItem("storedSelfTalk");
       const thatValue = await AsyncStorage.getItem("storedThat");
       const cravingValue = await AsyncStorage.getItem("storedCraving");
+      const emailAllowed = await AsyncStorage.getItem("emailAllowed");
       let copeData = copeValue ? JSON.parse(copeValue) : [];
       let checkData = checkValue ? JSON.parse(checkValue) : [];
       let focusData = focusValue ? JSON.parse(focusValue) : [];
@@ -42,6 +50,8 @@ const Report = () => {
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
       let thatData = thatValue ? JSON.parse(thatValue) : [];
       let craveData = cravingValue ? JSON.parse(cravingValue) : [];
+      let emailData = emailAllowed ? JSON.parse(emailAllowed) : true;
+      setEmailToken({ emailData });
       setReportStorage([
         ...copeData,
         ...checkData,
@@ -69,6 +79,11 @@ const Report = () => {
     setMyThree(myThree.filter((x) => x.id !== item.id));
   };
 
+  let currentDate = new Date();
+  let currentDay = currentDate.getDate();
+  let currentMonth = currentDate.getMonth() + 1;
+  let currentTime = currentDate.getTime();
+
   const verify = ({ item }) => {
     for (let x of myThree) {
       if (x.id === item.id) {
@@ -94,11 +109,46 @@ const Report = () => {
     );
   };
 
+  let limitAlert = () => {
+    Alert.alert(
+      `Email Limit`,
+      `You can send one email each week.\n\nChoose topics wisely.\n\nYour Tremedy emails are not deactivated until sent.`,
+      [
+        {
+          text: "OK",
+          style: "cancel",
+          onPress: () => {
+            emailErrorCheck();
+          },
+        },
+        {
+          text: "Go Back",
+          onPress: () => {
+            return;
+          },
+        },
+      ]
+    );
+  };
+
   const emailErrorCheck = () => {
+    emailResult === "sent"
+      ? setEmailToken({ ...emailToken, allowed: false })
+      : null;
+    console.log("error check email token : ", emailToken);
+
     if (myThree.length === 0) {
       Alert.alert(
         "Focused Report Empty",
         `Add entries for review with the "+" button.`,
+        [{ text: "Got It" }]
+      );
+      return;
+    }
+    if (!emailToken.allowed || emailResult === "sent") {
+      Alert.alert(
+        "Email Limit Exceeded",
+        `Email will be active again six days from ${currentMonth}/${currentDay}`,
         [{ text: "Got It" }]
       );
       return;
@@ -107,9 +157,24 @@ const Report = () => {
     }
   };
 
+  const testingReset = () => {
+    setEmailToken({ allowed: true, emailTime: 0 });
+    setEmailResult("x");
+  };
+
+  const storeData = async (emailToken) => {
+    try {
+      const jsonValue = JSON.stringify(emailToken);
+      await AsyncStorage.setItem("emailAllowed", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   let dayCount = token.rLength ? token.rLength * 7 : 7;
-  let currentDate = new Date().getTime();
+  // let currentDate = new Date().getTime();
   let weekAgo = currentDate - dayCount * 24 * 60 * 60 * 1000;
+  let allowedTestTime = 6 * 24 * 60 * 60 * 1000;
 
   let fullReport = reportStorage
     .filter((x) => (x.id >= weekAgo && x.flag) || x.check)
@@ -130,9 +195,10 @@ const Report = () => {
     });
 
   const sendReportMail = async () => {
-    let currentDate = new Date();
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth() + 1;
+    // let currentDate = new Date();
+    // let currentDay = currentDate.getDate();
+    // let currentMonth = currentDate.getMonth() + 1;
+    // let currentTime = currentDate.getTime();
 
     const { uri } = await Print.printToFileAsync({
       html: `
@@ -214,7 +280,6 @@ const Report = () => {
     MailComposer.composeAsync({
       subject: `Focused Report from Ourtre: ${token.name}`,
       body: `Find the PDF Focused Report from Ourtre attached below.\n
-      It is your decision who you would like to share this with.\n
       We recommend sending the report to yourself so that you have a copy for future use.\n
       You can also choose to bring a printed copy with you to your sessions.\n
       
@@ -224,14 +289,29 @@ const Report = () => {
       The Ourtre Team`,
       recipients: token.email,
       attachments: uri,
-    });
+    }).then((res) => setEmailResult(res.status));
+
+    setEmailToken({ ...emailToken, emailTime: currentTime });
+    console.log("time sent in email", emailToken.emailTime);
   };
 
   useEffect(() => {
-    Analytics.record({ name: "Report Page Visit" });
+    if (currentTime - emailToken.emailTime > allowedTestTime) {
+      setEmailToken({ ...emailToken, allowed: true });
+      storeData(emailToken);
+    }
   }, []);
 
+  useEffect(() => {
+    storeData(emailToken);
+  }, [emailToken.allowed]);
+
+  // useEffect(() => {
+  //   Analytics.record({ name: "Report Page Visit" });
+  // }, []);
+
   console.log("report run");
+
   React.useEffect(() => {
     async function checkAvailability() {
       const isMailAvailable = await MailComposer.isAvailableAsync();
@@ -312,7 +392,7 @@ const Report = () => {
             <TouchableOpacity
               style={{ marginBottom: "5%" }}
               onPress={() => {
-                emailErrorCheck();
+                limitAlert();
               }}
               delayPressIn={150}
             >
@@ -324,6 +404,9 @@ const Report = () => {
                   </Text>
                 ) : null}
               </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => testingReset()}>
+              <Text style={look.reportButton}>Test Reset</Text>
             </TouchableOpacity>
           </View>
           <View>
@@ -417,3 +500,49 @@ const Report = () => {
 };
 
 export { Report };
+
+// import React, { useState } from 'react';
+// import { Text, View, StyleSheet, Alert, Button } from 'react-native';
+// import Constants from 'expo-constants';
+// import * as FileSystem from 'expo-file-system';
+// import * as MailComposer from 'expo-mail-composer';
+
+
+ 
+// export default function App() {
+ 
+// const [stxt, setStxt] = useState("123");
+
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.paragraph}>{stxt}</Text>
+//       <Text style={styles.paragraph}>{data}</Text>
+//       <Button title="Send" onPress={btnclicked}/>
+//     </View>
+//   );
+// }
+
+// let data = "outside app() const text";
+
+// const btnclicked = () => {
+//   FileSystem.downloadAsync('https://filesamples.com/samples/ebook/mobi/sample1.mobi',FileSystem.documentDirectory + 'test.mobi')
+//   .then(({ uri }) => {MailComposer.composeAsync({recipients:["test@gmail.com"], attachments:[uri]}); })
+//   .then(({ res }) => {console.log(res)} )
+//   .catch(error => {console.error(error);});
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     paddingTop: Constants.statusBarHeight,
+//     backgroundColor: '#ecf0f1',
+//     padding: 8,
+//   },
+//   paragraph: {
+//     margin: 24,
+//     fontSize: 30,
+//     fontWeight: 'bold',
+//     textAlign: 'center',
+//   },
+// });
