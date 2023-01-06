@@ -1,4 +1,11 @@
 export type AmplifyDependentResourcesAttributes = {
+    "analytics": {
+        "ourtre": {
+            "Region": "string",
+            "Id": "string",
+            "appName": "string"
+        }
+    },
     "auth": {
         "Ourtre": {
             "IdentityPoolId": "string",
@@ -18,13 +25,6 @@ export type AmplifyDependentResourcesAttributes = {
             "PartitionKeyName": "string",
             "PartitionKeyType": "string",
             "Region": "string"
-        }
-    },
-    "analytics": {
-        "ourtre": {
-            "Region": "string",
-            "Id": "string",
-            "appName": "string"
         }
     }
 }
