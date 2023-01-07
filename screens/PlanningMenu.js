@@ -44,7 +44,8 @@ const PlanningMenu = ({ navigation }) => {
                 <View>
                   <Text style={look.add}>Experiences</Text>
                   <Text style={look.sub}>
-                    Take a look at what you're giving up and what you have.
+                    Take a look at what you could be giving up and what you have
+                    to stay strong for now.
                   </Text>
                 </View>
               </View>

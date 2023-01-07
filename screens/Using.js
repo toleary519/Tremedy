@@ -37,9 +37,7 @@ const Using = ({ navigation }) => {
           </View>
           <View style={[look.border, { paddingBottom: "2%" }]}>
             <View>
-              <Text style={look.add}>
-                You're going to call someone from this support list.
-              </Text>
+              <Text style={look.add}>Call someone from this support list.</Text>
               <Text style={look.sub}>
                 If the first person doesn't pick up, keep going. Keep going
                 until you get someone.
@@ -62,6 +60,14 @@ const Using = ({ navigation }) => {
             style={[look.border, { paddingBottom: "2%", paddingTop: "2%" }]}
           >
             <View>
+              <Text style={look.add}>Put them on speaker.</Text>
+              <Text style={look.sub}>Walk them through this list.</Text>
+            </View>
+          </View>
+          <View
+            style={[look.border, { paddingBottom: "2%", paddingTop: "2%" }]}
+          >
+            <View>
               <Text style={look.add}>Tell them what happened.</Text>
               <Text style={look.sub}>
                 Are you okay? Be honest, go slow. Don't try to gloss things
@@ -74,7 +80,7 @@ const Using = ({ navigation }) => {
           >
             <View>
               <Text style={look.add}>
-                Ask is they have time to unpack this with you.
+                Ask if they have time to unpack this with you.
               </Text>
               <Text style={look.sub}>
                 It's going to take a bit, and if they say no that is okay. Stay
@@ -87,7 +93,7 @@ const Using = ({ navigation }) => {
           >
             <View>
               <Text style={look.add}>
-                How you were feeling when it happened?
+                How were you feeling when it happened?
               </Text>
               <Text style={look.sub}>
                 What happened in the last 24 hours? When did you start to move
@@ -99,7 +105,7 @@ const Using = ({ navigation }) => {
             style={[look.border, { paddingBottom: "2%", paddingTop: "2%" }]}
           >
             <View>
-              <Text style={look.add}>Where you are now.</Text>
+              <Text style={look.add}>Tell them where you are now.</Text>
               <Text style={look.sub}>
                 Are you at home, are you out? Do you have anything left in the
                 house or on you?
@@ -110,7 +116,7 @@ const Using = ({ navigation }) => {
             style={[look.border, { paddingBottom: "2%", paddingTop: "2%" }]}
           >
             <View>
-              <Text style={look.add}>What's your next step?</Text>
+              <Text style={look.add}>What should be your next step?</Text>
               <Text style={look.sub}>
                 What do you need to do right now? Talk, vent, be picked up?
               </Text>
@@ -121,11 +127,11 @@ const Using = ({ navigation }) => {
           >
             <View>
               <Text style={look.add}>
-                Make a plan of managable action oriented steps.
+                Make a plan of manageable action oriented steps.
               </Text>
               <Text style={look.sub}>
-                What are you going to do in the next 5 minutes, 30 minutes, 1
-                hour, in the morning and tomorrow?
+                Tell them what you going to do in the next 5 minutes, 30
+                minutes, 1 hour, in the morning and tomorrow.
               </Text>
             </View>
           </View>
@@ -137,8 +143,8 @@ const Using = ({ navigation }) => {
                 Ask them to check in on you tomorrow.
               </Text>
               <Text style={look.sub}>
-                What time are they going to call and what should they do if you
-                do not pick up?
+                Set a time for them to call and decide what they should do if
+                you do not pick up.
               </Text>
             </View>
           </View>
@@ -147,11 +153,11 @@ const Using = ({ navigation }) => {
           >
             <View>
               <Text style={look.add}>
-                Get some water. Do a breating exercize.
+                Get some water. Do a breathing exercise.
               </Text>
               <Text style={look.sub}>
                 Set some alarms for your call. Do some of these exercises to
-                calm down. If you can, go to sleep. call someone else.
+                calm down. If you can, go to sleep or call someone else.
               </Text>
             </View>
           </View>
@@ -163,7 +169,7 @@ const Using = ({ navigation }) => {
               delayPressIn={150}
             >
               <Text style={[look.add, { textAlign: "center" }]}>
-                Let's calm down
+                Let's calm down.
               </Text>
             </TouchableOpacity>
           </View>

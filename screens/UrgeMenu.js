@@ -30,7 +30,7 @@ const UrgeMenu = ({ navigation }) => (
             <View style={look.element}>
               <View>
                 <Text style={look.add}>I'm planning</Text>
-                <Text style={look.sub}>Let's get you off that ledge.</Text>
+                <Text style={look.sub}>Let's get off the ledge.</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -89,7 +89,7 @@ const UrgeMenu = ({ navigation }) => (
                   How does this align with your values?
                 </Text>
                 <Text style={look.sub}>
-                  No bullshit. How does that behaviour get you these?
+                  No bullshit. How does this behaviour exhibit these?
                 </Text>
               </View>
             </View>

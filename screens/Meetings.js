@@ -53,7 +53,7 @@ const Meetings = ({ navigation }) => {
               style={[look.border, { paddingBottom: "2%", paddingTop: "2%" }]}
             >
               <Text style={look.add}>Dharma</Text>
-              <Text style={look.sub}>A buhdist approach to recovery.</Text>
+              <Text style={look.sub}>A Buddhist approach to recovery.</Text>
             </View>
           </TouchableOpacity>
         </View>
