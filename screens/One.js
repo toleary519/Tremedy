@@ -6,11 +6,17 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const One = ({ navigation }) => (
   <View style={styles.container}>
-  <Text style={styles.add}>Name one thing that you can taste.</Text>
-    <TouchableOpacity onPress={() => navigation.navigate("Five")} delayPressIn={150}>
+    <Text style={styles.add}>Name one thing you can taste.</Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Five")}
+      delayPressIn={150}
+    >
       <MaterialIcons style={styles.icon} name="replay-5" />
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("PepTalk")} delayPressIn={150}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("PepTalk")}
+      delayPressIn={150}
+    >
       <Feather style={styles.icon} name="home" />
     </TouchableOpacity>
   </View>

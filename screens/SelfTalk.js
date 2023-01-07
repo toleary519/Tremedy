@@ -162,8 +162,8 @@ const SelfTalk = () => {
 
           <View style={look.header}>
             <Text style={look.add}>
-              Take a moment to evaluate this thought. Modify the language, have
-              you added negative distortions? Try to write a more resonably
+              Take a moment to evaluate this thought. Modify the language. Have
+              you added negative distortions? Try to write a more reasonably
               framed thought in the field below.
             </Text>
           </View>
@@ -180,8 +180,8 @@ const SelfTalk = () => {
           </View>
           <View style={look.header}>
             <Text style={look.add}>
-              Look at the two side by side below and consider the differences.
-              Run the exercize again if something new comes to mind.
+              Look at the two side by side and consider the differences. Run the
+              exercise again if something new comes to mind.
             </Text>
           </View>
 

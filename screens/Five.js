@@ -10,7 +10,7 @@ const Five = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.add}>Name five things that you can see.</Text>
+      <Text style={styles.add}>Name five things you can see.</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("Four")}
         delayPressIn={150}

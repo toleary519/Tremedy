@@ -7,9 +7,9 @@ const NotesMenu = ({ navigation }) => (
     <View style={look.topBox}>
       <View style={look.header}>
         <Text style={look.add}>
-          Record and reflect on moments from your life here. When positive
-          events or feelings find you, write them down. If you need to review
-          some negatives in your past, write them down.
+          Record and reflect on moments from your life. When positive events or
+          feelings find you, write them down. If you need to review some
+          negatives in your past, write them down as well.
         </Text>
       </View>
       <View style={look.subHeader}>

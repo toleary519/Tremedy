@@ -149,7 +149,7 @@ const CopingStatement = () => {
         <View style={look.topBox}>
           <View style={look.header}>
             <Text style={look.add}>
-              Think of a coping statement that in concise and impactful. A
+              Think of a coping statement that is concise and impactful. A
               rational nudge from yourself to help you stay on course.
             </Text>
           </View>

@@ -4,8 +4,11 @@ import { Entypo } from '@expo/vector-icons';
 
 const Four = ({ navigation }) => (
   <View style={styles.container}>
-  <Text style={styles.add}>Name four things that you can touch.</Text>
-  <TouchableOpacity onPress={() => navigation.navigate("Three")} delayPressIn={150}>
+    <Text style={styles.add}>Name four things you can touch.</Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Three")}
+      delayPressIn={150}
+    >
       <Entypo style={styles.icon} name="arrow-with-circle-right" />
     </TouchableOpacity>
   </View>

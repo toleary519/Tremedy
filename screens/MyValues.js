@@ -162,8 +162,8 @@ const MyValues = () => {
           </View>
           <View style={look.subHeader}>
             <Text style={look.sub}>
-              If you are unsure, look through this list of values and take some
-              time to choose a few that truly resonate with you.
+              Look through this list of values and take some time to choose a
+              few that truly resonate with you.
             </Text>
           </View>
 

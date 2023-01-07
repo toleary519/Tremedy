@@ -150,7 +150,7 @@ const FocusStatement = () => {
           </View>
           <View style={look.subHeader}>
             <Text style={look.sub}>
-              Enter it below. As you grow, update it if you feel the need and
+              Enter it below. As you grow update it if you feel the need and
               when in doubt refer to it as a guiding principle.
             </Text>
           </View>

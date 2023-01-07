@@ -105,7 +105,7 @@ const Activities = () => {
           </View>
           <View style={look.subHeader}>
             <Text style={look.sub}>
-              Or use it as a To-Do list. Something for unanticipated bordom.
+              Or use it as a To-Do list. Something for unanticipated boredom.
             </Text>
           </View>
           <TextInput
