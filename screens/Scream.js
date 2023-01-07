@@ -45,12 +45,11 @@ const Scream = () => {
   };
 
   const highScore = () => {
-    let bestTotal =
-      best.length > 0
-        ? parseInt(best[0], 10) +
-          parseInt(best[1], 10) * 100 +
-          parseInt(best[2], 10)
-        : 0;
+    let bestTotal = best
+      ? parseInt(best[0], 10) +
+        parseInt(best[1], 10) * 100 +
+        parseInt(best[2], 10)
+      : 0;
 
     if (parseInt(a, 10) + parseInt(b, 10) * 100 + parseInt(c, 10) > bestTotal) {
       let newBest = [a, b, c];
@@ -85,9 +84,7 @@ const Scream = () => {
           <View style={look.elementHeader}>
             <Text style={[look.sub, { fontSize: 15 }]}>Personal Best :</Text>
             <Text style={[look.sub, { fontSize: 15 }]}>
-              {best.length > 0
-                ? `  ${best[0]}:${best[1]}:${best[2]}`
-                : `  00:00:00`}
+              {best ? `  ${best[0]}:${best[1]}:${best[2]}` : `  00:00:00`}
             </Text>
           </View>
           <View style={look.clock}>
