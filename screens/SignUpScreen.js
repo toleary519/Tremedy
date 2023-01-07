@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
-import CustomInput from "../../components/CustomInput";
+import CustomInput from "../assets/authPages/components/CustomInput";
 import {
   FacebookSocialButton,
   AmazonSocialButton,
@@ -8,20 +8,17 @@ import {
   GoogleSocialButton,
   TwitterSocialButton,
 } from "react-native-social-buttons";
-import CustomButton from "../../components/CustomButton";
-import SocialSignInButtons from "../../components/SocialSignInButtons";
-import { useNavigation } from "@react-navigation/core";
+import CustomButton from "../assets/authPages/components/CustomButton";
 import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";
-import { look } from "../../../styles";
+import { look } from "../assets/styles";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   const { control, handleSubmit, watch } = useForm();
   const pwd = watch("password");
-  const navigation = useNavigation();
 
   const onRegisterPressed = async (data) => {
     const { name, email, password } = data;
@@ -131,19 +128,16 @@ const SignUpScreen = () => {
           />
 
           <Text style={[styles.text, { justifyContent: "center" }]}>
-            By registering, you confirm that you accept our{" "}
-            <Text style={styles.link}>
-              {/* <Text style={styles.link} onPress={onTermsOfUsePressed}> */}
+            By registering, you confirm and accept our{" "}
+            <Text
+              style={styles.link}
+              onPress={() => navigation.navigate("Terms")}
+            >
               Terms of Use
-            </Text>{" "}
-            and{" "}
-            <Text style={styles.link}>
-              {/* <Text style={styles.link} onPress={onPrivacyPressed}> */}
-              Privacy Policy
             </Text>
           </Text>
 
-          <View style={{ alignItems: "center", flex: 1 }}>
+          <View style={{ alignItems: "center", flex: 1, marginTop: "2%" }}>
             <GoogleSocialButton
               buttonViewStyle={look.socials}
               onPress={() => authAlert()}
@@ -190,4 +184,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpScreen;
+export { SignUpScreen };

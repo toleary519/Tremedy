@@ -1,29 +1,25 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton';
-import SocialSignInButtons from '../../components/SocialSignInButtons';
-import {useNavigation} from '@react-navigation/native';
-import {useForm} from 'react-hook-form';
-import {Auth} from 'aws-amplify';
-import { look } from "../../../styles";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
+import CustomInput from "../assets/authPages/components/CustomInput";
+import CustomButton from "../assets/authPages/components/CustomButton";
+import { useForm } from "react-hook-form";
+import { Auth } from "aws-amplify";
+import { look } from "../assets/styles";
 
-const NewPasswordScreen = () => {
-  const {control, handleSubmit} = useForm();
+const NewPasswordScreen = ({ navigation }) => {
+  const { control, handleSubmit } = useForm();
 
-  const navigation = useNavigation();
-
-  const onSubmitPressed = async data => {
+  const onSubmitPressed = async (data) => {
     try {
       await Auth.forgotPasswordSubmit(data.username, data.code, data.password);
-      navigation.navigate('SignIn');
+      navigation.navigate("SignIn");
     } catch (e) {
-      Alert.alert('Oops', e.message);
+      Alert.alert("Oops", e.message);
     }
   };
 
   const onSignInPress = () => {
-    navigation.navigate('SignIn');
+    navigation.navigate("SignIn");
   };
 
   return (
@@ -79,22 +75,22 @@ const NewPasswordScreen = () => {
 
 const styles = StyleSheet.create({
   root: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
+    fontWeight: "bold",
+    color: "#051C60",
     margin: 10,
   },
   text: {
-    color: 'gray',
+    color: "gray",
     marginVertical: 10,
   },
   link: {
-    color: '#FDB075',
+    color: "#FDB075",
   },
 });
 
-export default NewPasswordScreen;
+export { NewPasswordScreen };

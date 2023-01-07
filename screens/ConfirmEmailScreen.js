@@ -1,23 +1,19 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton';
-import SocialSignInButtons from '../../components/SocialSignInButtons';
-import {useNavigation} from '@react-navigation/core';
-import {useForm} from 'react-hook-form';
-import {useRoute} from '@react-navigation/native';
-import {Auth} from 'aws-amplify';
-import { look } from "../../../styles";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
+import CustomInput from "../assets/authPages/components/CustomInput";
+import CustomButton from "../assets/authPages/components/CustomButton";
+import { useForm } from "react-hook-form";
+import { useRoute } from "@react-navigation/native";
+import { Auth } from "aws-amplify";
+import { look } from "../assets/styles";
 
-const ConfirmEmailScreen = () => {
+const ConfirmEmailScreen = ({ navigation }) => {
   const route = useRoute();
   const { control, handleSubmit, watch } = useForm({
     defaultValues: { username: route?.params?.username },
   });
 
   const username = watch("username");
-
-  const navigation = useNavigation();
 
   const onConfirmPressed = async (data) => {
     try {
@@ -92,24 +88,4 @@ const ConfirmEmailScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
-    margin: 10,
-  },
-  text: {
-    color: 'gray',
-    marginVertical: 10,
-  },
-  link: {
-    color: '#FDB075',
-  },
-});
-
-export default ConfirmEmailScreen;
+export { ConfirmEmailScreen };

@@ -1,16 +1,7 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  ScrollView,
-  TextInput,
-  Alert,
-} from "react-native";
-import CustomInput from "../../components/CustomInput";
-import CustomButton from "../../components/CustomButton";
+import { View, ScrollView, Alert } from "react-native";
+import CustomInput from "../assets/authPages/components/CustomInput";
+import CustomButton from "../assets/authPages/components/CustomButton";
 import {
   FacebookSocialButton,
   AmazonSocialButton,
@@ -18,15 +9,11 @@ import {
   GoogleSocialButton,
   TwitterSocialButton,
 } from "react-native-social-buttons";
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";
-import { look } from "../../../styles";
-import { color } from "../../../colors";
+import { look } from "../assets/styles";
 
-const SignInScreen = () => {
-  const navigation = useNavigation();
+const SignInScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   const {
@@ -154,4 +141,4 @@ const SignInScreen = () => {
   );
 };
 
-export default SignInScreen;
+export { SignInScreen };

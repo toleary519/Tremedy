@@ -47,17 +47,18 @@ import { Scream } from "./screens/Scream";
 import { NewFeature } from "./screens/NewFeature";
 import { That } from "./screens/That";
 import { Craving } from "./screens/Craving";
+import { ConfirmEmailScreen } from "./screens/ConfirmEmailScreen";
+import { ForgotPasswordScreen } from "./screens/ForgotPasswordScreen";
+import { NewPasswordScreen } from "./screens/NewPasswordScreen";
+import { SignInScreen } from "./screens/SignInScreen";
+import { SignUpScreen } from "./screens/SignUpScreen";
+import { Terms } from "./screens/Terms";
 import { color } from "./assets/colors";
 import { Context } from "./Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Amplify, Auth, Hub } from "aws-amplify";
 import awsmobile from "./src/aws-exports";
 Amplify.configure(awsmobile);
-import SignInScreen from "./assets/authPages/screens/SignInScreen";
-import SignUpScreen from "./assets/authPages/screens/SignUpScreen";
-import ConfirmEmailScreen from "./assets/authPages/screens/ConfirmEmailScreen";
-import ForgotPasswordScreen from "./assets/authPages/screens/ForgotPasswordScreen";
-import NewPasswordScreen from "./assets/authPages/screens/NewPasswordScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -370,6 +371,11 @@ function App() {
                     name="NewPassword"
                     component={NewPasswordScreen}
                     options={{ title: "New Password" }}
+                  />
+                  <Stack.Screen
+                    name="Terms"
+                    component={Terms}
+                    options={{ title: "Terms of Use" }}
                   />
                 </>
               )}

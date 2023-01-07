@@ -716,15 +716,15 @@ const UserSettings = () => {
 
       onText: `You will now see an option called "We can be better" on the first menu. In it are some unique features and specialized tools to use as well as lists of meetings. Both online and in-person.`,
     },
-    {
-      id: 2,
-      title: "My Notifications",
-      subtitle: "How often do you want to check-in?",
-      dropdown:
-        "Tremedy will send you a quiet notification to remind you to Check-In. Check-Ins can be done in roughly 30 seconds.",
-      onText:
-        "You can check-in whenever you want in the tool box. Ideally, do a check-in once a day.",
-    },
+    // {
+    //   id: 2,
+    //   title: "My Notifications",
+    //   subtitle: "How often do you want to check-in?",
+    //   dropdown:
+    //     "Tremedy will send you a quiet notification to remind you to Check-In. Check-Ins can be done in roughly 30 seconds.",
+    //   onText:
+    //     "You can check-in whenever you want in the tool box. Ideally, do a check-in once a day.",
+    // },
     {
       id: 3,
       title: "Manage Flags",

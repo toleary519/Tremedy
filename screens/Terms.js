@@ -16,9 +16,11 @@ const Terms = () => {
             a “notes” application. I understand that this application contains
             email capability and that who I share those emails with, if anyone,
             is my responsibility and is in no way is the responsibility of the
-            application or its creator. If you or someone you know is
-            experiencing mental distress reach out to a licensed medical
-            professional or in an emergency call 911.
+            application or its creator.
+          </Text>
+          <Text style={[look.input, { marginTop: "2%" }]}>
+            If you or someone you know is experiencing mental distress reach out
+            to a licensed medical professional or in an emergency call 911.
           </Text>
         </View>
       </ScrollView>
@@ -26,4 +28,4 @@ const Terms = () => {
   );
 };
 
-export default Terms;
+export { Terms };

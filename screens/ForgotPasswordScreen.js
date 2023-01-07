@@ -1,16 +1,13 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton';
-import SocialSignInButtons from '../../components/SocialSignInButtons';
-import {useNavigation} from '@react-navigation/core';
-import {useForm} from 'react-hook-form';
-import {Auth} from 'aws-amplify';
-import { look } from "../../../styles";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
+import CustomInput from "../assets/authPages/components/CustomInput";
+import CustomButton from "../assets/authPages/components/CustomButton";
+import { useForm } from "react-hook-form";
+import { Auth } from "aws-amplify";
+import { look } from "../assets/styles";
 
-const ForgotPasswordScreen = () => {
+const ForgotPasswordScreen = ({ navigation }) => {
   const { control, handleSubmit } = useForm();
-  const navigation = useNavigation();
 
   const onSendPressed = async (data) => {
     try {
@@ -61,22 +58,22 @@ const ForgotPasswordScreen = () => {
 
 const styles = StyleSheet.create({
   root: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
+    fontWeight: "bold",
+    color: "#051C60",
     margin: 10,
   },
   text: {
-    color: 'gray',
+    color: "gray",
     marginVertical: 10,
   },
   link: {
-    color: '#FDB075',
+    color: "#FDB075",
   },
 });
 
-export default ForgotPasswordScreen;
+export { ForgotPasswordScreen };
