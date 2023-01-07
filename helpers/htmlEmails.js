@@ -1,11 +1,10 @@
 const singleEmail = (x, item) => {
   return `
           <div class="QAbox">
-            <div class="row">
-                <p class="sub">${item.title}</p>
-                <p class="sub">${item.date}</p>
+            <div>
+                <p class="dateTime">${item.title} : ${item.date}</p>
             </div>
-              <p class="add">${x}</p>
+              <p class="sub">${x}</p>
           </div>
           `;
 };
@@ -13,22 +12,17 @@ const singleEmail = (x, item) => {
 const pieEmail = (item) => {
   return `   
       <div class="QAbox">
-          <div class="row">
-              <p class="sub">${item.title}</p>  
-              <p class="sub">${item.date}</p>
+          <div>
+              <p class="dateTime">${item.title} : ${item.date}</p>  
           </div>
-          <div class="column">
-              <p class="sub">How I feel physically</p>
-              <p class="add">${item.physical}</p>
+          <div>
+              <p class="sub">How I feel physically : ${item.physical}</p>
 
-              <p class="sub">Insights & thoughts</p>
-              <p class="add">${item.insights}</p>
+              <p class="sub">Insights & thoughts : ${item.insights}</p>
               
-              <p class="sub">How I feel emotionally</p>
-              <p class="add">${item.emotions}</p>
+              <p class="sub">How I feel emotionally : ${item.emotions}</p>
               
-              <p class="sub">How I feel spiritually</p>
-              <p class="add">${item.spiritual}</p>
+              <p class="sub">How I feel spiritually : ${item.spiritual}</p>
           </div>
       </div>
     `;
@@ -37,17 +31,14 @@ const pieEmail = (item) => {
 const selfEmail = (item) => {
   return ` 
       <div class="QAbox">
-        <div class="row">
-            <p class="sub">${item.title}</p>  
-            <p class="sub">${item.date}</p>
+        <div>
+          <p class="dateTime">${item.title} : ${item.date}</p>  
         </div>
-        <div class="column">
-            <p class="sub">Initial Thought:</p>
-            <p class="add">${item.initial}</p>
+        <div>
+          <p class="sub">Initial Thought: ${item.initial}</p>
         </div>
-        <div class="column">
-            <p class="sub">Rational Thought:</p>
-            <p class="add">${item.rational}</p>
+        <div>
+          <p class="sub">Rational Thought: ${item.rational}</p>
         </div>
       </div>
     `;
@@ -56,19 +47,16 @@ const selfEmail = (item) => {
 const checkEmail = (item) => {
   return `   
     <div class="QAbox">
-      <div class="row">
-          <p class="sub">${item.title}</p>  
-          <p class="sub">${item.time} - ${item.date}</p>
+      <div>
+        <p class="dateTime">${item.title} : ${item.time} - ${item.date}</p>
       </div>
-      <div class="row">
-          <p class="sub">Physical: ${item.phys}</p>
-          <p class="sub">Emotional: ${item.mental}</p>
-          <p class="sub">Outlook: ${item.outlook}</p>
+      <div>
+        <p class="sub">Physical: ${item.phys} - Emotional:${
+    item.mental
+  } - Outlook:${item.outlook}</p>
       </div>
-      <div class="row">
-          <p class="add">${item.feelOne}</p>
-          <p class="add">${item.feelTwo}</p>
-          <p class="add">${item.feelThree}</p>
+      <div>
+        <p class="add">${item.feelOne} : ${item.feelTwo} : ${item.feelThree}</p>
       </div>
           ${item.myCheckin ? `<p class="add">${item.myCheckin}</p>` : `</>`}
     </div>

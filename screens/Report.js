@@ -82,6 +82,7 @@ const Report = () => {
   let currentDate = new Date();
   let currentDay = currentDate.getDate();
   let currentMonth = currentDate.getMonth() + 1;
+  let currentYear = currentDate.getFullYear();
   let currentTime = currentDate.getTime();
 
   const verify = ({ item }) => {
@@ -112,7 +113,7 @@ const Report = () => {
   let limitAlert = () => {
     Alert.alert(
       `Email Limit`,
-      `You can send one email each week.\n\nChoose topics wisely.\n\nYour Tremedy emails are not deactivated until sent.`,
+      `Users are able to send one email each week.\n\nYou can review on the next screen before sending.`,
       [
         {
           text: "OK",
@@ -206,6 +207,10 @@ const Report = () => {
       .bg {
         box-sizing: border-box;
         font-family: roboto, arial, sans-serif;
+        border-top: 3px solid #3C5E90
+        border-bottom: 3px solid #3C5E90
+        border-right: 3px solid #3C5E90
+        border-left: 3px solid #3C5E90
       }
       .topBox {
         box-sizing: border-box;
@@ -219,15 +224,26 @@ const Report = () => {
         font-weight: bold;
         color: #161c20;
       }
+      .dateTime {
+        margin-right: 5%;
+        font-size: 16;
+        font-weight: bold;
+        color: #161c20;
+      }
       .title {
         padding-top: 5%;
-        font-size: 16;
+        font-size: 20;
+        font-weight: bold;
+        color: #161c20;
+      }
+      .titleTwo {
+        font-size: 18;
         font-weight: bold;
         color: #161c20;
       }
       .subTitle {
         font-size: 14;
-        opacity: 0.7;
+        opacity: 0.8;
         font-weight: bold;
         color: #161c20;
         padding-bottom: 5px;  
@@ -235,10 +251,8 @@ const Report = () => {
       }
       .sub {
         margin-right: 5%;
-        text-align: flex-start;
-        align-items: center;
-        opacity: 0.6;
-        font-size: 12px;
+        opacity: 0.8;
+        font-size: 14;
         font-weight: bold;
         color: #161c20;
       }
@@ -265,11 +279,15 @@ const Report = () => {
 
       <container class="bg">
         <head style="height: 5%;">
-          <p class="title">Focused Report from ${
+          <p class="title">Focused Report for discussion from ${
             token.name
           } via the Tremedy App</p>
-          <p class="subTitle">Compiled on ${currentMonth}/${currentDay}.</p>
+          <p class="titleTwo">The items below are entries that have been chosen as current priorities.</p>
+          <p class="subTitle">Compiled on ${currentMonth}/${currentDay}/${currentYear}.</p>
         </head>
+        <div></div>
+        <div></div>
+        <div></div>
         <body class="topBox">
           ${emailEntries(myThree)}
         </body>
@@ -282,10 +300,9 @@ const Report = () => {
     MailComposer.composeAsync({
       subject: `Focused Report from Tremedy:  ${token.name}`,
       body: `Find the PDF Focused Report from Tremedy attached below.\n
-      We recommend sending the report to yourself so that you have a copy for future use.\n
-      You can also choose to bring a printed copy with you to your sessions.\n
-      
-      With the Focused Reports try to choose three key and concise elements to discuss and examine. All of your information will still be available within the Tremedy app.
+      We recommend sending the report to yourself so that you have the copy.\n
+      You can choose to bring a printed copy with you to your sessions.\n
+      With the Focused Reports try to choose three key and concise elements to discuss and examine. All of your information will still be available within the Tremedy App itself.
       
       Take care of yourself,
       The Tremedy Team`,

@@ -85,11 +85,12 @@ const Routine = ({ navigation }) => {
                     onPress={() => navigation.navigate(item.pageName)}
                     delayPressIn={150}
                   >
-                    <View style={{ width: "80%" }}>
+                    <View>
                       <Text style={look.add}>{item.title}</Text>
                       <Text style={look.sub}>{item.sub}</Text>
                     </View>
                   </TouchableOpacity>
+
                   <View
                     style={[look.element, { justifyContent: "space-between" }]}
                   >
