@@ -704,12 +704,11 @@ const UserSettings = () => {
       id: 0,
       title: "My Profile",
       subtitle: "Email and Name",
-      dropdown:
-        "Enter your information here for report sharing and profile recovery.",
+      dropdown: "",
     },
     {
       id: 1,
-      title: "Substance & behavioural disorders.",
+      title: "Substance use disorders.",
       subtitle:
         "If you are struggling with these issues there are additional tools here.",
       dropdown: "Need help? You're not alone.",
@@ -747,7 +746,7 @@ const UserSettings = () => {
         ? "Report settings can only be changed by members. The default is 1 week. To join, please see billing information below."
         : "Set a time frame between 1 and 4 weeks.",
       onText:
-        "It is recommended to choose the length of time between therapy sessions, or an interval at which you choose to review. You don't want to overload your report. All of your entries will be readable on their respective pages.",
+        "It is recommended to choose the length of time between therapy sessions, or an interval at which you choose to review. You don't want to overload your report. All of your past entries will be readable on their respective pages.",
       notSubscribed:
         "There are still a number of tools you can use in the tool box!",
     },
@@ -756,7 +755,7 @@ const UserSettings = () => {
       title: "Found a bug? Have an issue?",
       subtitle: "Help us improve your experience.",
       dropdown:
-        "Explain as best you can the issue that you are having and what you hoped to see.",
+        "Explain as best you can the issue that you are having and what you were expecting to see.",
       value: null,
     },
     {
@@ -766,9 +765,7 @@ const UserSettings = () => {
       dropdown: "Send us an email.",
       onText: (
         <TouchableOpacity onPress={() => sendContactEmail()}>
-          <Text style={[look.outRoutine, { color: color.inputText }]}>
-            Send us an email.
-          </Text>
+          <Text style={look.inRoutine}>Send us an email.</Text>
         </TouchableOpacity>
       ),
     },
