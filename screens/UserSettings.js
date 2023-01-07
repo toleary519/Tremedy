@@ -306,12 +306,12 @@ const UserSettings = () => {
       <View>
         {item.id === 0 ? infoRender(item) : null}
         {item.id === 1 ? substanceRender(item) : null}
-        {item.id === 2 ? notifyRender(item) : null}
-        {item.id === 3 ? flagRender(item) : null}
-        {item.id === 4 ? deleteRender(item) : null}
-        {item.id === 5 ? reportRender(item) : null}
-        {item.id === 6 ? bugRender(item) : null}
-        {item.id === 7 ? contactRender(item) : null}
+        {/* {item.id === 2 ? notifyRender(item) : null} */}
+        {item.id === 2 ? flagRender(item) : null}
+        {item.id === 3 ? deleteRender(item) : null}
+        {item.id === 4 ? reportRender(item) : null}
+        {item.id === 5 ? bugRender(item) : null}
+        {item.id === 6 ? contactRender(item) : null}
         {/* {item.id === 7 ? billingRender(item) : null} */}
       </View>
     );
@@ -726,21 +726,21 @@ const UserSettings = () => {
     //     "You can check-in whenever you want in the tool box. Ideally, do a check-in once a day.",
     // },
     {
-      id: 3,
+      id: 2,
       title: "Manage Flags",
       subtitle: "Select when and how you would like to use flags.",
       dropdown:
         "Turning flags off here will turn off the prompt. You can still click the flag icon to add items to your report.",
     },
     {
-      id: 4,
+      id: 3,
       title: "Delete Data",
       subtitle: "Delete all data stored on your device.",
       dropdown: "This action is final.",
       onText: "All entry data will be removed.",
     },
     {
-      id: 5,
+      id: 4,
       title: "Report Length",
       subtitle: "How many weeks do you want in your report?",
       dropdown: !token.subscribed
@@ -752,7 +752,7 @@ const UserSettings = () => {
         "There are still a number of tools you can use in the tool box!",
     },
     {
-      id: 6,
+      id: 5,
       title: "Found a bug? Have an issue?",
       subtitle: "Help us improve your experience.",
       dropdown:
@@ -760,7 +760,7 @@ const UserSettings = () => {
       value: null,
     },
     {
-      id: 7,
+      id: 6,
       title: "Contact Us",
       subtitle: "Tell us what's on your mind.",
       dropdown: "Send us an email.",
