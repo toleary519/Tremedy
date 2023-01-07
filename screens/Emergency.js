@@ -68,7 +68,7 @@ const Emergency = ({ navigation }) => {
             >
               <Text style={look.add}>Hospitals + Clinics</Text>
               <Text style={look.sub}>
-                A list of the hospitals, clinics and medical resources near you.
+                Hospitals, clinics and medical resources near you.
               </Text>
             </TouchableOpacity>
           </View>
