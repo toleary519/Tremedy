@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "DontWorkFlow",
-    "slug": "DontWorkFlow",
+    "name": "Tremedy",
+    "slug": "Tremedy",
     "version": "0.1.9",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -29,9 +29,9 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.thomas.DontWorkFlow",
+      "bundleIdentifier": "com.thomas.tremedy",
       "infoPlist": {
-        "NSCameraUsageDescription": "Ourtre uses quiet notifcations to remind you of Check-Ins."
+        "NSCameraUsageDescription": "Tremedy uses quiet notifcations to remind you of Check-Ins."
       }  
     },
     "web": {
