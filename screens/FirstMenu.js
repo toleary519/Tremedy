@@ -101,9 +101,14 @@ const FirstMenu = ({ navigation }) => {
             onPress={() => navigation.navigate("Tour")}
             delayPressIn={150}
           >
-            {/* <View style={[look.element, { marginBottom: 0 }]}> */}
-            <Text style={[look.fSub, { marginTop: 15 }]}>Application Tour</Text>
-            {/* </View> */}
+            <Text
+              style={[
+                look.fSub,
+                { marginTop: 15, color: "#FFD25A", opacity: 0.7 },
+              ]}
+            >
+              Application Tour
+            </Text>
           </TouchableOpacity>
 
           <View style={look.element}>

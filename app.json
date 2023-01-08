@@ -2,7 +2,7 @@
   "expo": {
     "name": "Tremedy",
     "slug": "Tremedy",
-    "version": "0.1.9",
+    "version": "0.1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
