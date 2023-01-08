@@ -96,7 +96,7 @@ const SupportContacts = () => {
                     {item.lastName ? `, ${item.lastName}` : null}
                   </Text>
                 </View>
-                <Text style={look.contactAdd}>
+                <Text style={[look.contactAdd]}>
                   {item.phoneNumbers[0].number}
                 </Text>
               </TouchableOpacity>
