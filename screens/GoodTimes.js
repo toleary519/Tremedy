@@ -129,7 +129,7 @@ const GoodTimes = () => {
   };
 
   useEffect(() => {
-    // Analytics.record({ name: "GoodTimes Page Visit" });
+    Analytics.record({ name: "GoodTimes Page Visit" });
   }, []);
 
   console.log("good run");

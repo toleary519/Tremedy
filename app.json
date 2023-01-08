@@ -32,14 +32,14 @@
       "bundleIdentifier": "com.thomas.tremedy",
       "infoPlist": {
         "NSCameraUsageDescription": "Tremedy uses quiet notifcations to remind you of Check-Ins."
-      }  
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "4f099d5d-0bcc-459d-b31a-9390cfa07fcd"
+        "projectId": "68497da1-f6ca-447a-bc80-c129c6af0c2a"
       }
     }
   }

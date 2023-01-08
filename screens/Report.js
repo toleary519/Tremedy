@@ -325,9 +325,9 @@ const Report = () => {
     storeData(emailToken);
   }, [emailToken.allowed]);
 
-  // useEffect(() => {
-  //   Analytics.record({ name: "Report Page Visit" });
-  // }, []);
+  useEffect(() => {
+    Analytics.record({ name: "Report Page Visit" });
+  }, []);
 
   console.log("report run");
 

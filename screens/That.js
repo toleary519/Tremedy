@@ -129,7 +129,7 @@ const That = () => {
   };
 
   useEffect(() => {
-    // Analytics.record({ name: "That Page Visit" });
+    Analytics.record({ name: "That Page Visit" });
   }, []);
 
   React.useEffect(() => {

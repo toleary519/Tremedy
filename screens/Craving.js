@@ -155,7 +155,7 @@ const Craving = () => {
   };
 
   useEffect(() => {
-    // Analytics.record({ name: "Craving Page Visit" });
+    Analytics.record({ name: "Craving Page Visit" });
   }, []);
 
   console.log("craving run");

@@ -129,7 +129,7 @@ const FocusStatement = () => {
   };
 
   useEffect(() => {
-    // Analytics.record({ name: "Focus Page Visit" });
+    Analytics.record({ name: "Focus Page Visit" });
   }, []);
 
   React.useEffect(() => {

@@ -111,7 +111,7 @@ const CopingStatement = () => {
   };
 
   useEffect(() => {
-    // Analytics.record({ name: "Coping Page Visit" });
+    Analytics.record({ name: "Coping Page Visit" });
   }, []);
 
   React.useEffect(() => {

@@ -140,7 +140,7 @@ const MyValues = () => {
   };
 
   useEffect(() => {
-    // Analytics.record({ name: "Values Page Visit" });
+    Analytics.record({ name: "Values Page Visit" });
   }, []);
 
   console.log("value run");

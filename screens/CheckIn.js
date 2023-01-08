@@ -162,7 +162,7 @@ const CheckIn = () => {
   const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
 
   useEffect(() => {
-    // Analytics.record({ name: "Checkin Page Visit" });
+    Analytics.record({ name: "Checkin Page Visit" });
   }, []);
 
   React.useEffect(() => {

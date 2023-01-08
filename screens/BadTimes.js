@@ -134,7 +134,7 @@ const BadTimes = () => {
   };
 
   useEffect(() => {
-    // Analytics.record({ name: "BadTimes Page Visit" });
+    Analytics.record({ name: "BadTimes Page Visit" });
   }, []);
 
   console.log("bad run");
