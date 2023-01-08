@@ -35,6 +35,13 @@ export const pageOptions = [
     title: "The One Sheet",
   },
   {
+    id: 4.5,
+    selected: false,
+    pageName: "Journal",
+    sub: "A simple place for the longform.",
+    title: "Journal",
+  },
+  {
     id: 9,
     selected: false,
     pageName: "FocusStatement",

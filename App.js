@@ -47,6 +47,7 @@ import { Scream } from "./screens/Scream";
 import { NewFeature } from "./screens/NewFeature";
 import { That } from "./screens/That";
 import { Craving } from "./screens/Craving";
+import { Journal } from "./screens/Journal";
 import { ConfirmEmailScreen } from "./screens/ConfirmEmailScreen";
 import { ForgotPasswordScreen } from "./screens/ForgotPasswordScreen";
 import { NewPasswordScreen } from "./screens/NewPasswordScreen";
@@ -343,6 +344,11 @@ function App() {
                     name="Craving"
                     component={Craving}
                     options={{ title: "Craving Log" }}
+                  />
+                  <Stack.Screen
+                    name="Journal"
+                    component={Journal}
+                    options={{ title: "Journal" }}
                   />
                 </>
               ) : (
