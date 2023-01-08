@@ -400,4 +400,25 @@ export const look = {
   socials: {
     width: "85%",
   },
+  tourImage: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
+  },
+  tourBottomText: {
+    marginTop: 5,
+    marginBottom: 2,
+    fontSize: 15,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: color.inputText,
+  },
+  tourBottomView: {
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+    fontSize: 30,
+  },
 };

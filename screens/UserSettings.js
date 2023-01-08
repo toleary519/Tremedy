@@ -734,7 +734,7 @@ const UserSettings = () => {
     {
       id: 3,
       title: "Delete Data",
-      subtitle: "Delete all data stored on your device.",
+      subtitle: "Delete all App data stored on your device.",
       dropdown: "This action is final.",
       onText: "All entry data will be removed.",
     },

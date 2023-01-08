@@ -101,18 +101,17 @@ const FirstMenu = ({ navigation }) => {
             onPress={() => navigation.navigate("Tour")}
             delayPressIn={150}
           >
-            <View style={look.element}>
-              <View>
-                <Text style={look.fAdd}>Application Tour</Text>
-                <Text style={look.fSub}>Let us show you around.</Text>
-              </View>
-            </View>
+            {/* <View style={[look.element, { marginBottom: 0 }]}> */}
+            <Text style={[look.fSub, { marginTop: 15 }]}>Application Tour</Text>
+            {/* </View> */}
           </TouchableOpacity>
 
           <View style={look.element}>
             <TouchableOpacity onPress={() => signOut()} delayPressIn={150}>
               <View>
-                <Text style={[look.fSub, { opacity: 0.5 }]}>Sign out</Text>
+                <Text style={[look.fSub, { opacity: 0.5, marginTop: 0 }]}>
+                  Sign out
+                </Text>
               </View>
             </TouchableOpacity>
           </View>

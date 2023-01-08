@@ -48,7 +48,7 @@ import { NewFeature } from "./screens/NewFeature";
 import { That } from "./screens/That";
 import { Craving } from "./screens/Craving";
 import { Journal } from "./screens/Journal";
-// import { Tour } from "./screens/Tour";
+import { Tour } from "./screens/Tour";
 import { ConfirmEmailScreen } from "./screens/ConfirmEmailScreen";
 import { ForgotPasswordScreen } from "./screens/ForgotPasswordScreen";
 import { NewPasswordScreen } from "./screens/NewPasswordScreen";
@@ -351,11 +351,11 @@ function App() {
                     component={Journal}
                     options={{ title: "Journal" }}
                   />
-                  {/* <Stack.Screen
+                  <Stack.Screen
                     name="Tour"
                     component={Tour}
                     options={{ title: "Tour" }}
-                  /> */}
+                  />
                 </>
               ) : (
                 <>
