@@ -10,6 +10,7 @@ import {
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons"; 
 import coreV from "../assets/coreV.jpeg";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -170,13 +171,13 @@ const MyValues = () => {
           <TouchableOpacity
             onPress={() => setImageWindow(!imageWindow ? true : false)}
           >
-            <FontAwesome
+            <FontAwesome5
               style={[
                 look.icon,
                 look.centerIcon,
                 { paddingBottom: "4%", fontSize: 25, opacity: 0.7 },
               ]}
-              name="question-circle"
+              name="list"
             />
             {imageWindow ? (
               <View style={[look.imageBox]}>
