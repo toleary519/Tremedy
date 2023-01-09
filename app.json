@@ -11,16 +11,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#1B2A41"
     },
-    "plugins": [
-      [
-        "expo-notifications",
-        {
-          "icon": "./local/assets/notification-icon.png",
-          "color": "#D7D9D7",
-          "sounds": []
-        }
-      ]
-    ],
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -30,9 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.thomas.tremedy",
-      "infoPlist": {
-        "NSCameraUsageDescription": "Tremedy uses quiet notifcations to remind you of Check-Ins."
-      }
+      "buildNumber": "1"
     },
     "web": {
       "favicon": "./assets/favicon.png"
