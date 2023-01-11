@@ -462,9 +462,9 @@ const Report = () => {
                 ) : null}
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => testingReset()}>
+            {/* <TouchableOpacity onPress={() => testingReset()}>
               <Text style={look.reportButton}>Test Reset</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <View>
             {reportStorage ? (
