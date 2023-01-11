@@ -57,7 +57,7 @@ const SupportContacts = () => {
             <Text style={look.add}>
               It's okay to be feeling whatever you're feeling.
             </Text>
-            <Text style={look.sub}>CALL US!</Text>
+            <Text style={look.sub}>CALL!</Text>
             <Text style={[look.sub, { paddingBottom: "3%" }]}>
               To add a support contact put "2174" anywhere in the company field
               of their contact card and they will show up here.

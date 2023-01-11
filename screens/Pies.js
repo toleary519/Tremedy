@@ -157,7 +157,7 @@ const Pies = () => {
       >
         <View style={look.topBox}>
           <View style={look.header}>
-            <Text style={[look.add, { fontSize: 26 }]}>
+            <Text style={[look.add, { fontSize: 20 }]}>
               How do you feel today?
             </Text>
           </View>

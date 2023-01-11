@@ -84,23 +84,13 @@ function App() {
           country: "",
         }
   );
-
+  console.log("APPPPPPP - token", token);
   const checkUser = async () => {
     try {
       const authUser = await Auth.currentAuthenticatedUser({
         bypassCache: true,
       });
-      const jsonValue = await AsyncStorage.getItem("storedUser");
-      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
-      console.log("saved data", savedData);
-      setToken({ savedData });
-      console.log("token after set", token);
       setUser(authUser);
-      setToken({
-        ...token,
-        email: authUser.attributes.email,
-        name: authUser.attributes.name,
-      });
     } catch (e) {
       setUser(null);
     }
@@ -109,6 +99,47 @@ function App() {
   useEffect(() => {
     checkUser();
   }, []);
+
+  const loadUserData = () => {
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const jsonValue = await AsyncStorage.getItem("storedUser");
+      let savedData = jsonValue ? JSON.parse(jsonValue) : {};
+      console.log("saved data", savedData);
+      setToken({ ...savedData });
+      setToken(
+        token.subscribed
+          ? {
+              ...token,
+              name: user.attributes.name,
+              email: user.attributes.email,
+            }
+          : {
+              name: user.attributes.name,
+              email: user.attributes.email,
+              subscribed: true,
+              profile: true,
+              substance: false,
+              flags: true,
+              rLength: 1,
+              timeSaved: false,
+              timeHrs: null,
+              timeMins: null,
+              city: "",
+              country: "",
+            }
+      );
+      console.log("get user data run");
+    };
+    getUserData();
+  }, [loadUserData()]);
 
   useEffect(() => {
     const listener = (data) => {

@@ -21,7 +21,7 @@ const Meetings = ({ navigation }) => {
   };
 
   let anon = () => {
-    Linking.openURL(`https://www.google.com/search?q=aa+meetings+${address}`);
+    Linking.openURL(`https://www.google.com/search?q=aa+meetings+near+me`);
   };
 
   let lucky = () => {

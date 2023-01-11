@@ -9,6 +9,7 @@ import { Context } from "../Context";
 
 const FirstMenu = ({ navigation }) => {
   const [token, setToken] = useContext(Context);
+  const isFocused = useIsFocused();
 
   const signOut = async () => {
     try {
@@ -18,6 +19,21 @@ const FirstMenu = ({ navigation }) => {
       console.log("error signing out: ", error);
     }
   };
+
+  const storeData = async (token) => {
+    try {
+      console.log("inside storeData");
+      const jsonValue = JSON.stringify(token);
+      await AsyncStorage.setItem("storedUser", jsonValue);
+      console.log("this data has just been stored: ", token);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    storeData(token);
+  }, [isFocused]);
 
   return (
     <View style={look.container}>

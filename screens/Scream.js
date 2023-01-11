@@ -6,7 +6,7 @@ import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 
 const Scream = () => {
-  const [best, setBest] = useState(best ? best : ["00", "00", "00"]);
+  const [best, setBest] = useState(best ? best : []);
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   let a = ("0" + Math.floor((time / 60000) % 60)).slice(-2);
@@ -34,7 +34,7 @@ const Scream = () => {
       console.log(e);
     }
   };
-  // console.log("best : ", best);
+
   const storeData = async (best) => {
     try {
       const jsonValue = JSON.stringify(best);
@@ -60,10 +60,6 @@ const Scream = () => {
     setTime(0);
     return;
   };
-
-  useEffect(() => {
-    // Analytics.record({ name: "Scream Page Visit" });
-  }, []);
 
   React.useEffect(() => {
     getData();
