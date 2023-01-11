@@ -40,7 +40,7 @@ const slides = [
     key: 8,
     title: "",
     text: "",
-    image: require("../assets/TourImages/Emergency.jpg"),
+    image: require("../assets/TourImages/blank.jpg"),
   },
 ];
 

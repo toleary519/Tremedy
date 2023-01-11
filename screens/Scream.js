@@ -6,7 +6,7 @@ import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 
 const Scream = () => {
-  const [best, setBest] = useState(best ? best : []);
+  const [best, setBest] = useState(best ? best : ["00", "00", "00"]);
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   let a = ("0" + Math.floor((time / 60000) % 60)).slice(-2);
@@ -49,7 +49,7 @@ const Scream = () => {
       ? parseInt(best[0], 10) +
         parseInt(best[1], 10) * 100 +
         parseInt(best[2], 10)
-      : 0;
+      : `  00:00:00`;
 
     if (parseInt(a, 10) + parseInt(b, 10) * 100 + parseInt(c, 10) > bestTotal) {
       let newBest = [a, b, c];
