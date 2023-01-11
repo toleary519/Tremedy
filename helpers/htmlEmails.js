@@ -1,65 +1,98 @@
 const singleEmail = (x, item) => {
   return `
-          <div class="QAbox">
-            <div>
-                <p class="dateTime">${item.title} : ${item.date}</p>
-            </div>
-              <p class="sub">${x}</p>
-          </div>
-          `;
+  <table style="padding-top:2mm">
+    <thead>
+      <tr>
+        <th colspan="2">
+        ${item.title} : ${item.date}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>${x}</td>
+      </tr>
+    </tbody>
+  </table>
+  `;
 };
 
 const pieEmail = (item) => {
   return `   
-      <div class="QAbox">
-          <div>
-              <p class="dateTime">${item.title} : ${item.date}</p>  
-          </div>
-          <div>
-              <p class="sub">How I feel physically : ${item.physical}</p>
-
-              <p class="sub">Insights & thoughts : ${item.insights}</p>
-              
-              <p class="sub">How I feel emotionally : ${item.emotions}</p>
-              
-              <p class="sub">How I feel spiritually : ${item.spiritual}</p>
-          </div>
-      </div>
+  <table style="padding-top:2mm">
+    <thead>
+      <tr>
+        <th colspan="2">
+        ${item.title} : ${item.date}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>How I feel physically : <br><br>${item.physical}</td>
+      </tr>
+      <tr>
+        <td>Insights & thoughts : <br><br>${item.insights}</td>
+      </tr>
+      <tr>
+        <td>How I feel emotionally : <br><br>${item.emotions}</td>
+      </tr>
+      <tr>
+        <td>How I feel spiritually : <br><br>${item.spiritual}</td>
+      </tr>
+    </tbody>
+  </table>
     `;
 };
 
 const selfEmail = (item) => {
   return ` 
-      <div class="QAbox">
-        <div>
-          <p class="dateTime">${item.title} : ${item.date}</p>  
-        </div>
-        <div>
-          <p class="sub">Initial Thought: ${item.initial}</p>
-        </div>
-        <div>
-          <p class="sub">Rational Thought: ${item.rational}</p>
-        </div>
-      </div>
+  <table style="padding-top:2mm">
+    <thead>
+      <tr>
+        <th colspan="2">
+        ${item.title} : ${item.date}
+        </th>
+      </tr>
+    </thead>
+    <tbody style="padding-top:1mm; padding-bottom:1mm;">
+      <tr>
+        <td>Initial Thought: <br>${item.initial}</td>
+      </tr>
+      <tr >
+        <td>Rational Thought: <br>${item.rational}</td>
+      </tr>
+    </tbody>
+  </table>
     `;
 };
 
 const checkEmail = (item) => {
   return `   
-    <div class="QAbox">
-      <div>
-        <p class="dateTime">${item.title} : ${item.time} - ${item.date}</p>
-      </div>
-      <div>
-        <p class="sub">Physical: ${item.phys} - Emotional:${
-    item.mental
-  } - Outlook:${item.outlook}</p>
-      </div>
-      <div>
-        <p class="add">${item.feelOne} : ${item.feelTwo} : ${item.feelThree}</p>
-      </div>
-          ${item.myCheckin ? `<p class="add">${item.myCheckin}</p>` : `</>`}
-    </div>
+  <table style="padding-top:2mm">
+    <thead>
+      <tr>
+        <th colspan="2">
+        ${item.title} : ${item.time} - ${item.date}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Physical: ${item.phys} - Emotional:${item.mental} - Outlook:${
+    item.outlook
+  }</td>
+      </tr>
+      <tr>
+        <td>${item.feelOne} : ${item.feelTwo} : ${item.feelThree}</td>
+      </tr>
+      <tr>
+        <td>${
+          item.myCheckin ? `<p class="add">${item.myCheckin}</p>` : `</>`
+        }</td>
+      </tr>
+    </tbody>
+  </table>
       `;
 };
 

@@ -204,96 +204,134 @@ const Report = () => {
     const { uri } = await Print.printToFileAsync({
       html: `
       <style>
-      .bg {
-        box-sizing: border-box;
-        font-family: roboto, arial, sans-serif;
-        border-top: 3px solid #3C5E90
-        border-bottom: 3px solid #3C5E90
-        border-right: 3px solid #3C5E90
-        border-left: 3px solid #3C5E90
+
+      .whole {
+        margin-top:8mm;
       }
-      .topBox {
-        box-sizing: border-box;
-        flex-direction: column;
-        margin-left: 5%;
-        margin-right: 5%;
+      .container {
+        font-family:Futura, Helvetica, sans-serif;
+        margin-right:3mm;
+        margin-left:3mm;
       }
-      .add {
-        margin-right: 5%;
-        font-size: 14;
-        font-weight: bold;
-        color: #161c20;
+      :root{
+        
+        --highlight-color-one: #CBDBE1;
+        --highlight-color-one-transparent: #1FC2DEB3;
+        --highlight-color-two: #749FAE;
+        --text-color: #303E48;
+        --table-row-separator-color:#CEC3BA;
       }
-      .dateTime {
-        margin-right: 5%;
-        font-size: 16;
-        font-weight: bold;
-        color: #161c20;
+
+      @page{
+        /*
+        This CSS highlights how page sizes and margin boxes are set.
+        https://docraptor.com/documentation/article/1067959-size-dimensions-orientation
+        Within the page margin boxes content from running elements is used instead of a 
+        standard content string. The name which is passed in the element() function can
+        be found in the CSS code below in a position property and is defined there by 
+        the running() function.
+        */
+        size:USLetter;
+        
+        @top-left{
+          content:element(header);
+        }
+        
+        @bottom-left{
+          content:element(footer);
+        }
       }
-      .title {
-        padding-top: 5%;
-        font-size: 20;
-        font-weight: bold;
-        color: #161c20;
+
+      table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:1cm;
       }
-      .titleTwo {
-        font-size: 18;
-        font-weight: bold;
-        color: #161c20;
+
+      .scope{
+        height:0;
+        border:0;
+        border-top:.25mm solid var(--highlight-color-one);
+        margin:10mm 0 5mm 0;
       }
-      .subTitle {
-        font-size: 14;
-        opacity: 0.8;
-        font-weight: bold;
-        color: #161c20;
-        padding-bottom: 5px;  
-        border-bottom: 3px solid #3C5E90
+      
+      /*
+      The headers of the budget table get a blue background color and the text is transformed
+      to uppercase.
+      */
+      table thead tr th{
+        width:93%;
+        background-color:var(--highlight-color-one);
+        text-align:left;
+        padding:2mm 2mm;
+        text-transform:uppercase;
+        font-family:Futura, Helvetica, sans-serif;
+        font-size:9pt;
       }
-      .sub {
-        margin-right: 5%;
-        opacity: 0.8;
-        font-size: 14;
-        font-weight: bold;
-        color: #161c20;
+      
+      /*
+      The first cell in each content row should consum 90% of the tables width.
+      */
+      table tbody tr td:first-of-type{
+        width:90%;
       }
-      .QAbox {
-        display: block;
-        border-bottom: 3px solid #3C5E90
+      
+      /*
+      All cells in the tables body have a padding of 6mm and a border on the bottom.
+      */
+      table tbody tr td{
+        padding:6mm;
+        font-size:12pt;
+        border-bottom:0.125mm solid var(--table-row-separator-color);
       }
-      .statBox {
-        display: flex;
-        flex-direction: row;
-        border-bottom: 3px solid #3C5E90
+      
+      /*
+      The footer for all content pages is set as running element which gets added to
+      the page margin boxes via the @page rule. 
+      The text is smaller than standard and the items in the footer (HR element and text)
+      are aligned.
+      */
+      footer{
+        position:running(footer);
+        font-size:8pt;
+        font-family:Futura, Helvetica, sans-serif;
+        text-transform:uppercase;
+        color:var(--highlight-color-two);
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-right:9mm;
+        margin-left:3mm;
       }
-      .row {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+      
+      /*
+      The HR HTML element in the footer should have a width of 45% and a 0.5mm solid blue line.
+      */
+      footer hr{
+        width:60%;
+        height:0;
+        border:0;
+        border-top:.5mm solid var(--highlight-color-one);
       }
-      .column {
-        display: flex;
-        padding: 0;
-        flex-direction: column;
+      
+      /*
+      The last link in the footer (the link to the website) needs to be bold.
+      */
+      footer a:last-of-type{
+        font-weight:bold;
       }
       </style>
-
-      <container class="bg">
-        <head style="height: 5%;">
-          <p class="title">Focused Report for discussion from ${
-            token.name
-          } via the Tremedy App</p>
-          <p class="titleTwo">The items below are entries that have been chosen as current priorities.</p>
-          <p class="subTitle">Compiled on ${currentMonth}/${currentDay}/${currentYear}.</p>
-        </head>
-        <div></div>
-        <div></div>
-        <div></div>
-        <body class="topBox">
-          ${emailEntries(myThree)}
-        </body>
-
-      </container>
-
+      <div class="whole">
+        <h3 class="container">Focused Report for discussion from ${
+          token.name
+        }.</h3>
+        <h4 class="container">Compiled via the Tremedy App on ${currentMonth}/${currentDay}/${currentYear}.</h4>
+        ${emailEntries(myThree)}
+      </div>
+      <footer>
+      <hr />
+      <span> The Tremedy App | contact@diffit.io | diffit.io
+      </footer>
       `,
     });
 
