@@ -779,22 +779,6 @@ const UserSettings = () => {
                 <View style={look.header}>
                   <View style={look.userHeader}>
                     <Text style={look.add}>{item.title}</Text>
-                    {selectedOption === i ? (
-                      <TouchableOpacity
-                        onPress={() => {
-                          setSelectedOption(null);
-                          changingToken();
-                        }}
-                      >
-                        <Feather
-                          name="chevron-up"
-                          style={[
-                            look.outRoutine,
-                            { fontSize: 30, opacity: 0.7 },
-                          ]}
-                        />
-                      </TouchableOpacity>
-                    ) : null}
                   </View>
                   <Text style={look.sub}>{item.subtitle}</Text>
                 </View>

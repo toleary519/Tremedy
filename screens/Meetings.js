@@ -42,7 +42,7 @@ const Meetings = ({ navigation }) => {
             >
               <Text style={look.add}>Smart</Text>
               <Text style={look.sub}>
-                A non religious approach to recovery.
+                A nonreligious, non-12 step approach to recovery.
               </Text>
             </View>
           </TouchableOpacity>

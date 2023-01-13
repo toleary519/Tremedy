@@ -352,8 +352,8 @@ export const look = {
     // overflow: "hidden",
   },
   image: {
-    width: "60%",
-    height: 200,
+    width: "70%",
+    height: 350,
     borderRadius: 15,
     marginBottom: "4%",
   },
