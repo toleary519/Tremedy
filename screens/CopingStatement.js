@@ -85,10 +85,6 @@ const CopingStatement = () => {
     setCopingStorage(newList);
     setMyCoping("");
     storeData(newList);
-    // {
-    //   console.log("copeStorgae: ", copingStorage);
-    //   console.log("New List: ", newList);
-    // }
     getData();
   };
 

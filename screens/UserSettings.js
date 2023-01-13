@@ -35,12 +35,6 @@ const UserSettings = () => {
   const [isAvailable, setIsAvailable] = useState(false);
   const [time, setTime] = useState(new Date(Date.now()));
   const [token, setToken] = useContext(Context);
-  // const [tempTok, setTempTok] = useState(
-  //   tempTok ? tempTok : { substance: false, rLength: 1 }
-  // );
-  // const [tempSub, setTempSub] = useState(token.substance ? token.substance : false);
-  // const [tempLen, setTempLen] = useState(token.rLength ? token.rLength : 1);
-  // const [tempFlag, setTempFlag] = useState(token.flags ? token.flags : true);
   const [issue, setIssue] = useState({
     where: "",
     what: "",
@@ -48,28 +42,6 @@ const UserSettings = () => {
     bugNotes: "",
   });
 
-  // const storeData = async (token) => {
-  //   try {
-  //     console.log("inside storeData");
-  //     const jsonValue = JSON.stringify(token);
-  //     await AsyncStorage.setItem("storedUser", jsonValue);
-  //     console.log("this data has just been stored: ", token);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("storedUser");
-  //     let savedData = jsonValue ? JSON.parse(jsonValue) : [];
-  //     setToken(savedData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // This needs to work and we will be done VV
   const changingToken = () => {
     setToken({ ...token });
     getData();
