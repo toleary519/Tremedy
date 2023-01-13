@@ -116,9 +116,9 @@ const ProCon = () => {
     storeConData(conStorage);
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "ProCon Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "ProCon Page Visit" });
+  // }, []);
 
   React.useEffect(() => {
     getProData();

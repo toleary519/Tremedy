@@ -94,9 +94,9 @@ const Journal = () => {
     }
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "Journal Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "Journal Page Visit" });
+  // }, []);
 
   return (
     <View style={look.container}>

@@ -39,9 +39,9 @@ const Emergency = ({ navigation }) => {
     Linking.openURL(`https://www.google.com/search?q=hospitals+near+me`);
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "Emergency Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "Emergency Page Visit" });
+  // }, []);
 
   return (
     <View style={look.container}>

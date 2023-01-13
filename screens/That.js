@@ -128,9 +128,9 @@ const That = () => {
     getData();
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "That Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "That Page Visit" });
+  // }, []);
 
   React.useEffect(() => {
     getData();

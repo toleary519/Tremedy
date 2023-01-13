@@ -4,9 +4,9 @@ import { look } from "../assets/styles";
 import { Analytics } from "aws-amplify";
 
 const KneadInstruct = () => {
-  useEffect(() => {
-    // Analytics.record({ name: "Knead Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //    Analytics.record({ name: "Knead Page Visit" });
+  // }, []);
   return (
     <View style={look.container}>
       <View style={look.topBox}>

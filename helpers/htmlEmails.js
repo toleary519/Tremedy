@@ -8,7 +8,7 @@ const singleEmail = (x, item) => {
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="padding-bottom:1mm">
       <tr>
         <td>${x}</td>
       </tr>
@@ -79,12 +79,9 @@ const checkEmail = (item) => {
     </thead>
     <tbody>
       <tr>
-        <td>Physical: ${item.phys} - Emotional:${item.mental} - Outlook:${
+        <td>Physical: ${item.phys} - Emotional: ${item.mental} - Outlook: ${
     item.outlook
-  }</td>
-      </tr>
-      <tr>
-        <td>${item.feelOne} : ${item.feelTwo} : ${item.feelThree}</td>
+  }, Three Words : ${item.feelOne} - ${item.feelTwo} - ${item.feelThree}</td>
       </tr>
       <tr>
         <td>${

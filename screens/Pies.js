@@ -140,9 +140,9 @@ const Pies = () => {
     getData();
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "Pies Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "Pies Page Visit" });
+  // }, []);
 
   console.log("pie run");
   React.useEffect(() => {

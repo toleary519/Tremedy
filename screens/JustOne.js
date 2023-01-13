@@ -4,9 +4,9 @@ import { look } from "../assets/styles";
 import { Analytics } from "aws-amplify";
 
 const JustOne = ({ navigation }) => {
-  useEffect(() => {
-    // Analytics.record({ name: "JustOne Page Visit" });
-  }, []);
+  // useEffect(() => {
+  // Analytics.record({ name: "JustOne Page Visit" });
+  // }, []);
 
   return (
     <View style={look.container}>

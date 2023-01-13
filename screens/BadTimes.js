@@ -133,9 +133,9 @@ const BadTimes = () => {
     getData();
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "BadTimes Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "BadTimes Page Visit" });
+  // }, []);
 
   console.log("bad run");
   React.useEffect(() => {

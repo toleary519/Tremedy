@@ -129,9 +129,9 @@ const SelfTalk = () => {
     getData();
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "SelfTalk Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "SelfTalk Page Visit" });
+  // }, []);
 
   console.log("self run");
   React.useEffect(() => {

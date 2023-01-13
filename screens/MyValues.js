@@ -139,9 +139,9 @@ const MyValues = () => {
     getData();
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "Values Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "Values Page Visit" });
+  // }, []);
 
   console.log("value run");
   React.useEffect(() => {

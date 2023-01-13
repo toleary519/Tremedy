@@ -3,9 +3,9 @@ import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { Analytics } from "aws-amplify";
 
 const OutsideMenu = ({ navigation }) => {
-  useEffect(() => {
-    // Analytics.record({ name: "Outside Page Visit" });
-  }, []);
+  // useEffect(() => {
+  // Analytics.record({ name: "Outside Page Visit" });
+  // }, []);
 
   return (
     <View style={styles.container}>

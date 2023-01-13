@@ -45,9 +45,9 @@ const SupportContacts = () => {
     }
   }
 
-  useEffect(() => {
-    Analytics.record({ name: "Contacts Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "Contacts Page Visit" });
+  // }, []);
 
   return (
     <View style={look.container}>

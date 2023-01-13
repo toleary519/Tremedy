@@ -154,9 +154,9 @@ const Craving = () => {
     getData();
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "Craving Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "Craving Page Visit" });
+  // }, []);
 
   console.log("craving run");
   return (

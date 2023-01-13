@@ -28,9 +28,9 @@ const Meetings = ({ navigation }) => {
     Linking.openURL(`https://www.theluckiestclub.com/`);
   };
 
-  useEffect(() => {
-    // Analytics.record({ name: "Meetings Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //    Analytics.record({ name: "Meetings Page Visit" });
+  // }, []);
 
   return (
     <View style={look.container}>

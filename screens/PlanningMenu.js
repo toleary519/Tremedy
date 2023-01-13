@@ -4,9 +4,9 @@ import { look } from "../assets/styles";
 import { Analytics } from "aws-amplify";
 
 const PlanningMenu = ({ navigation }) => {
-  useEffect(() => {
-    // Analytics.record({ name: "Planning Page Visit" });
-  }, []);
+  // useEffect(() => {
+  // Analytics.record({ name: "Planning Page Visit" });
+  // }, []);
 
   return (
     <View style={look.container}>

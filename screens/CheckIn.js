@@ -161,9 +161,9 @@ const CheckIn = () => {
   const setTwo = feelOne ? Object.keys(feelingWheel[0][feelOne]) : null;
   const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
 
-  useEffect(() => {
-    Analytics.record({ name: "Checkin Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "Checkin Page Visit" });
+  // }, []);
 
   React.useEffect(() => {
     getData();

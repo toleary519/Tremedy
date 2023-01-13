@@ -106,9 +106,9 @@ const CopingStatement = () => {
     storeData(copingStorage);
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "Coping Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "Coping Page Visit" });
+  // }, []);
 
   React.useEffect(() => {
     getData();

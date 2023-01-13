@@ -128,9 +128,9 @@ const GoodTimes = () => {
     getData();
   };
 
-  useEffect(() => {
-    Analytics.record({ name: "GoodTimes Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   Analytics.record({ name: "GoodTimes Page Visit" });
+  // }, []);
 
   console.log("good run");
   React.useEffect(() => {
