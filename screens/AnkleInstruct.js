@@ -3,9 +3,9 @@ import { Text, View } from "react-native";
 import { look } from "../assets/styles";
 
 const AnkleInstruct = () => {
-  useEffect(() => {
-    // Analytics.record({ name: "Ankle Page Visit" });
-  }, []);
+  // useEffect(() => {
+  //   // Analytics.record({ name: "Ankle Page Visit" });
+  // }, []);
 
   return (
     <View style={look.container}>

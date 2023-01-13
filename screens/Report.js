@@ -111,32 +111,46 @@ const Report = () => {
   };
 
   let limitAlert = () => {
-    Alert.alert(
-      `Email Limit`,
-      `Users are able to send one email each week.\n\nYou can review on the next screen before sending.`,
-      [
-        {
-          text: "OK",
-          style: "cancel",
-          onPress: () => {
-            emailErrorCheck();
-          },
-        },
+    if (
+      myThree.length !== 0 &&
+      myThree[0].myThat !== undefined &&
+      myThree[0].myThat === "unlockemailcode"
+    ) {
+      Alert.alert(`Email Unlocked`, `You know a secret.`, [
         {
           text: "Go Back",
           onPress: () => {
-            return;
+            testingReset();
           },
         },
-      ]
-    );
+      ]);
+    } else {
+      Alert.alert(
+        `Email Limit`,
+        `Users are able to send one email each week.\n\nYou can review on the next screen before sending.`,
+        [
+          {
+            text: "OK",
+            style: "cancel",
+            onPress: () => {
+              emailErrorCheck();
+            },
+          },
+          {
+            text: "Go Back",
+            onPress: () => {
+              return;
+            },
+          },
+        ]
+      );
+    }
   };
 
   const emailErrorCheck = () => {
     emailResult === "sent"
       ? setEmailToken({ ...emailToken, allowed: false })
       : null;
-    console.log("error check email token : ", emailToken);
 
     if (myThree.length === 0) {
       Alert.alert(
