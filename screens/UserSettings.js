@@ -45,7 +45,6 @@ const UserSettings = () => {
   const changingToken = () => {
     setToken({ ...token });
     getData();
-    console.log("changed run", token.substance, token.rLength);
   };
 
   const onTimeSelected = (event, value) => {
@@ -54,10 +53,8 @@ const UserSettings = () => {
 
   const allKeysGone = async () => {
     const keys = await AsyncStorage.getAllKeys();
-    console.log(keys);
     await AsyncStorage.multiRemove(keys);
     const keysTwo = await AsyncStorage.getAllKeys();
-    console.log("keys two ------", keysTwo);
   };
 
   const deleteData = () => {
@@ -747,15 +744,6 @@ const UserSettings = () => {
         </TouchableOpacity>
       ),
     },
-    // {
-    //   id: 8,
-    //   title: "Billing Information",
-    //   subtitle: "Change cards or subsciption.",
-    //   dropdown:
-    //     "For testing purposes this is just a toggle but will be a credit card billing section.",
-    //   onText:
-    //     "And lets be honest. If you're testing it for me, we can work something out. Maybe.",
-    // },
   ];
 
   // useEffect(() => {

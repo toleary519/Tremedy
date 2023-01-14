@@ -22,10 +22,8 @@ const FirstMenu = ({ navigation }) => {
 
   const storeData = async (token) => {
     try {
-      console.log("inside storeData");
       const jsonValue = JSON.stringify(token);
       await AsyncStorage.setItem("storedUser", jsonValue);
-      console.log("this data has just been stored: ", token);
     } catch (e) {
       console.log(e);
     }

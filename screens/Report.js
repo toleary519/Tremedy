@@ -369,13 +369,7 @@ const Report = () => {
       recipients: token.email,
       attachments: uri,
     }).then((res) => setEmailResult(res.status));
-
-    console.log("email result", emailResult);
   };
-
-  console.log("email time: ", emailToken.emailTime);
-  console.log("difference time : ", differenceTime);
-  console.log("allowed test time : ", allowedTestTime);
   useEffect(() => {
     setEmailToken({
       ...emailToken,
@@ -580,49 +574,3 @@ const Report = () => {
 };
 
 export { Report };
-
-// import React, { useState } from 'react';
-// import { Text, View, StyleSheet, Alert, Button } from 'react-native';
-// import Constants from 'expo-constants';
-// import * as FileSystem from 'expo-file-system';
-// import * as MailComposer from 'expo-mail-composer';
-
-
- 
-// export default function App() {
- 
-// const [stxt, setStxt] = useState("123");
-
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.paragraph}>{stxt}</Text>
-//       <Text style={styles.paragraph}>{data}</Text>
-//       <Button title="Send" onPress={btnclicked}/>
-//     </View>
-//   );
-// }
-
-// let data = "outside app() const text";
-
-// const btnclicked = () => {
-//   FileSystem.downloadAsync('https://filesamples.com/samples/ebook/mobi/sample1.mobi',FileSystem.documentDirectory + 'test.mobi')
-//   .then(({ uri }) => {MailComposer.composeAsync({recipients:["test@gmail.com"], attachments:[uri]}); })
-//   .then(({ res }) => {console.log(res)} )
-//   .catch(error => {console.error(error);});
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     paddingTop: Constants.statusBarHeight,
-//     backgroundColor: '#ecf0f1',
-//     padding: 8,
-//   },
-//   paragraph: {
-//     margin: 24,
-//     fontSize: 30,
-//     fontWeight: 'bold',
-//     textAlign: 'center',
-//   },
-// });

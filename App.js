@@ -84,7 +84,6 @@ function App() {
           country: "",
         }
   );
-  console.log("APPPPPPP - token", token);
   const checkUser = async () => {
     try {
       const authUser = await Auth.currentAuthenticatedUser({
@@ -112,7 +111,6 @@ function App() {
     const getUserData = async () => {
       const jsonValue = await AsyncStorage.getItem("storedUser");
       let savedData = jsonValue ? JSON.parse(jsonValue) : {};
-      console.log("saved data", savedData);
       setToken({ ...savedData });
       setToken(
         token.subscribed
@@ -136,7 +134,6 @@ function App() {
               country: "",
             }
       );
-      console.log("get user data run");
     };
     getUserData();
   }, [loadUserData()]);
