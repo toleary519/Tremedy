@@ -133,7 +133,7 @@ const SignUpScreen = ({ navigation }) => {
               style={styles.link}
               onPress={() => navigation.navigate("Terms")}
             >
-              Terms of Use
+              Terms of Service
             </Text>
           </Text>
 

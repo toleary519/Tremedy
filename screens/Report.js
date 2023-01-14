@@ -11,6 +11,7 @@ import { Context } from "../Context";
 import { Analytics } from "aws-amplify";
 import { MailComposerStatus } from "expo-mail-composer";
 
+
 const Report = () => {
   let [showFull, setShowFull] = useState(true);
   let [showChecks, setShowChecks] = useState(false);
