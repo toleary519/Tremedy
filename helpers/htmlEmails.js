@@ -29,16 +29,16 @@ const pieEmail = (item) => {
     </thead>
     <tbody>
       <tr>
-        <td>How I feel physically : <br><br>${item.physical}</td>
+        <td>How I feel physically : <br>${item.physical}</td>
       </tr>
       <tr>
-        <td>Insights & thoughts : <br><br>${item.insights}</td>
+        <td>Insights & thoughts : <br>${item.insights}</td>
       </tr>
       <tr>
-        <td>How I feel emotionally : <br><br>${item.emotions}</td>
+        <td>How I feel emotionally : <br>${item.emotions}</td>
       </tr>
       <tr>
-        <td>How I feel spiritually : <br><br>${item.spiritual}</td>
+        <td>How I feel spiritually : <br>${item.spiritual}</td>
       </tr>
     </tbody>
   </table>

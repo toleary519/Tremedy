@@ -1,5 +1,6 @@
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { look } from "../assets/styles";
+import { color } from "../assets/colors";
 
 const SingleVal = (x, item) => {
   return (
@@ -103,11 +104,11 @@ const CheckVal = (item) => {
           <Text style={look.add}>{item.feelThree}</Text>
         </View>
       </View>
-      {item.myCheckin ? (
-        <View style={look.element}>
-          <Text style={look.add}>{item.myCheckin}</Text>
-        </View>
-      ) : null}
+      <View style={[look.element]}>
+        {item.myCheckin ? (
+          <Text style={[look.add]}>{item.myCheckin}</Text>
+        ) : null}
+      </View>
     </View>
   );
 };

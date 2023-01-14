@@ -78,7 +78,7 @@ const SignInScreen = ({ navigation }) => {
   return (
     <View style={look.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={look.topBox}>
+        <View style={[look.topBox, { paddingTop: "8%" }]}>
           <CustomInput
             name="email"
             capital={false}

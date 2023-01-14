@@ -23,7 +23,14 @@ const Report = () => {
   );
   const [allowed, setAllowed] = useState(null);
   const [emailToken, setEmailToken] = useState(
-    emailToken ? emailToken : { allowed: true, emailTime: 0 }
+    emailToken
+      ? emailToken
+      : {
+          allowed: true,
+          emailTime: 0,
+          emailMonth: currentMonth,
+          emailDay: currentDay,
+        }
   );
   const [emailResult, setEmailResult] = useState("x");
 
@@ -79,6 +86,9 @@ const Report = () => {
     setMyThree(myThree.filter((x) => x.id !== item.id));
   };
 
+  //should change when status changes firing useEffect
+  let emailSent = emailResult === "sent" ? 2 : 1;
+
   let currentDate = new Date();
   let currentDay = currentDate.getDate();
   let currentMonth = currentDate.getMonth() + 1;
@@ -116,7 +126,7 @@ const Report = () => {
       myThree[0].myThat !== undefined &&
       myThree[0].myThat === "unlockemailcode"
     ) {
-      Alert.alert(`Email Unlocked`, `You know a secret.`, [
+      Alert.alert(`Email Unlocked`, ` `, [
         {
           text: "Go Back",
           onPress: () => {
@@ -148,10 +158,6 @@ const Report = () => {
   };
 
   const emailErrorCheck = () => {
-    emailResult === "sent"
-      ? setEmailToken({ ...emailToken, allowed: false })
-      : null;
-
     if (myThree.length === 0) {
       Alert.alert(
         "Focused Report Empty",
@@ -160,10 +166,10 @@ const Report = () => {
       );
       return;
     }
-    if (!emailToken.allowed || emailResult === "sent") {
+    if (differenceTime < allowedTestTime) {
       Alert.alert(
         "Email Limit Exceeded",
-        `Email will be active again six days from ${currentMonth}/${currentDay}`,
+        `Email will be active again six days from ${emailToken.emailMonth}/${emailToken.emailDay}`,
         [{ text: "Got It" }]
       );
       return;
@@ -187,9 +193,10 @@ const Report = () => {
   };
 
   let dayCount = token.rLength ? token.rLength * 7 : 7;
-  // let currentDate = new Date().getTime();
   let weekAgo = currentDate - dayCount * 24 * 60 * 60 * 1000;
   let allowedTestTime = 6 * 24 * 60 * 60 * 1000;
+  let differenceTime = currentTime - emailToken.emailTime;
+  // let allowedTestTime = 60000;
 
   let fullReport = reportStorage
     .filter((x) => (x.id >= weekAgo && x.flag) || x.check)
@@ -210,17 +217,14 @@ const Report = () => {
     });
 
   const sendReportMail = async () => {
-    // let currentDate = new Date();
-    // let currentDay = currentDate.getDate();
-    // let currentMonth = currentDate.getMonth() + 1;
-    // let currentTime = currentDate.getTime();
-
     const { uri } = await Print.printToFileAsync({
       html: `
       <style>
 
       .whole {
-        margin-top:8mm;
+        margin: 1.25cm 5mm 5mm 5mm;
+        justify-content: center;
+        align-items: center;
       }
       .container {
         font-family:Futura, Helvetica, sans-serif;
@@ -257,9 +261,10 @@ const Report = () => {
       }
 
       table{
-        width:100%;
+        width:95%;
         border-collapse:collapse;
-        margin-top:1cm;
+        margin-top:0.6cm;
+        margin-left: 1%;
       }
 
       .scope{
@@ -274,7 +279,7 @@ const Report = () => {
       to uppercase.
       */
       table thead tr th{
-        width:93%;
+        width:100%;
         background-color:var(--highlight-color-one);
         text-align:left;
         padding:2mm 2mm;
@@ -287,15 +292,16 @@ const Report = () => {
       The first cell in each content row should consum 90% of the tables width.
       */
       table tbody tr td:first-of-type{
-        width:90%;
+        width:100%;
       }
       
       /*
       All cells in the tables body have a padding of 6mm and a border on the bottom.
       */
       table tbody tr td{
-        padding:6mm;
-        font-size:12pt;
+        padding:6mm 6mm 0 6mm;
+        font-size:10pt;
+        font-family:Futura, Helvetica, sans-serif;
         border-bottom:0.125mm solid var(--table-row-separator-color);
       }
       
@@ -326,6 +332,7 @@ const Report = () => {
         height:0;
         border:0;
         border-top:.5mm solid var(--highlight-color-one);
+        margin-top: 2mm;
       }
       
       /*
@@ -344,7 +351,7 @@ const Report = () => {
       </div>
       <footer>
       <hr />
-      <span> The Tremedy App | contact@diffit.io | diffit.io
+      <span style="margin-top: 1mm;"> The Tremedy App | contact@diffit.io | diffit.io
       </footer>
       `,
     });
@@ -362,20 +369,21 @@ const Report = () => {
       attachments: uri,
     }).then((res) => setEmailResult(res.status));
 
-    setEmailToken({ ...emailToken, emailTime: currentTime });
-    console.log("time sent in email", emailToken.emailTime);
+    console.log("email result", emailResult);
   };
 
+  console.log("email time: ", emailToken.emailTime);
+  console.log("difference time : ", differenceTime);
+  console.log("allowed test time : ", allowedTestTime);
   useEffect(() => {
-    if (currentTime - emailToken.emailTime > allowedTestTime) {
-      setEmailToken({ ...emailToken, allowed: true });
-      storeData(emailToken);
-    }
-  }, []);
-
-  useEffect(() => {
+    setEmailToken({
+      ...emailToken,
+      emailTime: currentTime,
+      emailDay: currentDay,
+      emailMonth: currentMonth,
+    });
     storeData(emailToken);
-  }, [emailToken.allowed]);
+  }, [emailSent]);
 
   // useEffect(() => {
   //   Analytics.record({ name: "Report Page Visit" });
