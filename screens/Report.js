@@ -10,7 +10,7 @@ import { emailEntries } from "../helpers/htmlEmails";
 import { Context } from "../Context";
 import { Analytics } from "aws-amplify";
 import { MailComposerStatus } from "expo-mail-composer";
-
+import { useIsFocused } from "@react-navigation/native";
 
 const Report = () => {
   let [showFull, setShowFull] = useState(true);
@@ -23,17 +23,9 @@ const Report = () => {
     reportStorage ? reportStorage : []
   );
   const [allowed, setAllowed] = useState(null);
-  const [emailToken, setEmailToken] = useState(
-    emailToken
-      ? emailToken
-      : {
-          allowed: true,
-          emailTime: 0,
-          emailMonth: currentMonth,
-          emailDay: currentDay,
-        }
-  );
+  const [emailToken, setEmailToken] = useState(emailToken ? emailToken : []);
   const [emailResult, setEmailResult] = useState("x");
+  const isFocused = useIsFocused();
 
   const getData = async () => {
     try {
@@ -58,8 +50,8 @@ const Report = () => {
       let selfData = selfTalkValue ? JSON.parse(selfTalkValue) : [];
       let thatData = thatValue ? JSON.parse(thatValue) : [];
       let craveData = cravingValue ? JSON.parse(cravingValue) : [];
-      let emailData = emailAllowed ? JSON.parse(emailAllowed) : true;
-      setEmailToken({ emailData });
+      let emailData = emailAllowed ? JSON.parse(emailAllowed) : [];
+      setEmailToken([...emailData]);
       setReportStorage([
         ...copeData,
         ...checkData,
@@ -167,10 +159,10 @@ const Report = () => {
       );
       return;
     }
-    if (differenceTime < allowedTestTime) {
+    if (differenceTime < allowedTestTime || emailSent === 2) {
       Alert.alert(
         "Email Limit Exceeded",
-        `Email will be active again six days from ${emailToken.emailMonth}/${emailToken.emailDay}`,
+        `Email will be active again six days from ${emailToken[0].date}`,
         [{ text: "Got It" }]
       );
       return;
@@ -184,10 +176,11 @@ const Report = () => {
     setEmailResult("x");
   };
 
-  const storeData = async (emailToken) => {
+  const storeEmailData = async (emailToken) => {
     try {
       const jsonValue = JSON.stringify(emailToken);
       await AsyncStorage.setItem("emailAllowed", jsonValue);
+      console.log("saved");
     } catch (e) {
       console.log(e);
     }
@@ -196,8 +189,11 @@ const Report = () => {
   let dayCount = token.rLength ? token.rLength * 7 : 7;
   let weekAgo = currentDate - dayCount * 24 * 60 * 60 * 1000;
   let allowedTestTime = 6 * 24 * 60 * 60 * 1000;
-  let differenceTime = currentTime - emailToken.emailTime;
   // let allowedTestTime = 60000;
+  let differenceTime =
+    emailToken.length > 0
+      ? currentTime - emailToken[0].time
+      : allowedTestTime + 100;
 
   let fullReport = reportStorage
     .filter((x) => (x.id >= weekAgo && x.flag) || x.check)
@@ -358,11 +354,10 @@ const Report = () => {
     });
 
     MailComposer.composeAsync({
-      subject: `Focused Report from Tremedy:  ${token.name}`,
+      subject: `Focused Report for review from ${token.name}`,
       body: `Find the PDF Focused Report from Tremedy attached below.\n
-      We recommend sending the report to yourself so that you have the copy.\n
-      You can choose to bring a printed copy with you to your sessions.\n
-      With the Focused Reports try to choose three key and concise elements to discuss and examine. All of your information will still be available within the Tremedy App itself.
+      We recommend sending the report to yourself so that you have the copy to discuss and examine.\n
+      All of your information will still be available within the Tremedy App itself.
       
       Take care of yourself,
       The Tremedy Team`,
@@ -370,20 +365,31 @@ const Report = () => {
       attachments: uri,
     }).then((res) => setEmailResult(res.status));
   };
-  useEffect(() => {
-    setEmailToken({
-      ...emailToken,
-      emailTime: currentTime,
-      emailDay: currentDay,
-      emailMonth: currentMonth,
-    });
-    storeData(emailToken);
+
+  const handleEmailAdd = () => {
+    let currentDate = new Date();
+    let currentDay = currentDate.getDate();
+    let currentMonth = currentDate.getMonth() + 1;
+
+    let orderId = currentDate.getTime();
+    let newEmailToken = {
+      time: orderId,
+      date: `${currentMonth}/${currentDay}`,
+    };
+
+    const newToken = [newEmailToken];
+
+    setEmailToken(newToken);
+    storeEmailData(newToken);
+    console.log("handle run");
+    getData();
+  };
+
+  React.useEffect(() => {
+    if (emailResult === "sent") {
+      handleEmailAdd();
+    }
   }, [emailSent]);
-
-  // useEffect(() => {
-  //   Analytics.record({ name: "Report Page Visit" });
-  // }, []);
-
   console.log("report run");
 
   React.useEffect(() => {

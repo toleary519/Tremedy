@@ -193,12 +193,3 @@ export const pageOptions = [
 //     sub: "Just let it out.",
 //   },
 // ];
-
-
-
-// {
-//   id: 4,
-//   pageName: "AnkleInstruct",
-//   title: "Memorize the pattern",
-//   sub: "Focus on and follow a cubes changing pattern.",
-// },
