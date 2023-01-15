@@ -156,8 +156,8 @@ const Using = ({ navigation }) => {
                 Get some water. Do a breathing exercise.
               </Text>
               <Text style={look.sub}>
-                Set some alarms for your call. Do some of these exercises to
-                calm down. If you can, go to sleep or call someone else.
+                Set some alarms for your call. Breathe. If you can, go to sleep
+                or call someone else.
               </Text>
             </View>
           </View>
@@ -165,7 +165,7 @@ const Using = ({ navigation }) => {
             style={[look.border, { paddingBottom: "4%", paddingTop: "2%" }]}
           >
             <TouchableOpacity
-              onPress={() => navigation.navigate("PercievedThreatMenu")}
+              onPress={() => navigation.navigate("Breathe")}
               delayPressIn={150}
             >
               <Text style={[look.add, { textAlign: "center" }]}>

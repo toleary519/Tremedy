@@ -1,10 +1,16 @@
 export const pageOptions = [
+  // {
+  //   id: 1,
+  //   selected: false,
+  //   pageName: "PercievedThreatMenu",
+  //   sub: "I need to calm down now",
+  //   title: "Elevated State",
+  // },
   {
     id: 1,
-    selected: false,
-    pageName: "PercievedThreatMenu",
-    sub: "I need to calm down now",
-    title: "Elevated State",
+    pageName: "Breathe",
+    sub: "A guided breathing exercize.",
+    title: "Breathe",
   },
   {
     id: 2,
@@ -125,20 +131,20 @@ export const pageOptions = [
     sub: "Calm from the head down.",
     title: "Progressive Muscle Relaxation",
   },
-  {
-    id: 17,
-    selected: false,
-    pageName: "EyeInstruct",
-    title: "Left & Right",
-    sub: "Lateral Eye Movements",
-  },
-  {
-    id: 18,
-    selected: false,
-    pageName: "KneadInstruct",
-    title: "Knead your feet",
-    sub: "A grounding exercize.",
-  },
+  // {
+  //   id: 17,
+  //   selected: false,
+  //   pageName: "EyeInstruct",
+  //   title: "Left & Right",
+  //   sub: "Lateral Eye Movements",
+  // },
+  // {
+  //   id: 18,
+  //   selected: false,
+  //   pageName: "KneadInstruct",
+  //   title: "Knead your feet",
+  //   sub: "A grounding exercize.",
+  // },
   // {
   //   id: 19,
   //   selected: false,
@@ -155,38 +161,38 @@ export const pageOptions = [
   },
 ];
 
-export const elevatedOptions = [
-  {
-    id: 1,
-    pageName: "Breathe",
-    sub: "A guided breathing exercize.",
-    title: "Breathe",
-  },
-  {
-    id: 2,
-    pageName: "PMRInstruct",
-    sub: "Calm from the head down.",
-    title: "Progressive Muscle Relaxation",
-  },
-  {
-    id: 3,
-    pageName: "EyeInstruct",
-    title: "Left & Right",
-    sub: "Lateral Eye Movements",
-  },
-  {
-    id: 4,
-    pageName: "KneadInstruct",
-    title: "Toe curls",
-    sub: "A grounding exercize.",
-  },
-  {
-    id: 5,
-    pageName: "Scream",
-    title: "Scream",
-    sub: "Just let it out.",
-  },
-];
+// export const elevatedOptions = [
+  // {
+  //   id: 1,
+  //   pageName: "Breathe",
+  //   sub: "A guided breathing exercize.",
+  //   title: "Breathe",
+  // },
+//   {
+//     id: 2,
+//     pageName: "PMRInstruct",
+//     sub: "Calm from the head down.",
+//     title: "Progressive Muscle Relaxation",
+//   },
+//   {
+//     id: 3,
+//     pageName: "EyeInstruct",
+//     title: "Left & Right",
+//     sub: "Lateral Eye Movements",
+//   },
+//   {
+//     id: 4,
+//     pageName: "KneadInstruct",
+//     title: "Toe curls",
+//     sub: "A grounding exercize.",
+//   },
+//   {
+//     id: 5,
+//     pageName: "Scream",
+//     title: "Scream",
+//     sub: "Just let it out.",
+//   },
+// ];
 
 
 

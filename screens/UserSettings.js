@@ -716,12 +716,12 @@ const UserSettings = () => {
     {
       id: 4,
       title: "Report Length",
-      subtitle: "How many weeks do you want in your report?",
+      subtitle: "How many weeks do you want in your One Sheet?",
       dropdown: !token.subscribed
         ? "Report settings can only be changed by members. The default is 1 week. To join, please see billing information below."
         : "Set a time frame between 1 and 4 weeks.",
       onText:
-        "It is recommended to choose the length of time between therapy sessions, or an interval at which you choose to review. You don't want to overload your report. All of your past entries will be readable on their respective pages.",
+        "It is recommended to choose the length of time or a regular interval at which you choose to review. You don't want to overload your report. All of your past entries will be readable on their respective pages.",
       notSubscribed:
         "There are still a number of tools you can use in the tool box!",
     },
