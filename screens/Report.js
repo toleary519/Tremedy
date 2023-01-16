@@ -381,7 +381,6 @@ const Report = () => {
 
     setEmailToken(newToken);
     storeEmailData(newToken);
-    console.log("handle run");
     getData();
   };
 
