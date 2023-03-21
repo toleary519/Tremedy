@@ -9,7 +9,7 @@ export const pageOptions = [
   {
     id: 1,
     pageName: "Breathe",
-    sub: "A guided breathing exercize.",
+    sub: "A guided breathing exercise.",
     title: "Breathe",
   },
   {
@@ -24,7 +24,7 @@ export const pageOptions = [
     selected: true,
     pageName: "That",
     sub: "Something's up, write it down, work on it.",
-    title: "That!",
+    title: "Quick Thought",
   },
   {
     id: 3,

@@ -80,9 +80,9 @@ const Emergency = ({ navigation }) => {
                 <Text style={look.add}>For a medical emergency</Text>
                 <Text style={[look.add, { color: "red" }]}> call 911</Text>
               </View>
-              <Text style={[look.add, { color: "red" }]}>
+              {/* <Text style={[look.add, { color: "red" }]}>
                 DISABLED FOR TESTING VERSION
-              </Text>
+              </Text> */}
               <Text style={look.sub}>
                 Pressing this button will start a call with 911
               </Text>

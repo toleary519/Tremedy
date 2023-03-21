@@ -111,7 +111,7 @@ const FirstMenu = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => navigation.navigate("Tour")}
             delayPressIn={150}
           >
@@ -123,7 +123,7 @@ const FirstMenu = ({ navigation }) => {
             >
               Application Tour
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           <View style={look.element}>
             <TouchableOpacity onPress={() => signOut()} delayPressIn={150}>
