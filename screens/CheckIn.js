@@ -157,9 +157,12 @@ const CheckIn = () => {
     feelOne && feelTwo && feelThree ? backThree() : null;
   };
 
-  const setOne = Object.keys(feelingWheel[0]);
-  const setTwo = feelOne ? Object.keys(feelingWheel[0][feelOne]) : null;
-  const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
+  // const setOne = Object.keys(feelingWheel[0]);
+  // const setTwo = feelOne ? Object.keys(feelingWheel[0][feelOne]) : null;
+  // const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
+  const setOne = feelingWheel;
+  const setTwo = feelOne ? feelingWheel : null;
+  const setThree = feelTwo ? feelingWheel : null;
 
   // useEffect(() => {
   //   Analytics.record({ name: "Checkin Page Visit" });
@@ -169,7 +172,7 @@ const CheckIn = () => {
     getData();
   }, []);
 
-  console.log("checkin run");
+  // console.log("checkin run");
 
   return (
     <View style={look.container}>
@@ -262,7 +265,9 @@ const CheckIn = () => {
           {!feelOne && !feelTwo && !feelThree ? (
             <View style={{ marginTop: "3%" }}>
               <Picker
-                itemStyle={{ fontSize: 20, height: 50, color: "#D7D9D7" }}
+                itemStyle={look.picker}
+                mode="dialog"
+                style={{ fontSize: 20, height: 100, color: "#D7D9D7" }}
                 selectedValue={!temp ? setTemp(setOne[0]) : temp}
                 onValueChange={(x) => {
                   setTemp(x);
@@ -277,7 +282,8 @@ const CheckIn = () => {
           {feelOne && !feelTwo && !feelThree ? (
             <View style={{ marginTop: "3%" }}>
               <Picker
-                itemStyle={{ fontSize: 20, height: 50, color: "#D7D9D7" }}
+                itemStyle={look.picker}
+                mode="dropdown"
                 selectedValue={!temp ? setTemp(setTwo[0]) : temp}
                 onValueChange={(x) => {
                   setTemp(x);
@@ -297,7 +303,7 @@ const CheckIn = () => {
           {feelOne && feelTwo && !feelThree ? (
             <View style={{ marginTop: "3%" }}>
               <Picker
-                itemStyle={{ fontSize: 20, height: 50, color: "#D7D9D7" }}
+                itemStyle={look.picker}
                 selectedValue={!temp ? setTemp(setThree[0]) : temp}
                 onValueChange={(x) => {
                   setTemp(x);
@@ -314,13 +320,16 @@ const CheckIn = () => {
               <TouchableOpacity onPress={() => handleBack()}>
                 <FontAwesome
                   name="chevron-circle-left"
-                  style={[look.icon, { marginRight: "5%" }]}
+                  style={[look.pickerIcon, { marginRight: "5%" }]}
                 />
               </TouchableOpacity>
             ) : null}
             {feelThree ? null : (
               <TouchableOpacity onPress={() => setFeeling(temp)}>
-                <FontAwesome name="chevron-circle-right" style={[look.icon]} />
+                <FontAwesome
+                  name="chevron-circle-right"
+                  style={[look.pickerIcon]}
+                />
               </TouchableOpacity>
             )}
           </View>

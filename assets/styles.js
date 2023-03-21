@@ -234,6 +234,12 @@ export const look = {
     fontSize: 30,
     color: color.font,
   },
+  pickerIcon: {
+    paddingTop: 10,
+    paddingBottom: 20,
+    fontSize: 30,
+    color: color.font,
+  },
   calendarIcon: {
     fontSize: 40,
     paddingRight: "1.5%",
@@ -420,5 +426,10 @@ export const look = {
     alignItems: "center",
     alignContent: "center",
     fontSize: 30,
+  },
+  picker: {
+    height: 70,
+    fontSize: 36,
+    color: "#D7D9D7",
   },
 };
