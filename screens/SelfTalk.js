@@ -133,7 +133,7 @@ const SelfTalk = () => {
   //   Analytics.record({ name: "SelfTalk Page Visit" });
   // }, []);
 
-  console.log("self run");
+  // console.log("self run");
   React.useEffect(() => {
     getData();
   }, []);
@@ -154,7 +154,7 @@ const SelfTalk = () => {
             style={look.input}
             onChangeText={(text) => setInitial(text)}
             value={initial}
-            placeholder={"initial thought ..."}
+            placeholder={"enter initial thought here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
@@ -172,7 +172,7 @@ const SelfTalk = () => {
               style={look.input}
               onChangeText={(text) => setRational(text)}
               value={rational}
-              placeholder={"reframed ..."}
+              placeholder={"enter reframed thought..."}
               placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"

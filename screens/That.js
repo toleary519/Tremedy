@@ -135,7 +135,7 @@ const That = () => {
   React.useEffect(() => {
     getData();
   }, []);
-  console.log("that run");
+  // console.log("that run");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView
@@ -158,7 +158,7 @@ const That = () => {
             style={look.input}
             onChangeText={(text) => setThat(text)}
             value={that}
-            placeholder={"that! ..."}
+            placeholder={"enter text here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"

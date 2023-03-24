@@ -135,7 +135,7 @@ const FocusStatement = () => {
   React.useEffect(() => {
     getData();
   }, []);
-  console.log("focus run");
+  // console.log("focus run");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView
@@ -158,7 +158,7 @@ const FocusStatement = () => {
             style={look.input}
             onChangeText={(text) => setMyFocus(text)}
             value={myFocus}
-            placeholder={"focus statement ..."}
+            placeholder={"enter text here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"

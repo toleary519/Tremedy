@@ -112,7 +112,7 @@ const Activities = () => {
             style={look.input}
             onChangeText={(text) => setActivity(text)}
             value={activity}
-            placeholder={"new activity ..."}
+            placeholder={"enter activity here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"

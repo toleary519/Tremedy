@@ -144,7 +144,7 @@ const Pies = () => {
   //   Analytics.record({ name: "Pies Page Visit" });
   // }, []);
 
-  console.log("pie run");
+  // console.log("pie run");
   React.useEffect(() => {
     getData();
   }, []);
@@ -174,7 +174,7 @@ const Pies = () => {
             style={look.input}
             onChangeText={(text) => setInsights(text)}
             value={insights}
-            placeholder={"Insights & Thoughts"}
+            placeholder={"Insights & Thoughts..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"
@@ -182,7 +182,7 @@ const Pies = () => {
           <TextInput
             style={look.input}
             onChangeText={(text) => setEmotions(text)}
-            placeholder={"Emotions & Feelings"}
+            placeholder={"Emotions & Feelings..."}
             placeholderTextColor={color.placeholderText}
             value={emotions}
             multiline

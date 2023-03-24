@@ -120,7 +120,7 @@ const Journal = () => {
             style={look.input}
             onChangeText={(text) => setEntry(text)}
             value={entry}
-            placeholder={"type away ..."}
+            placeholder={"enter text here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"

@@ -139,7 +139,7 @@ const ProCon = () => {
               style={[look.proInput]}
               onChangeText={(text) => setPro(text)}
               value={pro}
-              placeholder={"add pro ..."}
+              placeholder={"enter pro ..."}
               placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"
@@ -180,7 +180,7 @@ const ProCon = () => {
               style={[look.proInput]}
               onChangeText={(text) => setCon(text)}
               value={con}
-              placeholder={"add con ..."}
+              placeholder={"enter con ..."}
               placeholderTextColor={color.placeholderText}
               multiline
               keyboardType="default"

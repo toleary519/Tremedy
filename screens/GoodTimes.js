@@ -132,7 +132,7 @@ const GoodTimes = () => {
   //   Analytics.record({ name: "GoodTimes Page Visit" });
   // }, []);
 
-  console.log("good run");
+  // console.log("good run");
   React.useEffect(() => {
     getData();
   }, []);
@@ -159,7 +159,7 @@ const GoodTimes = () => {
             style={look.input}
             onChangeText={(text) => setNote(text)}
             value={note}
-            placeholder={"New memory ..."}
+            placeholder={"enter text here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"

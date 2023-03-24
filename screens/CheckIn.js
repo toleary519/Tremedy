@@ -343,7 +343,7 @@ const CheckIn = () => {
             style={look.input}
             onChangeText={(t) => setCheckin(t)}
             value={checkin}
-            placeholder={"..."}
+            placeholder={"enter text here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"

@@ -30,7 +30,7 @@ export const pageOptions = [
     id: 3,
     selected: false,
     pageName: "Routine",
-    sub: "The tools that help me most.",
+    sub: 'Add exercises you use most by pressing the "+"',
     title: "My Routine",
   },
   {

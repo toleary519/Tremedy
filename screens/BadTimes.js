@@ -137,7 +137,7 @@ const BadTimes = () => {
   //   Analytics.record({ name: "BadTimes Page Visit" });
   // }, []);
 
-  console.log("bad run");
+  // console.log("bad run");
   React.useEffect(() => {
     getData();
   }, []);
@@ -165,7 +165,7 @@ const BadTimes = () => {
             style={look.input}
             onChangeText={(text) => setNote(text)}
             value={note}
-            placeholder={"New Note ..."}
+            placeholder={"enter text here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"

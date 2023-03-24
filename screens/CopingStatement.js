@@ -135,7 +135,7 @@ const CopingStatement = () => {
     storeData(copingStorage);
     getData();
   };
-  console.log("coping run");
+  // console.log("coping run");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView
@@ -159,7 +159,7 @@ const CopingStatement = () => {
             style={look.input}
             onChangeText={(text) => setMyCoping(text)}
             value={myCoping}
-            placeholder={"coping statement ..."}
+            placeholder={"enter text here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"

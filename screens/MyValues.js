@@ -143,7 +143,7 @@ const MyValues = () => {
   //   Analytics.record({ name: "Values Page Visit" });
   // }, []);
 
-  console.log("value run");
+  // console.log("value run");
   React.useEffect(() => {
     getData();
   }, []);
@@ -190,7 +190,7 @@ const MyValues = () => {
             style={look.input}
             onChangeText={(text) => setMyValue(text)}
             value={myValue}
-            placeholder={"New value ..."}
+            placeholder={"enter text here..."}
             placeholderTextColor={color.placeholderText}
             multiline
             keyboardType="default"

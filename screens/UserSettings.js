@@ -750,7 +750,7 @@ const UserSettings = () => {
   // Analytics.record({ name: "UserSettings Page Visit" });
   // }, []);
 
-  console.log("user run");
+  // console.log("user run");
   return (
     <View style={look.container}>
       <View style={look.topBox}>
