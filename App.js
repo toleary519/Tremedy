@@ -149,6 +149,7 @@ function App() {
     return () => Hub.remove("auth", listener);
   }, []);
 
+
   if (user === undefined) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

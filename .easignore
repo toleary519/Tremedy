@@ -10,7 +10,7 @@ npm-debug.*
 *.orig.*
 web-build/
 
-# macOS
+# macO
 .DS_Store
 
 #amplify-do-not-edit-begin
