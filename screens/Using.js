@@ -1,11 +1,5 @@
-import React, { useEffect } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import React from "react";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { look } from "../assets/styles";
 
@@ -17,16 +11,6 @@ const Using = ({ navigation }) => {
         contentContainerStyle={{ paddingBottom: "15%" }}
       >
         <View style={look.topBox}>
-          {/* <View style={look.border}>
-          <View style={look.element}>
-            <View>
-              <Text style={[look.add]}>Letter From Yourself</Text>
-              <Text style={[look.sub]}>
-                Read a letter of support from yourself.
-              </Text>
-            </View>
-          </View>
-        </View> */}
           <View style={look.element}>
             <View>
               <Text style={look.add}>Game Plan</Text>

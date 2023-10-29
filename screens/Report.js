@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, TouchableOpacity, Alert, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Feather } from "@expo/vector-icons";
@@ -8,8 +8,6 @@ import * as Print from "expo-print";
 import { CheckVal, Entries } from "../helpers/reportFunctions";
 import { emailEntries } from "../helpers/htmlEmails";
 import { Context } from "../Context";
-import { Analytics } from "aws-amplify";
-import { MailComposerStatus } from "expo-mail-composer";
 import { useIsFocused } from "@react-navigation/native";
 
 const Report = () => {
@@ -79,7 +77,6 @@ const Report = () => {
     setMyThree(myThree.filter((x) => x.id !== item.id));
   };
 
-  //should change when status changes firing useEffect
   let emailSent = emailResult === "sent" ? 2 : 1;
 
   let currentDate = new Date();
@@ -189,7 +186,6 @@ const Report = () => {
   let dayCount = token.rLength ? token.rLength * 7 : 7;
   let weekAgo = currentDate - dayCount * 24 * 60 * 60 * 1000;
   let allowedTestTime = 6 * 24 * 60 * 60 * 1000;
-  // let allowedTestTime = 60000;
   let differenceTime =
     emailToken.length > 0
       ? currentTime - emailToken[0].time
@@ -206,7 +202,6 @@ const Report = () => {
       return b.id - a.id;
     });
 
-  // you could add && x.flagged
   let fullFlags = fullReport
     .filter((x) => !x.check && x.flag)
     .sort((a, b) => {
@@ -484,9 +479,6 @@ const Report = () => {
                 ) : null}
               </View>
             </TouchableOpacity>
-            {/* <TouchableOpacity onPress={() => testingReset()}>
-              <Text style={look.reportButton}>Test Reset</Text>
-            </TouchableOpacity> */}
           </View>
           <View>
             {reportStorage ? (

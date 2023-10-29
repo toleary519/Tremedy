@@ -1,12 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Image, StyleSheet, View } from "react-native";
-import { Analytics } from "aws-amplify";
 
 const PMRInstruct = () => {
-  // useEffect(() => {
-  // Analytics.record({ name: "PMR Page Visit" });
-  // }, []);
-
   return (
     <View style={styles.container}>
       <Image

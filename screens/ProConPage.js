@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Text, View, ScrollView, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 
@@ -90,17 +89,13 @@ const ProCon = () => {
         break;
       }
     }
-    // filter array for display
     setProStorage(proStorage.filter((val) => val.id !== item.id));
-    // make permanent delete
     proStorage.splice(index, 1);
-    // save deletion of item
     storeProData(proStorage);
   };
 
   const handleConDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
     for (let obj of conStorage) {
       if (obj.id !== item.id) {
         index++;
@@ -108,17 +103,10 @@ const ProCon = () => {
         break;
       }
     }
-    // filter array for display
     setConStorage(conStorage.filter((val) => val.id !== item.id));
-    // make permanent delete
     conStorage.splice(index, 1);
-    // save deletion of item
     storeConData(conStorage);
   };
-
-  // useEffect(() => {
-  //   Analytics.record({ name: "ProCon Page Visit" });
-  // }, []);
 
   React.useEffect(() => {
     getProData();

@@ -4,10 +4,8 @@ import CustomInput from "../assets/authPages/components/CustomInput";
 import CustomButton from "../assets/authPages/components/CustomButton";
 import {
   FacebookSocialButton,
-  AmazonSocialButton,
   AppleSocialButton,
   GoogleSocialButton,
-  TwitterSocialButton,
 } from "react-native-social-buttons";
 import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";

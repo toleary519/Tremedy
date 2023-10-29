@@ -1,10 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Context } from "../Context";
@@ -90,7 +89,6 @@ const That = () => {
 
   const handleDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
     for (let obj of thatStorage) {
       if (obj.id !== item.id) {
         index++;
@@ -98,11 +96,8 @@ const That = () => {
         break;
       }
     }
-    // filter array for display
     setThatStorage(thatStorage.filter((val) => val.id !== item.id));
-    // make permanent delete
     thatStorage.splice(index, 1);
-    // save deletion of item
     storeData(thatStorage);
   };
 
@@ -128,14 +123,9 @@ const That = () => {
     getData();
   };
 
-  // useEffect(() => {
-  //   Analytics.record({ name: "That Page Visit" });
-  // }, []);
-
   React.useEffect(() => {
     getData();
   }, []);
-  // console.log("that run");
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

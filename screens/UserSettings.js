@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  Text,
-  View,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
+import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -18,10 +11,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
-import { Auth } from "aws-amplify";
 import { Context } from "../Context";
-import { Analytics } from "aws-amplify";
-// enables alerts in the forground
+
+// enable alerts in the forground
 Notifications.setNotificationHandler({
   handleNotification: async () => {
     return {
@@ -130,42 +122,11 @@ const UserSettings = () => {
     }
   };
 
-  // const cancelAlarm = () => {
-  //   const secondAlarmAlert = () => {
-  //     Alert.alert(
-  //       "Delete Reminder",
-  //       `You can set a new alarm whenever you want.`,
-  //       {
-  //         text: "Okay",
-  //         onPress: async () => {
-  //           await Notifications.cancelAllScheduledNotificationsAsync();
-  //         },
-  //       }
-  //     );
-  //   };
-
-  //   Alert.alert("Turn Off Reminder?", [
-  //     {
-  //       text: "Yes",
-  //       onPress: () => {
-  //         secondAlarmAlert();
-  //       },
-  //     },
-  //     {
-  //       text: "Keep it.",
-  //       onPress: () => {
-  //         return;
-  //       },
-  //     },
-  //   ]);
-  // };
-
   useEffect(() => {
     async function checkAvailability() {
       const isMailAvailable = await MailComposer.isAvailableAsync();
       setIsAvailable(isMailAvailable);
     }
-    // getData();
     checkAvailability();
   }, []);
 
@@ -634,45 +595,6 @@ const UserSettings = () => {
       </View>
     );
   };
-  // const billingRender = (item) => {
-  //   return (
-  //     <View>
-  //       <View style={look.header}>
-  //         <View style={look.userHeader}>
-  //           <Text style={[look.add, { marginBottom: 10, width: "80%" }]}>
-  //             {item.dropdown}
-  //           </Text>
-  //           <TouchableOpacity
-  //             onPress={
-  //               token.subscribed
-  //                 ? () => setToken({ ...token, subscribed: false })
-  //                 : () => setToken({ ...token, subscribed: true })
-  //             }
-  //           >
-  //             {token.subscribed ? (
-  //               <MaterialIcons
-  //                 name="toggle-on"
-  //                 style={[look.toggleOn, { paddingTop: "2%" }]}
-  //               />
-  //             ) : (
-  //               <MaterialIcons
-  //                 name="toggle-off"
-  //                 style={[look.toggleOff, { paddingTop: "2%" }]}
-  //               />
-  //             )}
-  //           </TouchableOpacity>
-  //         </View>
-  //       </View>
-  //       <View>
-  //         {token.subscribed ? (
-  //           <View style={[look.element, { marginBottom: 10 }]}>
-  //             <Text style={look.sub}>{item.onText}</Text>
-  //           </View>
-  //         ) : null}
-  //       </View>
-  //     </View>
-  //   );
-  // };
 
   let settingsOptions = [
     {
@@ -690,15 +612,6 @@ const UserSettings = () => {
 
       onText: `You will now see an option called "We can be better" on the first menu. In it are some unique features and specialized tools to use as well as lists of meetings. Both online and in-person.`,
     },
-    // {
-    //   id: 2,
-    //   title: "My Notifications",
-    //   subtitle: "How often do you want to check-in?",
-    //   dropdown:
-    //     "Tremedy will send you a quiet notification to remind you to Check-In. Check-Ins can be done in roughly 30 seconds.",
-    //   onText:
-    //     "You can check-in whenever you want in the tool box. Ideally, do a check-in once a day.",
-    // },
     {
       id: 2,
       title: "Manage Flags",
@@ -746,11 +659,6 @@ const UserSettings = () => {
     },
   ];
 
-  // useEffect(() => {
-  // Analytics.record({ name: "UserSettings Page Visit" });
-  // }, []);
-
-  // console.log("user run");
   return (
     <View style={look.container}>
       <View style={look.topBox}>

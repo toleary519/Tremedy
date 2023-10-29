@@ -53,7 +53,6 @@ const TheVoid = () => {
 
   const handleDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
     for (let obj of voidLetter) {
       if (obj.id !== item.id) {
         index++;
@@ -61,11 +60,8 @@ const TheVoid = () => {
         break;
       }
     }
-    // filter array for display
     setVoidLetter(voidLetter.filter((val) => val.id !== item.id));
-    // make permanent delete
     voidLetter.splice(index, 1);
-    // save deletion of item
     storeData(voidLetter);
   };
 

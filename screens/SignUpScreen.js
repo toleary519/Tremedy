@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
 import CustomInput from "../assets/authPages/components/CustomInput";
 import {
   FacebookSocialButton,
-  AmazonSocialButton,
   AppleSocialButton,
   GoogleSocialButton,
-  TwitterSocialButton,
 } from "react-native-social-buttons";
 import CustomButton from "../assets/authPages/components/CustomButton";
 import { useForm } from "react-hook-form";

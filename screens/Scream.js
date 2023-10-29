@@ -140,6 +140,6 @@ const Scream = () => {
       </View>
     </View>
   );
-};;;;;
+};
 
 export { Scream };

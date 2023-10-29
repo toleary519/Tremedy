@@ -1,10 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Context } from "../Context";
@@ -30,7 +29,6 @@ const Pies = () => {
       console.log(e);
     }
   };
-  //  this is wrong it should be pieVVVVV
   const storeData = async (focusStorage) => {
     try {
       const jsonValue = JSON.stringify(focusStorage);
@@ -72,7 +70,6 @@ const Pies = () => {
 
   const handleDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
     for (let obj of pieStorage) {
       if (obj.id !== item.id) {
         index++;
@@ -80,11 +77,8 @@ const Pies = () => {
         break;
       }
     }
-    // filter array for display
     setPieStorage(pieStorage.filter((val) => val.id !== item.id));
-    // make permanent delete
     pieStorage.splice(index, 1);
-    // save deletion of item
     storeData(pieStorage);
   };
 
@@ -140,11 +134,6 @@ const Pies = () => {
     getData();
   };
 
-  // useEffect(() => {
-  //   Analytics.record({ name: "Pies Page Visit" });
-  // }, []);
-
-  // console.log("pie run");
   React.useEffect(() => {
     getData();
   }, []);

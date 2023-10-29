@@ -5,7 +5,6 @@ import contactImage from "../assets/contactImage.jpg";
 import call from "react-native-phone-call";
 import { FontAwesome } from "@expo/vector-icons";
 import { look } from "../assets/styles";
-import { Analytics } from "aws-amplify";
 
 const SupportContacts = () => {
   let filteredContacts = [];
@@ -44,10 +43,6 @@ const SupportContacts = () => {
       filteredContacts.push(support);
     }
   }
-
-  // useEffect(() => {
-  //   Analytics.record({ name: "Contacts Page Visit" });
-  // }, []);
 
   return (
     <View style={look.container}>

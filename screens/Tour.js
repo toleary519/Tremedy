@@ -52,9 +52,7 @@ const Tour = ({ navigation }) => {
           <Text style={look.tourBottomText}>{item.text}</Text>
         </View>
         <Image style={look.tourImage} source={item.image} />
-        <View style={look.tourBottomView}>
-          {/* <Text style={look.tourBottomText}>{item.text}</Text> */}
-        </View>
+        <View style={look.tourBottomView}></View>
       </View>
     );
   };

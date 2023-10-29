@@ -1,13 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Text, TouchableOpacity, ScrollView, View } from "react-native";
 import { look } from "../assets/styles";
-import { Analytics } from "aws-amplify";
 
 const PlanningMenu = ({ navigation }) => {
-  // useEffect(() => {
-  // Analytics.record({ name: "Planning Page Visit" });
-  // }, []);
-
   return (
     <View style={look.container}>
       <ScrollView

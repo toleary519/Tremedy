@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Text, View, Alert, TouchableOpacity, ScrollView } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 
 const Routine = ({ navigation }) => {
@@ -62,10 +61,6 @@ const Routine = ({ navigation }) => {
   };
 
   const end = selectedRoutine.length - 1;
-
-  // useEffect(() => {
-  //   Analytics.record({ name: "Routine Page Visit" });
-  // }, []);
 
   React.useEffect(() => {
     getData();

@@ -53,7 +53,6 @@ const PepTalkMenu = ({ navigation }) => {
 
   const handleDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
     for (let obj of routineList) {
       if (obj.id !== item.id) {
         index++;
@@ -61,11 +60,8 @@ const PepTalkMenu = ({ navigation }) => {
         break;
       }
     }
-    // filter array for display
     setRoutineList(routineList.filter((val) => val.id !== item.id));
-    // make permanent delete
     routineList.splice(index, 1);
-    // save deletion of item
     storeData(routineList);
   };
 
@@ -160,22 +156,5 @@ const PepTalkMenu = ({ navigation }) => {
     </View>
   );
 };
-
-// used overflow: hidden below to prevent corners.
-
-const styles = StyleSheet.create({
-  left: {
-    flex: 8,
-  },
-  right: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  text: {
-    color: "green",
-    fontSize: 20,
-    left: "10%",
-  },
-});
 
 export { PepTalkMenu };
