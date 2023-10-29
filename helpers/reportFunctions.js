@@ -1,6 +1,5 @@
-import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
+import { Text, View } from "react-native";
 import { look } from "../assets/styles";
-import { color } from "../assets/colors";
 
 const SingleVal = (x, item) => {
   return (
@@ -164,6 +163,5 @@ const Entries = (item) => {
     </View>
   );
 };
-
 
 export { CheckVal, Entries };

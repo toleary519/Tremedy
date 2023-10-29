@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 
 const theErrorCheck = ({ x }) => {
@@ -58,59 +57,6 @@ const theErrorCheck = ({ x }) => {
     getData();
   };
 };
-
-// const errorCheck = (entry, [storage, setStorage, setEntry]) => {
-//   if (!entry.replace(/\s+/g, "")) {
-//     Alert.alert("Entry Error", `Fill out all fields to submit.`, [
-//       { text: "Got It" },
-//     ]);
-//     return;
-//   } else {
-//     flagAlert(handleAdd, entry, [storage, setStorage, setEntry]);
-//   }
-// };
-
-// const flagAlert = (handleAdd, entry, [x]) => {
-//   const pressTrue = () => {
-//     let flag = true;
-//     handleAdd(flag, entry, ...x);
-//   };
-//   const pressFalse = () => {
-//     let flag = false;
-//     handleAdd(flag, ...x);
-//   };
-
-//   Alert.alert("Flag this for therapist?", `You can review it together.`, [
-//     {
-//       text: "Yes",
-//       onPress: () => pressTrue(),
-//     },
-
-//     { text: "Nope", onPress: () => pressFalse() },
-//   ]);
-
-//   const handleAdd = (flag, entry, storage, setStorage, setEntry) => {
-//     let currentDate = new Date();
-//     let currentDay = currentDate.getDate();
-//     let currentMonth = currentDate.getMonth() + 1;
-//     let currentYear = currentDate.getFullYear();
-//     let orderId = currentDate.getTime();
-
-//     let newFocus = {
-//       id: orderId,
-//       entry: entry,
-//       flag: flag,
-//       date: `${currentMonth}/${currentDay}/${currentYear}`,
-//     };
-
-//     const newList = [...storage, newFocus];
-
-//     setStorage(newList);
-//     setEntry("");
-//     storeData(newList);
-//     getData();
-//   };
-// };
 
 const handleAdd = (flag, entry, storage, setStorage, setEntry) => {
   let currentDate = new Date();
@@ -179,13 +125,9 @@ const storeData = async (storage) => {
 };
 
 const hlp = {
-  //   flagAlert,
-  //   errorCheck,
   handleClick,
   handleDelete,
   getData,
-  //   storeData,
-  //   handleAdd,
   theErrorCheck,
 };
 
