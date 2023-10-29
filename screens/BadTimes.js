@@ -1,12 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState, useContext } from "react";
+import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -133,11 +126,6 @@ const BadTimes = () => {
     getData();
   };
 
-  // useEffect(() => {
-  //   Analytics.record({ name: "BadTimes Page Visit" });
-  // }, []);
-
-  // console.log("bad run");
   React.useEffect(() => {
     getData();
   }, []);

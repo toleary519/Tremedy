@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
 import { feelingWheel } from "../helpers/feelingwheelOptions";
 import Slider from "@react-native-community/slider";
@@ -157,22 +157,13 @@ const CheckIn = () => {
     feelOne && feelTwo && feelThree ? backThree() : null;
   };
 
-  // const setOne = Object.keys(feelingWheel[0]);
-  // const setTwo = feelOne ? Object.keys(feelingWheel[0][feelOne]) : null;
-  // const setThree = feelTwo ? [...feelingWheel[0][feelOne][feelTwo]] : null;
   const setOne = feelingWheel;
   const setTwo = feelOne ? feelingWheel : null;
   const setThree = feelTwo ? feelingWheel : null;
 
-  // useEffect(() => {
-  //   Analytics.record({ name: "Checkin Page Visit" });
-  // }, []);
-
   React.useEffect(() => {
     getData();
   }, []);
-
-  // console.log("checkin run");
 
   return (
     <View style={look.container}>

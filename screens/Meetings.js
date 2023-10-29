@@ -6,8 +6,6 @@ import { look } from "../assets/styles";
 import { Analytics } from "aws-amplify";
 
 const Meetings = ({ navigation }) => {
-  // token should come in so that we can get the city.
-
   const [address, setAddress] = useState();
 
   let smart = () => {
@@ -27,10 +25,6 @@ const Meetings = ({ navigation }) => {
   let lucky = () => {
     Linking.openURL(`https://www.theluckiestclub.com/`);
   };
-
-  // useEffect(() => {
-  //    Analytics.record({ name: "Meetings Page Visit" });
-  // }, []);
 
   return (
     <View style={look.container}>

@@ -1,9 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Text, Alert, View, TouchableOpacity, Linking } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { Context } from "../Context";
-import { Analytics } from "aws-amplify";
 
 const Emergency = ({ navigation }) => {
   const [token, setToken] = useContext(Context);
@@ -38,10 +36,6 @@ const Emergency = ({ navigation }) => {
   let hospitals = () => {
     Linking.openURL(`https://www.google.com/search?q=hospitals+near+me`);
   };
-
-  // useEffect(() => {
-  //   Analytics.record({ name: "Emergency Page Visit" });
-  // }, []);
 
   return (
     <View style={look.container}>
@@ -80,9 +74,6 @@ const Emergency = ({ navigation }) => {
                 <Text style={look.add}>For a medical emergency</Text>
                 <Text style={[look.add, { color: "red" }]}> call 911</Text>
               </View>
-              {/* <Text style={[look.add, { color: "red" }]}>
-                DISABLED FOR TESTING VERSION
-              </Text> */}
               <Text style={look.sub}>
                 Pressing this button will start a call with 911
               </Text>

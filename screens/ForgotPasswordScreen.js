@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
 import CustomInput from "../assets/authPages/components/CustomInput";
 import CustomButton from "../assets/authPages/components/CustomButton";

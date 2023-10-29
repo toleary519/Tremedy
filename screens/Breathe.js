@@ -1,12 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Image, StyleSheet } from "react-native";
-import { Analytics } from "aws-amplify";
 
 const Breathe = () => {
-  // useEffect(() => {
-  //   Analytics.record({ name: "Breathe Page Visit" });
-  // }, []);
-
   return (
     <View style={styles.container}>
       <Image

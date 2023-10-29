@@ -1,10 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Context } from "../Context";
@@ -90,7 +89,7 @@ const FocusStatement = () => {
 
   const handleDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
+
     for (let obj of focusStorage) {
       if (obj.id !== item.id) {
         index++;
@@ -98,11 +97,11 @@ const FocusStatement = () => {
         break;
       }
     }
-    // filter array for display
+
     setFocusStorage(focusStorage.filter((val) => val.id !== item.id));
-    // make permanent delete
+
     focusStorage.splice(index, 1);
-    // save deletion of item
+
     storeData(focusStorage);
   };
 
@@ -128,14 +127,10 @@ const FocusStatement = () => {
     getData();
   };
 
-  // useEffect(() => {
-  //   Analytics.record({ name: "Focus Page Visit" });
-  // }, []);
-
   React.useEffect(() => {
     getData();
   }, []);
-  // console.log("focus run");
+
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Text, TouchableOpacity, View, Alert } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
@@ -111,19 +111,6 @@ const FirstMenu = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </View>
-          {/* <TouchableOpacity
-            onPress={() => navigation.navigate("Tour")}
-            delayPressIn={150}
-          >
-            <Text
-              style={[
-                look.fSub,
-                { marginTop: 15, color: "#FFD25A", opacity: 0.7 },
-              ]}
-            >
-              Application Tour
-            </Text>
-          </TouchableOpacity> */}
 
           <View style={look.element}>
             <TouchableOpacity onPress={() => signOut()} delayPressIn={150}>

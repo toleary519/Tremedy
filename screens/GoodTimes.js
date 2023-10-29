@@ -1,10 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Context } from "../Context";
@@ -90,7 +89,7 @@ const GoodTimes = () => {
 
   const handleDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
+
     for (let obj of goodStorage) {
       if (obj.id !== item.id) {
         index++;
@@ -98,11 +97,11 @@ const GoodTimes = () => {
         break;
       }
     }
-    // filter array for display
+
     setGoodStorage(goodStorage.filter((val) => val.id !== item.id));
-    // make permanent delete
+
     goodStorage.splice(index, 1);
-    // save deletion of item
+
     storeData(goodStorage);
   };
 
@@ -128,11 +127,6 @@ const GoodTimes = () => {
     getData();
   };
 
-  // useEffect(() => {
-  //   Analytics.record({ name: "GoodTimes Page Visit" });
-  // }, []);
-
-  // console.log("good run");
   React.useEffect(() => {
     getData();
   }, []);

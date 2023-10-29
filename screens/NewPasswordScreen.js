@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
 import CustomInput from "../assets/authPages/components/CustomInput";
 import CustomButton from "../assets/authPages/components/CustomButton";
@@ -72,25 +72,5 @@ const NewPasswordScreen = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  root: {
-    alignItems: "center",
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#051C60",
-    margin: 10,
-  },
-  text: {
-    color: "gray",
-    marginVertical: 10,
-  },
-  link: {
-    color: "#FDB075",
-  },
-});
 
 export { NewPasswordScreen };

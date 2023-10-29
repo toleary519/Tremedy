@@ -1,13 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Text, Image, View } from "react-native";
 import { look } from "../assets/styles";
-import { Analytics } from "aws-amplify";
 
 const EyeInstruct = () => {
-  useEffect(() => {
-    // Analytics.record({ name: "Eye Page Visit" });
-  }, []);
-
   return (
     <View style={look.container}>
       <View style={look.topBox}>

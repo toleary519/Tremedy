@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
-import { Analytics } from "aws-amplify";
 
 const Activities = () => {
   const [activeStorage, setActiveStorage] = useState(
@@ -81,10 +80,6 @@ const Activities = () => {
       handleAdd();
     }
   };
-
-  // useEffect(() => {
-  //   Analytics.record({ name: "Activities Page Visit" });
-  // }, []);
 
   React.useEffect(() => {
     getData();

@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Text, View, Alert, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Analytics } from "aws-amplify";
-import { SimpleLineIcons } from "@expo/vector-icons";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 
@@ -63,7 +61,7 @@ const Journal = () => {
 
   const handleDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
+
     for (let obj of jStorage) {
       if (obj.id !== item.id) {
         index++;
@@ -71,11 +69,11 @@ const Journal = () => {
         break;
       }
     }
-    // filter array for display
+
     setJStorage(jStorage.filter((val) => val.id !== item.id));
-    // make permanent delete
+
     jStorage.splice(index, 1);
-    // save deletion of item
+
     storeData(jStorage);
   };
 
@@ -93,10 +91,6 @@ const Journal = () => {
       handleAdd();
     }
   };
-
-  // useEffect(() => {
-  //   Analytics.record({ name: "Journal Page Visit" });
-  // }, []);
 
   return (
     <View style={look.container}>

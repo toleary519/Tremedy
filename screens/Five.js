@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { Analytics } from "aws-amplify";
 
 const Five = ({ navigation }) => {
-  useEffect(() => {
-    // Analytics.record({ name: "Five Page Visit" });
-  }, []);
-
   return (
     <View style={styles.container}>
       <Text style={styles.add}>Name five things you can see.</Text>

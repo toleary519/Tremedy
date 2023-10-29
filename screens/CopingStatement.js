@@ -90,7 +90,6 @@ const CopingStatement = () => {
 
   const handleDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
     for (let obj of copingStorage) {
       if (obj.id !== item.id) {
         index++;
@@ -98,17 +97,13 @@ const CopingStatement = () => {
         break;
       }
     }
-    // filter array for display
+
     setCopingStorage(copingStorage.filter((val) => val.id !== item.id));
-    // make permanent delete
+
     copingStorage.splice(index, 1);
-    // save deletion of item
+
     storeData(copingStorage);
   };
-
-  // useEffect(() => {
-  //   Analytics.record({ name: "Coping Page Visit" });
-  // }, []);
 
   React.useEffect(() => {
     getData();
@@ -135,7 +130,7 @@ const CopingStatement = () => {
     storeData(copingStorage);
     getData();
   };
-  // console.log("coping run");
+
   return (
     <View style={look.container}>
       <KeyboardAwareScrollView
@@ -172,7 +167,6 @@ const CopingStatement = () => {
           </TouchableOpacity>
           {sortedEntries.map((item, i) => (
             <View key={item.id} style={look.border}>
-              {/* {console.log("item : ", item)} */}
               <View style={look.elementHeader}>
                 <TouchableOpacity onPress={() => handleDelete({ item })}>
                   <MaterialIcons

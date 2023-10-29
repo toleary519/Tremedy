@@ -1,13 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { look } from "../assets/styles";
-import { Analytics } from "aws-amplify";
 
 const JustOne = ({ navigation }) => {
-  // useEffect(() => {
-  // Analytics.record({ name: "JustOne Page Visit" });
-  // }, []);
-
   return (
     <View style={look.container}>
       <View style={look.topBox}>

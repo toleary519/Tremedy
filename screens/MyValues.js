@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import {
   Text,
   View,
@@ -9,12 +9,10 @@ import {
 } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons"; 
+import { FontAwesome5 } from "@expo/vector-icons";
 import coreV from "../assets/coreV.jpeg";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Analytics } from "aws-amplify";
 import { look } from "../assets/styles";
 import { color } from "../assets/colors";
 import { Context } from "../Context";
@@ -101,7 +99,6 @@ const MyValues = () => {
 
   const handleDelete = ({ item }) => {
     let index = 0;
-    // find the index of item to delete
     for (let obj of valueStorage) {
       if (obj.id !== item.id) {
         index++;
@@ -109,11 +106,8 @@ const MyValues = () => {
         break;
       }
     }
-    // filter array for display
     setValueStorage(valueStorage.filter((val) => val.id !== item.id));
-    // make permanent delete
     valueStorage.splice(index, 1);
-    // save deletion of item
     storeData(valueStorage);
   };
 
@@ -139,11 +133,6 @@ const MyValues = () => {
     getData();
   };
 
-  // useEffect(() => {
-  //   Analytics.record({ name: "Values Page Visit" });
-  // }, []);
-
-  // console.log("value run");
   React.useEffect(() => {
     getData();
   }, []);
