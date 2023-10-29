@@ -1,0 +1,2 @@
+# Tremedy
+Tremedy is a mobile application that combines note-taking and cognitive behavioral therapy to help patients have more focused and productive sessions with their doctors and therapists. In the “Toolbox” there are check-ins, CBT exercises, and note pads to track thought trends and mood. Flagged entries are consolidated in the One Sheet.  The user picks the top three entries and a PDF is emailed to their doctor for their next session.
